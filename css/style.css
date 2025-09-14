@@ -32,12 +32,12 @@
             grid-template-areas:
                 "first sec sec"
                 "first third third";
-            height: 400px; /* Set fixed height for grid container */
+            height: 400px;
         }
 
         .info-item-first { grid-area: first; }
         .info-item-sec { grid-area: sec; }
-        .info-item-third { grid-area: third; overflow: hidden; } /* Ensure overflow is hidden */
+        .info-item-third { grid-area: third; overflow: hidden; }
 
         /* Gaya Tombol Kategori */
         .category-btn {
@@ -66,12 +66,12 @@
         .product-stack-container {
             position: relative;
             width: 100%;
-            height: 360px; /* Reduced height */
+            height: 360px;
             perspective: 1000px;
         }
         .product-card {
             position: absolute;
-            width: 300px; /* Lebar kartu tetap */
+            width: 300px;
             height: 100%;
             top: 0;
             left: 50%;
@@ -84,12 +84,13 @@
             overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2; /* Batasi hingga 2 baris */
+            -webkit-line-clamp: 2;
         }
         
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
+            height: 8px;
         }
         ::-webkit-scrollbar-track {
             background: #1f2937;
@@ -174,7 +175,7 @@
         }
         .floating-icons i {
             position: absolute;
-            color: rgba(14, 165, 233, 0.15); /* Light blue with low opacity */
+            color: rgba(14, 165, 233, 0.15);
             animation: floating 20s infinite ease-in-out;
             bottom: -150px;
         }
@@ -183,6 +184,75 @@
             50% { transform: translateY(-100vh) rotate(180deg); }
             100% { transform: translateY(0) rotate(360deg); }
         }
+        
+        /* Form Input Styling */
+        .form-input {
+             background-color: var(--bg-color); 
+             border: 2px solid #4a5160;
+             transition: border-color 0.3s ease;
+        }
+        .form-input:focus {
+            border-color: var(--main-color);
+            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.4);
+        }
+
+        .hero-btn .btn-icon {
+            transition: transform 0.3s ease;
+        }
+        .hero-btn:hover .btn-icon {
+            transform: translateX(4px);
+        }
+        
+        /* FAQ Accordion */
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        .faq-question .faq-icon {
+            transition: transform 0.3s ease;
+        }
+        .faq-question.active .faq-icon {
+            transform: rotate(45deg);
+        }
+        
+        /* Toast Notification */
+        @keyframes toast-in {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes toast-out {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+        .toast {
+            animation: toast-in 0.5s ease forwards;
+        }
+        .toast.removing {
+            animation: toast-out 0.5s ease forwards;
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        #back-to-top.visible {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: auto;
+        }
+        
+        /* Copy Button */
+        .copy-btn {
+            cursor: pointer;
+            margin-left: 8px;
+            color: #9ca3af;
+            transition: color 0.2s;
+        }
+        .copy-btn:hover {
+            color: var(--main-color);
+        }
+
 
         /* Responsif untuk layar kecil */
         @media (max-width: 1023px) {
@@ -194,7 +264,7 @@
             }
             .info-item-third {
                 max-height: 400px;
-                overflow-y: auto; /* Fix for mobile scroll */
+                overflow-y: auto;
             }
             .product-card {
                 width: 250px;
