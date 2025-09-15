@@ -1,4 +1,4 @@
-:root {
+ :root {
             --bg-color: #1f242d;
             --second-bg-color: #323946;
             --main-color: #0ea5e9;
@@ -21,255 +21,116 @@
             transform: translateY(-0.5rem);
             box-shadow: 0 1rem 2rem -0.5rem rgba(14, 165, 233, 0.2);
         }
-
-        /* Tata Letak Grid Kustom */
         .info-grid-container {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             grid-template-rows: auto 1fr;
             gap: 1.5rem;
             grid-auto-flow: row;
-            grid-template-areas:
-                "first sec sec"
-                "first third third";
+            grid-template-areas: "first sec sec" "first third third";
             height: 400px;
         }
-
         .info-item-first { grid-area: first; }
         .info-item-sec { grid-area: sec; }
         .info-item-third { grid-area: third; overflow: hidden; }
 
-        /* Gaya Tombol Kategori */
         .category-btn {
-            width: 100%;
-            padding: 0.75rem 1rem;
-            border-radius: 0.5rem;
-            text-align: left;
-            font-weight: 600;
+            width: 100%; padding: 0.75rem 1rem; border-radius: 0.5rem; text-align: left; font-weight: 600;
             transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-            background-color: transparent;
-            color: var(--main-color);
-            border: 2px solid var(--main-color);
+            background-color: transparent; color: var(--main-color); border: 2px solid var(--main-color);
         }
-        .category-btn:hover {
-            background-color: var(--main-color);
-            border-color: var(--main-color);
-            color: #ffffff;
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--main-color); border-color: var(--main-color); color: #ffffff;
         }
-        .category-btn.active {
-            background-color: var(--main-color);
-            color: #ffffff;
-            border-color: var(--main-color);
-        }
-        
-        /* Card Stacking Styles */
-        .product-stack-container {
-            position: relative;
-            width: 100%;
-            height: 360px;
-            perspective: 1000px;
-        }
+        .product-stack-container { position: relative; width: 100%; height: 360px; perspective: 1000px; }
         .product-card {
-            position: absolute;
-            width: 300px;
-            height: 100%;
-            top: 0;
-            left: 50%;
-            transform-origin: center center;
-            transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease;
-            cursor: pointer;
+            position: absolute; width: 300px; height: 100%; top: 0; left: 50%; transform-origin: center center;
+            transition: transform 0.5s ease, opacity 0.5s ease, z-index 0.5s ease; cursor: pointer;
         }
-        
-        .truncate-text {
-            overflow: hidden;
-            display: -webkit-box;
-            -webkit-box-orient: vertical;
-            -webkit-line-clamp: 2;
-        }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #1f2937;
-            border-radius: 10px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: var(--main-color);
-            border-radius: 10px;
-            border: 2px solid #1f2937;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background-color: #38bdf8;
-        }
+        .truncate-text { overflow: hidden; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #1f2937; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb { background-color: var(--main-color); border-radius: 10px; border: 2px solid #1f2937; }
+        ::-webkit-scrollbar-thumb:hover { background-color: #38bdf8; }
 
-        /* Scroll Animation */
-        .animate-on-scroll {
-            opacity: 0;
-            transform: translateY(2rem);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .animate-on-scroll.is-visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .animate-on-scroll { opacity: 0; transform: translateY(2rem); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+        .animate-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .animate-on-scroll.delay-300.is-visible { transition-delay: 0.3s; }
         
-        /* Content Panel Animation */
-        @keyframes contentFadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .content-panel.active {
-            animation: contentFadeIn 0.5s ease-out forwards;
-        }
+        @keyframes contentFadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        .content-panel.active { animation: contentFadeIn 0.5s ease-out forwards; }
         
-        /* Ripper Box Hover Effect */
-        .ripper-box {
-            transition: transform 0.3s ease, border-color 0.3s ease;
-            cursor: pointer;
-        }
-        .ripper-box:hover {
-            transform: scale(1.02);
-            border-color: var(--main-color);
-        }
+        .ripper-box { transition: transform 0.3s ease, border-color 0.3s ease; cursor: pointer; }
+        .ripper-box:hover { transform: scale(1.02); border-color: var(--main-color); }
 
-        /* Modal Animation */
-        @keyframes modalFadeIn {
-            from { opacity: 0; transform: scale(0.95); }
-            to { opacity: 1; transform: scale(1); }
-        }
-        .modal-view:not(.hidden) .modal-content {
-            animation: modalFadeIn 0.3s ease-out forwards;
-        }
+        @keyframes modalFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-view:not(.hidden) .modal-content { animation: modalFadeIn 0.3s ease-out forwards; }
 
-        /* Gradient Text for Titles */
-        .gradient-text {
-            background-image: linear-gradient(90deg, #ffffff, #38bdf8);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
+        .gradient-text { background-image: linear-gradient(90deg, #ffffff, #38bdf8); -webkit-background-clip: text; background-clip: text; color: transparent; }
         
-        /* Animation for Ripper list items */
-        .animate-in-list {
-            opacity: 0;
-            transform: translateX(-2rem);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .animate-in-list.is-visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .animate-in-list { opacity: 0; transform: translateX(-2rem); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+        .animate-in-list.is-visible { opacity: 1; transform: translateX(0); }
 
-        /* Floating Icon Background */
-        .floating-icons {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            overflow: hidden;
-        }
-        .floating-icons i {
-            position: absolute;
-            color: rgba(14, 165, 233, 0.15);
-            animation: floating 20s infinite ease-in-out;
-            bottom: -150px;
-        }
-        @keyframes floating {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-100vh) rotate(180deg); }
-            100% { transform: translateY(0) rotate(360deg); }
-        }
+        .floating-icons { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; overflow: hidden; }
+        .floating-icons i { position: absolute; color: rgba(14, 165, 233, 0.15); animation: floating 20s infinite ease-in-out; bottom: -150px; }
+        @keyframes floating { 0% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-100vh) rotate(180deg); } 100% { transform: translateY(0) rotate(360deg); } }
         
-        /* Form Input Styling */
-        .form-input {
-             background-color: var(--bg-color); 
-             border: 2px solid #4a5160;
-             transition: border-color 0.3s ease;
-        }
-        .form-input:focus {
-            border-color: var(--main-color);
-            box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.4);
-        }
+        .form-input { background-color: var(--bg-color); border: 2px solid #4a5160; transition: border-color 0.3s ease; }
+        .form-input:focus { border-color: var(--main-color); box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.4); }
+        .form-input.invalid { border-color: #f87171; }
+        .form-input.invalid:focus { border-color: #f87171; box-shadow: 0 0 0 2px rgba(248, 113, 113, 0.4); }
+        .form-input.valid { border-color: #4ade80; }
+        .form-input.valid:focus { border-color: #4ade80; box-shadow: 0 0 0 2px rgba(74, 222, 128, 0.4); }
 
-        .hero-btn .btn-icon {
-            transition: transform 0.3s ease;
-        }
-        .hero-btn:hover .btn-icon {
-            transform: translateX(4px);
-        }
+        .hero-btn .btn-icon { transition: transform 0.3s ease; }
+        .hero-btn:hover .btn-icon { transform: translateX(4px); }
         
-        /* FAQ Accordion */
-        .faq-answer {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-        }
-        .faq-question .faq-icon {
-            transition: transform 0.3s ease;
-        }
-        .faq-question.active .faq-icon {
-            transform: rotate(45deg);
-        }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+        .faq-question .faq-icon { transition: transform 0.3s ease; }
+        .faq-question.active .faq-icon { transform: rotate(45deg); }
         
-        /* Toast Notification */
-        @keyframes toast-in {
-            from { transform: translateX(100%); opacity: 0; }
-            to { transform: translateX(0); opacity: 1; }
-        }
-        @keyframes toast-out {
-            from { transform: translateX(0); opacity: 1; }
-            to { transform: translateX(100%); opacity: 0; }
-        }
-        .toast {
-            animation: toast-in 0.5s ease forwards;
-        }
-        .toast.removing {
-            animation: toast-out 0.5s ease forwards;
-        }
+        @keyframes toast-in { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes toast-out { from { transform: translateX(0); opacity: 1; } to { transform: translateX(100%); opacity: 0; } }
+        .toast { animation: toast-in 0.5s ease forwards; }
+        .toast.removing { animation: toast-out 0.5s ease forwards; }
 
-        /* Back to Top Button */
-        #back-to-top {
-            transition: opacity 0.3s, transform 0.3s;
-        }
-        #back-to-top.visible {
-            opacity: 1;
-            transform: scale(1);
-            pointer-events: auto;
-        }
+        #back-to-top { transition: opacity 0.3s, transform 0.3s; }
+        #back-to-top.visible { opacity: 1; transform: scale(1); pointer-events: auto; }
         
-        /* Copy Button */
-        .copy-btn {
-            cursor: pointer;
-            margin-left: 8px;
-            color: #9ca3af;
-            transition: color 0.2s;
+        .copy-btn { cursor: pointer; margin-left: 8px; color: #9ca3af; transition: color 0.2s; }
+        .copy-btn:hover { color: var(--main-color); }
+
+        .process-swiper .swiper-pagination { position: static; margin-top: 1.5rem; }
+        .process-swiper .swiper-pagination-bullet { background-color: #6b7280; opacity: 0.8; }
+        .process-swiper .swiper-pagination-bullet-active { background-color: var(--main-color); opacity: 1; }
+        
+        .process-step { transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; }
+        .process-step:hover { transform: scale(1.05); box-shadow: 0 0 20px rgba(14, 165, 233, 0.3); }
+        .process-step:hover .text-sky-400 { color: #38bdf8; }
+
+        .partner-filter-btn { padding: 0.5rem 1rem; border-radius: 0.5rem; font-weight: 600; background-color: #374151; color: #d1d5db; transition: all 0.3s ease; }
+        .partner-filter-btn.active, .partner-filter-btn:hover { background-color: var(--main-color); color: white; }
+        
+        .achievement-item { position: relative; cursor: default; }
+        .achievement-item .tooltip {
+            visibility: hidden; opacity: 0; position: absolute; bottom: 100%; left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            margin-bottom: 10px; background-color: var(--main-color); color: white; text-align: center;
+            border-radius: 6px; padding: 8px 12px; z-index: 10; width: max-content; max-width: 200px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
-        .copy-btn:hover {
-            color: var(--main-color);
+        .achievement-item:hover .tooltip { visibility: visible; opacity: 1; transform: translateX(-50%) translateY(0); }
+        .achievement-item .tooltip::after {
+            content: ''; position: absolute; top: 100%; left: 50%;
+            margin-left: -5px; border-width: 5px; border-style: solid;
+            border-color: var(--main-color) transparent transparent transparent;
         }
 
 
-        /* Responsif untuk layar kecil */
         @media (max-width: 1023px) {
-            .info-grid-container {
-                display: flex;
-                flex-direction: column;
-                grid-template-areas: none;
-                height: auto;
-            }
-            .info-item-third {
-                max-height: 400px;
-                overflow-y: auto;
-            }
-            .product-card {
-                width: 250px;
-            }
-             .product-stack-container {
-                height: 340px;
-            }
+            .info-grid-container { display: flex; flex-direction: column; grid-template-areas: none; height: auto; }
+            .info-item-third { max-height: 400px; overflow-y: auto; }
+            .product-card { width: 250px; }
+            .product-stack-container { height: 340px; }
         }

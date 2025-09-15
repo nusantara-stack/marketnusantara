@@ -78,13 +78,26 @@
                 card.style.zIndex = zIndex;
             });
         }
-
+        
         cards.forEach((card) => {
             card.addEventListener('click', () => {
                 const newIndex = parseInt(card.dataset.index, 10);
-                updateStack(newIndex);
+                if (activeIndex !== newIndex) {
+                    updateStack(newIndex);
+                } else {
+                    showProductModal(newIndex);
+                }
             });
         });
+
+        document.getElementById('next-card-btn').addEventListener('click', () => {
+            updateStack((activeIndex + 1) % cards.length);
+        });
+
+        document.getElementById('prev-card-btn').addEventListener('click', () => {
+            updateStack((activeIndex - 1 + cards.length) % cards.length);
+        });
+
 
         updateStack(0);
 
@@ -98,7 +111,7 @@
         
         // Ripper List, Search, and Modal Logic
         const ripperData = [
-             { name: 'Pelaku 1', whatsapp: ['wa.me/+6283110877006'], nominal: 'Rp107.154', kasus: 'Scam', ewallet: ['083110877006'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/grhioa.jpg' },
+            { name: 'Pelaku 1', whatsapp: ['wa.me/+6283110877006'], nominal: 'Rp107.154', kasus: 'Scam', ewallet: ['083110877006'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/grhioa.jpg' },
             { name: 'Meisya Putri Arini', whatsapp: ['wa.me/+6283137567672'], nominal: 'Rp15.000', kasus: 'Scam', ewallet: ['081398091300 - Dana', '081398091300 - Gopay', '083133326689 - Gopay', '901185589079 - Seabank (a/n: ESIH)'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/zo46ma.jpg' },
             { name: 'Pelaku 3', whatsapp: ['wa.me/+6283152796642'], nominal: 'Rp8.000', kasus: 'Scam', ewallet: ['901369935890'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/g5j2fa.jpg' },
             { name: 'Pelaku 4', whatsapp: ['wa.me/6281313419236'], nominal: 'Rp30.000', kasus: 'Scam', ewallet: ['085727021478 OVO'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/53lt90.jpg' },
@@ -113,6 +126,7 @@
             { name: 'Pelaku 13', whatsapp: ['wa.me/6287719232611'], nominal: '120K (bisa lebih banyak)', kasus: 'Scam', ewallet: ['—'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/t22l04.jpg' },
             { name: 'Pelaku 14', whatsapp: ['wa.me/62895402510585', 'wa.me/62895414376389'], nominal: '30K (bisa lebih banyak)', kasus: 'Scam', ewallet: ['0895384890460'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/ohep24.jpg' },
             { name: 'Pelaku 15', whatsapp: ['wa.me/6281321446734'], nominal: '165K', kasus: 'Scam', ewallet: ['—'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/y0b2k5.jpg' },
+            { name: 'Aris Setiawan', whatsapp: ['wa.me/+6285191205379'], nominal: '— (Garapan)', kasus: 'Scam', ewallet: ['—'], status: 'Terverifikasi ✅', imgSrc: 'https://files.catbox.moe/v4trgt.jpg' },
         ];
         
         const ripperListContainer = document.querySelector('#ripper-list .grid');
@@ -159,7 +173,7 @@
         modalDetails.addEventListener('click', function(event) {
             if (event.target.classList.contains('copy-btn')) {
                 const textToCopy = event.target.getAttribute('data-copy-text');
-                copyToClipboard(textToCopy);
+                copyToClipboard(textToCopy, event.target);
             }
         });
 
@@ -238,7 +252,7 @@
             { name: 'Nokos Indonesia', price: 'Rp 5.000', imgSrc: 'https://files.catbox.moe/17om8d.jpg', description: 'Dapatkan nomor virtual WhatsApp Indonesia sekali pakai untuk verifikasi aman dan menjaga privasi online Anda.' },
             { name: 'Bikin Website', isTiered: true, tiers: [
                 { name: 'Paket Basic', price: 'Rp 250.000', features: ['1 Halaman Landing Page', 'Desain Responsif', 'Domain .com (1 Thn)', 'Hosting (1 Thn)'] },
-                { name: 'Paket Bisnis', price: 'Rp 750.000', features: ['Hingga 5 Halaman', 'Desain Premium', 'Domain & Hosting (1 Thn)', 'Integrasi Sosial Media'] },
+                { name: 'Paket Bisnis', price: 'Rp 750.000', popular: true, features: ['Hingga 5 Halaman', 'Desain Premium', 'Domain & Hosting (1 Thn)', 'Integrasi Sosial Media'] },
                 { name: 'Paket E-Commerce', price: 'Rp 1.500.000', features: ['Toko Online Penuh', 'Payment Gateway', 'Manajemen Produk', 'Domain & Hosting (1 Thn)'] }
             ]},
             { name: 'Rekber', price: 'Mulai dari Rp 1.000', imgSrc: 'https://files.catbox.moe/ygx3ln.jpg', description: 'Transaksi online aman dengan layanan rekening bersama (rekber) terpercaya kami sebagai penengah.' },
@@ -251,7 +265,8 @@
             let contentHTML = '';
             if (product.isTiered) {
                 let tiersHTML = product.tiers.map(tier => `
-                    <div class="flex flex-col border border-gray-700 rounded-lg p-4 bg-gray-900/50 flex-1">
+                    <div class="relative flex flex-col border border-gray-700 rounded-lg p-4 bg-gray-900/50 flex-1">
+                        ${tier.popular ? `<div class="absolute top-0 -right-1 bg-rose-600 text-white text-xs font-bold px-3 py-1 rounded-bl-lg rounded-tr-lg">PALING POPULER</div>` : ''}
                         <h4 class="text-xl font-bold text-sky-400">${tier.name}</h4>
                         <p class="text-2xl font-bold my-3">${tier.price}</p>
                         <ul class="space-y-2 text-sm text-gray-300 mb-4 flex-grow">${tier.features.map(f => `<li class="flex items-center"><i class="fas fa-check-circle text-sky-500 mr-2"></i>${f}</li>`).join('')}</ul>
@@ -326,6 +341,8 @@
         }
         setupModal('report-scammer-btn', 'report-modal', 'close-report-modal');
         setupModal('submit-testimonial-btn', 'testimonial-modal', 'close-testimonial-modal');
+        setupModal('register-partner-btn', 'partner-modal', 'close-partner-modal');
+        setupModal('news-list', 'news-modal', 'close-news-modal'); // Re-use for news items
 
         // Toast Notification
         const toastContainer = document.getElementById('toast-container');
@@ -341,7 +358,7 @@
         }
         
         // Copy to Clipboard
-        function copyToClipboard(text) {
+        function copyToClipboard(text, iconElement) {
             const ta = document.createElement('textarea');
             ta.value = text;
             document.body.appendChild(ta);
@@ -349,16 +366,32 @@
             document.execCommand('copy');
             document.body.removeChild(ta);
             showToast(`Teks berhasil disalin: ${text}`);
+            if (iconElement) {
+                const originalClass = iconElement.className;
+                iconElement.className = 'fas fa-check text-green-500';
+                setTimeout(() => {
+                    iconElement.className = originalClass;
+                }, 2000);
+            }
         }
 
         // AJAX Form Submission
         function setupFormspreeAjax(formId, successMessage) {
             const form = document.getElementById(formId);
             if (!form) return;
+            const button = form.querySelector('button[type="submit"]');
+            if (!button) return;
+            const buttonText = button.querySelector('.button-text');
+            const buttonSpinner = button.querySelector('.button-spinner');
+
             form.addEventListener("submit", async function(event) {
                 event.preventDefault();
                 const data = new FormData(event.target);
-                showToast('Mengirim...', 'info');
+                
+                button.disabled = true;
+                if(buttonText) buttonText.classList.add('hidden');
+                if(buttonSpinner) buttonSpinner.classList.remove('hidden');
+
                 try {
                     const response = await fetch(event.target.action, { method: form.method, body: data, headers: { 'Accept': 'application/json' } });
                     if (response.ok) {
@@ -368,17 +401,23 @@
                         if(parentModal) parentModal.classList.add('hidden');
                     } else {
                         const data = await response.json();
-                        const errorMsg = data.errors ? data.errors.map(e => e.message).join(", ") : "Oops! Terjadi masalah.";
+                        const errorMsg = data.errors ? data.errors.map(e => e.message).join(", ") : "Oops! Terjadi masalah saat mengirim formulir.";
                         showToast(errorMsg, 'error');
                     }
                 } catch (error) {
-                    showToast("Oops! Terjadi masalah.", 'error');
+                    showToast("Oops! Terjadi masalah saat mengirim formulir.", 'error');
+                } finally {
+                    button.disabled = false;
+                    if(buttonText) buttonText.classList.remove('hidden');
+                    if(buttonSpinner) buttonSpinner.classList.add('hidden');
                 }
             });
         }
         setupFormspreeAjax('contact-form', 'Terima kasih! Pesan Anda telah terkirim.');
         setupFormspreeAjax('report-form', 'Terima kasih! Laporan Anda telah terkirim.');
         setupFormspreeAjax('testimonial-form', 'Terima kasih! Ulasan Anda telah terkirim.');
+        setupFormspreeAjax('partner-form', 'Terima kasih! Pengajuan Anda akan kami tinjau.');
+        setupFormspreeAjax('newsletter-form', 'Terima kasih telah berlangganan!');
 
         // Welcome Popup
         const welcomeModal = document.getElementById('welcome-modal');
@@ -406,3 +445,108 @@
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
+        
+        // Initialize Process Slider (Swiper)
+        new Swiper('.process-swiper', {
+            slidesPerView: 1, spaceBetween: 30, loop: true,
+            autoplay: { delay: 3000, disableOnInteraction: false, },
+            pagination: { el: '.swiper-pagination', clickable: true, },
+            breakpoints: {
+                640: { slidesPerView: 2, spaceBetween: 20 },
+                768: { slidesPerView: 3, spaceBetween: 40 },
+                1024: { slidesPerView: 5, spaceBetween: 30 },
+            },
+        });
+
+        // Partner Filter Logic
+        const filterButtons = document.querySelectorAll('.partner-filter-btn');
+        const partnerList = document.getElementById('partner-list');
+        if (partnerList) {
+            const partners = partnerList.children;
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+                    const filter = button.dataset.filter;
+                    for (let partner of partners) {
+                        if (filter === 'all' || partner.dataset.category === filter) {
+                            partner.style.display = 'block';
+                        } else {
+                            partner.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        }
+        
+        // News Section Logic
+        const newsData = [
+            {
+                title: "Pembaruan Tampilan & Fitur Keamanan",
+                date: "15 Sep 2025",
+                category: "UPDATE",
+                categoryColor: "bg-blue-500",
+                thumbnail: "https://files.catbox.moe/24f1q2.jpg",
+                fullContent: "Kami dengan bangga mengumumkan pembaruan besar pada tampilan situs Market Nusantara. Selain itu, kami juga memperkenalkan fitur 'Mitra Terverifikasi' untuk membantu Anda menemukan partner bisnis yang aman dan terpercaya. Jelajahi sekarang dan rasakan pengalaman yang lebih baik!"
+            },
+            {
+                title: "Promo Spesial Jasa Rekber Selama Bulan September",
+                date: "15 Sep 2025",
+                category: "PROMO",
+                categoryColor: "bg-yellow-500",
+                thumbnail: "https://files.catbox.moe/ygx3ln.jpg",
+                fullContent: "Nikmati promo spesial untuk layanan Rekening Bersama (Rekber) kami! Selama bulan September, dapatkan potongan biaya layanan hingga 50% untuk semua transaksi. Ini adalah kesempatan terbaik untuk bertransaksi dengan aman dan hemat. Jangan lewatkan!"
+            },
+            {
+                title: "5 Tips Mengenali Ciri-Ciri Penipu Online",
+                date: "15 Sep 2025",
+                category: "TIPS",
+                categoryColor: "bg-green-500",
+                thumbnail: "https://files.catbox.moe/tbms70.jpg",
+                fullContent: "Keamanan adalah prioritas. Berikut adalah 5 tips cepat untuk mengenali ciri-ciri penipu online: 1. Harga terlalu murah untuk menjadi kenyataan. 2. Memaksa untuk transfer cepat. 3. Menggunakan nomor rekening pribadi, bukan atas nama bisnis. 4. Profil media sosial yang mencurigakan. 5. Menolak menggunakan layanan Rekber. Selalu waspada!"
+            }
+        ];
+
+        const newsListContainer = document.getElementById('news-list');
+        const newsModal = document.getElementById('news-modal');
+        const closeNewsModalBtn = document.getElementById('close-news-modal');
+        const modalNewsDetails = document.getElementById('modal-news-details');
+
+        function generateNewsList() {
+            if (!newsListContainer) return;
+            newsListContainer.innerHTML = '';
+            newsData.forEach((item, index) => {
+                const newsItem = document.createElement('div');
+                newsItem.className = 'flex items-start gap-4 p-3 rounded-lg hover:bg-gray-800 transition-colors cursor-pointer group';
+                newsItem.addEventListener('click', () => showNewsModal(index));
+                newsItem.innerHTML = `
+                    <img src="${item.thumbnail}" alt="${item.title}" class="w-24 h-24 object-cover rounded-md flex-shrink-0" loading="lazy">
+                    <div class="flex-grow">
+                        <div class="flex items-center gap-2 mb-1">
+                             <span class="text-xs font-bold px-2 py-0.5 rounded-full text-white ${item.categoryColor}">${item.category}</span>
+                             <span class="text-xs text-gray-400">${item.date}</span>
+                        </div>
+                        <h5 class="font-semibold text-white group-hover:text-sky-400 transition-colors">${item.title}</h5>
+                    </div>
+                    <i class="fas fa-arrow-right text-gray-600 group-hover:text-sky-400 transition-colors self-center"></i>
+                `;
+                newsListContainer.appendChild(newsItem);
+            });
+        }
+        
+        function showNewsModal(index) {
+            const item = newsData[index];
+            modalNewsDetails.innerHTML = `
+                <img src="${item.thumbnail}" alt="${item.title}" class="w-full h-48 object-cover rounded-lg mb-4" loading="lazy">
+                <div class="flex items-center gap-3 mb-2">
+                    <span class="text-sm font-bold px-3 py-1 rounded-full text-white ${item.categoryColor}">${item.category}</span>
+                    <span class="text-sm text-gray-400">${item.date}</span>
+                </div>
+                <h3 class="text-2xl font-bold text-sky-300 mb-4">${item.title}</h3>
+                <p class="text-gray-300 whitespace-pre-line">${item.fullContent}</p>
+            `;
+            newsModal.classList.remove('hidden');
+        }
+        if(closeNewsModalBtn) closeNewsModalBtn.addEventListener('click', () => newsModal.classList.add('hidden'));
+
+        generateNewsList();
