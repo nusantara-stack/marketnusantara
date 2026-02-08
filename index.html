@@ -5,40 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Market Nusantara - Marketplace Komunitas Kreatif</title>
     
-    <!-- Tailwind CSS CDN --><script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter --><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Swiper.js CSS CDN --><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
     
-    <!-- Custom CSS --><style>
-        /* Sistem Pewarnaan Root */
+    <style>
         :root {
-            --color-background: #000000; /* Hitam Pekat */
-            --color-surface-1: #111111;   /* Permukaan sedikit lebih terang */
-            --color-surface-2: #1c1c1c;   /* Permukaan untuk hover/border */
+            --color-background: #050505; 
+            --color-surface-1: #0f1115;  /* Sedikit kebiruan gelap */
+            --color-surface-2: #181b21; 
             --color-text-primary: #f3f4f6;
-            --color-text-secondary: #a1a1aa;
+            --color-text-secondary: #94a3b8; /* Slate-400 yang lebih dingin */
             
-            --color-orange: #f97316;
-            --color-orange-hover: #fb923c;
-            --color-orange-transparent: rgba(249, 115, 22, 0.05);
-
-            --color-tomato: #ff6347;
-            --color-tomato-hover: #ff7f50;
-            --color-tomato-transparent: rgba(255, 99, 71, 0.05);
+            /* TEMA BARU: CYAN NEBULA (Colorful & Cohesive) */
+            /* Warna Dasar: Cyan */
+            --color-cyan: #22d3ee; 
+            --color-cyan-dark: #0891b2;
             
-            --color-gold: #daa520; /* Coklat Emas */
-            --color-gold-hover: #f0c04a;
-            --color-gold-transparent: rgba(218, 165, 32, 0.05);
+            /* Warna Sekunder: Violet (untuk campuran gradasi) */
+            --color-violet: #8b5cf6;
 
-            --color-glass-bg: rgba(10, 10, 10, 0.25);
-            --color-glass-border: rgba(255, 255, 255, 0.1);
+            /* Override Variable Lama dengan Tema Baru */
+            --color-orange: var(--color-cyan);  
+            --color-orange-hover: var(--color-cyan-dark);
+            --color-orange-transparent: rgba(34, 211, 238, 0.15); 
+
+            /* Variable Gradasi (Untuk kesan colorful tapi menyatu) */
+            --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+            --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%);
+
+            --color-glass-bg: rgba(15, 23, 42, 0.4); /* Slate tint */
+            --color-glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* Skeleton Screen & Loading State Styling (TAMBAHAN) */
+        /* Preloader */
         #preloader {
             position: fixed;
             top: 0;
@@ -65,11 +69,9 @@
             border-radius: 0.5rem;
         }
 
-        /* Smooth Scroll Behavior */
         html {
             scroll-behavior: smooth;
-            font-size: 16px; /* Set base font size for rem calculation */
-            /* --- BARU: Menghilangkan scrollbar di Firefox & IE/Edge --- */
+            font-size: 16px;
             scrollbar-width: none;
             -ms-overflow-style: none;
         }
@@ -78,55 +80,38 @@
             font-family: 'Inter', sans-serif;
             background-color: var(--color-background);
             color: var(--color-text-primary);
-            overflow-x: hidden; /* Mencegah horizontal scroll */
-            --color-accent: var(--color-orange); /* Default Accent */
-            --color-accent-hover: var(--color-orange-hover); /* Default Accent Hover */
+            overflow-x: hidden;
+            --color-accent: var(--color-orange);
+            --color-accent-hover: var(--color-orange-hover); 
             --color-accent-transparent: var(--color-orange-transparent);
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
-            /* --- BARU: Kode Anti Select Text --- */
-            -webkit-user-select: none; /* Safari */
-            -moz-user-select: none; /* Firefox */
-            -ms-user-select: none; /* IE 10+ */
-            user-select: none; /* Sintaks Standar */
-        }
-        
-        /* Theme Classes (BARU) */
-        body.theme-tomato {
-            --color-accent: var(--color-tomato);
-            --color-accent-hover: var(--color-tomato-hover);
-            --color-accent-transparent: var(--color-tomato-transparent);
-        }
-        body.theme-gold {
-            --color-accent: var(--color-gold);
-            --color-accent-hover: var(--color-gold-hover);
-            --color-accent-transparent: var(--color-gold-transparent);
+            -ms-overflow-style: none; 
+            scrollbar-width: none;
+            -webkit-user-select: none; 
+            -moz-user-select: none;
+            -ms-user-select: none; 
+            user-select: none; 
         }
 
-        /* Hide scrollbar for Chrome, Safari and Opera */
-        html::-webkit-scrollbar, /* --- BARU: Menargetkan html juga --- */
+        html::-webkit-scrollbar, 
         body::-webkit-scrollbar,
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
         .hide-scrollbar {
-            -ms-overflow-style: none;  /* IE and Edge */
-            scrollbar-width: none;  /* Firefox */
+            -ms-overflow-style: none;  
+            scrollbar-width: none;
         }
-
-        /* Scroll Progress Bar */
         #scroll-progress-bar {
             position: fixed;
             top: 0;
             left: 0;
-            height: 0.25rem; /* 4px -> 0.25rem */
-            background-color: var(--color-accent);
+            height: 0.25rem; 
+            background: var(--color-gradient-main); /* Progress bar warna-warni */
             width: 0%;
             z-index: 100;
             transition: width 0.1s ease-out;
+            box-shadow: 0 0 15px var(--color-cyan);
         }
-
-        /* Nav Link Styling */
         .nav-link {
             position: relative;
             z-index: 10;
@@ -136,31 +121,30 @@
         }
         .nav-link.active,
         .nav-link:hover {
-            color: var(--color-accent);
+            color: var(--color-cyan);
+            text-shadow: 0 0 10px var(--color-accent-transparent);
         }
-
-        /* Nav Follower Element */
         #nav-follower {
             position: absolute;
             z-index: 5;
-            height: 2.25rem; /* 36px -> 2.25rem */
-            background-color: rgba(255, 255, 255, 0.1);
+            height: 2.25rem; 
+            background-color: var(--color-accent-transparent);
             border-radius: 9999px;
-            border: 0.0625rem solid var(--color-glass-border); /* 1px -> 0.0625rem */
-            /* Transisi sekarang ditangani oleh JavaScript untuk efek "surfing" yang mulus */
+            border: 1px solid var(--color-cyan);
             opacity: 0;
-            backdrop-filter: blur(0.3125rem); /* 5px -> 0.3125rem */
+            backdrop-filter: blur(0.3125rem);
             -webkit-backdrop-filter: blur(0.3125rem);
+            box-shadow: 0 0 15px var(--color-accent-transparent);
         }
 
 
-        /* Hero section background */
+        /* Hero & Glassmorphism */
         .hero-section {
-            /* This class is now used for layout, background is handled by a video element. */
+            /* Smooth padding transition for focus mode */
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Glassmorphism effect for navbar */
+        /* Navbar Glass */
         .navbar-glass {
             background: var(--color-glass-bg);
             backdrop-filter: blur(0.625rem);
@@ -168,7 +152,7 @@
             border-bottom: 0.0625rem solid var(--color-glass-border);
         }
         
-        /* Glass effect for hero text boxes */
+        /* Glass Box Standard */
         .glass-box {
             background: var(--color-glass-bg);
             backdrop-filter: blur(0.3125rem);
@@ -176,9 +160,13 @@
             border: 0.0625rem solid var(--color-glass-border);
             position: relative;
             padding-top: 2rem;
+            transition: border-color 0.3s ease;
+        }
+        .glass-box:hover {
+            border-color: var(--color-cyan);
         }
 
-        /* BARU: Swiper Hero Progressbar Styling */
+        /* Swiper Customization */
         .hero-swiper-pagination.swiper-pagination-progressbar {
             position: relative !important;
             top: auto !important;
@@ -188,20 +176,37 @@
             border-radius: 3px;
         }
         .hero-swiper-pagination .swiper-pagination-progressbar-fill {
-            background: var(--color-accent);
+            background: var(--color-gradient-main); /* Progress bar slider gradient */
             border-radius: 3px;
-            transition: transform 0.2s linear; /* Smooth fill */
+            transition: transform 0.2s linear; 
+            box-shadow: 0 0 10px var(--color-cyan);
         }
 
-        /* Swiper custom styles */
+        /* Hero Swiper Slide */
         .hero-swiper { width: 100%; }
         .swiper-slide { height: auto; display: flex; }
         
-        /* Text shadow for hero title */
-        .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } /* 2px 2px 8px -> rem */
+        /* Text Shadow */
+        .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
+        
+        /* Text Gradient Title */
+        .text-gradient {
+            background: var(--color-gradient-main);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
 
-        /* Efek Kilatan Cahaya pada Tombol */
+        /* Button Shine Effect (UPDATED FOR GRADIENT) */
         .btn-shine { position: relative; overflow: hidden; }
+        .btn-shine.btn-primary {
+            background: var(--color-gradient-main);
+            color: #000;
+        }
+        .btn-shine.btn-primary:hover {
+            background: var(--color-gradient-hover);
+        }
+        
         .btn-shine::before {
             content: '';
             position: absolute;
@@ -209,18 +214,18 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
             transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
         }
         .btn-shine:hover::before { left: 100%; }
 
-        /* Label Tag untuk Slide Hero */
+        /* Slide Number Tag */
         .slide-tag {
             position: absolute;
             top: 0.75rem;
             right: 0.75rem;
-            background-color: rgba(255, 255, 255, 0.1);
-            color: var(--color-accent);
+            background-color: var(--color-accent-transparent);
+            color: var(--color-cyan);
             font-weight: 700;
             font-size: 0.75rem;
             width: 1.75rem;
@@ -229,28 +234,28 @@
             align-items: center;
             justify-content: center;
             border-radius: 0.375rem;
-            border: 0.0625rem solid var(--color-glass-border); /* 1px -> 0.0625rem */
-            backdrop-filter: blur(0.125rem); /* 2px -> 0.125rem */
+            border: 1px solid var(--color-cyan); 
+            backdrop-filter: blur(0.125rem); 
             -webkit-backdrop-filter: blur(0.125rem);
         }
         
-        /* Section Divider Line (REVISED) */
+        /* Section Divider */
         .section-divider-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
         .section-divider-line {
-            height: 0.1875rem; /* 3px -> 0.1875rem */
+            height: 1px; 
             width: 40%; 
-            background-color: var(--color-text-primary);
-            opacity: 0.8;
+            background: linear-gradient(90deg, transparent, var(--color-cyan), transparent);
+            opacity: 0.3;
         }
 
-        /* Statistics Section (BARU) */
+        /* Stats Section */
         #statistik {
-            background-color: var(--color-background); /* Diubah ke hitam pekat */
-            background-image: radial-gradient(circle at bottom right, rgba(249, 115, 22, 0.03), transparent 30%);
+            background-color: var(--color-background); 
+            background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
         }
         .stat-card {
             background: linear-gradient(to right, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
@@ -259,69 +264,225 @@
         }
         .stat-card:hover {
             transform: translateY(-0.5rem);
-            border-color: rgba(249, 115, 22, 0.5);
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 20px var(--color-accent-transparent);
         }
 
-        /* Testimonial Section Styling (BARU) */
-        #testimoni {
-             background-color: var(--color-background);
+        /* Mitra Section */
+        #mitra {
+            position: relative;
         }
-        .testimonial-card {
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(0.625rem); /* 10px */
-            -webkit-backdrop-filter: blur(0.625rem);
-            border: 0.0625rem solid var(--color-glass-border);
+        .mitra-swiper {
+            width: 100%;
+            padding: 2rem 0 4rem;
+        }
+
+        /* Variable warna aksen untuk tiap tipe role (Tetap dipertahankan biar colorful) */
+        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.2); } /* Ungu */
+        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.2); } /* Biru */
+        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.2); } /* Kuning/Emas */
+        .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } /* Default jadi Cyan */
+
+        .mitra-card {
+            /* Dimensi Tetap */
+            height: 380px; 
+            width: 100%;
+            background-color: #0a0a0a;
+            border-radius: 0; /* Gaya boxy tajam */
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #222;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .testimonial-card:hover {
-            transform: translateY(-0.5rem); /* 8px */
-            box-shadow: 0 1.25rem 2.5rem -0.625rem rgba(0,0,0,0.3); /* 20px 40px -10px */
+
+        .mitra-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+            border-color: #333;
         }
-        .testimonial-quote-bg {
+
+        /* Latar Belakang Teks Pudar (MARKET / PARTNER) */
+        .card-bg-text {
             position: absolute;
-            top: -1.25rem; /* -20px */
-            left: 0.75rem; /* 12px */
-            font-size: 8rem; /* 128px */
-            font-weight: 800;
-            color: var(--color-accent-transparent);
-            z-index: 1;
+            top: 20%;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 3rem;
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            pointer-events: none;
+            z-index: 0;
             line-height: 1;
-            user-select: none;
-            transition: color 0.3s ease;
         }
-        .testimonial-content {
-            position: relative;
+
+        /* Aksen Warna Diagonal */
+        .card-accent-slash {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(to left, var(--card-accent-dim), transparent);
+            clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
+            z-index: 1;
+            transition: all 0.3s ease;
+        }
+        
+        /* Garis warna solid di kanan */
+        .card-accent-border {
+            position: absolute;
+            top: 20px;
+            right: 0;
+            width: 4px;
+            height: 60px;
+            background-color: var(--card-accent);
             z-index: 2;
         }
 
-        /* Testimonial Carousel Pagination (BARU) */
-        .swiper-pagination-testimonial .swiper-pagination-bullet {
-            background-color: var(--color-text-secondary);
-            opacity: 0.5;
+        .mitra-card:hover .card-accent-slash {
+            width: 70%;
+            opacity: 0.8;
+        }
+
+        /* Image Wrapper */
+        .mitra-image-wrapper {
+            position: relative;
+            z-index: 2;
+            height: 65%;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .mitra-img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%; /* Tetap bulat tapi besar */
+            border: 3px solid rgba(255,255,255,0.1);
+            filter: grayscale(100%); /* Efek hitam putih awal */
+            transition: all 0.4s ease;
+        }
+
+        .mitra-card:hover .mitra-img {
+            filter: grayscale(0%);
+            transform: scale(1.05);
+            border-color: var(--card-accent);
+            box-shadow: 0 0 20px var(--card-accent-dim);
+        }
+
+        /* Info Section (Bawah) */
+        .mitra-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.25rem;
+            z-index: 10;
+            background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.8) 80%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .mitra-role-label {
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--card-accent);
+            display: block;
+            margin-bottom: -4px;
+        }
+
+        .mitra-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #fff;
+            line-height: 1.1;
+            text-transform: capitalize;
+        }
+
+        /* Action Bar (Paling Bawah) */
+        .mitra-action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center content now */
+            margin-top: 0.75rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 0.75rem;
+        }
+
+        .btn-feed {
+            background-color: var(--card-accent);
+            color: #fff; /* Teks putih pada kartu mitra agar kontras dengan warna kartu */
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            width: 100%; /* Full width */
             transition: all 0.3s ease;
-            width: 0.5rem; /* 8px */
-            height: 0.5rem; /* 8px */
+            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
-        .swiper-pagination-testimonial .swiper-pagination-bullet-active {
-            background-color: var(--color-accent);
-            opacity: 1;
-            width: 2rem; /* 32px */
-            border-radius: 0.5rem; /* 8px */
+        
+        .btn-feed:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 15px var(--card-accent);
         }
+
+        .feed-count {
+            background: rgba(0,0,0,0.3);
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 0.7rem;
+        }
+
+
+        /* Swiper Nav Mitra Override */
+        .mitra-swiper-button {
+            color: #fff;
+            background: rgba(0,0,0,0.5);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(4px);
+        }
+        .mitra-swiper-button:after {
+            font-size: 1rem !important;
+        }
+
 
         /* FAQ Section */
         #faq {
             background-color: var(--color-background);
-            background-image: radial-gradient(circle at top left, rgba(249, 115, 22, 0.05), transparent 40%);
+            background-image: radial-gradient(circle at top left, var(--color-accent-transparent), transparent 40%);
         }
         .faq-item {
             background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
-            border: 0.0625rem solid rgba(255,255,255,0.1); /* 1px -> 0.0625rem */
+            border: 0.0625rem solid rgba(255,255,255,0.1); 
             border-radius: 0.75rem;
             transition: all 0.3s ease;
-            backdrop-filter: blur(0.3125rem); /* 5px -> 0.3125rem */
+            backdrop-filter: blur(0.3125rem); 
             -webkit-backdrop-filter: blur(0.3125rem);
         }
         .faq-answer {
@@ -330,28 +491,33 @@
             transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), padding 0.5s ease;
             padding: 0 1.5rem;
         }
+        .faq-item.active {
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 15px var(--color-accent-transparent);
+        }
         .faq-item.active .faq-answer {
-            max-height: 12.5rem; /* 200px -> 12.5rem */
+            max-height: 12.5rem; 
             padding: 0 1.5rem 1.5rem;
         }
         .faq-item.active .faq-arrow-container {
-            background-color: var(--color-accent);
+            background: var(--color-gradient-main); /* Panah Gradient */
         }
         .faq-item.active .faq-arrow {
             transform: rotate(180deg);
+            color: #000; 
         }
-        .faq-arrow { transition: transform 0.3s ease; }
+        .faq-arrow { transition: transform 0.3s ease; color: #fff; }
         .faq-arrow-container {
             background-color: rgba(255,255,255,0.1);
             border-radius: 0.375rem;
             transition: background-color 0.3s ease;
         }
 
-        /* Contact Section Specific Styles (REVISED) */
+        /* Contact Section (UPDATED IMAGE) */
         #kontak {
             position: relative;
             overflow: hidden;
-            background-image: url('https://files.catbox.moe/zn0g0n.jpeg');
+            background-image: url('assets/contact.webp'); /* Update Image */
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -378,21 +544,31 @@
         .contact-form-input {
             background-color: transparent;
             border: none;
-            border-bottom: 0.0625rem solid #4a4a4a; /* 1px -> 0.0625rem */
+            border-bottom: 0.0625rem solid #4a4a4a; 
             color: var(--color-text-primary);
             padding: 0.75rem 0;
             transition: border-color 0.3s ease;
         }
         .contact-form-input:focus {
             outline: none;
-            border-bottom-color: var(--color-accent);
+            border-bottom-color: var(--color-cyan);
+            box-shadow: 0 1px 0 0 var(--color-cyan);
         }
         .form-bracket {
             position: absolute;
             width: 2rem;
             height: 2rem;
-            border-color: var(--color-accent);
+            border-color: var(--color-cyan);
+            opacity: 0.8;
+            transition: all 0.3s ease;
         }
+        .relative:hover .form-bracket {
+            width: 2.5rem;
+            height: 2.5rem;
+            opacity: 1;
+            box-shadow: 0 0 10px var(--color-accent-transparent);
+        }
+
 
         /* Social Proof Notification */
         #social-proof-notification {
@@ -410,7 +586,7 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
             transform: translateX(-150%);
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden; /* To contain the progress bar */
+            overflow: hidden; 
         }
         #social-proof-notification.visible {
             transform: translateX(0);
@@ -419,42 +595,12 @@
             position: absolute;
             bottom: 0;
             left: 0;
-            height: 0.1875rem; /* 3px */
-            background-color: rgba(255, 255, 255, 0.4);
+            height: 0.1875rem; 
+            background: var(--color-gradient-main);
             width: 100%;
         }
 
-        /* --- PRODUCT DETAIL VIEW STYLES (REVISED & BARU) --- */
-        #product-detail-view {
-            transition: opacity 0.3s ease-in-out;
-        }
-        #product-detail-view.visible {
-            opacity: 1;
-            pointer-events: auto;
-        }
-        #product-bottom-sheet {
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        #product-detail-view.visible #product-bottom-sheet {
-            transform: translateY(0);
-        }
-        #product-modal-content {
-            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), opacity 0.3s ease-in-out;
-        }
-        #product-detail-view.visible #product-modal-content {
-            transform: scale(1);
-            opacity: 1;
-        }
-        .product-gallery-swiper .swiper-pagination-bullet {
-            background-color: var(--color-text-secondary);
-            opacity: 0.7;
-        }
-        .product-gallery-swiper .swiper-pagination-bullet-active {
-            background-color: var(--color-accent);
-            opacity: 1;
-        }
-        
-        /* --- INFO MODAL STYLES (BARU) --- */
+        /* Modal Info */
         #info-modal-content {
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -477,36 +623,13 @@
             space-y: 0.5rem;
         }
 
-        /* Color Palette in Navbar (REVISED) */
-        #color-palette-options {
-            transition: transform 0.2s ease, opacity 0.2s ease;
-        }
-        #color-palette-options.hidden {
-            transform: scale(0.95) translateY(-10px);
-            opacity: 0;
-            pointer-events: none;
-        }
-        .palette-color {
-            width: 1.25rem; /* 20px */
-            height: 1.25rem; /* 20px */
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid transparent;
-            transition: all 0.2s ease;
-        }
-        .palette-color:hover,
-        .palette-color.active {
-            transform: scale(1.15);
-            border-color: #fff;
-        }
-
-        /* URL Copied Toast Notification (BARU) */
+        /* Toast Notification */
         #toast-notification.show {
             opacity: 1;
             transform: translateY(0) translateX(-50%);
         }
 
-        /* --- Scroll Animation Classes (REVISED) --- */
+        /* Animate on Scroll */
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -528,24 +651,25 @@
             transform: none;
         }
 
-        /* --- Advanced Hero Tabs (BARU) --- */
+        /* Tabbed Interface */
         .hero-tab-button {
             transition: all 0.3s ease;
             color: var(--color-text-secondary);
             border-bottom: 2px solid transparent;
-            padding-bottom: 0.5rem; /* 8px */
+            padding-bottom: 0.5rem; 
         }
         .hero-tab-button.active,
         .hero-tab-button:hover {
             color: var(--color-text-primary);
         }
         .hero-tab-button.active {
-            border-bottom-color: var(--color-accent);
+            border-bottom-color: var(--color-cyan);
+            text-shadow: 0 0 10px var(--color-accent-transparent);
         }
         .tab-panel {
             transition: opacity 0.4s ease-in-out, max-height 0.5s ease-in-out;
             opacity: 1;
-            max-height: 500px; /* large enough value */
+            max-height: 500px; 
             overflow: hidden;
         }
         .tab-panel.hidden {
@@ -554,7 +678,7 @@
             pointer-events: none;
         }
 
-        /* --- BARU: Mengatur tinggi header saat focus mode --- */
+        /* Header Animation for Focus Mode */
         header {
             transition: min-height 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -565,10 +689,10 @@
             padding-bottom: 0;
         }
 
-        /* --- REVISED: Info Section Container Styling --- */
+        /* Info Section Container */
         #informasi-section-container {
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
-            max-height: 5000px; /* Nilai yang cukup besar */
+            max-height: 5000px; 
             overflow: hidden;
             background-color: var(--color-background);
         }
@@ -579,7 +703,7 @@
         }
 
 
-        /* --- BARU: Gradient Fade for Team Section --- */
+        /* Team Section Decorations */
         #tim-kami::before {
             content: '';
             position: absolute;
@@ -602,7 +726,7 @@
         }
 
 
-        /* --- BARU: Redesigned Team Card Styling by Level --- */
+        /* Team Card Base */
         .team-card {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
             border: 1px solid var(--color-glass-border);
@@ -621,7 +745,7 @@
             border-radius: 50%;
             margin-bottom: 0.5rem;
             object-fit: cover;
-            border: 2px solid transparent; /* Base border */
+            border: 2px solid transparent; 
             padding: 2px;
             transition: transform 0.3s ease, border-color 0.3s ease;
         }
@@ -642,13 +766,14 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
         .team-card:hover img {
-            border-color: var(--color-accent);
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 10px var(--color-accent-transparent);
         }
 
-        /* Lvl 3 - Manager Card */
+        /* Level 3: Manager / Lead */
         .team-card-lvl3 img { width: 3.5rem; height: 3.5rem; }
 
-        /* Lvl 2 - Executive Card */
+        /* Level 2: C-Level (COO, CTO) */
         .team-card-lvl2 {
             background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
             border-color: var(--color-glass-border);
@@ -656,37 +781,37 @@
         .team-card-lvl2 img {
             width: 4rem;
             height: 4rem;
-            border-color: var(--color-accent);
+            border-color: var(--color-cyan);
         }
         .team-card-lvl2 h4 { font-size: 1rem; }
 
-        /* Lvl 1 - CEO Card */
+        /* Level 1: CEO (Special Effect) */
         @keyframes animated-glow {
-          0% { box-shadow: 0 0 10px -5px var(--color-accent); }
-          50% { box-shadow: 0 0 20px 0px var(--color-accent-transparent), 0 0 25px 0px var(--color-accent); }
-          100% { box-shadow: 0 0 10px -5px var(--color-accent); }
+          0% { box-shadow: 0 0 10px -5px var(--color-cyan); }
+          50% { box-shadow: 0 0 20px 0px var(--color-accent-transparent), 0 0 25px 0px var(--color-cyan); }
+          100% { box-shadow: 0 0 10px -5px var(--color-cyan); }
         }
         .team-card-lvl1 {
             padding: 1.25rem;
-            border: 2px solid var(--color-accent);
-            box-shadow: 0 0 10px -5px var(--color-accent);
+            border: 2px solid var(--color-cyan);
+            box-shadow: 0 0 10px -5px var(--color-cyan);
             animation: animated-glow 5s ease-in-out infinite;
         }
         .team-card-lvl1 img {
              width: 5rem;
              height: 5rem;
              border-width: 3px;
-             border-color: var(--color-accent);
+             border-color: var(--color-cyan);
         }
         .team-card-lvl1 h4 { font-size: 1.125rem; }
-        .team-card-lvl1 .role { font-size: 0.875rem; color: var(--color-accent);}
+        .team-card-lvl1 .role { font-size: 0.875rem; color: var(--color-cyan);}
         .team-card-lvl1:hover {
             transform: translateY(-10px) scale(1.03);
             box-shadow: 0 15px 30px rgba(0,0,0,0.4);
         }
 
 
-        /* --- BARU: Redesigned News List Styling --- */
+        /* News List Items */
         .news-list-item {
             display: flex;
             align-items: center;
@@ -700,7 +825,7 @@
         .news-list-item:hover {
             transform: translateY(-5px);
             background-color: var(--color-surface-2);
-            border-color: var(--color-glass-border);
+            border-color: var(--color-cyan); /* Border accent saat hover */
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
         .news-date {
@@ -734,15 +859,14 @@
             opacity: 0;
             transform: translateX(-10px);
             transition: all 0.3s ease;
-            color: var(--color-accent);
+            color: var(--color-cyan);
         }
         .news-list-item:hover .news-arrow {
             opacity: 1;
             transform: translateX(0);
         }
         
-
-        /* --- REDESIGNED: Service Card Styling --- */
+        /* Process Service Cards */
         .service-card {
             background: var(--color-surface-2);
             border: 1px solid var(--color-glass-border);
@@ -755,6 +879,8 @@
         .service-card:hover {
             transform: translateY(-8px);
             background: var(--color-glass-bg);
+            border-color: var(--color-cyan); /* Border accent */
+            box-shadow: 0 10px 30px -10px var(--color-accent-transparent);
         }
         .service-card-number {
             position: absolute;
@@ -767,7 +893,7 @@
             user-select: none;
         }
         
-        /* --- Nav Links visibility for tabs (REVISED with Info Mode) --- */
+        /* Navbar State Management */
         #desktop-menu-container.info-mode .main-nav-link,
         #mobile-menu.info-mode .main-nav-link {
             display: none;
@@ -777,7 +903,7 @@
             display: none;
         }
 
-        /* --- Main Content visibility for tabs (BARU) --- */
+        /* Main Content Transition */
         main {
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
         }
@@ -788,16 +914,18 @@
             overflow: hidden;
         }
 
-        /* --- BARU: Back to Top Button Styling --- */
+        /* Back to Top Button */
         #back-to-top-btn {
             position: fixed;
-            bottom: 1.5rem; /* 24px */
-            right: 1.5rem; /* 24px */
-            z-index: 40; /* Di bawah notifikasi & modal */
+            bottom: 1.5rem; 
+            right: 1.5rem; 
+            z-index: 40; 
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
+            background: var(--color-gradient-main); /* Gradient button */
+            border: none;
         }
         #back-to-top-btn.visible {
             opacity: 1;
@@ -805,14 +933,14 @@
             pointer-events: auto;
         }
 
-        /* --- REVISED: Welcome Modal Styling --- */
+        /* Welcome Modal */
         #welcome-modal-content {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            /* BARU: Glassmorphism Effect */
+            
             background: var(--color-glass-bg);
-            backdrop-filter: blur(1rem); /* 16px */
+            backdrop-filter: blur(1rem); 
             -webkit-backdrop-filter: blur(1rem);
-            border-top: 4px solid var(--color-accent); /* Aksen Warna */
+            border-top: 4px solid var(--color-cyan); 
         }
         #welcome-modal-container.visible {
             opacity: 1;
@@ -827,9 +955,9 @@
 </head>
 <body class="antialiased" oncontextmenu="return false;">
     
-    <!-- Preloader / Skeleton Screen --><div id="preloader">
+    <div id="preloader">
         <div class="container mx-auto px-6 h-full">
-            <!-- Skeleton Navbar --><div class="h-20 flex justify-between items-center">
+            <div class="h-20 flex justify-between items-center">
                 <div class="skeleton h-10 w-40"></div>
                 <div class="hidden md:flex items-center space-x-8">
                     <div class="skeleton h-6 w-16"></div>
@@ -837,7 +965,7 @@
                     <div class="skeleton h-6 w-16"></div>
                 </div>
             </div>
-            <!-- Skeleton Hero --><div class="absolute bottom-16 left-0 right-0 px-6">
+            <div class="absolute bottom-16 left-0 right-0 px-6">
                  <div class="w-full">
                     <div class="skeleton h-16 w-3/4 mb-4"></div>
                     <div class="skeleton h-16 w-1/2 mb-8"></div>
@@ -857,57 +985,44 @@
     </div>
     
     <div id="main-content">
-        <!-- Scroll Progress Bar --><div id="scroll-progress-bar"></div>
+        <div id="scroll-progress-bar"></div>
 
-        <!-- Header & Hero Section --><header id="home" class="relative min-h-screen flex flex-col">
-            <!-- Video Background & Overlay --><div class="absolute top-0 left-0 w-full h-full z-[-1]">
-                <video autoplay loop muted playsinline class="w-full h-full object-cover">
-                    <source src="https://files.catbox.moe/t1ave4.mp4" type="video/mp4">
-                </video>
+        <header id="home" class="relative min-h-screen flex flex-col">
+            <div class="absolute top-0 left-0 w-full h-full z-[-1]">
+                <!-- VIDEO DIGANTI JADI GAMBAR HERO -->
+                <img src="assets/hero.webp" alt="Hero Background" class="w-full h-full object-cover">
                 <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 5%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.5) 100%);"></div>
             </div>
             
-            <!-- Navigation Bar --><nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
+            <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
                 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <!-- Logo --><a href="#home">
+                    <a href="#home">
                         <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="h-10 w-auto">
                     </a>
                     
-                    <!-- Desktop Menu (muncul di md ke atas) --><div id="desktop-menu-container" class="hidden md:flex items-center space-x-8 relative">
+                    <div id="desktop-menu-container" class="hidden md:flex items-center space-x-8 relative">
                         <div id="nav-follower"></div>
-                        <!-- Main Links -->
+                        
                         <a href="#home" class="nav-link main-nav-link">Home</a>
-                        <a href="#produk-unggulan" class="nav-link main-nav-link">Produk</a>
+                        <a href="#mitra" class="nav-link main-nav-link">Mitra</a>
                         <a href="#statistik" class="nav-link main-nav-link">Statistik</a>
-                        <a href="#testimoni" class="nav-link main-nav-link">Testimoni</a>
+                        <!-- Link Testimoni Dihapus -->
                         <a href="#kontak" class="nav-link main-nav-link">Kontak</a>
-                        <!-- Info Tab Links (Hidden by default) -->
+                        
                         <a href="#berita" class="nav-link info-nav-link">Berita</a>
-                        <a href="#tim-kami" class="nav-link info-nav-link">Tim Kami</a>
+                        <!-- Link Tim Kami Dihapus -->
                         <a href="#layanan" class="nav-link info-nav-link">Proses Layanan</a>
                         <a href="#faq" class="nav-link info-nav-link">FAQ</a>
                     </div>
                     
-                    <!-- Actions Group (kanan) -->
+                    
                     <div class="flex items-center gap-2 sm:gap-4">
-                        <!-- Color Palette (REVISED) -->
-                        <div class="relative">
-                            <button id="palette-toggle-button" title="Ubah Tema Warna" class="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9c.83 0 1.5-.67 1.5-1.5 0-.39-.15-.74-.39-1.01-.23-.26-.38-.61-.38-.99 0-.83.67-1.5 1.5-1.5H16c2.76 0 5-2.24 5-5 0-4.42-4.03-8-9-8zm-5.5 9c-.83 0-1.5-.67-1.5-1.5S5.67 9 6.5 9 8 9.67 8 10.5 7.33 12 6.5 12zm3-4C8.67 8 8 7.33 8 6.5S8.67 5 9.5 5s1.5.67 1.5 1.5S10.33 8 9.5 8zm5 0c-.83 0-1.5-.67-1.5-1.5S13.67 5 14.5 5s1.5.67 1.5 1.5S15.33 8 14.5 8zm3 4c-.83 0-1.5-.67-1.5-1.5S16.67 9 17.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
-                            </button>
-                            <div id="color-palette-options" class="hidden absolute top-full right-0 mt-2 flex items-center gap-2 bg-black/50 backdrop-blur-md p-2 rounded-full border border-[var(--color-glass-border)] transition-all origin-top-right">
-                                <div class="palette-color active" data-theme="theme-orange" style="background-color: var(--color-orange);" title="Tema Oranye"></div>
-                                <div class="palette-color" data-theme="theme-tomato" style="background-color: var(--color-tomato);" title="Tema Tomato"></div>
-                                <div class="palette-color" data-theme="theme-gold" style="background-color: var(--color-gold);" title="Tema Emas"></div>
-                            </div>
-                        </div>
-
-                        <!-- Share Button -->
+                        
                         <button id="share-button" title="Bagikan Halaman" class="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
                             <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
                         </button>
                         
-                        <!-- Mobile Menu Button (hanya muncul di bawah md) -->
+                        
                         <div class="md:hidden">
                             <button id="mobile-menu-button" class="text-white focus:outline-none">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -915,21 +1030,21 @@
                         </div>
                     </div>
                 </div>
-                <!-- Mobile Menu --><div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+                <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
                     <a href="#home" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Home</a>
-                    <a href="#produk-unggulan" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Produk</a>
+                    <a href="#mitra" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Mitra</a>
                     <a href="#statistik" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Statistik</a>
-                    <a href="#testimoni" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Testimoni</a>
+                    <!-- Link Testimoni Dihapus -->
                     <a href="#kontak" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Kontak</a>
-                    <!-- Info Tab Links (Hidden by default) -->
+                    
                     <a href="#berita" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Berita</a>
-                    <a href="#tim-kami" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Tim Kami</a>
+                    <!-- Link Tim Kami Dihapus -->
                     <a href="#layanan" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Proses Layanan</a>
                     <a href="#faq" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">FAQ</a>
                 </div>
             </nav>
 
-            <!-- Hero Content --><div class="hero-section flex-grow flex items-center md:items-end justify-center text-left pb-12 md:pb-16">
+            <div class="hero-section flex-grow flex items-center md:items-end justify-center text-left pb-12 md:pb-16">
                 <div class="container mx-auto px-6 z-10 w-full">
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
                         <div class="w-full pt-20 md:pt-0">
@@ -940,8 +1055,8 @@
                                 Platform terpercaya untuk segala transaksi online Anda. Aman, cepat, dan didukung oleh komunitas.
                             </p>
                             <div class="flex flex-row flex-wrap items-center gap-4 mb-10">
-                                <a href="#produk-unggulan" id="cta-jelajahi-produk" class="btn-shine inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold text-white rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transform hover:scale-105 transition-all duration-300">
-                                    Jelajahi Produk
+                                <a href="#mitra" id="cta-lihat-mitra" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold text-black rounded-lg transform hover:scale-105 transition-all duration-300">
+                                    Lihat Mitra
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" /></svg>
                                 </a>
                                 <a href="#" class="btn-shine inline-block px-4 py-2 sm:px-8 sm:py-3 text-sm text-center font-semibold text-white rounded-lg border border-[var(--color-glass-border)] bg-[var(--color-glass-bg)] hover:bg-white/20 transform hover:scale-105 transition-all duration-300">
@@ -957,28 +1072,28 @@
                                     <div class="swiper-slide"><div class="glass-box p-6 rounded-lg h-full"><div class="slide-tag">5</div><h2 class="text-base font-bold mb-2">Komunitas</h2><p class="text-sm text-[var(--color-text-secondary)]">Menyediakan ruang di mana anggota dapat berinteraksi, berkolaborasi, dan bertransaksi dengan rasa aman yang terjamin.</p></div></div>
                                 </div>
                             </div>
-                            <!-- BARU: Progressbar untuk Hero Swiper -->
+                            
                             <div class="hero-swiper-pagination swiper-pagination mt-4"></div>
-                            <div class="mt-2"> <!-- Margin diubah dari mt-6 -->
+                            <div class="mt-2"> 
                                 <div class="flex justify-start">
                                     <button id="swiper-next" class="text-xs font-semibold tracking-widest text-gray-400 hover:text-white transition-colors duration-300 mb-2">SWIPE &raquo;</button>
                                 </div>
                             </div>
                             
-                            <!-- Advanced Tabs (REVISED) -->
+                            
                             <div id="hero-tabs-container" class="mt-4 border-t border-white/10 pt-4">
-                                <!-- Tab Buttons -->
+                                
                                 <div class="flex items-center gap-6 mb-4">
                                     <button class="hero-tab-button active text-sm font-semibold" data-tab="tab-beranda">Beranda</button>
                                     <button class="hero-tab-button text-sm font-semibold" data-tab="tab-komunitas">Komunitas</button>
                                     <button class="hero-tab-button text-sm font-semibold" data-tab="tab-informasi">Informasi</button>
                                 </div>
-                                <!-- Tab Content -->
+                                
                                 <div class="relative min-h-[20px]">
-                                    <!-- Tab Panel 1: Beranda -->
+                                    
                                     <div id="tab-beranda" class="tab-panel">
                                     </div>
-                                    <!-- Tab Panel 2: Komunitas -->
+                                    
                                     <div id="tab-komunitas" class="tab-panel hidden">
                                     </div>
                                 </div>
@@ -989,118 +1104,39 @@
             </div>
         </header>
 
-        <!-- Information Section Container (REVISED) --><div id="informasi-section-container" class="hidden">
+        <div id="informasi-section-container" class="hidden">
 
-            <!-- Section Berita --><section id="berita" class="pt-8 pb-12 md:pt-12 md:pb-16" style="background-color: var(--color-background);">
+            <section id="berita" class="pt-8 pb-12 md:pt-12 md:pb-16" style="background-color: var(--color-background);">
                 <div class="container mx-auto px-4 relative">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Papan Pengumuman</h2>
                         <p class="mt-2 text-[var(--color-text-secondary)]">Informasi, update, dan pengumuman terbaru dari platform kami.</p>
                     </div>
-                    <div class="max-w-3xl mx-auto space-y-4">
-                        <!-- News List Item 1 -->
-                        <a href="#" class="news-list-item group">
-                            <div class="news-date">
-                                <span class="day">10</span>
-                                <span class="month">OKT</span>
-                            </div>
-                            <div class="news-content">
-                                <h3 class="font-bold text-base text-white group-hover:text-[var(--color-accent)] transition-colors">Peluncuran Fitur Kolaborasi Proyek</h3>
-                                <p class="text-xs text-gray-500">Kategori: <span class="font-semibold text-[var(--color-text-secondary)]">UPDATE PLATFORM</span></p>
-                            </div>
-                            <div class="news-arrow">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                            </div>
-                        </a>
-            
-                        <!-- News List Item 2 -->
-                         <a href="#" class="news-list-item group">
-                            <div class="news-date">
-                                <span class="day">05</span>
-                                <span class="month">OKT</span>
-                            </div>
-                            <div class="news-content">
-                                <h3 class="font-bold text-base text-white group-hover:text-[var(--color-accent)] transition-colors">Workshop: Pemasaran Digital untuk UMKM Kreatif</h3>
-                                <p class="text-xs text-gray-500">Kategori: <span class="font-semibold text-[var(--color-text-secondary)]">EVENT KOMUNITAS</span></p>
-                            </div>
-                            <div class="news-arrow">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                            </div>
-                        </a>
-            
-                        <!-- News List Item 3 -->
-                         <a href="#" class="news-list-item group">
-                            <div class="news-date">
-                                <span class="day">01</span>
-                                <span class="month">OKT</span>
-                            </div>
-                            <div class="news-content">
-                                <h3 class="font-bold text-base text-white group-hover:text-[var(--color-accent)] transition-colors">Pencapaian 10.000+ Komunitas Kreator</h3>
-                                <p class="text-xs text-gray-500">Kategori: <span class="font-semibold text-[var(--color-text-secondary)]">PENGUMUMAN</span></p>
-                            </div>
-                            <div class="news-arrow">
-                               <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                            </div>
-                        </a>
+                    
+                    <!-- DYNAMIC NEWS CONTAINER -->
+                    <div id="news-container" class="max-w-3xl mx-auto space-y-4">
+                         <!-- Skeleton Loader Awal -->
+                        <div class="skeleton h-24 w-full rounded-xl"></div>
+                        <div class="skeleton h-24 w-full rounded-xl"></div>
+                        <div class="skeleton h-24 w-full rounded-xl"></div>
                     </div>
+                    
                     <div class="text-center mt-8">
                         <p class="text-xs text-gray-500 italic">Hanya menampilkan 3 pembaruan terbaru. Untuk arsip, kunjungi halaman blog kami.</p>
                     </div>
                 </div>
             </section>
 
-            <!-- Section Tim Kami --><section id="tim-kami" class="relative py-12 md:py-16 bg-[var(--color-surface-1)] overflow-hidden">
-                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://files.catbox.moe/1oxkib.jpeg');"></div>
-                <div class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-                <div class="container mx-auto px-4 relative z-10">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold text-white">Struktur Kepemimpinan Market Nusantara</h2>
-                        <p class="mt-2 text-[var(--color-text-secondary)]">Perkenalkan para pemimpin dan inovator di balik visi kami untuk memajukan komunitas kreatif.</p>
-                    </div>
-                    
-                    <div class="max-w-7xl mx-auto space-y-12">
-                        <!-- LEVEL 1 -->
-                        <div class="flex justify-center">
-                            <div class="team-card team-card-lvl1 w-full max-w-sm">
-                                <img src="https://placehold.co/128x128/111111/f3f4f6?text=PM" alt="Foto CEO">
-                                <h4>Parhan M.P</h4>
-                                <p class="role">CEO (Chief Executive Officer)</p>
-                            </div>
-                        </div>
+            <!-- SECTION TIM KAMI DIHAPUS DARI SINI -->
 
-                        <!-- LEVEL 2 -->
-                        <div class="grid grid-cols-2 gap-3 md:gap-4 max-w-3xl mx-auto">
-                            <div class="team-card team-card-lvl2">
-                                <img src="https://placehold.co/128x128/111111/f3f4f6?text=JD" alt="Foto COO">
-                                <h4>Wella Marliana</h4>
-                                <p class="role">COO (Chief Operating Officer)</p>
-                            </div>
-                            <div class="team-card team-card-lvl2">
-                                <img src="https://placehold.co/128x128/111111/f3f4f6?text=JS" alt="Foto CTO">
-                                <h4>Rima Mirianti</h4>
-                                <p class="role">CTO (Chief Technology Officer)</p>
-                            </div>
-                        </div>
-
-                        <!-- LEVEL 3 -->
-                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 md:gap-4">
-                            <div class="team-card team-card-lvl3"><img src="https://placehold.co/128x128/1c1c1c/a1a1aa?text=AM" alt="Foto Manajer"><h4>Ghabriel</h4><p class="role">Marketing Manager</p></div>
-                            <div class="team-card team-card-lvl3"><img src="https://placehold.co/128x128/1c1c1c/a1a1aa?text=SW" alt="Foto Manajer"><h4>John</h4><p class="role">Head of Partnerships</p></div>
-                            <div class="team-card team-card-lvl3"><img src="https://placehold.co/128x128/1c1c1c/a1a1aa?text=BP" alt="Foto Manajer"><h4>Ahmad</h4><p class="role">Lead Developer</p></div>
-                            <div class="team-card team-card-lvl3"><img src="https://placehold.co/128x128/1c1c1c/a1a1aa?text=DL" alt="Foto Manajer"><h4>Sintia.</h4><p class="role">CS Team Lead</p></div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Section Layanan --><section id="layanan" class="py-12 md:py-16">
+            <section id="layanan" class="py-12 md:py-16">
                 <div class="container mx-auto px-4">
                     <div class="text-center mb-12">
                         <h2 class="text-3xl md:text-4xl font-bold text-white">Alur Proses Rekening Bersama</h2>
                         <p class="mt-2 text-[var(--color-text-secondary)]">Transaksi aman, nyaman, dan terpercaya dalam 5 langkah.</p>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-5 gap-8 max-w-7xl mx-auto">
-                        <!-- Service Card 1 -->
+                        
                         <div class="service-card">
                             <div class="service-card-number">01</div>
                             <div class="relative z-10">
@@ -1109,7 +1145,7 @@
                                 <p class="text-sm text-[var(--color-text-secondary)]">Pembeli transfer dana ke rekening aman Market Nusantara.</p>
                             </div>
                         </div>
-                         <!-- Service Card 2 -->
+                          
                         <div class="service-card">
                             <div class="service-card-number">02</div>
                             <div class="relative z-10">
@@ -1118,7 +1154,7 @@
                                 <p class="text-sm text-[var(--color-text-secondary)]">Dana kami amankan & kami beri tahu penjual untuk memproses pesanan.</p>
                             </div>
                         </div>
-                         <!-- Service Card 3 -->
+                          
                         <div class="service-card">
                             <div class="service-card-number">03</div>
                             <div class="relative z-10">
@@ -1127,7 +1163,7 @@
                                 <p class="text-sm text-[var(--color-text-secondary)]">Penjual mengirimkan barang atau jasa yang telah disepakati.</p>
                             </div>
                         </div>
-                         <!-- Service Card 4 -->
+                          
                         <div class="service-card">
                             <div class="service-card-number">04</div>
                             <div class="relative z-10">
@@ -1136,7 +1172,7 @@
                                 <p class="text-sm text-[var(--color-text-secondary)]">Pembeli menerima barang/jasa lalu melakukan konfirmasi.</p>
                             </div>
                         </div>
-                         <!-- Service Card 5 -->
+                          
                         <div class="service-card">
                             <div class="service-card-number">05</div>
                             <div class="relative z-10">
@@ -1149,25 +1185,26 @@
                 </div>
             </section>
 
-            <!-- FAQ Section --><section id="faq" class="py-8 md:py-20">
+            <section id="faq" class="py-8 md:py-20">
                 <div class="container mx-auto px-6">
                     <div class="grid lg:grid-cols-3 gap-12 items-start">
-                        <!-- Left Column: Title & CTA --><div class="lg:col-span-1 animate-on-scroll fade-right">
+                        <div class="lg:col-span-1 animate-on-scroll fade-right">
                             <p class="text-sm font-bold flex items-center gap-2 text-[var(--color-accent)] mb-2">
                                <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd" /></svg>
                                MARKET NUSANTARA FAQ
                             </p>
                             <h2 class="text-4xl md:text-5xl font-bold mb-6">Pertanyaan Umum</h2>
-                            <div class="glass-box p-6 rounded-lg" style="border-color: rgba(249, 115, 22, 0.3);">
+                            <!-- PERUBAHAN DI SINI: WARNA BORDER JADI CYAN TRANSPARAN -->
+                            <div class="glass-box p-6 rounded-lg" style="border-color: rgba(34, 211, 238, 0.3);">
                                 <h3 class="font-bold text-lg mb-2">Masih punya pertanyaan?</h3>
                                 <p class="text-sm text-[var(--color-text-secondary)] mb-4">Tidak menemukan jawaban yang Anda cari? Hubungi tim dukungan kami.</p>
-                                <a href="#kontak" class="btn-shine inline-block w-full text-center px-6 py-3 text-sm font-semibold text-white rounded-lg transition-colors duration-300" style="background-color: var(--color-accent); --hover-bg: var(--color-accent-hover);" onmouseover="this.style.backgroundColor = 'var(--hover-bg)'" onmouseout="this.style.backgroundColor = 'var(--color-accent)'">
+                                <a href="#kontak" class="btn-shine btn-primary inline-block w-full text-center px-6 py-3 text-sm font-semibold text-black rounded-lg transition-colors duration-300">
                                     Kirim Email
                                 </a>
                             </div>
                         </div>
 
-                        <!-- Right Column: Accordion --><div class="lg:col-span-2 space-y-4">
+                        <div class="lg:col-span-2 space-y-4">
                             <div class="faq-item animate-on-scroll fade-left">
                                 <button class="faq-question w-full flex justify-between items-center text-left p-6">
                                     <span class="font-semibold text-white">Apa itu Rekening Bersama (Rekber)?</span>
@@ -1184,7 +1221,7 @@
                                     <span class="font-semibold text-white">Bagaimana alur transaksi menggunakan Rekber?</span>
                                      <div class="faq-arrow-container p-1">
                                         <svg class="faq-arrow w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                    </div>
+                                     </div>
                                 </button>
                                 <div class="faq-answer text-[var(--color-text-secondary)]">
                                     <p>Alurnya sederhana: 1) Pembeli melakukan pembayaran ke rekening Market Nusantara. 2) Kami mengonfirmasi pembayaran dan memberitahu penjual untuk mengirim barang. 3) Pembeli mengonfirmasi penerimaan barang. 4) Kami mentransfer dana ke rekening penjual.</p>
@@ -1195,7 +1232,7 @@
                                     <span class="font-semibold text-white">Apakah ada biaya untuk bergabung dengan Market Nusantara?</span>
                                      <div class="faq-arrow-container p-1">
                                         <svg class="faq-arrow w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                                    </div>
+                                     </div>
                                 </button>
                                 <div class="faq-answer text-[var(--color-text-secondary)]">
                                     <p>Tidak ada biaya pendaftaran sama sekali. Bergabung dengan komunitas Market Nusantara sepenuhnya gratis! Kami hanya mengenakan biaya layanan yang transparan pada setiap transaksi yang berhasil untuk mendukung operasional dan pengembangan platform.</p>
@@ -1207,77 +1244,53 @@
             </section>
         </div>
 
-        <!-- Main Content --><main>
-            <!-- Produk Unggulan Section --><section id="produk-unggulan" class="pb-8 md:pb-16">
+        <main>
+            <!-- MITRA SECTION (DYNAMIC CAROUSEL) -->
+            <section id="mitra" class="pb-8 md:pb-16 pt-8">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12 animate-on-scroll zoom-in">
-                        <h2 class="text-3xl md:text-4xl font-bold">Produk & Jasa Unggulan</h2>
-                        <p class="mt-2 text-[var(--color-text-secondary)]">Berikut adalah produk dan jasa Market Nusantara</p>
+                        <h2 class="text-3xl md:text-4xl font-bold">Mitra Market Nusantara</h2>
+                        <p class="mt-2 text-[var(--color-text-secondary)]">Berkolaborasi dengan brand dan komunitas terpercaya untuk ekosistem yang lebih baik.</p>
                     </div>
-                    <div class="flex overflow-x-auto space-x-4 pb-4 sm:grid sm:grid-cols-2 sm:gap-1 sm:space-x-0 sm:pb-0 lg:grid-cols-4 hide-scrollbar">
-                    <!-- Product Card 1 --><div id="produk-jasa-website" class="product-card relative group overflow-hidden w-1/2 flex-shrink-0 sm:w-auto cursor-pointer animate-on-scroll fade-up" 
-                            data-title="Jasa Pembuatan Website" 
-                            data-description="Solusi digital untuk bisnis Anda, mulai dari landing page, toko online, hingga sistem custom sesuai kebutuhan." 
-                            data-price="Mulai dari Rp 1.500.000"
-                            data-images='["https://files.catbox.moe/dek6q1.jpg", "https://files.catbox.moe/p8ma0l.jpg", "https://files.catbox.moe/o3t302.jpg"]'>
-                            <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://files.catbox.moe/dek6q1.jpg" alt="Jasa Pembuatan Website">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6 text-white">
-                                <h3 class="text-xl font-bold">Jasa Pembuatan Website</h3>
-                                <p class="text-sm opacity-80 mt-1">Solusi digital untuk bisnis Anda.</p>
+                    
+                    <div class="relative group">
+                        <!-- Swiper Mitra -->
+                        <div class="swiper mitra-swiper">
+                            <div class="swiper-wrapper" id="mitra-container">
+                                <!-- Data dari mitra.json akan dimuat di sini -->
+                                <div class="swiper-slide h-full">
+                                    <div class="mitra-card skeleton w-full"></div>
+                                </div>
+                                <div class="swiper-slide h-full">
+                                    <div class="mitra-card skeleton w-full"></div>
+                                </div>
+                                <div class="swiper-slide h-full">
+                                    <div class="mitra-card skeleton w-full"></div>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Product Card 2 --><div id="produk-jasa-rekber" class="product-card relative group overflow-hidden w-1/2 flex-shrink-0 sm:w-auto cursor-pointer animate-on-scroll fade-up" style="transition-delay: 100ms"
-                            data-title="Jasa Rekening Bersama (Rekber)"
-                            data-description="Layanan pihak ketiga yang menjamin keamanan transaksi online Anda. Dana aman hingga barang sampai tujuan."
-                            data-price="Fee Transaksi 5%"
-                            data-images='["https://files.catbox.moe/yu6b7p.jpg", "https://files.catbox.moe/vlf5o5.jpg", "https://files.catbox.moe/j4l9m8.jpg"]'>
-                            <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://files.catbox.moe/yu6b7p.jpg" alt="Jasa Rekber">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6 text-white">
-                                <h3 class="text-xl font-bold">Jasa Rekber</h3>
-                                <p class="text-sm opacity-80 mt-1">Transaksi aman dan terpercaya.</p>
-                            </div>
-                        </div>
-                        <!-- Product Card 3 --><div id="produk-nomor-virtual" class="product-card relative group overflow-hidden w-1/2 flex-shrink-0 sm:w-auto cursor-pointer animate-on-scroll fade-up" style="transition-delay: 200ms"
-                            data-title="Nomor Virtual Sekali Pakai"
-                            data-description="Dapatkan nomor telepon virtual untuk verifikasi akun (OTP) berbagai aplikasi tanpa menggunakan nomor pribadi Anda."
-                            data-price="Rp 5.000 / Nomor"
-                            data-images='["https://files.catbox.moe/nn665e.jpg", "https://files.catbox.moe/qf7s1m.jpg", "https://files.catbox.moe/s1x1n8.jpg"]'>
-                            <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://files.catbox.moe/nn665e.jpg" alt="Nomor Virtual">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6 text-white">
-                                <h3 class="text-xl font-bold">Nomor Virtual</h3>
-                                <p class="text-sm opacity-80 mt-1">Privasi terjaga, komunikasi lancar.</p>
-                            </div>
-                        </div>
-                        <!-- Product Card 4 --><div id="produk-jasa-otp" class="product-card relative group overflow-hidden w-1/2 flex-shrink-0 sm:w-auto cursor-pointer animate-on-scroll fade-up" style="transition-delay: 300ms"
-                            data-title="Jasa Verifikasi OTP Aplikasi"
-                            data-description="Butuh bantuan verifikasi akun? Kami menyediakan jasa penerimaan kode OTP untuk berbagai platform dengan cepat."
-                            data-price="Tergantung Aplikasi"
-                            data-images='["https://files.catbox.moe/62t74t.jpg", "https://files.catbox.moe/2hgyj6.jpg", "https://files.catbox.moe/x9wz16.jpg"]'>
-                            <img class="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500" src="https://files.catbox.moe/62t74t.jpg" alt="Jasa OTP Aplikasi">
-                            <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
-                            <div class="absolute bottom-0 left-0 p-6 text-white">
-                                <h3 class="text-xl font-bold">Jasa OTP Aplikasi</h3>
-                                <p class="text-sm opacity-80 mt-1">Verifikasi mudah dan cepat.</p>
-                            </div>
+                            
+                            <!-- Navigation buttons -->
+                            <div class="swiper-button-next mitra-swiper-button"></div>
+                            <div class="swiper-button-prev mitra-swiper-button"></div>
+                            
+                            <!-- Pagination -->
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>
             </section>
             
-            <!-- Visual Divider --><div class="container mx-auto px-6 py-8 animate-on-scroll zoom-in">
+            <div class="container mx-auto px-6 py-8 animate-on-scroll zoom-in">
                  <div class="section-divider-container">
                     <div class="section-divider-line"></div>
                     <div class="section-divider-line"></div>
                 </div>
             </div>
 
-            <!-- Statistics Section (BARU) --><section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
+            <section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
                 <div class="container mx-auto px-6">
                     <div class="grid lg:grid-cols-5 gap-12 items-center">
-                        <!-- Left Part: Main Stat & Testimonial --><div class="lg:col-span-3 animate-on-scroll fade-right">
+                        <div class="lg:col-span-3 animate-on-scroll fade-right">
                             <p class="text-sm font-bold flex items-center gap-2 text-[var(--color-accent)] mb-2">
                                 <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M12 7a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0V8.414l-4.293 4.293a1 1 0 01-1.414 0L8 10.414l-4.293 4.293a1 1 0 01-1.414-1.414l5-5a1 1 0 011.414 0L12 11.586l3.293-3.293V7h-3z" clip-rule="evenodd" /></svg>
                                 ANGKA BERBICARA
@@ -1295,133 +1308,21 @@
                             </div>
                         </div>
 
-                        <!-- Right Part: Four Stat Boxes (REVISED) --><div class="lg:col-span-2 grid grid-cols-2 gap-6">
-                            <!-- Stat 1: Transaksi --><div class="stat-card p-6 rounded-lg text-center animate-on-scroll zoom-in">
-                                <svg class="w-10 h-10 mx-auto mb-3 text-[var(--color-accent)]" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
-                                <p class="text-3xl sm:text-4xl font-bold stat-number" data-target="15000" data-plus="true">0</p>
-                                <p class="text-sm text-[var(--color-text-secondary)]">Transaksi Rekber</p>
-                            </div>
-                            <!-- Stat 2: Nomor Virtual --><div class="stat-card p-6 rounded-lg text-center animate-on-scroll zoom-in" style="transition-delay: 100ms">
-                                <svg class="w-10 h-10 mx-auto mb-3 text-[var(--color-accent)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" /></svg>
-                                <p class="text-3xl sm:text-4xl font-bold stat-number" data-target="7500" data-plus="true">0</p>
-                                <p class="text-sm text-[var(--color-text-secondary)]">Nomor Virtual Terjual</p>
-                            </div>
-                            <!-- Stat 3: OTP --><div class="stat-card p-6 rounded-lg text-center animate-on-scroll zoom-in" style="transition-delay: 200ms">
-                                <svg class="w-10 h-10 mx-auto mb-3 text-[var(--color-accent)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25a3 3 0 013 3m3 0a6 6 0 01-7.029 5.912c-.563-.097-1.159.026-1.563.43L10.5 17.25H8.25v2.25H6v2.25H2.25v-2.818c0-.597.237-1.17.659-1.591l6.499-6.499c.404-.404.527-1 .43-1.563A6 6 0 1121.75 8.25z" /></svg>
-                                <p class="text-3xl sm:text-4xl font-bold stat-number" data-target="9700" data-plus="true">0</p>
-                                <p class="text-sm text-[var(--color-text-secondary)]">Verifikasi OTP Berhasil</p>
-                            </div>
-                            <!-- Stat 4: Website --><div class="stat-card p-6 rounded-lg text-center animate-on-scroll zoom-in" style="transition-delay: 300ms">
-                                 <svg class="w-10 h-10 mx-auto mb-3 text-[var(--color-accent)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17.25v1.007a3 3 0 01-.879 2.122L7.5 21h9l-.621-.621A3 3 0 0115 18.257V17.25m6-12V15a2.25 2.25 0 01-2.25 2.25H5.25A2.25 2.25 0 013 15V5.25A2.25 2.25 0 015.25 3h13.5A2.25 2.25 0 0121 5.25z" /></svg>
-                                <p class="text-3xl sm:text-4xl font-bold stat-number" data-target="1000" data-plus="true">0</p>
-                                <p class="text-sm text-[var(--color-text-secondary)]">Website Dibuat</p>
-                            </div>
+                        <!-- STATISTIK CONTAINER (DYNAMIC CONTENT) -->
+                        <div id="statistik-container" class="lg:col-span-2 grid grid-cols-2 gap-6">
+                            <!-- Skeleton Loader Statistik -->
+                            <div class="skeleton h-32 rounded-lg"></div>
+                            <div class="skeleton h-32 rounded-lg"></div>
                         </div>
+
                     </div>
                 </div>
             </section>
             
-            <!-- Testimonial Section (BARU) --><section id="testimoni" class="py-8 md:py-20">
-                <div class="container mx-auto px-6">
-                    <div class="text-center mb-16 animate-on-scroll zoom-in">
-                        <p class="text-sm font-bold flex items-center justify-center gap-2 text-[var(--color-accent)] mb-2">
-                           <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z" /><path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" /></svg>
-                            KATA MEREKA
-                        </p>
-                        <h2 class="text-4xl md:text-5xl font-bold">Dipercaya oleh Ribuan Pengguna</h2>
-                        <p class="mt-4 text-[var(--color-text-secondary)] max-w-2xl mx-auto">
-                            Dari wirausaha hingga mahasiswa, lihat bagaimana Market Nusantara membantu mereka bertumbuh.
-                        </p>
-                    </div>
-
-                    <!-- Testimonial Grid / Carousel Container -->
-                    <div class="relative">
-                        <div class="swiper testimonial-swiper lg:overflow-visible">
-                            <div class="swiper-wrapper pb-16 lg:pb-0 lg:grid lg:grid-cols-3 lg:gap-8">
-                                <!-- Card 1 -->
-                                <div class="swiper-slide h-auto animate-on-scroll fade-up">
-                                    <div class="testimonial-card rounded-xl p-8 flex flex-col justify-between h-full">
-                                        <div class="testimonial-quote-bg">“</div>
-                                        <div class="testimonial-content">
-                                            <div class="flex mb-4">
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                            </div>
-                                            <p class="text-[var(--color-text-secondary)] italic mb-6">"Fitur Rekber di Market Nusantara benar-benar mengubah cara saya bertransaksi. Sekarang saya bisa menjangkau pelanggan dari seluruh Indonesia dengan rasa aman. Omzet naik drastis!"</p>
-                                        </div>
-                                        <div class="flex items-center gap-4 pt-4 border-t border-white/10 testimonial-content">
-                                            <img class="w-12 h-12 rounded-full object-cover" src="https://placehold.co/100x100/111111/f97316?text=BS" alt="Budi Santoso">
-                                            <div>
-                                                <p class="font-bold text-white">Budi Santoso</p>
-                                                <p class="text-sm text-[var(--color-text-secondary)]">Wirausaha Kuliner</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 2 -->
-                                <div class="swiper-slide h-auto animate-on-scroll fade-up" style="transition-delay: 150ms">
-                                    <div class="testimonial-card rounded-xl p-8 flex flex-col justify-between h-full lg:mt-12">
-                                         <div class="testimonial-quote-bg">“</div>
-                                         <div class="testimonial-content">
-                                            <div class="flex mb-4">
-                                                <!-- 5 stars -->
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                            </div>
-                                            <p class="text-[var(--color-text-secondary)] italic mb-6">"Saya pakai jasa Nomor Virtual untuk verifikasi proyek-proyek sampingan. Sangat praktis, privasi terjaga, dan harganya terjangkau untuk kantong mahasiswa. Recommended!"</p>
-                                         </div>
-                                        <div class="flex items-center gap-4 pt-4 border-t border-white/10 testimonial-content">
-                                            <img class="w-12 h-12 rounded-full object-cover" src="https://placehold.co/100x100/111111/f97316?text=AN" alt="Aditya Nugraha">
-                                            <div>
-                                                <p class="font-bold text-white">Aditya Nugraha</p>
-                                                <p class="text-sm text-[var(--color-text-secondary)]">Mahasiswa & Web Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Card 3 -->
-                                <div class="swiper-slide h-auto animate-on-scroll fade-up" style="transition-delay: 300ms">
-                                     <div class="testimonial-card rounded-xl p-8 flex flex-col justify-between h-full">
-                                         <div class="testimonial-quote-bg">“</div>
-                                         <div class="testimonial-content">
-                                            <div class="flex mb-4">
-                                                <!-- 5 stars -->
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                                <svg class="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path></svg>
-                                            </div>
-                                            <p class="text-[var(--color-text-secondary)] italic mb-6">"Sebagai desainer, menjual aset digital seringkali rumit. Di sini, prosesnya mulus dan cepat. Komunitasnya juga sangat suportif, saya dapat banyak inspirasi dan klien baru."</p>
-                                         </div>
-                                        <div class="flex items-center gap-4 pt-4 border-t border-white/10 testimonial-content">
-                                            <img class="w-12 h-12 rounded-full object-cover" src="https://placehold.co/100x100/111111/f97316?text=CL" alt="Citra Lestari">
-                                            <div>
-                                                <p class="font-bold text-white">Citra Lestari</p>
-                                                <p class="text-sm text-[var(--color-text-secondary)]">Freelance Desainer Grafis</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Carousel Pagination -->
-                        <div class="swiper-pagination-testimonial text-center mt-8 lg:hidden"></div>
-                    </div>
-                </div>
-            </section>
-            <!-- Kontak Section --><section id="kontak" class="py-8 md:py-20">
+            <section id="kontak" class="py-8 md:py-20">
             <div class="container mx-auto px-6">
                 <div class="grid md:grid-cols-2 gap-16 items-center">
-                    <!-- Left Column: Info --><div class="text-white animate-on-scroll fade-right">
+                    <div class="text-white animate-on-scroll fade-right">
                         <h2 class="text-4xl md:text-5xl font-bold flex items-center gap-3">
                             Hubungi Kami
                             <span class="w-3 h-3 bg-[var(--color-accent)]"></span>
@@ -1447,7 +1348,7 @@
                                     <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">0812-1474-5949</p>
                                 </div>
                             </a>
-                            <!-- Location Info --><div class="flex items-center gap-4 group">
+                            <div class="flex items-center gap-4 group">
                                 <div class="bg-white/10 p-3 rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
@@ -1460,7 +1361,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Map Preview --><div class="mt-8 rounded-lg overflow-hidden border border-[var(--color-glass-border)]">
+                        <div class="mt-8 rounded-lg overflow-hidden border border-[var(--color-glass-border)]">
                             <iframe 
                                 src="https://www.google.com/maps/embed?pb=!1m18!m12!1m3!1d253496.2483584852!2d106.73356223528738!3d-6.921619424613207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e684e12d3261a85%3A0x1b14806875b61c2c!2sSukabumi%2C%2C%20Kota%20Sukabumi%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1668612188682!5m2!1sid!2sid" 
                                 width="100%" 
@@ -1473,8 +1374,8 @@
                         </div>
                     </div>
 
-                    <!-- Right Column: Form --><div class="relative bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-lg animate-on-scroll fade-left" style="transition-delay: 200ms">
-                        <!-- Brackets --><div class="form-bracket -top-3 -left-3 border-t-2 border-l-2"></div>
+                    <div class="relative bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-lg animate-on-scroll fade-left" style="transition-delay: 200ms">
+                        <div class="form-bracket -top-3 -left-3 border-t-2 border-l-2"></div>
                         <div class="form-bracket -top-3 -right-3 border-t-2 border-r-2"></div>
                         <div class="form-bracket -bottom-3 -left-3 border-b-2 border-l-2"></div>
                         <div class="form-bracket -bottom-3 -right-3 border-b-2 border-r-2"></div>
@@ -1495,7 +1396,7 @@
                                 <textarea id="message" name="message" rows="4" class="contact-form-input w-full mt-1" required></textarea>
                             </div>
                             <div>
-                                <button type="submit" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-semibold text-white rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transform hover:scale-105 transition-all duration-300">
+                                <button type="submit" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-semibold text-black rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transform hover:scale-105 transition-all duration-300">
                                     Kirim Pesan
                                 </button>
                             </div>
@@ -1508,115 +1409,30 @@
 
     </main>
     
-    <!-- Product Detail View (REVISED & BARU) -->
-    <div id="product-detail-view" class="fixed inset-0 z-[100] opacity-0 pointer-events-none">
-        <!-- Backdrop -->
-        <div id="product-detail-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
-
-        <!-- Bottom Sheet (Mobile/Tablet View) -->
-        <div id="product-bottom-sheet" class="lg:hidden absolute bottom-0 left-0 right-0 w-full max-h-[90vh] bg-[var(--color-surface-1)] rounded-t-2xl flex flex-col border-t border-[var(--color-glass-border)] shadow-2xl translate-y-full">
-            <!-- Header with Handle -->
-            <div class="relative p-4 flex-shrink-0">
-                <div class="absolute top-3 left-1/2 -translate-x-1/2 w-16 h-1 bg-[var(--color-surface-2)] rounded-full"></div>
-                <button id="close-sheet-btn" class="absolute top-1/2 right-4 -translate-y-1/2 text-gray-500 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-            </div>
-            <!-- Scrollable Content -->
-            <div class="overflow-y-auto hide-scrollbar">
-                <div class="swiper product-gallery-swiper w-full">
-                    <div class="swiper-wrapper" id="sheet-gallery-wrapper">
-                        <!-- Images will be injected here by JS -->
-                    </div>
-                    <div class="swiper-pagination"></div>
-                </div>
-                <div class="p-6 md:p-8">
-                    <h2 id="sheet-product-title" class="text-2xl font-bold text-white mb-2"></h2>
-                    <p id="sheet-product-price" class="text-lg text-[var(--color-accent)] font-semibold mb-6"></p>
-                    <div class="border-y border-[var(--color-surface-2)] py-6 mb-6">
-                        <h3 class="font-bold text-md text-white mb-2">Deskripsi</h3>
-                        <p id="sheet-product-description" class="text-sm text-[var(--color-text-secondary)] leading-relaxed"></p>
-                    </div>
-                    <div>
-                        <p class="text-sm text-center text-[var(--color-text-secondary)] mb-3">hubungi via</p>
-                        <div class="grid grid-cols-2 gap-4">
-                            <a href="https://wa.me/6281214745949" target="_blank" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white rounded-lg bg-green-500 hover:bg-green-600 transition-all duration-300">
-                               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 14.2c-.3-.2-1.1-.5-1.2-.6-.2-.1-.4-.1-.6.1-.2.2-.5.6-.6.7-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.6-.9-.6-.5-1-1.1-1.2-1.3-.1-.2 0-.3.1-.4 0 0 .1-.1.2-.2.1-.1.2-.2.2-.3.1-.1.1-.2 0-.4-.1-.2-.6-1.4-.8-1.9-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.3c.1.1 1.6 2.4 3.8 3.4.6.2.9.4 1.2.5.5.2 1 .1 1.3-.1.4-.2.9-1.2 1.2-1.5.2-.3.2-.5.1-.7-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path></svg>
-                                WhatsApp
-                            </a>
-                            <a href="https://t.me/@market_nusantara" target="_blank" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white rounded-lg bg-sky-500 hover:bg-sky-600 transition-all duration-300">
-                               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.8 7.3l-1.4 6.5c-.2.7-.6.9-1.2.6l-2.5-1.8-1.2 1.2c-.1.1-.3.3-.6.3l.2-2.6 4.8-4.4c.2-.2-.1-.3-.4-.1l-6 3.8-2.5-.8c-.7-.2-.7-.7.1-1l10.3-4c.6-.2 1.1.2.9.9z"></path></svg>
-                               Telegram
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modal (Desktop View) -->
-        <div id="product-modal" class="hidden lg:flex items-center justify-center w-full h-full p-4">
-            <div id="product-modal-content" class="bg-[var(--color-surface-1)] rounded-2xl shadow-2xl w-full max-w-4xl max-h-[90vh] grid grid-cols-2 relative overflow-hidden border border-[var(--color-glass-border)] scale-95 opacity-0">
-                <button id="close-modal-btn" class="absolute top-4 right-4 z-10 text-gray-500 hover:text-white transition-colors">
-                    <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <!-- Left: Single Image -->
-                <div class="w-full h-full bg-[var(--color-background)]">
-                    <img id="modal-product-image" src="" alt="Detail Produk" class="w-full h-full object-cover">
-                </div>
-                <!-- Right: Info -->
-                <div class="flex flex-col p-8 overflow-y-auto hide-scrollbar">
-                    <div>
-                        <h2 id="modal-product-title" class="text-3xl font-bold text-white mb-2"></h2>
-                        <p id="modal-product-price" class="text-xl text-[var(--color-accent)] font-semibold mb-6"></p>
-                        <div class="border-y border-[var(--color-surface-2)] py-6 mb-6">
-                            <h3 class="font-bold text-lg text-white mb-2">Deskripsi</h3>
-                            <p id="modal-product-description" class="text-[var(--color-text-secondary)] leading-relaxed"></p>
-                        </div>
-                    </div>
-                    <div class="mt-auto pt-6">
-                        <p class="text-sm text-center text-[var(--color-text-secondary)] mb-3">hubungi via</p>
-                        <div class="grid grid-cols-2 gap-4">
-                             <a href="https://wa.me/6281214745949" target="_blank" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-white rounded-lg bg-green-500 hover:bg-green-600 transition-all duration-300">
-                               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16.6 14.2c-.3-.2-1.1-.5-1.2-.6-.2-.1-.4-.1-.6.1-.2.2-.5.6-.6.7-.1.1-.2.2-.4.1-.2-.1-.8-.3-1.6-.9-.6-.5-1-1.1-1.2-1.3-.1-.2 0-.3.1-.4 0 0 .1-.1.2-.2.1-.1.2-.2.2-.3.1-.1.1-.2 0-.4-.1-.2-.6-1.4-.8-1.9-.2-.5-.4-.4-.5-.4h-.4c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.3c.1.1 1.6 2.4 3.8 3.4.6.2.9.4 1.2.5.5.2 1 .1 1.3-.1.4-.2.9-1.2 1.2-1.5.2-.3.2-.5.1-.7-.1-.1-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm0 18c-4.4 0-8-3.6-8-8s3.6-8 8-8 8 3.6 8 8-3.6 8-8 8z"></path></svg>
-                                WhatsApp
-                            </a>
-                            <a href="https://t.me/@market_nusantara" target="_blank" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-6 py-3 text-base font-semibold text-white rounded-lg bg-sky-500 hover:bg-sky-600 transition-all duration-300">
-                               <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2zm4.8 7.3l-1.4 6.5c-.2.7-.6.9-1.2.6l-2.5-1.8-1.2 1.2c-.1.1-.3.3-.6.3l.2-2.6 4.8-4.4c.2-.2-.1-.3-.4-.1l-6 3.8-2.5-.8c-.7-.2-.7-.7.1-1l10.3-4c.6-.2 1.1.2.9.9z"></path></svg>
-                               Telegram
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Info Modal (BARU) -->
+    
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div class="flex items-center justify-center w-full h-full p-4 md:p-8">
             <div id="info-modal-content" class="bg-[var(--color-surface-1)] rounded-2xl shadow-2xl w-full max-w-3xl max-h-[85vh] flex flex-col relative border border-[var(--color-glass-border)] transform scale-95 opacity-0">
-                <!-- Header -->
+                
                 <div class="flex-shrink-0 flex items-center justify-between p-5 border-b border-[var(--color-surface-2)]">
                     <h2 id="info-modal-title" class="text-xl font-bold text-white"></h2>
                     <button id="close-info-modal-btn" class="text-gray-500 hover:text-white transition-colors">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
-                <!-- Scrollable Body -->
+                
                 <div id="info-modal-body" class="p-6 md:p-8 overflow-y-auto hide-scrollbar text-[var(--color-text-secondary)] space-y-4">
-                    <!-- Content will be injected here by JS -->
+                    
                 </div>
             </div>
         </div>
     </div>
 
 
-    <!-- Simple Modern Footer --><footer style="background-color: var(--color-surface-1);">
+    <footer style="background-color: var(--color-surface-1);">
             <div class="container mx-auto px-6 lg:px-8 py-12">
-                <!-- Top Section --><div class="flex flex-col sm:flex-row justify-between items-center pb-8">
+                <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
                         <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="h-10 w-auto">
                     </a>
@@ -1629,12 +1445,11 @@
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t" style="border-color: var(--color-surface-2);">
                     <div>
-                        <h3 class="font-bold mb-4 text-white">Produk</h3>
+                        <h3 class="font-bold mb-4 text-white">Mitra</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <li><a href="#" class="hover:text-white transition-colors footer-product-link" data-product-id="produk-jasa-website">Jasa Website</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors footer-product-link" data-product-id="produk-jasa-rekber">Jasa Rekber</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors footer-product-link" data-product-id="produk-nomor-virtual">Nomor Virtual</a></li>
-                            <li><a href="#" class="hover:text-white transition-colors footer-product-link" data-product-id="produk-jasa-otp">Jasa OTP</a></li>
+                            <li><a href="#mitra" class="hover:text-white transition-colors">Bank Digital</a></li>
+                            <li><a href="#mitra" class="hover:text-white transition-colors">Logistik</a></li>
+                            <li><a href="#mitra" class="hover:text-white transition-colors">Komunitas</a></li>
                         </ul>
                     </div>
                     <div>
@@ -1659,24 +1474,24 @@
                     </div>
                 </div>
 
-                <!-- Copyright --><div class="text-center pt-8 mt-8 border-t text-[var(--color-text-secondary)]" style="border-color: var(--color-surface-2);">
+                <div class="text-center pt-8 mt-8 border-t text-[var(--color-text-secondary)]" style="border-color: var(--color-surface-2);">
                     <p class="text-sm">&copy; 2025 Market Nusantara. Semua Hak Cipta Dilindungi.</p>
                 </div>
             </div>
         </footer>
     </div>
     
-    <!-- URL Copied Toast (BARU) -->
+    
     <div id="toast-notification" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-y-4 transition-all duration-300">
         Link disalin ke clipboard!
     </div>
 
-    <!-- BARU: Back to Top Button -->
-    <button id="back-to-top-btn" title="Kembali ke Atas" class="w-12 h-12 rounded-full bg-[var(--color-accent)] text-white flex items-center justify-center shadow-lg hover:bg-[var(--color-accent-hover)] transform hover:scale-110 transition-all duration-300">
+    
+    <button id="back-to-top-btn" title="Kembali ke Atas" class="w-12 h-12 rounded-full bg-[var(--color-accent)] text-black flex items-center justify-center shadow-lg hover:bg-[var(--color-accent-hover)] transform hover:scale-110 transition-all duration-300">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
     </button>
 
-    <!-- Social Proof Notification --><div id="social-proof-notification">
+    <div id="social-proof-notification">
         <div class="p-4 flex items-start gap-4 relative">
             <img id="notification-image" src="" alt="Produk" class="w-16 h-16 object-cover rounded-md">
             <div class="flex-grow">
@@ -1691,58 +1506,14 @@
         <div id="notification-progress-bar"></div>
     </div>
 
-    <!-- REVISED: Welcome Modal -->
-    <div id="welcome-modal-container" class="fixed inset-0 z-[120] opacity-0 pointer-events-none transition-opacity duration-300">
-        <div id="welcome-modal-backdrop" class="absolute inset-0 bg-black/70"></div>
-        <div class="flex items-center justify-center w-full h-full p-4 md:p-8">
-            <div id="welcome-modal-content" class="rounded-2xl shadow-2xl w-full max-w-3xl relative border border-[var(--color-glass-border)] transform scale-95 opacity-0">
-                <button id="welcome-modal-close-x-btn" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                </button>
-                <div class="grid grid-cols-1 md:grid-cols-5">
-                    <!-- Left Column -->
-                    <div class="md:col-span-2 bg-black/20 p-8 flex flex-col items-center justify-center text-center rounded-t-2xl md:rounded-tr-none md:rounded-l-2xl">
-                        <img src="https://files.catbox.moe/uexwov.jpg" alt="Market Nusantara Welcome" class="h-28 w-28 object-cover rounded-full mb-4 border-4 border-[var(--color-surface-1)]">
-                        <h3 class="text-xl font-bold text-white">Market Nusantara</h3>
-                        <p class="text-sm text-[var(--color-text-secondary)] mt-1">Solusi Digital Anda</p>
-                    </div>
+    <!-- WELCOME MODAL DIHAPUS DARI SINI -->
 
-                    <!-- Right Column -->
-                    <div class="md:col-span-3 p-8 md:p-10 flex flex-col">
-                        <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Selamat Datang!</h2>
-                        <p class="text-[var(--color-text-secondary)] mb-6 text-sm">
-                            Terima kasih telah berkunjung. Kami siap membantu segala kebutuhan digital Anda, dari website hingga keamanan transaksi.
-                        </p>
-                        
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6">
-                            <a href="#produk-unggulan" id="welcome-cta-produk" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transition-all duration-300">
-                                <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path d="M.022 8.362a.75.75 0 01.956-.312l3.475 1.476a.75.75 0 010 1.348l-3.475 1.476a.75.75 0 01-.956-.312l-1.476-3.475a.75.75 0 01.312-.956L0 8.351l.022.011zM6.634 3.362a.75.75 0 01.956.312l1.476 3.475a.75.75 0 01-.312.956L8.634 8.23l-.011.022a.75.75 0 01-.956-.312L6.192 4.465a.75.75 0 01.312-.956L6.634 3.362zM18.362 6.634a.75.75 0 01.312.956l-1.476 3.475a.75.75 0 01-.956.312L16.134 11.27l-.022-.011a.75.75 0 01.312-.956l3.475-1.476a.75.75 0 01.956.312zM11.77 11.366a.75.75 0 01.312.956l-1.476 3.475a.75.75 0 01-.956.312l-1.127-.478-.011-.022a.75.75 0 01.312-.956l3.475-1.476a.75.75 0 01.956.312z" /></svg>
-                                Lihat Produk
-                            </a>
-                            <a href="#faq" id="welcome-cta-faq" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white rounded-lg bg-white/10 hover:bg-white/20 transition-all duration-300">
-                               <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zM8.94 6.94a.75.75 0 11-1.06-1.061 3.5 3.5 0 014.95 4.95l-2.5 2.5a.75.75 0 01-1.06-1.06l2.5-2.5a2 2 0 00-2.828-2.828l-2.472 2.472a.75.75 0 11-1.06-1.06l2.472-2.472z" clip-rule="evenodd" /></svg>
-                                Baca FAQ
-                            </a>
-                        </div>
-                        
-                        <div class="mt-auto pt-4 border-t border-[var(--color-surface-2)]">
-                            <label for="dont-show-again-checkbox" class="flex items-center justify-center text-xs text-[var(--color-text-secondary)] cursor-pointer">
-                                <input type="checkbox" id="dont-show-again-checkbox" class="h-4 w-4 rounded bg-gray-700 border-gray-600 text-[var(--color-accent)] focus:ring-[var(--color-accent)] accent-[var(--color-accent)] mr-2">
-                                Jangan tampilkan lagi pesan ini.
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- jQuery CDN (Added for AJAX) --><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <!-- Swiper.js JS CDN --><script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Skeleton Screen Logic
+            
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('main-content');
             
@@ -1751,31 +1522,236 @@
                 mainContent.classList.add('loaded');
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                    // Check if welcome modal should be shown after preloader is gone
-                    if (localStorage.getItem('marketNusantaraWelcomeShown') !== 'true') {
-                        setTimeout(openWelcomeModal, 500); // Small delay for a smoother entry
-                    }
-                }, 500); // Wait for fade out transition
+                    
+                    // SCRIPT WELCOME MODAL DIHAPUS DARI SINI
+                }, 500); 
             });
             
-            // Mobile menu toggle
+            
             const mobileMenuButton = document.getElementById('mobile-menu-button');
             const mobileMenu = document.getElementById('mobile-menu');
             mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
 
-            // Swiper initialization (REVISED)
-            var swiper = new Swiper(".hero-swiper", {
+            
+            var swiperHero = new Swiper(".hero-swiper", {
                 slidesPerView: 1, spaceBetween: 16,
                 navigation: { nextEl: "#swiper-next" },
-                // BARU: Konfigurasi progressbar
-                pagination: {
-                    el: '.hero-swiper-pagination',
-                    type: 'progressbar',
-                },
+                pagination: { el: '.hero-swiper-pagination', type: 'progressbar' },
                 breakpoints: { 768: { slidesPerView: 3, spaceBetween: 16 } },
             });
 
-            // --- REVISED NAVBAR LOGIC (Fluid "Surfing" Animation) ---
+            // LOGIKA SECTION MITRA (CAROUSEL & DATABASE)
+            const mitraContainer = document.getElementById('mitra-container');
+            const roleLabels = {
+                'own': { label: 'OWNER', class: 'accent-own' },
+                'pt': { label: 'PARTNER', class: 'accent-pt' },
+                'tk': { label: 'TOKO', class: 'accent-tk' }
+            };
+
+            const loadMitraData = async () => {
+                try {
+                    const response = await fetch('DATABASE/mitra.json');
+                    const mitraData = await response.json();
+                    
+                    let htmlContent = '';
+                    mitraData.forEach(mitra => {
+                        const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
+                        
+                        // REMOVE STATS & RESULT TEXT
+
+                        htmlContent += `
+                            <div class="swiper-slide h-auto">
+                                <div class="mitra-card ${roleInfo.class}">
+                                    <div class="card-bg-text">MARKET</div>
+                                    <div class="card-accent-slash"></div>
+                                    <div class="card-accent-border"></div>
+                                    
+                                    <div class="mitra-image-wrapper">
+                                        <img src="${mitra.foto}" alt="${mitra.nama}" class="mitra-img" onerror="this.src='https://placehold.co/200x200/1c1c1c/a1a1aa?text=${mitra.nama.substring(0,2)}'">
+                                    </div>
+                                    
+                                    <div class="mitra-info">
+                                        <span class="mitra-role-label">${roleInfo.label}</span>
+                                        <h3 class="mitra-name">${mitra.nama}</h3>
+                                        
+                                        <div class="mitra-action-bar">
+                                            <a href="${mitra.link}" target="_blank" class="btn-feed">
+                                                SALURAN
+                                            </a>
+                                            <!-- REMOVED STATS & RESULT DIVS -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    mitraContainer.innerHTML = htmlContent;
+                    
+                    // Inisialisasi Swiper Mitra setelah data dimuat
+                    new Swiper(".mitra-swiper", {
+                        slidesPerView: 2,
+                        spaceBetween: 10, // Jarak antar kartu lebih rapat
+                        loop: true,
+                        autoplay: {
+                            delay: 3000,
+                            disableOnInteraction: false,
+                        },
+                        pagination: {
+                            el: ".swiper-pagination",
+                            clickable: true,
+                        },
+                        navigation: {
+                            nextEl: ".swiper-button-next",
+                            prevEl: ".swiper-button-prev",
+                        },
+                        breakpoints: {
+                            640: { slidesPerView: 2, spaceBetween: 12 },
+                            768: { slidesPerView: 3, spaceBetween: 14 },
+                            1024: { slidesPerView: 4, spaceBetween: 16 },
+                        },
+                    });
+                    
+                } catch (error) {
+                    console.error('Error loading mitra data:', error);
+                    mitraContainer.innerHTML = '<p class="text-center w-full py-10 text-red-500">Gagal memuat data mitra.</p>';
+                }
+            };
+
+            loadMitraData();
+
+            // LOGIKA SECTION BERITA / PENGUMUMAN (DATABASE)
+            const newsContainer = document.getElementById('news-container');
+
+            const loadNewsData = async () => {
+                try {
+                    const response = await fetch('DATABASE/news.json');
+                    const newsData = await response.json();
+                    
+                    let htmlContent = '';
+                    const latestNews = newsData.slice(0, 3);
+
+                    latestNews.forEach(item => {
+                        htmlContent += `
+                        <a href="${item.link || '#'}" class="news-list-item group">
+                            <div class="news-date">
+                                <span class="day">${item.tanggal}</span>
+                                <span class="month">${item.bulan}</span>
+                            </div>
+                            <div class="news-content">
+                                <h3 class="font-bold text-base text-white group-hover:text-[var(--color-accent)] transition-colors">${item.judul}</h3>
+                                <p class="text-xs text-gray-500">Kategori: <span class="font-semibold text-[var(--color-text-secondary)]">${item.kategori}</span></p>
+                            </div>
+                            <div class="news-arrow">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
+                            </div>
+                        </a>
+                        `;
+                    });
+
+                    if (latestNews.length === 0) {
+                         htmlContent = '<p class="text-center text-gray-500">Belum ada pengumuman saat ini.</p>';
+                    }
+                    
+                    newsContainer.innerHTML = htmlContent;
+                    
+                } catch (error) {
+                    console.error('Error loading news data:', error);
+                    newsContainer.innerHTML = '<p class="text-center w-full py-4 text-red-500">Gagal memuat berita.</p>';
+                }
+            };
+
+            loadNewsData();
+
+            // LOGIKA STATISTIK (NEW DATABASE)
+            const statsContainer = document.getElementById('statistik-container');
+
+            const loadStatistikData = async () => {
+                try {
+                    const response = await fetch('DATABASE/statistik.json?v=' + new Date().getTime());
+                    const statsData = await response.json();
+                    
+                    // Render HTML untuk statistik baru
+                    const htmlContent = `
+                        <div class="stat-card group p-4 sm:p-6 rounded-xl flex flex-col items-center justify-center relative overflow-hidden animate-on-scroll zoom-in border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
+                            <!-- Decorative Glow -->
+                            <div class="absolute inset-0 bg-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                            
+                            <div class="relative z-10 mb-3 p-3 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)]">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+                                </svg>
+                            </div>
+                            
+                            <h3 class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-1 stat-number" data-target="${statsData.total_transaksi}" data-plus="true">0</h3>
+                            <p class="relative z-10 text-xs sm:text-sm text-[var(--color-text-secondary)] font-medium uppercase tracking-wider">Total Transaksi</p>
+                        </div>
+
+                        <div class="stat-card group p-4 sm:p-6 rounded-xl flex flex-col items-center justify-center relative overflow-hidden animate-on-scroll zoom-in border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300" style="transition-delay: 100ms">
+                             <!-- Decorative Glow -->
+                            <div class="absolute inset-0 bg-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+
+                            <div class="relative z-10 mb-3 p-3 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)]">
+                                <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                                </svg>
+                            </div>
+                            
+                            <h3 class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--color-accent)] mb-1">Rp ${statsData.uang_display}</h3>
+                            <p class="relative z-10 text-xs sm:text-sm text-[var(--color-text-secondary)] font-medium uppercase tracking-wider">Dana Diamankan</p>
+                        </div>
+                    `;
+
+                    statsContainer.innerHTML = htmlContent;
+
+                    // FIX: Ensure elements fade in by adding is-visible class
+                    const newCards = statsContainer.querySelectorAll('.animate-on-scroll');
+                    const visibilityObserver = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.classList.add('is-visible');
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    newCards.forEach(card => visibilityObserver.observe(card));
+
+                    // Re-attach observer for animation (only needed for the number counter)
+                    const animateCounter = (el) => {
+                        const target = +el.getAttribute('data-target');
+                        const duration = 2000; 
+                        const frameDuration = 1000 / 60; 
+                        const totalFrames = Math.round(duration / frameDuration);
+                        let frame = 0;
+
+                        const counter = setInterval(() => {
+                            frame++;
+                            const progress = Math.pow(frame / totalFrames, 3); 
+                            const currentCount = Math.round(target * progress);
+                            el.innerText = currentCount.toLocaleString('id-ID') + (el.dataset.plus ? '+' : '');
+                            if (frame === totalFrames) clearInterval(counter);
+                        }, frameDuration);
+                    };
+
+                    const statObserver = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.querySelectorAll('.stat-number').forEach(num => animateCounter(num));
+                                observer.unobserve(entry.target); 
+                            }
+                        });
+                    }, { threshold: 0.3 }); 
+                    
+                    // Observe again since content changed
+                    statObserver.observe(document.getElementById('statistik'));
+
+                } catch (error) {
+                    console.error('Error loading statistik data:', error);
+                    statsContainer.innerHTML = '<p class="text-center w-full py-4 text-red-500">Gagal memuat statistik. Pastikan file DATABASE/statistik.json ada.</p>';
+                }
+            };
+
+            loadStatistikData();
+            
             const progressBar = document.getElementById('scroll-progress-bar');
             const desktopMenuContainer = document.getElementById('desktop-menu-container');
             const navFollower = document.getElementById('nav-follower');
@@ -1783,7 +1759,7 @@
 
             let targetProps = { left: 0, width: 0, opacity: 0 };
             let currentProps = { left: 0, width: 0, opacity: 0 };
-            const LERP_FACTOR = 0.1; // Faktor easing: angka lebih kecil = lebih lambat/halus
+            const LERP_FACTOR = 0.1; 
 
             function getActiveLinkProps() {
                 let currentSectionId = '';
@@ -1804,7 +1780,7 @@
                 
                 const activeLink = document.querySelector(`.nav-link[href="#${currentSectionId}"]`);
                 
-                if (activeLink && !activeLink.offsetParent === false) { // Cek jika link terlihat
+                if (activeLink && !activeLink.offsetParent === false) { 
                     activeLink.classList.add('active');
                     return {
                         left: activeLink.offsetLeft - 12,
@@ -1816,7 +1792,7 @@
             }
 
             function animateFollower() {
-                // Kalkulasi posisi baru di setiap frame untuk pergerakan mulus (lerping)
+                
                 currentProps.left += (targetProps.left - currentProps.left) * LERP_FACTOR;
                 currentProps.width += (targetProps.width - currentProps.width) * LERP_FACTOR;
                 currentProps.opacity += (targetProps.opacity - currentProps.opacity) * LERP_FACTOR;
@@ -1828,9 +1804,9 @@
                 requestAnimationFrame(animateFollower);
             }
 
-            animateFollower(); // Mulai loop animasi
+            animateFollower(); 
 
-            // Listener saat kursor masuk ke area link
+            
             desktopMenuContainer.querySelectorAll('.nav-link').forEach(link => {
                 link.addEventListener('mouseenter', () => {
                     targetProps = {
@@ -1841,31 +1817,31 @@
                 });
             });
 
-            // Listener saat kursor meninggalkan seluruh area menu
+            
             desktopMenuContainer.addEventListener('mouseleave', () => {
                 targetProps = getActiveLinkProps();
             });
 
-            // Listener saat window di-scroll
+            
             window.addEventListener('scroll', () => {
                 const scrollTop = document.documentElement.scrollTop;
                 const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                 progressBar.style.width = `${(scrollTop / scrollHeight) * 100}%`;
                 
-                // Hanya update target follower jika kursor TIDAK sedang di atas menu
+                
                 if (!desktopMenuContainer.matches(':hover')) {
                     targetProps = getActiveLinkProps();
                 }
             });
             
-            // Set posisi awal follower setelah halaman dimuat
+            
             setTimeout(() => {
                 const initialProps = getActiveLinkProps();
                 targetProps = initialProps;
-                currentProps = initialProps; // Langsung set agar tidak ada animasi dari pojok
+                currentProps = initialProps; 
             }, 300);
             
-            // FAQ Accordion Logic
+            
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
@@ -1878,9 +1854,9 @@
                 });
             });
 
-            // --- AJAX Contact Form Submission ---
+            
             $('#contact-form').on('submit', function(e) {
-                e.preventDefault(); // Mencegah submit standar
+                e.preventDefault(); 
 
                 var form = $(this);
                 var submitButton = form.find('button[type="submit"]');
@@ -1890,424 +1866,30 @@
                     url: "https://formsubmit.co/ajax/parhan.mustika@gmail.com",
                     method: "POST",
                     data: form.serialize(),
-                    dataType: "json",
-                    beforeSend: function() {
-                        formStatus.html('<p class="text-sm text-yellow-400">Mengirim pesan...</p>');
-                        submitButton.prop('disabled', true).css('opacity', '0.7');
-                    },
                     success: function(response) {
-                        formStatus.html('<p class="text-sm text-green-400">Pesan berhasil terkirim. Terima kasih!</p>');
+                        formStatus.html('<p class="text-sm text-green-400">Pesan berhasil terkirim!</p>');
                         form[0].reset();
-                        submitButton.prop('disabled', false).css('opacity', '1');
-                        setTimeout(function() {
-                            formStatus.html('');
-                        }, 5000);
-                    },
-                    error: function(xhr, status, error) {
-                        formStatus.html('<p class="text-sm text-red-400">Terjadi kesalahan. Silakan coba lagi.</p>');
-                        submitButton.prop('disabled', false).css('opacity', '1');
-                         setTimeout(function() {
-                            formStatus.html('');
-                        }, 5000);
                     }
                 });
             });
 
-            // --- Statistics Counter Animation (BARU) ---
-            const statsSection = document.getElementById('statistik');
-            if (statsSection) { // Pastikan section ada sebelum menjalankan observer
-                const animateCounter = (el) => {
-                    const target = +el.getAttribute('data-target');
-                    const duration = 2000; // Durasi animasi dalam ms
-                    const frameDuration = 1000 / 60; // 60fps
-                    const totalFrames = Math.round(duration / frameDuration);
-                    let frame = 0;
-
-                    const counter = setInterval(() => {
-                        frame++;
-                        const progress = Math.pow(frame / totalFrames, 3); // Efek ease-out
-                        const currentCount = Math.round(target * progress);
-
-                        el.innerText = currentCount.toLocaleString('id-ID');
-
-                        if (frame === totalFrames) {
-                            clearInterval(counter);
-                            // Tambahkan tanda '+' setelah animasi selesai jika ada
-                            if (el.dataset.plus) {
-                                el.innerText = target.toLocaleString('id-ID') + '+';
-                            }
-                        }
-                    }, frameDuration);
-                };
-
-                const statObserver = new IntersectionObserver((entries, observer) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const statNumbers = entry.target.querySelectorAll('.stat-number');
-                            statNumbers.forEach(num => animateCounter(num));
-                            observer.unobserve(entry.target); // Animasi hanya berjalan sekali
-                        }
-                    });
-                }, { threshold: 0.3 }); // Picu saat 30% section terlihat
-
-                statObserver.observe(statsSection);
-            }
-
-            // --- Testimonial Carousel Logic (BARU & REVISED) ---
-            let testimonialSwiper;
-            const testimonialWrapper = document.querySelector('.testimonial-swiper .swiper-wrapper');
-
-            const handleTestimonialLayout = () => {
-                const isDesktop = window.innerWidth >= 1024;
-
-                if (isDesktop && testimonialSwiper) {
-                    testimonialSwiper.destroy(true, true);
-                    testimonialSwiper = undefined;
-                    // Mengembalikan style grid yang mungkin di-override Swiper
-                    testimonialWrapper.classList.add('lg:grid', 'lg:grid-cols-3', 'lg:gap-8');
-                } else if (!isDesktop && !testimonialSwiper) {
-                    // Hapus class grid agar tidak konflik dengan Swiper
-                    testimonialWrapper.classList.remove('lg:grid', 'lg:grid-cols-3', 'lg:gap-8');
-                    testimonialSwiper = new Swiper('.testimonial-swiper', {
-                        loop: true,
-                        slidesPerView: 1,
-                        spaceBetween: 16,
-                        pagination: {
-                            el: '.swiper-pagination-testimonial',
-                            clickable: true,
-                        },
-                        breakpoints: {
-                            768: { // Tablet
-                                slidesPerView: 2,
-                                spaceBetween: 24,
-                            }
-                        }
-                    });
-                }
-            };
-
-            // Panggil saat pertama kali load dan saat ukuran window berubah
-            handleTestimonialLayout();
-            window.addEventListener('resize', handleTestimonialLayout);
-
-            // --- PRODUCT DETAIL VIEW LOGIC (REVISED & BARU) ---
-            const productDetailView = document.getElementById('product-detail-view');
-            const productCards = document.querySelectorAll('.product-card');
             
-            const closeSheetBtn = document.getElementById('close-sheet-btn');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const backdrop = document.getElementById('product-detail-backdrop');
-
-            let sheetGallerySwiper;
-
-            const populateAndOpenView = (data) => {
-                // Populate Sheet Content
-                document.getElementById('sheet-product-title').textContent = data.title;
-                document.getElementById('sheet-product-price').textContent = data.price;
-                document.getElementById('sheet-product-description').textContent = data.description;
-                const sheetGalleryWrapper = document.getElementById('sheet-gallery-wrapper');
-                sheetGalleryWrapper.innerHTML = '';
-                data.images.forEach(imgUrl => {
-                    sheetGalleryWrapper.innerHTML += `<div class="swiper-slide"><img src="${imgUrl}" class="w-full h-64 object-cover" alt="${data.title}"></div>`;
-                });
-
-                // Populate Modal Content
-                document.getElementById('modal-product-title').textContent = data.title;
-                document.getElementById('modal-product-price').textContent = data.price;
-                document.getElementById('modal-product-description').textContent = data.description;
-                document.getElementById('modal-product-image').src = data.images[0];
-
-
-                // Initialize/Update Swiper for sheet only
-                if (sheetGallerySwiper) sheetGallerySwiper.destroy(true, true);
-                sheetGallerySwiper = new Swiper('#product-bottom-sheet .product-gallery-swiper', { 
-                    loop: true,
-                    pagination: { el: '#product-bottom-sheet .swiper-pagination', clickable: true },
-                });
-                
-                // Show the main container
-                productDetailView.classList.add('visible');
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeProductView = () => {
-                productDetailView.classList.remove('visible');
-                document.body.style.overflow = '';
-            };
-
-            productCards.forEach(card => {
-                card.addEventListener('click', () => {
-                    const productData = {
-                        title: card.dataset.title,
-                        description: card.dataset.description,
-                        price: card.dataset.price,
-                        images: JSON.parse(card.dataset.images)
-                    };
-                    populateAndOpenView(productData);
-                });
-            });
-
-            [closeSheetBtn, closeModalBtn].forEach(el => {
-                if(el) el.addEventListener('click', closeProductView);
-            });
-
-
-            // --- Info Modal Logic (BARU) ---
+            // STATS OBSERVER moved to loadStatistikData function to handle dynamic content
+            
             const infoModalContainer = document.getElementById('info-modal-container');
             const infoModalContent = document.getElementById('info-modal-content');
-            const infoModalTitle = document.getElementById('info-modal-title');
-            const infoModalBody = document.getElementById('info-modal-body');
             const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
-            const infoModalBackdrop = document.getElementById('info-modal-backdrop');
-            const infoLinks = document.querySelectorAll('.info-link');
-
-            const modalContents = {
-                'pusat-bantuan': {
-                    title: 'Pusat Bantuan',
-                    content: `
-                        <div class="space-y-4">
-                            <div class="faq-item">
-                                <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                                    <span class="font-semibold text-white">Bagaimana cara kerja Rekber?</span>
-                                    <div class="faq-arrow-container p-1"><svg class="faq-arrow w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
-                                </button>
-                                <div class="faq-answer text-[var(--color-text-secondary)]"><p>Anda mentransfer pembayaran ke kami, kami menahannya dengan aman. Penjual mengirimkan barang/jasa. Setelah Anda konfirmasi penerimaan, kami meneruskan dana ke penjual.</p></div>
-                            </div>
-                            <div class="faq-item">
-                                <button class="faq-question w-full flex justify-between items-center text-left p-6">
-                                    <span class="font-semibold text-white">Berapa lama proses transaksi?</span>
-                                    <div class="faq-arrow-container p-1"><svg class="faq-arrow w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></div>
-                                </button>
-                                <div class="faq-answer text-[var(--color-text-secondary)]"><p>Proses verifikasi pembayaran instan. Kecepatan transaksi selanjutnya tergantung pada pengiriman barang oleh penjual dan konfirmasi dari Anda sebagai pembeli.</p></div>
-                            </div>
-                        </div>
-                    `
-                },
-                'kebijakan-privasi': {
-                    title: 'Kebijakan Privasi',
-                    content: `
-                        <h3>1. Pengumpulan Informasi</h3>
-                        <p>Kami mengumpulkan informasi yang Anda berikan secara langsung kepada kami, seperti saat Anda membuat akun, melakukan transaksi, atau menghubungi dukungan pelanggan. Informasi ini dapat mencakup nama, alamat email, nomor telepon, dan detail pembayaran.</p>
-                        <h3>2. Penggunaan Informasi</h3>
-                        <p>Informasi Anda kami gunakan untuk menyediakan, memelihara, dan meningkatkan layanan kami. Ini termasuk memproses transaksi, mencegah penipuan, dan berkomunikasi dengan Anda tentang produk, layanan, dan promosi.</p>
-                        <h3>3. Keamanan Data</h3>
-                        <p>Kami mengambil langkah-langkah yang wajar untuk melindungi informasi pribadi Anda dari kehilangan, pencurian, penyalahgunaan, serta akses, pengungkapan, perubahan, dan perusakan yang tidak sah.</p>
-                    `
-                },
-                'syarat-ketentuan': {
-                    title: 'Syarat & Ketentuan',
-                    content: `
-                        <h3>1. Penerimaan Persyaratan</h3>
-                        <p>Dengan mengakses dan menggunakan layanan Market Nusantara, Anda setuju untuk terikat oleh Syarat & Ketentuan ini. Jika Anda tidak setuju dengan bagian mana pun dari persyaratan ini, Anda tidak boleh menggunakan layanan kami.</p>
-                        <h3>2. Layanan Rekening Bersama (Rekber)</h3>
-                        <p>Market Nusantara bertindak sebagai perantara netral. Kami tidak bertanggung jawab atas kualitas, keamanan, atau legalitas barang atau jasa yang diperdagangkan. Tanggung jawab kami terbatas pada penanganan dana transaksi sesuai dengan alur yang disepakati.</p>
-                        <h3>3. Kewajiban Pengguna</h3>
-                        <p>Anda bertanggung jawab untuk memberikan informasi yang akurat dan menjaga kerahasiaan akun Anda. Anda setuju untuk tidak menggunakan layanan kami untuk tujuan ilegal atau tidak sah.</p>
-                    `
-                },
-                'cara-berjualan': {
-                    title: 'Cara Berjualan di Market Nusantara',
-                    content: `
-                        <h3>1. Buat Akun & Profil Kreator</h3>
-                        <p>Daftar gratis dan lengkapi profil Anda. Tunjukkan siapa Anda dan apa yang membuat karya Anda unik untuk menarik kepercayaan pembeli.</p>
-                        <h3>2. Unggah Produk atau Jasa Anda</h3>
-                        <p>Buat daftar produk atau jasa Anda dengan deskripsi yang jelas, foto berkualitas tinggi, dan harga yang kompetitif. Semakin detail, semakin baik!</p>
-                        <h3>3. Gunakan Rekening Bersama (Rekber)</h3>
-                        <p>Semua transaksi di platform kami wajib menggunakan Rekber untuk keamanan. Saat pembeli melakukan pembayaran, kami akan memberitahu Anda untuk memproses pesanan.</p>
-                        <h3>4. Kirim & Dapatkan Pembayaran</h3>
-                        <p>Setelah Anda mengirimkan produk/jasa dan pembeli melakukan konfirmasi, kami akan langsung mentransfer dana ke rekening Anda. Mudah dan aman!</p>
-                    `
-                }
-            };
-
-            const openInfoModal = (target) => {
-                const data = modalContents[target];
-                if (!data) return;
-
-                infoModalTitle.textContent = data.title;
-                infoModalBody.innerHTML = data.content;
-
-                infoModalContainer.classList.remove('opacity-0', 'pointer-events-none');
-                infoModalContent.classList.remove('scale-95', 'opacity-0');
-                document.body.style.overflow = 'hidden';
-
-                if (target === 'pusat-bantuan') {
-                    const helpFaqItems = infoModalBody.querySelectorAll('.faq-item');
-                    helpFaqItems.forEach(item => {
-                        const question = item.querySelector('.faq-question');
-                        // Ensure event listener is not added multiple times
-                        const newQuestion = question.cloneNode(true);
-                        question.parentNode.replaceChild(newQuestion, question);
-
-                        newQuestion.addEventListener('click', () => {
-                            item.classList.toggle('active');
-                        });
-                    });
-                }
-            };
 
             const closeInfoModal = () => {
                 infoModalContainer.classList.add('opacity-0', 'pointer-events-none');
                 infoModalContent.classList.add('scale-95', 'opacity-0');
-                if (!productDetailView.classList.contains('visible')) {
-                    document.body.style.overflow = '';
-                }
+                document.body.style.overflow = '';
             };
-
-            infoLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const target = link.dataset.modalTarget;
-                    openInfoModal(target);
-                });
-            });
-
             if(closeInfoModalBtn) closeInfoModalBtn.addEventListener('click', closeInfoModal);
 
-            // --- Color Palette Logic (REVISED) ---
-            const paletteToggleButton = document.getElementById('palette-toggle-button');
-            const paletteOptions = document.getElementById('color-palette-options');
-            const paletteColors = paletteOptions.querySelectorAll('.palette-color');
-            const body = document.body;
-
-            paletteToggleButton.addEventListener('click', (event) => {
-                event.stopPropagation();
-                paletteOptions.classList.toggle('hidden');
-            });
-
-            paletteColors.forEach(color => {
-                color.addEventListener('click', () => {
-                    paletteColors.forEach(c => c.classList.remove('active'));
-                    color.classList.add('active');
-                    
-                    const theme = color.dataset.theme;
-                    
-                    body.classList.remove('theme-tomato', 'theme-gold');
-                    
-                    if (theme !== 'theme-orange') {
-                        body.classList.add(theme);
-                    }
-                });
-            });
             
-            // Close palette when clicking anywhere else on the page
-            document.addEventListener('click', (event) => {
-                if (!paletteToggleButton.contains(event.target) && !paletteOptions.contains(event.target)) {
-                    paletteOptions.classList.add('hidden');
-                }
-            });
-
-            // --- Share Button Logic (BARU) ---
-            const shareButton = document.getElementById('share-button');
-            const toast = document.getElementById('toast-notification');
-
-            shareButton.addEventListener('click', async () => {
-                const shareData = {
-                    title: 'Market Nusantara',
-                    text: 'Jelajahi karya terbaik dari para kreator di seluruh penjuru kepulauan!',
-                    url: window.location.href
-                };
-
-                if (navigator.share) {
-                    try {
-                        await navigator.share(shareData);
-                    } catch (err) {
-                        console.error("Error sharing:", err);
-                    }
-                } else {
-                    // Fallback for desktop browsers
-                    navigator.clipboard.writeText(window.location.href).then(() => {
-                        toast.classList.add('show');
-                        setTimeout(() => {
-                            toast.classList.remove('show');
-                        }, 2000);
-                    }).catch(err => {
-                        console.error('Failed to copy text: ', err);
-                    });
-                }
-            });
-
-
-             // --- Social Proof Notification Logic (REVISED) ---
-            const notificationElement = document.getElementById('social-proof-notification');
-            const closeButton = document.getElementById('notification-close');
-            const progressBarEl = document.getElementById('notification-progress-bar');
-            let notificationTimeout;
-
-            // Data notifikasi dengan prioritas
-            const notificationsData = [
-                { product: 'Jasa Rekber', image: 'https://files.catbox.moe/yu6b7p.jpg' },
-                { product: 'Jasa OTP Aplikasi', image: 'https://files.catbox.moe/62t74t.jpg' },
-                { product: 'Jasa Rekber', image: 'https://files.catbox.moe/yu6b7p.jpg' }, // Duplikat untuk prioritas
-                { product: 'Jasa OTP Aplikasi', image: 'https://files.catbox.moe/62t74t.jpg' }, // Duplikat untuk prioritas
-                { product: 'Nomor Virtual', image: 'https://files.catbox.moe/nn665e.jpg' },
-                { product: 'Jasa Rekber', image: 'https://files.catbox.moe/yu6b7p.jpg' }, // Duplikat untuk prioritas
-                { product: 'Jasa OTP Aplikasi', image: 'https://files.catbox.moe/62t74t.jpg' }, // Duplikat untuk prioritas
-            ];
-
-            const showNotification = () => {
-                const randomNotification = notificationsData[Math.floor(Math.random() * notificationsData.length)];
-                const randomHour = Math.floor(Math.random() * 24) + 1; // Angka acak 1-24
-
-                let descriptionText = '';
-                let productName = randomNotification.product;
-
-                if (productName.startsWith('Jasa ')) {
-                    // Hapus kata "Jasa " dari awal
-                    let cleanProductName = productName.substring(5); 
-                    descriptionText = `Seseorang telah menggunakan jasa <strong class="text-white">${cleanProductName}</strong>`;
-                } else {
-                    descriptionText = `Seseorang telah membeli <strong class="text-white">${productName}</strong>`;
-                }
-
-                document.getElementById('notification-image').src = randomNotification.image;
-                document.getElementById('notification-title').innerText = 'Riwayat Transaksi';
-                document.getElementById('notification-description').innerHTML = descriptionText;
-                document.getElementById('notification-time').innerText = `${randomHour} jam yang lalu`;
-
-                notificationElement.classList.add('visible');
-
-                // Reset progress bar
-                progressBarEl.style.transition = 'none';
-                progressBarEl.style.width = '100%';
-
-                // Trigger reflow agar reset diterapkan sebelum animasi dimulai
-                progressBarEl.offsetHeight; 
-
-                // Mulai animasi progress bar
-                progressBarEl.style.transition = 'width 5s linear';
-                progressBarEl.style.width = '0%';
-            };
-
-            const hideNotification = () => {
-                notificationElement.classList.remove('visible');
-            };
-
-            const startNotificationCycle = () => {
-                const showAndQueueNext = () => {
-                    showNotification();
-                    setTimeout(hideNotification, 5000); // Sembunyikan setelah 5 detik
-
-                    // Waktu acak antara 1 dan 2 menit untuk notifikasi berikutnya
-                    const randomInterval = Math.random() * (120000 - 60000) + 60000;
-                    notificationTimeout = setTimeout(showAndQueueNext, randomInterval);
-                };
-                showAndQueueNext();
-            };
-
-            // Tombol close untuk menghentikan siklus
-            closeButton.addEventListener('click', () => {
-                hideNotification();
-                clearTimeout(notificationTimeout);
-            });
-
-            // Mulai siklus setelah halaman dimuat
-            setTimeout(startNotificationCycle, 5000);
-
-            // --- Hero Advanced Tabs Logic (REVISED) ---
             const tabButtons = document.querySelectorAll('.hero-tab-button');
-            const tabPanels = document.querySelectorAll('.tab-panel');
-            const heroHeader = document.querySelector('header#home'); // Target the header
+            const heroHeader = document.querySelector('header#home'); 
             const mainContentForTabs = document.querySelector('main');
             const informasiSectionContainer = document.getElementById('informasi-section-container');
 
@@ -2315,210 +1897,65 @@
                 button.addEventListener('click', () => {
                     tabButtons.forEach(btn => btn.classList.remove('active'));
                     button.classList.add('active');
-
                     const targetTabId = button.getAttribute('data-tab');
-
-                    // Handle panels inside hero
-                    tabPanels.forEach(panel => {
-                        panel.classList.toggle('hidden', panel.id !== targetTabId);
-                    });
-
-                    // Handle main section visibility
+                    document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.toggle('hidden', panel.id !== targetTabId));
                     const isFocusMode = targetTabId === 'tab-komunitas' || targetTabId === 'tab-informasi';
                     const isInfoTab = targetTabId === 'tab-informasi';
-                    
-                    // Toggle focus mode on the header itself to adjust its height
                     heroHeader.classList.toggle('focus-mode-active', isFocusMode);
-
                     mainContentForTabs.classList.toggle('hidden-by-tab', isFocusMode);
                     informasiSectionContainer.classList.toggle('hidden', !isInfoTab);
-                    
-                    // Handle nav items visibility by swapping modes
                     desktopMenuContainer.classList.toggle('info-mode', isInfoTab);
-                    mobileMenu.classList.toggle('info-mode', isInfoTab);
-
-                    // Force-update nav follower position on tab change
-                    setTimeout(() => {
-                        const newProps = getActiveLinkProps();
-                        targetProps = newProps;
-                        // For instant jump on tab switch, uncomment below line
-                        // currentProps = newProps; 
-                    }, 50);
-
                 });
             });
 
-            // --- REMOVED: Sub-tabs logic is no longer needed ---
-
-            // --- Scroll Animation Logic (REVISED) ---
+            
             const scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    } else {
-                        entry.target.classList.remove('is-visible');
-                    }
-                });
-            }, { 
-                threshold: 0.1 // Picu animasi saat 10% elemen terlihat
-            });
+                entries.forEach(entry => entry.isIntersecting ? entry.target.classList.add('is-visible') : null);
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
 
-            document.querySelectorAll('.animate-on-scroll').forEach(el => {
-                scrollObserver.observe(el);
-            });
 
-            // --- REVISED: Footer Product Links to Modal Logic ---
-            const footerProductLinks = document.querySelectorAll('.footer-product-link');
+            // LOGIKA SHARE BUTTON YANG DIPERBAIKI
+            const shareButton = document.getElementById('share-button');
+            const toast = document.getElementById('toast-notification');
 
-            footerProductLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
+            if (shareButton) {
+                shareButton.addEventListener('click', async () => {
+                    const shareData = {
+                        title: 'Market Nusantara',
+                        text: 'Platform marketplace komunitas kreatif terpercaya.',
+                        url: window.location.href
+                    };
 
-                    const productId = link.dataset.productId;
-                    const targetCard = document.getElementById(productId);
-
-                    if (targetCard) {
-                        // Logika pemindahan tab dihapus untuk UX yang lebih baik
-                        const productData = {
-                            title: targetCard.dataset.title,
-                            description: targetCard.dataset.description,
-                            price: targetCard.dataset.price,
-                            images: JSON.parse(targetCard.dataset.images)
-                        };
-                        populateAndOpenView(productData);
-                    }
-                });
-            });
-
-            // --- BARU: Footer Links to Tab Logic ---
-            const footerTabLinks = document.querySelectorAll('.footer-tab-link');
-            const infoTabButton = document.querySelector('.hero-tab-button[data-tab="tab-informasi"]');
-
-            footerTabLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-                    setTimeout(() => {
-                        if (!infoTabButton.classList.contains('active')) {
-                            infoTabButton.click();
+                    // Mencoba menggunakan Web Share API (Mobile)
+                    try {
+                        if (navigator.share) {
+                            await navigator.share(shareData);
+                        } else {
+                            throw new Error('Web Share API not supported');
                         }
-
-                        const scrollTargetId = link.dataset.scrollTarget;
-                        if (scrollTargetId) {
+                    } catch (err) {
+                        // Fallback: Copy to clipboard (Desktop)
+                        try {
+                            await navigator.clipboard.writeText(window.location.href);
+                            // Tampilkan Toast
+                            toast.classList.add('show');
                             setTimeout(() => {
-                                const scrollTargetElement = document.querySelector(scrollTargetId);
-                                if(scrollTargetElement) {
-                                    scrollTargetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                                }
-                            }, 500); 
+                                toast.classList.remove('show');
+                            }, 3000);
+                        } catch (clipboardErr) {
+                            console.error('Gagal menyalin link', clipboardErr);
                         }
-                    }, 300);
-                });
-            });
-
-            // --- BARU: Optimasi CTA Jelajahi Produk ---
-            const ctaJelajahiProduk = document.getElementById('cta-jelajahi-produk');
-            const berandaTabButton = document.querySelector('.hero-tab-button[data-tab="tab-beranda"]');
-            const produkUnggulanSection = document.getElementById('produk-unggulan');
-
-            if (ctaJelajahiProduk) {
-                ctaJelajahiProduk.addEventListener('click', (e) => {
-                    e.preventDefault();
-
-                    // Cek apakah tab Beranda sudah aktif atau belum
-                    if (!berandaTabButton.classList.contains('active')) {
-                        // Jika tidak, klik tab Beranda secara programatis untuk beralih
-                        berandaTabButton.click();
                     }
-                    
-                    // Setelah tab dipastikan benar, scroll ke section produk
-                    // Memberi sedikit jeda agar transisi tab selesai sebelum scroll
-                    setTimeout(() => {
-                        produkUnggulanSection.scrollIntoView({
-                            behavior: 'smooth',
-                            block: 'start'
-                        });
-                    }, 100); 
                 });
             }
 
-            // --- BARU: Back to Top Button Logic ---
             const backToTopBtn = document.getElementById('back-to-top-btn');
-            if (backToTopBtn) {
-                window.addEventListener('scroll', () => {
-                    if (window.scrollY > 400) {
-                        backToTopBtn.classList.add('visible');
-                    } else {
-                        backToTopBtn.classList.remove('visible');
-                    }
-                });
-                backToTopBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
-
-            // --- REVISED: Welcome Modal Logic ---
-            const welcomeModalContainer = document.getElementById('welcome-modal-container');
-            const closeWelcomeModalXBtn = document.getElementById('welcome-modal-close-x-btn');
-            const welcomeModalBackdrop = document.getElementById('welcome-modal-backdrop');
-            const dontShowAgainCheckbox = document.getElementById('dont-show-again-checkbox');
-            const welcomeCtaProduk = document.getElementById('welcome-cta-produk');
-            const welcomeCtaFaq = document.getElementById('welcome-cta-faq');
-
-            const openWelcomeModal = () => {
-                if (!welcomeModalContainer) return;
-                welcomeModalContainer.classList.add('visible');
-                document.body.style.overflow = 'hidden';
-            };
-
-            const closeWelcomeModal = () => {
-                if (!welcomeModalContainer) return;
-                welcomeModalContainer.classList.remove('visible');
-                
-                if (dontShowAgainCheckbox && dontShowAgainCheckbox.checked) {
-                    localStorage.setItem('marketNusantaraWelcomeShown', 'true');
-                }
-                
-                if (!productDetailView.classList.contains('visible') && infoModalContainer.classList.contains('opacity-0')) {
-                     document.body.style.overflow = '';
-                }
-            };
-            
-            if (closeWelcomeModalXBtn) closeWelcomeModalXBtn.addEventListener('click', closeWelcomeModal);
-            
-            if (welcomeCtaProduk) {
-                welcomeCtaProduk.addEventListener('click', (e) => {
-                    closeWelcomeModal();
-                });
-            }
-            if (welcomeCtaFaq) {
-                welcomeCtaFaq.addEventListener('click', (e) => {
-                    // REVISED: Switch to info tab before scrolling to FAQ
-                    e.preventDefault();
-                    if (infoTabButton && !infoTabButton.classList.contains('active')) {
-                        infoTabButton.click();
-                    }
-                    closeWelcomeModal();
-                    setTimeout(() => {
-                        const faqSection = document.getElementById('faq');
-                        if(faqSection) faqSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }, 100);
-                });
-            }
-
+            window.addEventListener('scroll', () => {
+                window.scrollY > 400 ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible');
+            });
+            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
         });
     </script>
-
 </body>
 </html>
-
-
-
-
-
-
-
-
-
