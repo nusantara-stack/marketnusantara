@@ -1,26 +1,27 @@
 [
   {
-    "nama": "Bank Digital ID",
-    "foto": "https://placehold.co/128x128/1c1c1c/f97316?text=BD",
+    "nama": "0",
+    "foto": "https://placehold.co/128x128/1c1c1c/f97316?text=0",
     "role": "own",
     "link": "https://whatsapp.com/channel/..."
   },
   {
-    "nama": "Nusantara",
-    "foto": "https://placehold.co/128x128/1c1c1c/ef4444?text=MN",
+    "nama": "0",
+    "foto": "https://placehold.co/128x128/1c1c1c/ef4444?text=0",
     "role": "own",
     "link": "https://whatsapp.com/channel/..."
   },
   {
-    "nama": "Nusantara",
-    "foto": "https://placehold.co/128x128/1c1c1c/ef4444?text=MN",
+    "nama": "0",
+    "foto": "https://placehold.co/128x128/1c1c1c/ef4444?text=0",
     "role": "pt",
     "link": "https://whatsapp.com/channel/..."
   },
   {
-    "nama": "Kreatif Store",
-    "foto": "assets/hero.webp",
+    "nama": "0",
+    "foto": "https://placehold.co/128x128/1c1c1c/ef4444?text=0",
     "role": "pt",
     "link": "https://whatsapp.com/channel/..."
   }
+
 ]
