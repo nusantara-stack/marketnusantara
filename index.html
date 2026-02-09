@@ -951,6 +951,118 @@
             opacity: 1;
         }
 
+        /* === MOBILE RESPONSIVE TWEAKS === */
+        @media (max-width: 768px) {
+            html {
+                font-size: 13px !important; /* Scale down global base size slightly */
+            }
+            
+            /* Hero Text Compact */
+            .hero-section h1 {
+                font-size: 2.5rem !important; /* Smaller Hero Title */
+                margin-bottom: 0.5rem !important;
+            }
+            .hero-section p {
+                font-size: 0.9rem !important;
+                margin-bottom: 1.5rem !important;
+            }
+
+            /* Mitra Card Compact */
+            .mitra-card {
+                height: 280px !important; /* Reduce height significantly */
+            }
+            .mitra-img {
+                width: 100px !important; /* Smaller image */
+                height: 100px !important;
+                border-width: 2px !important;
+            }
+            .mitra-image-wrapper {
+                height: 55% !important; /* Adjust wrapper proportion */
+                margin-top: 0.5rem !important;
+            }
+            .mitra-name {
+                font-size: 1.1rem !important; /* Smaller name */
+            }
+            .mitra-role-label {
+                font-size: 0.6rem !important;
+                margin-bottom: 0 !important;
+            }
+            .btn-feed {
+                padding: 0.4rem 0.8rem !important;
+                font-size: 0.7rem !important;
+            }
+            .mitra-info {
+                padding: 0.75rem !important;
+                gap: 0.25rem !important;
+            }
+            .card-bg-text {
+                font-size: 2rem !important; /* Smaller background text */
+                top: 15% !important;
+            }
+
+            /* Service Card Compact */
+            .service-card {
+                padding: 1rem !important;
+            }
+            .service-card-number {
+                font-size: 3rem !important;
+                top: -0.5rem !important;
+                right: -0.25rem !important;
+            }
+            .service-card h4 {
+                font-size: 1rem !important;
+            }
+            .service-card p {
+                font-size: 0.8rem !important;
+            }
+            
+            /* Stat Card Compact */
+            .stat-card {
+                padding: 1rem !important;
+            }
+            .stat-card h3 {
+                font-size: 1.75rem !important;
+            }
+            .stat-card p {
+                font-size: 0.7rem !important;
+            }
+            .stat-card svg {
+                width: 1.25rem !important;
+                height: 1.25rem !important;
+            }
+            
+            /* FAQ Compact */
+            .faq-question {
+                padding: 1rem !important;
+            }
+            .faq-answer {
+                padding: 0 1rem !important;
+            }
+            .faq-item.active .faq-answer {
+                padding: 0 1rem 1rem !important;
+            }
+            
+            /* General Section Spacing */
+            section {
+                padding-top: 2.5rem !important;
+                padding-bottom: 2.5rem !important;
+            }
+            
+            /* Glass Box Compact */
+            .glass-box {
+                padding: 1rem !important;
+                padding-top: 1.5rem !important;
+            }
+            .glass-box h2 {
+                font-size: 1rem !important;
+                margin-bottom: 0.25rem !important;
+            }
+            .glass-box p {
+                font-size: 0.8rem !important;
+                line-height: 1.4 !important;
+            }
+        }
+
     </style>
 </head>
 <body class="antialiased" oncontextmenu="return false;">
