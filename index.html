@@ -16,29 +16,23 @@
     <style>
         :root {
             --color-background: #050505; 
-            --color-surface-1: #0f1115;  /* Sedikit kebiruan gelap */
+            --color-surface-1: #0f1115;  
             --color-surface-2: #181b21; 
             --color-text-primary: #f3f4f6;
-            --color-text-secondary: #94a3b8; /* Slate-400 yang lebih dingin */
+            --color-text-secondary: #94a3b8; 
             
-            /* TEMA BARU: CYAN NEBULA (Colorful & Cohesive) */
-            /* Warna Dasar: Cyan */
             --color-cyan: #22d3ee; 
             --color-cyan-dark: #0891b2;
-            
-            /* Warna Sekunder: Violet (untuk campuran gradasi) */
             --color-violet: #8b5cf6;
 
-            /* Override Variable Lama dengan Tema Baru */
             --color-orange: var(--color-cyan);  
             --color-orange-hover: var(--color-cyan-dark);
             --color-orange-transparent: rgba(34, 211, 238, 0.15); 
 
-            /* Variable Gradasi (Untuk kesan colorful tapi menyatu) */
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
             --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%);
 
-            --color-glass-bg: rgba(15, 23, 42, 0.4); /* Slate tint */
+            --color-glass-bg: rgba(15, 23, 42, 0.4); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
         }
 
@@ -106,7 +100,7 @@
             top: 0;
             left: 0;
             height: 0.25rem; 
-            background: var(--color-gradient-main); /* Progress bar warna-warni */
+            background: var(--color-gradient-main); 
             width: 0%;
             z-index: 100;
             transition: width 0.1s ease-out;
@@ -140,7 +134,6 @@
 
         /* Hero & Glassmorphism */
         .hero-section {
-            /* Smooth padding transition for focus mode */
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
@@ -176,7 +169,7 @@
             border-radius: 3px;
         }
         .hero-swiper-pagination .swiper-pagination-progressbar-fill {
-            background: var(--color-gradient-main); /* Progress bar slider gradient */
+            background: var(--color-gradient-main); 
             border-radius: 3px;
             transition: transform 0.2s linear; 
             box-shadow: 0 0 10px var(--color-cyan);
@@ -197,7 +190,7 @@
             background-clip: text;
         }
 
-        /* Button Shine Effect (UPDATED FOR GRADIENT) */
+        /* Button Shine Effect */
         .btn-shine { position: relative; overflow: hidden; }
         .btn-shine.btn-primary {
             background: var(--color-gradient-main);
@@ -274,7 +267,7 @@
         }
         .mitra-swiper {
             width: 100%;
-            padding: 2rem 0 3rem; /* Adjusted padding for Progress Bar space */
+            padding: 2rem 0 3rem; 
         }
         
         /* PROGRESS BAR CUSTOMIZATION FOR MITRA */
@@ -289,24 +282,23 @@
             border-radius: 3px;
         }
         .mitra-swiper .swiper-pagination-progressbar-fill {
-            background: var(--color-cyan) !important; /* Bar accent color */
+            background: var(--color-cyan) !important; 
             border-radius: 3px;
             box-shadow: 0 0 10px var(--color-cyan);
         }
 
 
-        /* Variable warna aksen untuk tiap tipe role (Tetap dipertahankan biar colorful) */
-        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.2); } /* Ungu */
-        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.2); } /* Biru */
-        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.2); } /* Kuning/Emas */
-        .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } /* Default jadi Cyan */
+        /* Variable warna aksen untuk tiap tipe role */
+        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.2); } 
+        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.2); } 
+        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.2); } 
+        .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
         .mitra-card {
-            /* Dimensi Tetap */
             height: 380px; 
             width: 100%;
             background-color: #0a0a0a;
-            border-radius: 0; /* Gaya boxy tajam */
+            border-radius: 0; 
             position: relative;
             overflow: hidden;
             display: flex;
@@ -383,9 +375,9 @@
             width: 160px;
             height: 160px;
             object-fit: cover;
-            border-radius: 50%; /* Tetap bulat tapi besar */
+            border-radius: 50%; 
             border: 3px solid rgba(255,255,255,0.1);
-            filter: grayscale(100%); /* Efek hitam putih awal */
+            filter: grayscale(100%); 
             transition: all 0.4s ease;
         }
 
@@ -432,7 +424,7 @@
         .mitra-action-bar {
             display: flex;
             align-items: center;
-            justify-content: center; /* Center content now */
+            justify-content: center; 
             margin-top: 0.75rem;
             border-top: 1px solid rgba(255,255,255,0.1);
             padding-top: 0.75rem;
@@ -440,7 +432,7 @@
 
         .btn-feed {
             background-color: var(--card-accent);
-            color: #fff; /* Teks putih pada kartu mitra agar kontras dengan warna kartu */
+            color: #fff; 
             padding: 0.6rem 1rem;
             border-radius: 999px;
             font-size: 0.8rem;
@@ -451,7 +443,7 @@
             align-items: center;
             justify-content: center;
             gap: 0.5rem;
-            width: 100%; /* Full width */
+            width: 100%; 
             transition: all 0.3s ease;
             text-shadow: 0 1px 2px rgba(0,0,0,0.3);
         }
@@ -459,17 +451,6 @@
         .btn-feed:hover {
             transform: scale(1.02);
             box-shadow: 0 0 15px var(--card-accent);
-        }
-
-        .feed-count {
-            background: rgba(0,0,0,0.3);
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            font-size: 0.7rem;
         }
 
 
@@ -518,7 +499,7 @@
             padding: 0 1.5rem 1.5rem;
         }
         .faq-item.active .faq-arrow-container {
-            background: var(--color-gradient-main); /* Panah Gradient */
+            background: var(--color-gradient-main); 
         }
         .faq-item.active .faq-arrow {
             transform: rotate(180deg);
@@ -535,7 +516,7 @@
         #kontak {
             position: relative;
             overflow: hidden;
-            background-image: url('assets/contact.webp'); /* Update Image */
+            background-image: url('assets/contact.webp'); 
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
@@ -743,147 +724,6 @@
             z-index: 2;
         }
 
-
-        /* Team Card Base */
-        .team-card {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0));
-            border: 1px solid var(--color-glass-border);
-            border-radius: 1rem;
-            padding: 0.75rem;
-            text-align: center;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-        .team-card img {
-            border-radius: 50%;
-            margin-bottom: 0.5rem;
-            object-fit: cover;
-            border: 2px solid transparent; 
-            padding: 2px;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        .team-card h4 {
-            font-weight: 700;
-            color: var(--color-text-primary);
-            font-size: 0.875rem;
-            margin-bottom: 0.125rem;
-            line-height: 1.2;
-        }
-        .team-card .role {
-            font-size: 0.7rem;
-            color: var(--color-text-secondary);
-            min-height: auto;
-        }
-        .team-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-        }
-        .team-card:hover img {
-            border-color: var(--color-cyan);
-            box-shadow: 0 0 10px var(--color-accent-transparent);
-        }
-
-        /* Level 3: Manager / Lead */
-        .team-card-lvl3 img { width: 3.5rem; height: 3.5rem; }
-
-        /* Level 2: C-Level (COO, CTO) */
-        .team-card-lvl2 {
-            background: linear-gradient(145deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-            border-color: var(--color-glass-border);
-        }
-        .team-card-lvl2 img {
-            width: 4rem;
-            height: 4rem;
-            border-color: var(--color-cyan);
-        }
-        .team-card-lvl2 h4 { font-size: 1rem; }
-
-        /* Level 1: CEO (Special Effect) */
-        @keyframes animated-glow {
-          0% { box-shadow: 0 0 10px -5px var(--color-cyan); }
-          50% { box-shadow: 0 0 20px 0px var(--color-accent-transparent), 0 0 25px 0px var(--color-cyan); }
-          100% { box-shadow: 0 0 10px -5px var(--color-cyan); }
-        }
-        .team-card-lvl1 {
-            padding: 1.25rem;
-            border: 2px solid var(--color-cyan);
-            box-shadow: 0 0 10px -5px var(--color-cyan);
-            animation: animated-glow 5s ease-in-out infinite;
-        }
-        .team-card-lvl1 img {
-             width: 5rem;
-             height: 5rem;
-             border-width: 3px;
-             border-color: var(--color-cyan);
-        }
-        .team-card-lvl1 h4 { font-size: 1.125rem; }
-        .team-card-lvl1 .role { font-size: 0.875rem; color: var(--color-cyan);}
-        .team-card-lvl1:hover {
-            transform: translateY(-10px) scale(1.03);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.4);
-        }
-
-
-        /* News List Items */
-        .news-list-item {
-            display: flex;
-            align-items: center;
-            gap: 1.5rem;
-            padding: 1rem;
-            border-radius: 0.75rem;
-            border: 1px solid var(--color-surface-2);
-            background-color: var(--color-surface-1);
-            transition: all 0.3s ease;
-        }
-        .news-list-item:hover {
-            transform: translateY(-5px);
-            background-color: var(--color-surface-2);
-            border-color: var(--color-cyan); /* Border accent saat hover */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-        .news-date {
-            flex-shrink: 0;
-            width: 4.5rem;
-            height: 4.5rem;
-            background: linear-gradient(145deg, var(--color-surface-2), var(--color-background));
-            border: 1px solid var(--color-glass-border);
-            border-radius: 0.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            font-weight: 800;
-        }
-        .news-date .day {
-            font-size: 1.75rem;
-            color: var(--color-text-primary);
-            line-height: 1;
-        }
-        .news-date .month {
-            font-size: 0.75rem;
-            color: var(--color-text-secondary);
-            text-transform: uppercase;
-        }
-        .news-content {
-            flex-grow: 1;
-        }
-        .news-arrow {
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-            color: var(--color-cyan);
-        }
-        .news-list-item:hover .news-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        
         /* Process Service Cards */
         .service-card {
             background: var(--color-surface-2);
@@ -1113,7 +953,6 @@
 
         <header id="home" class="relative min-h-screen flex flex-col">
             <div class="absolute top-0 left-0 w-full h-full z-[-1]">
-                <!-- VIDEO DIGANTI JADI GAMBAR HERO -->
                 <img src="assets/hero.webp" alt="Hero Background" class="w-full h-full object-cover">
                 <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 5%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.5) 100%);"></div>
             </div>
@@ -1130,11 +969,9 @@
                         <a href="#home" class="nav-link main-nav-link">Home</a>
                         <a href="#mitra" class="nav-link main-nav-link">Mitra</a>
                         <a href="#statistik" class="nav-link main-nav-link">Statistik</a>
-                        <!-- Link Testimoni Dihapus -->
                         <a href="#kontak" class="nav-link main-nav-link">Kontak</a>
                         
-                        <a href="#berita" class="nav-link info-nav-link">Berita</a>
-                        <!-- Link Tim Kami Dihapus -->
+                        <!-- Link BERITA DIHAPUS DARI SINI -->
                         <a href="#layanan" class="nav-link info-nav-link">Proses Layanan</a>
                         <a href="#faq" class="nav-link info-nav-link">FAQ</a>
                     </div>
@@ -1158,11 +995,9 @@
                     <a href="#home" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Home</a>
                     <a href="#mitra" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Mitra</a>
                     <a href="#statistik" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Statistik</a>
-                    <!-- Link Testimoni Dihapus -->
                     <a href="#kontak" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Kontak</a>
                     
-                    <a href="#berita" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Berita</a>
-                    <!-- Link Tim Kami Dihapus -->
+                    <!-- Link BERITA DIHAPUS DARI SINI -->
                     <a href="#layanan" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Proses Layanan</a>
                     <a href="#faq" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">FAQ</a>
                 </div>
@@ -1232,29 +1067,7 @@
         </header>
 
         <div id="informasi-section-container" class="hidden">
-
-            <section id="berita" class="pt-8 pb-12 md:pt-12 md:pb-16" style="background-color: var(--color-background);">
-                <div class="container mx-auto px-4 relative">
-                    <div class="text-center mb-12">
-                        <h2 class="text-3xl md:text-4xl font-bold text-white">Papan Pengumuman</h2>
-                        <p class="mt-2 text-[var(--color-text-secondary)]">Informasi, update, dan pengumuman terbaru dari platform kami.</p>
-                    </div>
-                    
-                    <!-- DYNAMIC NEWS CONTAINER -->
-                    <div id="news-container" class="max-w-3xl mx-auto space-y-4">
-                         <!-- Skeleton Loader Awal -->
-                        <div class="skeleton h-24 w-full rounded-xl"></div>
-                        <div class="skeleton h-24 w-full rounded-xl"></div>
-                        <div class="skeleton h-24 w-full rounded-xl"></div>
-                    </div>
-                    
-                    <div class="text-center mt-8">
-                        <p class="text-xs text-gray-500 italic">Hanya menampilkan 3 pembaruan terbaru. Untuk arsip, kunjungi halaman blog kami.</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- SECTION TIM KAMI DIHAPUS DARI SINI -->
+            <!-- SECTION BERITA DIHAPUS DARI SINI -->
 
             <section id="layanan" class="py-12 md:py-16">
                 <div class="container mx-auto px-4">
@@ -1321,7 +1134,6 @@
                                MARKET NUSANTARA FAQ
                             </p>
                             <h2 class="text-4xl md:text-5xl font-bold mb-6">Pertanyaan Umum</h2>
-                            <!-- PERUBAHAN DI SINI: WARNA BORDER JADI CYAN TRANSPARAN -->
                             <div class="glass-box p-6 rounded-lg" style="border-color: rgba(34, 211, 238, 0.3);">
                                 <h3 class="font-bold text-lg mb-2">Masih punya pertanyaan?</h3>
                                 <p class="text-sm text-[var(--color-text-secondary)] mb-4">Tidak menemukan jawaban yang Anda cari? Hubungi tim dukungan kami.</p>
@@ -1606,7 +1418,9 @@
                     <div>
                         <h3 class="font-bold mb-4 text-white">Informasi</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <li><a href="#" class="footer-tab-link hover:text-white transition-colors" data-tab-target="tab-informasi">Papan Pengumuman</a></li>
+                            <!-- PAPAN PENGUMUMAN DIHAPUS DARI SINI -->
+                            <li><a href="#layanan" class="footer-tab-link hover:text-white transition-colors">Proses Layanan</a></li>
+                            <li><a href="#faq" class="footer-tab-link hover:text-white transition-colors">FAQ</a></li>
                         </ul>
                     </div>
                 </div>
@@ -1701,8 +1515,6 @@
                 mainContent.classList.add('loaded');
                 setTimeout(() => {
                     preloader.style.display = 'none';
-                    
-                    // SCRIPT WELCOME MODAL DIHAPUS DARI SINI
                 }, 500); 
             });
             
@@ -1735,9 +1547,6 @@
                     let htmlContent = '';
                     mitraData.forEach(mitra => {
                         const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
-                        
-                        // REMOVE STATS & RESULT TEXT
-
                         htmlContent += `
                             <div class="swiper-slide h-auto">
                                 <div class="mitra-card ${roleInfo.class}">
@@ -1757,7 +1566,6 @@
                                             <a href="${mitra.link}" target="_blank" class="btn-feed">
                                                 SALURAN
                                             </a>
-                                            <!-- REMOVED STATS & RESULT DIVS -->
                                         </div>
                                     </div>
                                 </div>
@@ -1767,16 +1575,14 @@
                     
                     mitraContainer.innerHTML = htmlContent;
                     
-                    // Inisialisasi Swiper Mitra setelah data dimuat
                     new Swiper(".mitra-swiper", {
                         slidesPerView: 2,
-                        spaceBetween: 10, // Jarak antar kartu lebih rapat
+                        spaceBetween: 10, 
                         loop: true,
                         autoplay: {
                             delay: 3000,
                             disableOnInteraction: false,
                         },
-                        // CHANGE PAGINATION TO PROGRESSBAR
                         pagination: {
                             el: ".swiper-pagination",
                             type: "progressbar",
@@ -1800,49 +1606,6 @@
 
             loadMitraData();
 
-            // LOGIKA SECTION BERITA / PENGUMUMAN (DATABASE)
-            const newsContainer = document.getElementById('news-container');
-
-            const loadNewsData = async () => {
-                try {
-                    const response = await fetch('DATABASE/news.json');
-                    const newsData = await response.json();
-                    
-                    let htmlContent = '';
-                    const latestNews = newsData.slice(0, 3);
-
-                    latestNews.forEach(item => {
-                        htmlContent += `
-                        <a href="${item.link || '#'}" class="news-list-item group">
-                            <div class="news-date">
-                                <span class="day">${item.tanggal}</span>
-                                <span class="month">${item.bulan}</span>
-                            </div>
-                            <div class="news-content">
-                                <h3 class="font-bold text-base text-white group-hover:text-[var(--color-accent)] transition-colors">${item.judul}</h3>
-                                <p class="text-xs text-gray-500">Kategori: <span class="font-semibold text-[var(--color-text-secondary)]">${item.kategori}</span></p>
-                            </div>
-                            <div class="news-arrow">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path></svg>
-                            </div>
-                        </a>
-                        `;
-                    });
-
-                    if (latestNews.length === 0) {
-                         htmlContent = '<p class="text-center text-gray-500">Belum ada pengumuman saat ini.</p>';
-                    }
-                    
-                    newsContainer.innerHTML = htmlContent;
-                    
-                } catch (error) {
-                    console.error('Error loading news data:', error);
-                    newsContainer.innerHTML = '<p class="text-center w-full py-4 text-red-500">Gagal memuat berita.</p>';
-                }
-            };
-
-            loadNewsData();
-
             // LOGIKA STATISTIK (NEW DATABASE)
             const statsContainer = document.getElementById('statistik-container');
 
@@ -1851,7 +1614,6 @@
                     const response = await fetch('DATABASE/statistik.json?v=' + new Date().getTime());
                     const statsData = await response.json();
                     
-                    // Render HTML untuk statistik baru
                     const htmlContent = `
                         <div class="stat-card group p-4 sm:p-6 rounded-xl flex flex-col items-center justify-center relative overflow-hidden animate-on-scroll zoom-in border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
                             <!-- Decorative Glow -->
@@ -2085,6 +1847,49 @@
                     mainContentForTabs.classList.toggle('hidden-by-tab', isFocusMode);
                     informasiSectionContainer.classList.toggle('hidden', !isInfoTab);
                     desktopMenuContainer.classList.toggle('info-mode', isInfoTab);
+                });
+            });
+
+            // REVISI PENTING: GLOBAL CLICK LISTENER UNTUK NAVIGASI FOOTER/LINK YANG CERDAS
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href').substring(1);
+                    if (!targetId) return;
+
+                    // Daftar section untuk setiap tab
+                    const berandaSections = ['home', 'mitra', 'statistik', 'kontak'];
+                    const infoSections = ['layanan', 'faq'];
+
+                    let targetTab = null;
+
+                    // Cek apakah target ada di Beranda
+                    if (berandaSections.includes(targetId)) {
+                        targetTab = 'tab-beranda';
+                    } 
+                    // Cek apakah target ada di Informasi
+                    else if (infoSections.includes(targetId)) {
+                        targetTab = 'tab-informasi';
+                    }
+
+                    // Jika target membutuhkan tab tertentu
+                    if (targetTab) {
+                        const targetTabButton = document.querySelector(`.hero-tab-button[data-tab="${targetTab}"]`);
+                        
+                        // Jika tab yang dibutuhkan belum aktif
+                        if (targetTabButton && !targetTabButton.classList.contains('active')) {
+                            // Klik tab secara programatik
+                            targetTabButton.click();
+                            
+                            // Tunggu sebentar agar layout berubah, baru scroll
+                            e.preventDefault(); // Mencegah scroll default yang mungkin gagal karena elemen hidden
+                            setTimeout(() => {
+                                const targetElement = document.getElementById(targetId);
+                                if (targetElement) {
+                                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                                }
+                            }, 100); // Delay 100ms cukup untuk transisi JS
+                        }
+                    }
                 });
             });
 
