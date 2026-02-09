@@ -975,10 +975,19 @@
                 font-size: 13px !important;
             }
             
-            /* HERO COMPACT */
-            .hero-section {
-                padding-bottom: 0.5rem !important; /* Extremely tight for hero */
+            /* REVISI: Header Height Control */
+            header#home {
+                min-height: auto !important; /* Agar tinggi header mengikuti isi, tidak dipaksa full screen */
+                height: auto !important;
+                padding-bottom: 2rem !important; /* Memberi sedikit ruang di bawah tab sebelum Mitra */
             }
+
+            /* REVISI: Hero Alignment & Spacing */
+            .hero-section {
+                padding-bottom: 0 !important; 
+                align-items: flex-start !important; /* Rata atas, bukan tengah */
+            }
+
             .hero-section h1 {
                 font-size: 2.5rem !important;
                 margin-bottom: 0.25rem !important;
@@ -996,6 +1005,10 @@
             .container {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
+            }
+            /* Adjust inner spacing inside Hero */
+            .hero-section > .container {
+                padding-top: 1rem !important;
             }
 
             /* HEADINGS & TEXT GAP */
@@ -1128,10 +1141,12 @@
                 </div>
             </nav>
 
-            <div class="hero-section flex-grow flex items-center md:items-end justify-center text-left pb-12 md:pb-16">
+            <!-- REVISI PADA KELAS: items-start, pt-24 -->
+            <div class="hero-section flex-grow flex items-start md:items-end justify-center text-left pb-12 md:pb-16">
                 <div class="container mx-auto px-6 z-10 w-full">
+                    <!-- REVISI PADA PADDING: pt-24 (mobile) -->
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
-                        <div class="w-full pt-20 md:pt-0">
+                        <div class="w-full pt-24 md:pt-0 pb-4">
                             <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-4 text-shadow-dark">
                                 MARKET<br>NUSANTARA
                             </h1>
