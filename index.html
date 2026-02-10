@@ -31,7 +31,7 @@
             --color-orange-transparent: rgba(34, 211, 238, 0.15); 
 
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
-            --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%);
+            --color-gradient-glow: linear-gradient(to right, #22d3ee, #8b5cf6);
 
             --color-glass-bg: rgba(15, 23, 42, 0.4); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
@@ -120,21 +120,41 @@
             text-shadow: 0 0 10px var(--color-accent-transparent);
         }
         
-        /* REVISI NAVBAR SELECTOR: Warna Senada & Efek Neon */
+        /* REVISI NAVBAR SELECTOR: Transparent Body, Gradient Glow */
         #nav-follower {
             position: absolute;
             z-index: 5;
             height: 2.25rem; 
-            /* Menggunakan Gradient agar lebih hidup */
-            background: var(--color-gradient-main); 
-            opacity: 0.15; /* Sedikit lebih terlihat */
+            /* Transparan seperti kaca */
+            background: rgba(255, 255, 255, 0.03); 
             border-radius: 9999px;
-            border: 1px solid var(--color-cyan);
-            backdrop-filter: blur(0.3125rem);
-            -webkit-backdrop-filter: blur(0.3125rem);
-            /* Box shadow cyan yang kuat */
-            box-shadow: 0 0 15px var(--color-cyan), inset 0 0 10px rgba(34, 211, 238, 0.3);
+            
+            /* Border tipis */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            
+            /* REVISI: Gradient Box Shadow (Cyan + Ungu) */
+            box-shadow: 
+                0 0 15px rgba(34, 211, 238, 0.4), /* Cyan Glow */
+                0 0 15px rgba(139, 92, 246, 0.4), /* Violet Glow */
+                inset 0 0 10px rgba(34, 211, 238, 0.1); 
+
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        /* Tambahkan pseudo-element untuk border gradient halus (opsional, tapi bagus) */
+        #nav-follower::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            border-radius: 9999px;
+            padding: 1px;
+            background: var(--color-gradient-main);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
         }
 
 
@@ -379,8 +399,8 @@
         }
 
         .mitra-img {
-            width: 140px;
-            height: 140px;
+            width: 120px; /* REVISI: Sedikit lebih kecil agar muat 5 di desktop */
+            height: 120px;
             object-fit: cover;
             border-radius: 50%; 
             border: 2px solid rgba(255,255,255,0.2);
@@ -421,7 +441,7 @@
         }
 
         .mitra-name {
-            font-size: 1.5rem;
+            font-size: 1.25rem; /* REVISI: Sedikit lebih kecil untuk akomodasi 5 kartu */
             font-weight: 800;
             color: #fff;
             line-height: 1.1;
@@ -572,6 +592,71 @@
             height: 2.5rem;
             opacity: 1;
             box-shadow: 0 0 10px var(--color-accent-transparent);
+        }
+        
+        /* === FOOTER GALAXY THEME === */
+        footer {
+            position: relative;
+            overflow: hidden;
+            /* Pastikan background default gelap */
+            background-color: var(--color-surface-1);
+        }
+        
+        /* Galaxy Fog Animation */
+        .footer-galaxy-bg {
+            position: absolute;
+            bottom: -50%;
+            left: -25%;
+            width: 150%;
+            height: 200%;
+            /* Gradient nebula halus */
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(34, 211, 238, 0.05) 40%, transparent 70%);
+            z-index: 0;
+            opacity: 0.8;
+            animation: galaxy-rotate 60s linear infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes galaxy-rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Stars in Footer */
+        .footer-stars {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                radial-gradient(1px 1px at 10% 10%, rgba(255,255,255,0.8) 1px, transparent 0),
+                radial-gradient(1px 1px at 20% 80%, rgba(255,255,255,0.6) 1px, transparent 0),
+                radial-gradient(2px 2px at 40% 40%, rgba(255,255,255,1) 1px, transparent 0),
+                radial-gradient(1px 1px at 60% 90%, rgba(34,211,238,0.8) 1px, transparent 0),
+                radial-gradient(1px 1px at 80% 20%, rgba(139,92,246,0.8) 1px, transparent 0);
+            background-size: 500px 500px;
+            opacity: 0.5;
+        }
+        
+        /* Floating particles */
+        .footer-particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--color-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--color-cyan);
+            animation: float-particle 10s ease-in-out infinite;
+            opacity: 0;
+        }
+        .footer-particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+        .footer-particle:nth-child(2) { top: 60%; right: 15%; animation-delay: 3s; background: var(--color-violet); box-shadow: 0 0 10px var(--color-violet); }
+        .footer-particle:nth-child(3) { bottom: 30%; left: 40%; animation-delay: 6s; }
+
+        @keyframes float-particle {
+            0% { transform: translateY(0) scale(0); opacity: 0; }
+            50% { transform: translateY(-20px) scale(1); opacity: 0.8; }
+            100% { transform: translateY(-40px) scale(0); opacity: 0; }
         }
 
 
@@ -1396,8 +1481,15 @@
     </div>
 
 
+    <!-- REVISI FOOTER: Added Galaxy Theme Background -->
     <footer style="background-color: var(--color-surface-1);">
-            <div class="container mx-auto px-6 lg:px-8 py-12">
+            <div class="footer-galaxy-bg"></div>
+            <div class="footer-stars"></div>
+            <div class="footer-particle"></div>
+            <div class="footer-particle"></div>
+            <div class="footer-particle"></div>
+
+            <div class="container relative z-10 mx-auto px-6 lg:px-8 py-12">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
                         <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="h-10 w-auto">
@@ -1446,8 +1538,7 @@
                     <p class="text-sm">&copy; 2025 Market Nusantara. Semua Hak Cipta Dilindungi.</p>
                 </div>
             </div>
-        </footer>
-    </div>
+    </footer>
     
     
     <div id="toast-notification" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-y-4 transition-all duration-300">
@@ -1489,8 +1580,6 @@
         <div id="notification-progress-bar"></div>
     </div>
 
-    <!-- WELCOME MODAL DIHAPUS DARI SINI -->
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -1525,7 +1614,7 @@
             window.addEventListener('resize', resize);
             resize();
 
-            // KELAS BINTANG (Dengan efek kedip lebih halus)
+            // KELAS BINTANG
             class Star {
                 constructor() {
                     this.reset();
@@ -1614,7 +1703,7 @@
                 }
             }
             
-            // REVISI SHOOTING STAR (Bintang Jatuh - Lebih Cepat & Sering)
+            // SHOOTING STAR (Bintang Jatuh - Cepat & Sering)
             class ShootingStar {
                 constructor() {
                     this.reset();
@@ -1810,9 +1899,11 @@
                             prevEl: ".swiper-button-prev",
                         },
                         breakpoints: {
+                            // REVISI BREAKPOINTS: Desktop jadi 5
                             640: { slidesPerView: 2, spaceBetween: 12 },
                             768: { slidesPerView: 3, spaceBetween: 14 },
-                            1024: { slidesPerView: 4, spaceBetween: 16 },
+                            1024: { slidesPerView: 5, spaceBetween: 16 }, // Menampilkan 5 kartu di Desktop
+                            1280: { slidesPerView: 5, spaceBetween: 20 }
                         },
                     });
                     
