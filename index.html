@@ -120,30 +120,21 @@
             text-shadow: 0 0 10px var(--color-accent-transparent);
         }
         
-        /* REVISI NAVBAR SELECTOR: Transparent Body, Gradient Glow */
         #nav-follower {
             position: absolute;
             z-index: 5;
             height: 2.25rem; 
-            /* Transparan seperti kaca */
             background: rgba(255, 255, 255, 0.03); 
             border-radius: 9999px;
-            
-            /* Border tipis */
             border: 1px solid rgba(255, 255, 255, 0.1);
-
             backdrop-filter: blur(4px);
             -webkit-backdrop-filter: blur(4px);
-            
-            /* REVISI: Gradient Box Shadow (Cyan + Ungu) */
             box-shadow: 
-                0 0 15px rgba(34, 211, 238, 0.4), /* Cyan Glow */
-                0 0 15px rgba(139, 92, 246, 0.4), /* Violet Glow */
+                0 0 15px rgba(34, 211, 238, 0.4), 
+                0 0 15px rgba(139, 92, 246, 0.4), 
                 inset 0 0 10px rgba(34, 211, 238, 0.1); 
-
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
-        /* Tambahkan pseudo-element untuk border gradient halus (opsional, tapi bagus) */
         #nav-follower::before {
             content: '';
             position: absolute;
@@ -157,13 +148,10 @@
             opacity: 0.5;
         }
 
-
-        /* Hero & Glassmorphism */
         .hero-section {
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* Navbar Glass */
         .navbar-glass {
             background: var(--color-glass-bg);
             backdrop-filter: blur(0.625rem);
@@ -171,7 +159,6 @@
             border-bottom: 0.0625rem solid var(--color-glass-border);
         }
         
-        /* Glass Box Standard */
         .glass-box {
             background: var(--color-glass-bg);
             backdrop-filter: blur(0.3125rem);
@@ -185,7 +172,6 @@
             border-color: var(--color-cyan);
         }
 
-        /* Swiper Customization */
         .hero-swiper-pagination.swiper-pagination-progressbar {
             position: relative !important;
             top: auto !important;
@@ -201,14 +187,11 @@
             box-shadow: 0 0 10px var(--color-cyan);
         }
 
-        /* Hero Swiper Slide */
         .hero-swiper { width: 100%; }
         .swiper-slide { height: auto; display: flex; }
         
-        /* Text Shadow */
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
         
-        /* Text Gradient Title */
         .text-gradient {
             background: var(--color-gradient-main);
             -webkit-background-clip: text;
@@ -216,7 +199,6 @@
             background-clip: text;
         }
 
-        /* Button Shine Effect */
         .btn-shine { position: relative; overflow: hidden; }
         .btn-shine.btn-primary {
             background: var(--color-gradient-main);
@@ -238,7 +220,6 @@
         }
         .btn-shine:hover::before { left: 100%; }
 
-        /* Slide Number Tag */
         .slide-tag {
             position: absolute;
             top: 0.75rem;
@@ -258,7 +239,6 @@
             -webkit-backdrop-filter: blur(0.125rem);
         }
         
-        /* Section Divider */
         .section-divider-container {
             display: flex;
             justify-content: space-between;
@@ -273,7 +253,8 @@
 
         /* Stats Section */
         #statistik {
-            background-color: var(--color-background); 
+            /* Background transparan agar parallax terlihat */
+            background-color: transparent; 
             background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
         }
         .stat-card {
@@ -296,7 +277,6 @@
             padding: 2rem 0 3rem; 
         }
         
-        /* PROGRESS BAR CUSTOMIZATION FOR MITRA */
         .mitra-swiper .swiper-pagination-progressbar {
             position: absolute !important;
             bottom: 0 !important;
@@ -313,39 +293,31 @@
             box-shadow: 0 0 10px var(--color-cyan);
         }
 
-
-        /* Variable warna aksen untuk tiap tipe role */
         .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); } 
         .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); } 
         .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); } 
         .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
-        /* REVISI MITRA CARD: ELECTRIC GLOW STYLE */
         .mitra-card {
             height: 380px; 
             width: 100%;
-            background-color: #0a0a0a; /* Hitam Pekat */
-            border-radius: 0.75rem; /* Sedikit rounded sesuai ref */
+            background-color: #0a0a0a; 
+            border-radius: 0.75rem; 
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            
-            /* Border default solid tipis */
             border: 1px solid rgba(255, 255, 255, 0.1); 
-            
-            /* Box Shadow untuk efek glow awal yang lembut */
             box-shadow: 0 0 10px rgba(0,0,0,0.5);
             transition: all 0.3s ease;
         }
 
-        /* EFEK ELECTRIC BORDER SAAT HOVER (dan default dikit) */
         .mitra-card::before {
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
             border-radius: 0.75rem;
-            padding: 2px; /* Ketebalan border glow */
+            padding: 2px;
             background: linear-gradient(45deg, transparent, var(--card-accent), transparent);
             -webkit-mask: 
                 linear-gradient(#fff 0 0) content-box, 
@@ -358,7 +330,6 @@
 
         .mitra-card:hover {
             transform: translateY(-5px);
-            /* Glow Border Intens saat hover */
             border-color: var(--card-accent);
             box-shadow: 
                 0 0 20px var(--card-accent-dim), 
@@ -369,7 +340,6 @@
             opacity: 1;
         }
 
-        /* Latar Belakang Teks Pudar (MARKET / PARTNER) */
         .card-bg-text {
             position: absolute;
             top: 20%;
@@ -386,7 +356,6 @@
             line-height: 1;
         }
 
-        /* Image Wrapper */
         .mitra-image-wrapper {
             position: relative;
             z-index: 2;
@@ -399,12 +368,11 @@
         }
 
         .mitra-img {
-            width: 120px; /* REVISI: Sedikit lebih kecil agar muat 5 di desktop */
+            width: 120px; 
             height: 120px;
             object-fit: cover;
             border-radius: 50%; 
             border: 2px solid rgba(255,255,255,0.2);
-            /* REVISI: Gambar tidak grayscale, tapi agak redup, jadi terang pas hover */
             filter: brightness(0.8); 
             transition: all 0.4s ease;
             box-shadow: 0 0 15px rgba(0,0,0,0.5);
@@ -417,7 +385,6 @@
             box-shadow: 0 0 25px var(--card-accent-dim);
         }
 
-        /* Info Section (Bawah) */
         .mitra-info {
             position: relative;
             z-index: 10;
@@ -441,7 +408,7 @@
         }
 
         .mitra-name {
-            font-size: 1.25rem; /* REVISI: Sedikit lebih kecil untuk akomodasi 5 kartu */
+            font-size: 1.25rem;
             font-weight: 800;
             color: #fff;
             line-height: 1.1;
@@ -449,7 +416,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Action Bar (Paling Bawah) */
         .mitra-action-bar {
             margin-top: auto;
         }
@@ -468,19 +434,17 @@
             justify-content: center;
             gap: 0.5rem;
             width: 100%; 
-            border: 1px solid var(--card-accent); /* Border style button */
+            border: 1px solid var(--card-accent); 
             transition: all 0.3s ease;
             box-shadow: 0 0 5px var(--card-accent-dim);
         }
         
         .btn-feed:hover {
             background-color: var(--card-accent);
-            color: #000; /* Contrast text on hover */
+            color: #000; 
             box-shadow: 0 0 20px var(--card-accent);
         }
 
-
-        /* Swiper Nav Mitra Override */
         .mitra-swiper-button {
             color: #fff;
             background: rgba(0,0,0,0.5);
@@ -496,10 +460,8 @@
             font-size: 1rem !important;
         }
 
-
-        /* FAQ Section */
         #faq {
-            background-color: var(--color-background);
+            background-color: transparent; /* Update untuk parallax */
             background-image: radial-gradient(circle at top left, var(--color-accent-transparent), transparent 40%);
         }
         .faq-item {
@@ -538,7 +500,6 @@
             transition: background-color 0.3s ease;
         }
 
-        /* Contact Section (UPDATED IMAGE) */
         #kontak {
             position: relative;
             overflow: hidden;
@@ -594,22 +555,18 @@
             box-shadow: 0 0 10px var(--color-accent-transparent);
         }
         
-        /* === FOOTER GALAXY THEME === */
         footer {
             position: relative;
             overflow: hidden;
-            /* Pastikan background default gelap */
             background-color: var(--color-surface-1);
         }
         
-        /* Galaxy Fog Animation */
         .footer-galaxy-bg {
             position: absolute;
             bottom: -50%;
             left: -25%;
             width: 150%;
             height: 200%;
-            /* Gradient nebula halus */
             background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, rgba(34, 211, 238, 0.05) 40%, transparent 70%);
             z-index: 0;
             opacity: 0.8;
@@ -622,7 +579,6 @@
             to { transform: rotate(360deg); }
         }
         
-        /* Stars in Footer */
         .footer-stars {
             position: absolute;
             inset: 0;
@@ -638,7 +594,6 @@
             opacity: 0.5;
         }
         
-        /* Floating particles */
         .footer-particle {
             position: absolute;
             width: 4px;
@@ -659,8 +614,6 @@
             100% { transform: translateY(-40px) scale(0); opacity: 0; }
         }
 
-
-        /* Social Proof Notification */
         #social-proof-notification {
             position: fixed;
             bottom: 1.5rem;
@@ -690,7 +643,6 @@
             width: 100%;
         }
 
-        /* Modal Info */
         #info-modal-content {
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -713,13 +665,11 @@
             space-y: 0.5rem;
         }
 
-        /* Toast Notification */
         #toast-notification.show {
             opacity: 1;
             transform: translateY(0) translateX(-50%);
         }
 
-        /* Animate on Scroll */
         .animate-on-scroll {
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
@@ -741,7 +691,6 @@
             transform: none;
         }
 
-        /* Tabbed Interface */
         .hero-tab-button {
             transition: all 0.3s ease;
             color: var(--color-text-secondary);
@@ -768,7 +717,6 @@
             pointer-events: none;
         }
 
-        /* Header Animation for Focus Mode */
         header {
             transition: min-height 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
@@ -779,12 +727,13 @@
             padding-bottom: 0;
         }
 
-        /* Info Section Container */
         #informasi-section-container {
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
             max-height: 5000px; 
             overflow: hidden;
-            background-color: var(--color-background);
+            background-color: var(--color-background); /* Pastikan punya background agar menutupi parallax */
+            position: relative; /* Penting untuk z-index di atas fixed bg */
+            z-index: 10;
         }
         #informasi-section-container.hidden {
             opacity: 0;
@@ -793,7 +742,6 @@
         }
 
 
-        /* Team Section Decorations */
         #tim-kami::before {
             content: '';
             position: absolute;
@@ -815,7 +763,6 @@
             z-index: 2;
         }
 
-        /* Process Service Cards */
         .service-card {
             background: var(--color-surface-2);
             border: 1px solid var(--color-glass-border);
@@ -842,7 +789,6 @@
             user-select: none;
         }
         
-        /* Navbar State Management */
         #desktop-menu-container.info-mode .main-nav-link,
         #mobile-menu.info-mode .main-nav-link {
             display: none;
@@ -852,9 +798,10 @@
             display: none;
         }
 
-        /* Main Content Transition */
         main {
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
+            position: relative; /* Agar di atas fixed background */
+            z-index: 10;
         }
         main.hidden-by-tab {
             opacity: 0;
@@ -863,7 +810,6 @@
             overflow: hidden;
         }
 
-        /* Back to Top Button */
         #back-to-top-btn {
             position: fixed;
             bottom: 1.5rem; 
@@ -882,7 +828,6 @@
             pointer-events: auto;
         }
 
-        /* Music Button */
         #music-control-btn {
             position: fixed;
             bottom: 1.5rem;
@@ -908,8 +853,41 @@
             box-shadow: 0 0 15px var(--color-accent-transparent);
             border-color: var(--color-cyan);
         }
+        
+        /* === AUDIO VISUALIZER === */
+        #audio-visualizer {
+            position: fixed;
+            bottom: 2rem;
+            left: 5rem; /* Sebelah tombol musik */
+            z-index: 44;
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        #audio-visualizer.active {
+            opacity: 1;
+        }
+        .visualizer-bar {
+            width: 4px;
+            background: var(--color-cyan);
+            border-radius: 2px;
+            animation: visualize 0.5s infinite ease-in-out;
+            box-shadow: 0 0 5px var(--color-cyan);
+        }
+        .visualizer-bar:nth-child(odd) {
+            background: var(--color-violet);
+            box-shadow: 0 0 5px var(--color-violet);
+        }
+        @keyframes visualize {
+            0% { height: 20%; }
+            50% { height: 100%; }
+            100% { height: 20%; }
+        }
 
-        /* Welcome Modal */
+
         #welcome-modal-content {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             
@@ -927,35 +905,58 @@
             opacity: 1;
         }
 
-        /* Space Canvas Specifics */
+        /* === PARALLAX & GLITCH UPDATES === */
+        
+        /* 1. Updated Space Canvas untuk Parallax Global */
         #space-canvas {
-            position: absolute;
+            position: fixed; /* Ubah ke fixed agar jadi global background */
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            /* Update background to be extremely dark for contrast */
             background: #000000;
+            /* Will be transformed via JS for Parallax */
+            will-change: transform; 
         }
 
-        /* === MOBILE RESPONSIVE TWEAKS (VERY TIGHT SPACING) === */
+        /* 2. Glitch Effect CSS */
+        @keyframes glitch-skew {
+            0% { transform: skew(0deg); }
+            20% { transform: skew(-2deg); }
+            40% { transform: skew(2deg); }
+            60% { transform: skew(-1deg); }
+            80% { transform: skew(1deg); }
+            100% { transform: skew(0deg); }
+        }
+        
+        @keyframes glitch-anim {
+            0% { text-shadow: 2px 0 var(--color-cyan), -2px 0 var(--color-violet); }
+            25% { text-shadow: -2px 0 var(--color-cyan), 2px 0 var(--color-violet); }
+            50% { text-shadow: 2px 0 var(--color-violet), -2px 0 var(--color-cyan); }
+            75% { text-shadow: -2px 0 var(--color-violet), 2px 0 var(--color-cyan); }
+            100% { text-shadow: 2px 0 var(--color-cyan), -2px 0 var(--color-violet); }
+        }
+
+        .glitch-active {
+            animation: glitch-anim 0.3s infinite linear, glitch-skew 0.3s infinite linear;
+        }
+
+
         @media (max-width: 768px) {
             html {
                 font-size: 13px !important;
             }
             
-            /* REVISI: Header Height Control */
             header#home {
-                min-height: auto !important; /* Agar tinggi header mengikuti isi, tidak dipaksa full screen */
+                min-height: auto !important; 
                 height: auto !important;
-                padding-bottom: 2rem !important; /* Memberi sedikit ruang di bawah tab sebelum Mitra */
+                padding-bottom: 2rem !important; 
             }
 
-            /* REVISI: Hero Alignment & Spacing */
             .hero-section {
                 padding-bottom: 0 !important; 
-                align-items: flex-start !important; /* Rata atas, bukan tengah */
+                align-items: flex-start !important; 
             }
 
             .hero-section h1 {
@@ -967,42 +968,37 @@
                 margin-bottom: 1rem !important;
             }
 
-            /* COMPACT SECTIONS & ELEMENTS */
             section {
-                padding-top: 1rem !important; /* Very tight section spacing */
+                padding-top: 1rem !important; 
                 padding-bottom: 1rem !important;
             }
             .container {
                 padding-left: 1rem !important;
                 padding-right: 1rem !important;
             }
-            /* Adjust inner spacing inside Hero */
             .hero-section > .container {
                 padding-top: 1rem !important;
             }
 
-            /* HEADINGS & TEXT GAP */
             h2 {
-                font-size: 1.5rem !important; /* Smaller titles */
+                font-size: 1.5rem !important; 
                 margin-bottom: 0.5rem !important;
             }
             p {
                 margin-bottom: 0.5rem !important;
             }
-            .mb-12 { margin-bottom: 1.5rem !important; } /* Reduce huge margins */
+            .mb-12 { margin-bottom: 1.5rem !important; } 
             .mb-8 { margin-bottom: 1rem !important; }
             .mt-12 { margin-top: 1.5rem !important; }
             .gap-8 { gap: 1rem !important; }
-            .space-y-6 > * + * { margin-top: 1rem !important; } /* Tighter lists */
+            .space-y-6 > * + * { margin-top: 1rem !important; } 
 
-            /* MITRA COMPACT */
-            .mitra-swiper { padding-bottom: 2.5rem !important; } /* Space for new progress bar */
+            .mitra-swiper { padding-bottom: 2.5rem !important; } 
             .mitra-card { height: 260px !important; }
             .mitra-img { width: 90px !important; height: 90px !important; }
             .mitra-name { font-size: 1rem !important; }
             .btn-feed { padding: 0.3rem 0.6rem !important; font-size: 0.7rem !important; }
             
-            /* SERVICE & STAT COMPACT */
             .service-card, .stat-card, .glass-box {
                 padding: 0.75rem !important;
             }
@@ -1012,7 +1008,6 @@
             }
             .stat-card h3 { font-size: 1.5rem !important; }
             
-            /* FAQ COMPACT */
             .faq-question { padding: 0.75rem !important; }
             .faq-answer { padding: 0 0.75rem !important; }
             .faq-item.active .faq-answer { padding: 0 0.75rem 0.75rem !important; }
@@ -1054,13 +1049,13 @@
     <div id="main-content">
         <div id="scroll-progress-bar"></div>
 
+        <!-- Canvas Background is now FIXED position in CSS, placed outside header to act as global background -->
+        <canvas id="space-canvas"></canvas>
+        <div class="fixed inset-0 z-[-1]" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%); pointer-events: none;"></div>
+
+
         <header id="home" class="relative min-h-screen flex flex-col">
-            <div class="absolute top-0 left-0 w-full h-full z-[-1]">
-                <!-- GALAXY SPACE BACKGROUND CANVAS -->
-                <canvas id="space-canvas"></canvas>
-                <!-- Stronger gradient overlay for readability against nebula -->
-                <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%);"></div>
-            </div>
+            <!-- Background elements removed from header as they are now global fixed -->
             
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
                 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -1106,20 +1101,18 @@
                 </div>
             </nav>
 
-            <!-- REVISI PADA KELAS: items-start, pt-24 -->
             <div class="hero-section flex-grow flex items-start md:items-end justify-center text-left pb-12 md:pb-16">
                 <div class="container mx-auto px-6 z-10 w-full">
-                    <!-- REVISI PADA PADDING: pt-24 (mobile) -->
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
                         <div class="w-full pt-24 md:pt-0 pb-4">
-                            <h1 class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-4 text-shadow-dark">
+                            <!-- ADDED GLITCH CLASS TARGET -->
+                            <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-4 text-shadow-dark">
                                 MARKET<br>NUSANTARA
                             </h1>
                             <p class="text-lg md:text-xl max-w-xl mb-8" style="color: var(--color-text-primary);">
                                 Platform terpercaya untuk segala transaksi online Anda. Aman, cepat, dan didukung oleh komunitas.
                             </p>
                             <div class="flex flex-row flex-wrap items-center gap-4 mb-10">
-                                <!-- TOMBOL HERO DIPERBARUI (SALURAN) -->
                                 <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" id="cta-lihat-mitra" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold text-black rounded-lg transform hover:scale-105 transition-all duration-300">
                                     Saluran
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
@@ -1481,7 +1474,6 @@
     </div>
 
 
-    <!-- REVISI FOOTER: Added Galaxy Theme Background -->
     <footer style="background-color: var(--color-surface-1);">
             <div class="footer-galaxy-bg"></div>
             <div class="footer-stars"></div>
@@ -1527,7 +1519,6 @@
                     <div>
                         <h3 class="font-bold mb-4 text-white">Informasi</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <!-- PAPAN PENGUMUMAN DIHAPUS DARI SINI -->
                             <li><a href="#layanan" class="footer-tab-link hover:text-white transition-colors">Proses Layanan</a></li>
                             <li><a href="#faq" class="footer-tab-link hover:text-white transition-colors">FAQ</a></li>
                         </ul>
@@ -1546,19 +1537,26 @@
     </div>
 
     
-    <!-- Music Player Button -->
+    <!-- Music Player Button & VISUALIZER -->
     <button id="music-control-btn" title="Play/Pause Music">
-        <!-- Play Icon -->
         <svg id="music-play-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <!-- Pause Icon (Initially Hidden) -->
         <svg id="music-pause-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
     </button>
     <audio id="bg-music" src="assets/song.mp3" loop></audio>
+    
+    <!-- Audio Visualizer Element -->
+    <div id="audio-visualizer">
+        <div class="visualizer-bar" style="height: 40%; animation-delay: 0.1s;"></div>
+        <div class="visualizer-bar" style="height: 70%; animation-delay: 0.3s;"></div>
+        <div class="visualizer-bar" style="height: 50%; animation-delay: 0.0s;"></div>
+        <div class="visualizer-bar" style="height: 90%; animation-delay: 0.4s;"></div>
+        <div class="visualizer-bar" style="height: 60%; animation-delay: 0.2s;"></div>
+    </div>
 
 
     <button id="back-to-top-btn" title="Kembali ke Atas" class="w-12 h-12 rounded-full bg-[var(--color-accent)] text-black flex items-center justify-center shadow-lg hover:bg-[var(--color-accent-hover)] transform hover:scale-110 transition-all duration-300">
@@ -1586,7 +1584,6 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- ADVANCED NEBULA SPACE ANIMATION SCRIPT ---
             const canvas = document.getElementById('space-canvas');
             const ctx = canvas.getContext('2d');
             
@@ -1594,15 +1591,14 @@
             let particles = [];
             let nebulas = [];
             let shootingStars = [];
-            const starCount = 100; // Jumlah bintang
-            const nebulaCount = 5; // Jumlah awan nebula
+            const starCount = 100; 
+            const nebulaCount = 5; 
 
-            // Warna nebula: Ungu (Violet), Biru (Cyan), Biru Tua
             const nebulaColors = [
-                'rgba(139, 92, 246, 0.15)', // Violet
-                'rgba(34, 211, 238, 0.15)', // Cyan
-                'rgba(59, 130, 246, 0.15)', // Blue
-                'rgba(76, 29, 149, 0.15)'   // Dark Violet
+                'rgba(139, 92, 246, 0.15)', 
+                'rgba(34, 211, 238, 0.15)', 
+                'rgba(59, 130, 246, 0.15)', 
+                'rgba(76, 29, 149, 0.15)'   
             ];
 
             function resize() {
@@ -1614,7 +1610,6 @@
             window.addEventListener('resize', resize);
             resize();
 
-            // KELAS BINTANG
             class Star {
                 constructor() {
                     this.reset();
@@ -1626,11 +1621,10 @@
                     this.blinkSpeed = 0.01 + Math.random() * 0.03;
                     this.alpha = Math.random();
                     this.alphaDirection = Math.random() < 0.5 ? 1 : -1;
-                    this.vy = Math.random() * 0.2; // Kecepatan vertikal sangat lambat
-                    this.color = Math.random() > 0.8 ? '#22d3ee' : '#ffffff'; // Beberapa bintang cyan
+                    this.vy = Math.random() * 0.2; 
+                    this.color = Math.random() > 0.8 ? '#22d3ee' : '#ffffff'; 
                 }
                 update() {
-                    // Blink logic
                     if (this.alphaDirection === 1) {
                         this.alpha += this.blinkSpeed;
                         if (this.alpha >= 1) { this.alpha = 1; this.alphaDirection = -1; }
@@ -1639,7 +1633,6 @@
                         if (this.alpha <= 0.2) { this.alpha = 0.2; this.alphaDirection = 1; }
                     }
 
-                    // Move slightly up
                     this.y -= this.vy;
                     if (this.y < 0) {
                         this.y = height;
@@ -1658,21 +1651,17 @@
                 }
             }
 
-            // KELAS NEBULA (AWAN GAS)
             class Nebula {
                 constructor() {
                     this.reset();
-                    // Mulai dari posisi acak agar tidak menumpuk saat load
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
                 }
                 reset() {
                     this.x = Math.random() * width;
                     this.y = Math.random() * height;
-                    // Ukuran nebula besar
                     this.radius = Math.random() * 300 + 200; 
                     this.color = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
-                    // Gerakan sangat lambat dan mengambang (floating)
                     this.vx = (Math.random() - 0.5) * 0.3;
                     this.vy = (Math.random() - 0.5) * 0.3;
                 }
@@ -1680,7 +1669,6 @@
                     this.x += this.vx;
                     this.y += this.vy;
 
-                    // Pantul di tepi layar agar tidak hilang
                     if (this.x < -this.radius) this.x = width + this.radius;
                     if (this.x > width + this.radius) this.x = -this.radius;
                     if (this.y < -this.radius) this.y = height + this.radius;
@@ -1689,25 +1677,22 @@
                     this.draw();
                 }
                 draw() {
-                    // Membuat gradasi radial untuk efek "soft cloud"
                     const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
                     gradient.addColorStop(0, this.color);
                     gradient.addColorStop(1, 'rgba(0,0,0,0)');
 
-                    ctx.globalCompositeOperation = 'screen'; // Blending mode agar warna menyatu seperti cahaya
+                    ctx.globalCompositeOperation = 'screen'; 
                     ctx.fillStyle = gradient;
                     ctx.beginPath();
                     ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
                     ctx.fill();
-                    ctx.globalCompositeOperation = 'source-over'; // Reset blending mode
+                    ctx.globalCompositeOperation = 'source-over'; 
                 }
             }
             
-            // SHOOTING STAR (Bintang Jatuh - Cepat & Sering)
             class ShootingStar {
                 constructor() {
                     this.reset();
-                    // Jarak waktu tunggu lebih pendek (20-80 frame)
                     this.waitTime = Math.random() * 60 + 20; 
                     this.timer = 0;
                     this.active = false;
@@ -1715,10 +1700,10 @@
                 reset() {
                     this.x = Math.random() * width;
                     this.y = 0;
-                    this.len = Math.random() * 100 + 50; // Lebih panjang
-                    this.speed = Math.random() * 15 + 8; // Lebih Cepat
-                    this.size = Math.random() * 1.5 + 0.5; // Sedikit lebih tebal
-                    this.waitTime = Math.random() * 100 + 30; // Reset wait time lebih cepat
+                    this.len = Math.random() * 100 + 50; 
+                    this.speed = Math.random() * 15 + 8; 
+                    this.size = Math.random() * 1.5 + 0.5; 
+                    this.waitTime = Math.random() * 100 + 30; 
                     this.timer = 0;
                     this.active = false;
                 }
@@ -1740,7 +1725,6 @@
                     }
                 }
                 draw() {
-                    // Gradient Trail effect
                     const grad = ctx.createLinearGradient(this.x, this.y, this.x + this.len, this.y - this.len);
                     grad.addColorStop(0, "rgba(255, 255, 255, 1)");
                     grad.addColorStop(1, "rgba(255, 255, 255, 0)");
@@ -1755,43 +1739,69 @@
                 }
             }
 
-            // Init Objects
             for (let i = 0; i < starCount; i++) {
                 particles.push(new Star());
             }
             for (let i = 0; i < nebulaCount; i++) {
                 nebulas.push(new Nebula());
             }
-            // Tambah jumlah bintang jatuh jadi 4 agar lebih sering
             for (let i = 0; i < 4; i++) {
                 shootingStars.push(new ShootingStar());
             }
 
 
             function animate() {
-                // Clear canvas (dengan sedikit trace agar gerakan terlihat smooth, opsional)
                 ctx.clearRect(0, 0, width, height);
-
-                // 1. Gambar Nebula (Layer paling belakang)
                 nebulas.forEach(nebula => nebula.update());
-
-                // 2. Gambar Bintang Biasa (Layer tengah)
                 particles.forEach(star => star.update());
-
-                // 3. Gambar Bintang Jatuh (Layer efek)
                 shootingStars.forEach(ss => ss.update());
-
                 requestAnimationFrame(animate);
             }
 
             animate();
-            // --- END ADVANCED NEBULA SCRIPT ---
             
-            // LOGIKA MUSIC PLAYER
+            // --- PARALLAX SCROLLING LOGIC ---
+            // Saat scroll, kita menggeser canvas sedikit untuk efek kedalaman
+            window.addEventListener('scroll', () => {
+                const scrolled = window.scrollY;
+                // Geser background 50% lebih lambat dari scroll konten (moves down as we scroll down = stays relative)
+                // Sebenarnya untuk efek "jauh", background harus bergerak sedikit ke arah berlawanan scroll (fixed does this relative to content),
+                // atau bergerak sedikit searah scroll (agar tidak diam total).
+                // Kita gerakkan sedikit ke atas (negatif) agar terasa 'mengambang'
+                canvas.style.transform = `translateY(${scrolled * 0.2}px)`;
+            });
+
+
+            // --- GLITCH EFFECT LOGIC ---
+            const heroTitle = document.getElementById('hero-title');
+            
+            // Fungsi untuk memicu glitch secara acak
+            function triggerGlitch() {
+                // Tambahkan kelas
+                heroTitle.classList.add('glitch-active');
+                
+                // Durasi glitch acak antara 200ms - 800ms
+                const duration = Math.random() * 600 + 200;
+                
+                setTimeout(() => {
+                    heroTitle.classList.remove('glitch-active');
+                }, duration);
+
+                // Jadwalkan glitch berikutnya (acak antara 3 - 10 detik)
+                const nextGlitch = Math.random() * 7000 + 3000;
+                setTimeout(triggerGlitch, nextGlitch);
+            }
+
+            // Mulai glitch loop setelah beberapa detik load
+            setTimeout(triggerGlitch, 3000);
+
+
+            // --- MUSIC PLAYER & VISUALIZER ---
             const musicBtn = document.getElementById('music-control-btn');
             const bgMusic = document.getElementById('bg-music');
             const playIcon = document.getElementById('music-play-icon');
             const pauseIcon = document.getElementById('music-pause-icon');
+            const visualizer = document.getElementById('audio-visualizer'); // Get Visualizer
             let isPlaying = false;
 
             if (musicBtn && bgMusic) {
@@ -1801,11 +1811,13 @@
                         playIcon.classList.remove('hidden');
                         pauseIcon.classList.add('hidden');
                         musicBtn.classList.remove('playing');
+                        visualizer.classList.remove('active'); // Hide visualizer
                     } else {
                         bgMusic.play().then(() => {
                             playIcon.classList.add('hidden');
                             pauseIcon.classList.remove('hidden');
                             musicBtn.classList.add('playing');
+                            visualizer.classList.add('active'); // Show visualizer
                         }).catch(error => {
                             console.log("Audio playback failed: ", error);
                         });
