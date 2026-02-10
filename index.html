@@ -119,17 +119,22 @@
             color: var(--color-cyan);
             text-shadow: 0 0 10px var(--color-accent-transparent);
         }
+        
+        /* REVISI NAVBAR SELECTOR: Warna Senada & Efek Neon */
         #nav-follower {
             position: absolute;
             z-index: 5;
             height: 2.25rem; 
-            background-color: var(--color-accent-transparent);
+            /* Menggunakan Gradient agar lebih hidup */
+            background: var(--color-gradient-main); 
+            opacity: 0.15; /* Sedikit lebih terlihat */
             border-radius: 9999px;
             border: 1px solid var(--color-cyan);
-            opacity: 0;
             backdrop-filter: blur(0.3125rem);
             -webkit-backdrop-filter: blur(0.3125rem);
-            box-shadow: 0 0 15px var(--color-accent-transparent);
+            /* Box shadow cyan yang kuat */
+            box-shadow: 0 0 15px var(--color-cyan), inset 0 0 10px rgba(34, 211, 238, 0.3);
+            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
 
@@ -290,28 +295,58 @@
 
 
         /* Variable warna aksen untuk tiap tipe role */
-        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.2); } 
-        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.2); } 
-        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.2); } 
+        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); } 
+        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); } 
+        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); } 
         .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
+        /* REVISI MITRA CARD: ELECTRIC GLOW STYLE */
         .mitra-card {
             height: 380px; 
             width: 100%;
-            background-color: #0a0a0a;
-            border-radius: 0; 
+            background-color: #0a0a0a; /* Hitam Pekat */
+            border-radius: 0.75rem; /* Sedikit rounded sesuai ref */
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border: 1px solid #222;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            
+            /* Border default solid tipis */
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            
+            /* Box Shadow untuk efek glow awal yang lembut */
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+        }
+
+        /* EFEK ELECTRIC BORDER SAAT HOVER (dan default dikit) */
+        .mitra-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: 0.75rem;
+            padding: 2px; /* Ketebalan border glow */
+            background: linear-gradient(45deg, transparent, var(--card-accent), transparent);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
         }
 
         .mitra-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
-            border-color: #333;
+            /* Glow Border Intens saat hover */
+            border-color: var(--card-accent);
+            box-shadow: 
+                0 0 20px var(--card-accent-dim), 
+                inset 0 0 20px var(--card-accent-dim); 
+        }
+
+        .mitra-card:hover::before {
+            opacity: 1;
         }
 
         /* Latar Belakang Teks Pudar (MARKET / PARTNER) */
@@ -331,40 +366,11 @@
             line-height: 1;
         }
 
-        /* Aksen Warna Diagonal */
-        .card-accent-slash {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 60%;
-            height: 100%;
-            background: linear-gradient(to left, var(--card-accent-dim), transparent);
-            clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
-            z-index: 1;
-            transition: all 0.3s ease;
-        }
-        
-        /* Garis warna solid di kanan */
-        .card-accent-border {
-            position: absolute;
-            top: 20px;
-            right: 0;
-            width: 4px;
-            height: 60px;
-            background-color: var(--card-accent);
-            z-index: 2;
-        }
-
-        .mitra-card:hover .card-accent-slash {
-            width: 70%;
-            opacity: 0.8;
-        }
-
         /* Image Wrapper */
         .mitra-image-wrapper {
             position: relative;
             z-index: 2;
-            height: 65%;
+            height: 60%;
             width: 100%;
             display: flex;
             align-items: center;
@@ -373,44 +379,45 @@
         }
 
         .mitra-img {
-            width: 160px;
-            height: 160px;
+            width: 140px;
+            height: 140px;
             object-fit: cover;
             border-radius: 50%; 
-            border: 3px solid rgba(255,255,255,0.1);
-            filter: grayscale(100%); 
+            border: 2px solid rgba(255,255,255,0.2);
+            /* REVISI: Gambar tidak grayscale, tapi agak redup, jadi terang pas hover */
+            filter: brightness(0.8); 
             transition: all 0.4s ease;
+            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
         .mitra-card:hover .mitra-img {
-            filter: grayscale(0%);
+            filter: brightness(1.1);
             transform: scale(1.05);
             border-color: var(--card-accent);
-            box-shadow: 0 0 20px var(--card-accent-dim);
+            box-shadow: 0 0 25px var(--card-accent-dim);
         }
 
         /* Info Section (Bawah) */
         .mitra-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 1.25rem;
+            position: relative;
             z-index: 10;
-            background: linear-gradient(to top, #000 0%, rgba(0,0,0,0.8) 80%, transparent 100%);
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            justify-content: flex-end;
+            padding: 1.5rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
         }
 
         .mitra-role-label {
-            font-size: 0.65rem;
+            font-size: 0.7rem;
             font-weight: 700;
             letter-spacing: 0.1em;
             text-transform: uppercase;
             color: var(--card-accent);
             display: block;
-            margin-bottom: -4px;
+            margin-bottom: 0.25rem;
+            text-shadow: 0 0 5px var(--card-accent-dim);
         }
 
         .mitra-name {
@@ -419,25 +426,21 @@
             color: #fff;
             line-height: 1.1;
             text-transform: capitalize;
+            margin-bottom: 1rem;
         }
 
         /* Action Bar (Paling Bawah) */
         .mitra-action-bar {
-            display: flex;
-            align-items: center;
-            justify-content: center; 
-            margin-top: 0.75rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 0.75rem;
+            margin-top: auto;
         }
 
         .btn-feed {
-            background-color: var(--card-accent);
+            background-color: transparent;
             color: #fff; 
-            padding: 0.6rem 1rem;
+            padding: 0.5rem 1rem;
             border-radius: 999px;
-            font-size: 0.8rem;
-            font-weight: 800;
+            font-size: 0.75rem;
+            font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             display: flex;
@@ -445,13 +448,15 @@
             justify-content: center;
             gap: 0.5rem;
             width: 100%; 
+            border: 1px solid var(--card-accent); /* Border style button */
             transition: all 0.3s ease;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 0 5px var(--card-accent-dim);
         }
         
         .btn-feed:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 15px var(--card-accent);
+            background-color: var(--card-accent);
+            color: #000; /* Contrast text on hover */
+            box-shadow: 0 0 20px var(--card-accent);
         }
 
 
@@ -1499,6 +1504,7 @@
             let width, height;
             let particles = [];
             let nebulas = [];
+            let shootingStars = [];
             const starCount = 100; // Jumlah bintang
             const nebulaCount = 5; // Jumlah awan nebula
 
@@ -1608,21 +1614,22 @@
                 }
             }
             
-            // KELAS SHOOTING STAR (Bintang Jatuh)
+            // REVISI SHOOTING STAR (Bintang Jatuh - Lebih Cepat & Sering)
             class ShootingStar {
                 constructor() {
                     this.reset();
-                    this.waitTime = Math.random() * 200 + 100; // Delay awal
+                    // Jarak waktu tunggu lebih pendek (20-80 frame)
+                    this.waitTime = Math.random() * 60 + 20; 
                     this.timer = 0;
                     this.active = false;
                 }
                 reset() {
                     this.x = Math.random() * width;
                     this.y = 0;
-                    this.len = Math.random() * 80 + 10;
-                    this.speed = Math.random() * 10 + 6;
-                    this.size = Math.random() * 1 + 0.1;
-                    this.waitTime = Math.random() * 500 + 200; // Random delay between stars
+                    this.len = Math.random() * 100 + 50; // Lebih panjang
+                    this.speed = Math.random() * 15 + 8; // Lebih Cepat
+                    this.size = Math.random() * 1.5 + 0.5; // Sedikit lebih tebal
+                    this.waitTime = Math.random() * 100 + 30; // Reset wait time lebih cepat
                     this.timer = 0;
                     this.active = false;
                 }
@@ -1630,7 +1637,7 @@
                     if (this.active) {
                         this.x -= this.speed;
                         this.y += this.speed;
-                        if (this.x < 0 || this.y > height) {
+                        if (this.x < -this.len || this.y > height + this.len) {
                             this.active = false;
                             this.reset();
                         } else {
@@ -1644,8 +1651,14 @@
                     }
                 }
                 draw() {
-                    ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+                    // Gradient Trail effect
+                    const grad = ctx.createLinearGradient(this.x, this.y, this.x + this.len, this.y - this.len);
+                    grad.addColorStop(0, "rgba(255, 255, 255, 1)");
+                    grad.addColorStop(1, "rgba(255, 255, 255, 0)");
+
+                    ctx.strokeStyle = grad;
                     ctx.lineWidth = this.size;
+                    ctx.lineCap = "round";
                     ctx.beginPath();
                     ctx.moveTo(this.x, this.y);
                     ctx.lineTo(this.x + this.len, this.y - this.len);
@@ -1660,8 +1673,10 @@
             for (let i = 0; i < nebulaCount; i++) {
                 nebulas.push(new Nebula());
             }
-            // 2 Bintang jatuh
-            let shootingStars = [new ShootingStar(), new ShootingStar()];
+            // Tambah jumlah bintang jatuh jadi 4 agar lebih sering
+            for (let i = 0; i < 4; i++) {
+                shootingStars.push(new ShootingStar());
+            }
 
 
             function animate() {
@@ -1754,16 +1769,16 @@
                             <div class="swiper-slide h-auto">
                                 <div class="mitra-card ${roleInfo.class}">
                                     <div class="card-bg-text">MARKET</div>
-                                    <div class="card-accent-slash"></div>
-                                    <div class="card-accent-border"></div>
                                     
                                     <div class="mitra-image-wrapper">
                                         <img src="${mitra.foto}" alt="${mitra.nama}" class="mitra-img" onerror="this.src='https://placehold.co/200x200/1c1c1c/a1a1aa?text=${mitra.nama.substring(0,2)}'">
                                     </div>
                                     
                                     <div class="mitra-info">
-                                        <span class="mitra-role-label">${roleInfo.label}</span>
-                                        <h3 class="mitra-name">${mitra.nama}</h3>
+                                        <div>
+                                            <span class="mitra-role-label">${roleInfo.label}</span>
+                                            <h3 class="mitra-name">${mitra.nama}</h3>
+                                        </div>
                                         
                                         <div class="mitra-action-bar">
                                             <a href="${mitra.link}" target="_blank" class="btn-feed">
