@@ -836,6 +836,17 @@
             opacity: 1;
         }
 
+        /* Space Canvas Specifics */
+        #space-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+        }
+
         /* === MOBILE RESPONSIVE TWEAKS (VERY TIGHT SPACING) === */
         @media (max-width: 768px) {
             html {
@@ -953,8 +964,9 @@
 
         <header id="home" class="relative min-h-screen flex flex-col">
             <div class="absolute top-0 left-0 w-full h-full z-[-1]">
-                <img src="assets/hero.webp" alt="Hero Background" class="w-full h-full object-cover">
-                <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 5%, rgba(0, 0, 0, 0.7) 50%, rgba(0, 0, 0, 0.5) 100%);"></div>
+                <!-- GALAXY SPACE BACKGROUND CANVAS -->
+                <canvas id="space-canvas"></canvas>
+                <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 5%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 100%);"></div>
             </div>
             
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
@@ -971,7 +983,6 @@
                         <a href="#statistik" class="nav-link main-nav-link">Statistik</a>
                         <a href="#kontak" class="nav-link main-nav-link">Kontak</a>
                         
-                        <!-- Link BERITA DIHAPUS DARI SINI -->
                         <a href="#layanan" class="nav-link info-nav-link">Proses Layanan</a>
                         <a href="#faq" class="nav-link info-nav-link">FAQ</a>
                     </div>
@@ -997,7 +1008,6 @@
                     <a href="#statistik" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Statistik</a>
                     <a href="#kontak" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Kontak</a>
                     
-                    <!-- Link BERITA DIHAPUS DARI SINI -->
                     <a href="#layanan" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Proses Layanan</a>
                     <a href="#faq" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">FAQ</a>
                 </div>
@@ -1067,7 +1077,6 @@
         </header>
 
         <div id="informasi-section-container" class="hidden">
-            <!-- SECTION BERITA DIHAPUS DARI SINI -->
 
             <section id="layanan" class="py-12 md:py-16">
                 <div class="container mx-auto px-4">
@@ -1479,6 +1488,78 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+
+            // --- SPACE GALAXY ANIMATION SCRIPT ---
+            const canvas = document.getElementById('space-canvas');
+            const ctx = canvas.getContext('2d');
+            let stars = [];
+            const FPS = 60;
+            const starCount = 150; // Jumlah bintang
+
+            // Set canvas size
+            function setCanvasSize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            setCanvasSize();
+            window.addEventListener('resize', setCanvasSize);
+
+            class Star {
+                constructor() {
+                    this.reset();
+                }
+
+                reset() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2; 
+                    this.blinkSpeed = 0.02 + Math.random() * 0.05;
+                    this.alpha = Math.random();
+                    this.alphaDirection = 1;
+                    this.velocity = Math.random() * 0.5; // Kecepatan gerak
+                }
+
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
+                    ctx.fill();
+                }
+
+                update() {
+                    // Efek berkelip
+                    if (this.alphaDirection === 1) {
+                        this.alpha += this.blinkSpeed;
+                        if (this.alpha >= 1) this.alphaDirection = -1;
+                    } else {
+                        this.alpha -= this.blinkSpeed;
+                        if (this.alpha <= 0.2) this.alphaDirection = 1;
+                    }
+
+                    // Efek gerakan perlahan ke atas (seperti terbang di angkasa)
+                    this.y -= this.velocity;
+                    if (this.y < 0) {
+                        this.y = canvas.height;
+                        this.x = Math.random() * canvas.width;
+                    }
+
+                    this.draw();
+                }
+            }
+
+            // Init stars
+            for (let i = 0; i < starCount; i++) {
+                stars.push(new Star());
+            }
+
+            function animateSpace() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                stars.forEach(star => star.update());
+                requestAnimationFrame(animateSpace);
+            }
+
+            animateSpace();
+            // --- END SPACE GALAXY SCRIPT ---
             
             // LOGIKA MUSIC PLAYER
             const musicBtn = document.getElementById('music-control-btn');
