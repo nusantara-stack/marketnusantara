@@ -24,6 +24,7 @@
             --color-cyan: #22d3ee; 
             --color-cyan-dark: #0891b2;
             --color-violet: #8b5cf6;
+            --color-violet-dark: #7c3aed;
 
             --color-orange: var(--color-cyan);  
             --color-orange-hover: var(--color-cyan-dark);
@@ -844,7 +845,8 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+            /* Update background to be extremely dark for contrast */
+            background: #000000;
         }
 
         /* === MOBILE RESPONSIVE TWEAKS (VERY TIGHT SPACING) === */
@@ -966,7 +968,8 @@
             <div class="absolute top-0 left-0 w-full h-full z-[-1]">
                 <!-- GALAXY SPACE BACKGROUND CANVAS -->
                 <canvas id="space-canvas"></canvas>
-                <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 5%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.1) 100%);"></div>
+                <!-- Stronger gradient overlay for readability against nebula -->
+                <div class="absolute inset-0" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%);"></div>
             </div>
             
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
@@ -1489,77 +1492,196 @@
     <script>
         document.addEventListener('DOMContentLoaded', () => {
 
-            // --- SPACE GALAXY ANIMATION SCRIPT ---
+            // --- ADVANCED NEBULA SPACE ANIMATION SCRIPT ---
             const canvas = document.getElementById('space-canvas');
             const ctx = canvas.getContext('2d');
-            let stars = [];
-            const FPS = 60;
-            const starCount = 150; // Jumlah bintang
+            
+            let width, height;
+            let particles = [];
+            let nebulas = [];
+            const starCount = 100; // Jumlah bintang
+            const nebulaCount = 5; // Jumlah awan nebula
 
-            // Set canvas size
-            function setCanvasSize() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
+            // Warna nebula: Ungu (Violet), Biru (Cyan), Biru Tua
+            const nebulaColors = [
+                'rgba(139, 92, 246, 0.15)', // Violet
+                'rgba(34, 211, 238, 0.15)', // Cyan
+                'rgba(59, 130, 246, 0.15)', // Blue
+                'rgba(76, 29, 149, 0.15)'   // Dark Violet
+            ];
+
+            function resize() {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                canvas.width = width;
+                canvas.height = height;
             }
-            setCanvasSize();
-            window.addEventListener('resize', setCanvasSize);
+            window.addEventListener('resize', resize);
+            resize();
 
+            // KELAS BINTANG (Dengan efek kedip lebih halus)
             class Star {
                 constructor() {
                     this.reset();
                 }
-
                 reset() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2; 
-                    this.blinkSpeed = 0.02 + Math.random() * 0.05;
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    this.size = Math.random() * 2 + 0.5;
+                    this.blinkSpeed = 0.01 + Math.random() * 0.03;
                     this.alpha = Math.random();
-                    this.alphaDirection = 1;
-                    this.velocity = Math.random() * 0.5; // Kecepatan gerak
+                    this.alphaDirection = Math.random() < 0.5 ? 1 : -1;
+                    this.vy = Math.random() * 0.2; // Kecepatan vertikal sangat lambat
+                    this.color = Math.random() > 0.8 ? '#22d3ee' : '#ffffff'; // Beberapa bintang cyan
                 }
-
-                draw() {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = `rgba(255, 255, 255, ${this.alpha})`;
-                    ctx.fill();
-                }
-
                 update() {
-                    // Efek berkelip
+                    // Blink logic
                     if (this.alphaDirection === 1) {
                         this.alpha += this.blinkSpeed;
-                        if (this.alpha >= 1) this.alphaDirection = -1;
+                        if (this.alpha >= 1) { this.alpha = 1; this.alphaDirection = -1; }
                     } else {
                         this.alpha -= this.blinkSpeed;
-                        if (this.alpha <= 0.2) this.alphaDirection = 1;
+                        if (this.alpha <= 0.2) { this.alpha = 0.2; this.alphaDirection = 1; }
                     }
 
-                    // Efek gerakan perlahan ke atas (seperti terbang di angkasa)
-                    this.y -= this.velocity;
+                    // Move slightly up
+                    this.y -= this.vy;
                     if (this.y < 0) {
-                        this.y = canvas.height;
-                        this.x = Math.random() * canvas.width;
+                        this.y = height;
+                        this.x = Math.random() * width;
                     }
 
                     this.draw();
                 }
+                draw() {
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fillStyle = this.color;
+                    ctx.globalAlpha = this.alpha;
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                }
             }
 
-            // Init stars
+            // KELAS NEBULA (AWAN GAS)
+            class Nebula {
+                constructor() {
+                    this.reset();
+                    // Mulai dari posisi acak agar tidak menumpuk saat load
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = Math.random() * height;
+                    // Ukuran nebula besar
+                    this.radius = Math.random() * 300 + 200; 
+                    this.color = nebulaColors[Math.floor(Math.random() * nebulaColors.length)];
+                    // Gerakan sangat lambat dan mengambang (floating)
+                    this.vx = (Math.random() - 0.5) * 0.3;
+                    this.vy = (Math.random() - 0.5) * 0.3;
+                }
+                update() {
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Pantul di tepi layar agar tidak hilang
+                    if (this.x < -this.radius) this.x = width + this.radius;
+                    if (this.x > width + this.radius) this.x = -this.radius;
+                    if (this.y < -this.radius) this.y = height + this.radius;
+                    if (this.y > height + this.radius) this.y = -this.radius;
+
+                    this.draw();
+                }
+                draw() {
+                    // Membuat gradasi radial untuk efek "soft cloud"
+                    const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+                    gradient.addColorStop(0, this.color);
+                    gradient.addColorStop(1, 'rgba(0,0,0,0)');
+
+                    ctx.globalCompositeOperation = 'screen'; // Blending mode agar warna menyatu seperti cahaya
+                    ctx.fillStyle = gradient;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.globalCompositeOperation = 'source-over'; // Reset blending mode
+                }
+            }
+            
+            // KELAS SHOOTING STAR (Bintang Jatuh)
+            class ShootingStar {
+                constructor() {
+                    this.reset();
+                    this.waitTime = Math.random() * 200 + 100; // Delay awal
+                    this.timer = 0;
+                    this.active = false;
+                }
+                reset() {
+                    this.x = Math.random() * width;
+                    this.y = 0;
+                    this.len = Math.random() * 80 + 10;
+                    this.speed = Math.random() * 10 + 6;
+                    this.size = Math.random() * 1 + 0.1;
+                    this.waitTime = Math.random() * 500 + 200; // Random delay between stars
+                    this.timer = 0;
+                    this.active = false;
+                }
+                update() {
+                    if (this.active) {
+                        this.x -= this.speed;
+                        this.y += this.speed;
+                        if (this.x < 0 || this.y > height) {
+                            this.active = false;
+                            this.reset();
+                        } else {
+                            this.draw();
+                        }
+                    } else {
+                        this.timer++;
+                        if (this.timer >= this.waitTime) {
+                            this.active = true;
+                        }
+                    }
+                }
+                draw() {
+                    ctx.strokeStyle = "rgba(255, 255, 255, 0.5)";
+                    ctx.lineWidth = this.size;
+                    ctx.beginPath();
+                    ctx.moveTo(this.x, this.y);
+                    ctx.lineTo(this.x + this.len, this.y - this.len);
+                    ctx.stroke();
+                }
+            }
+
+            // Init Objects
             for (let i = 0; i < starCount; i++) {
-                stars.push(new Star());
+                particles.push(new Star());
+            }
+            for (let i = 0; i < nebulaCount; i++) {
+                nebulas.push(new Nebula());
+            }
+            // 2 Bintang jatuh
+            let shootingStars = [new ShootingStar(), new ShootingStar()];
+
+
+            function animate() {
+                // Clear canvas (dengan sedikit trace agar gerakan terlihat smooth, opsional)
+                ctx.clearRect(0, 0, width, height);
+
+                // 1. Gambar Nebula (Layer paling belakang)
+                nebulas.forEach(nebula => nebula.update());
+
+                // 2. Gambar Bintang Biasa (Layer tengah)
+                particles.forEach(star => star.update());
+
+                // 3. Gambar Bintang Jatuh (Layer efek)
+                shootingStars.forEach(ss => ss.update());
+
+                requestAnimationFrame(animate);
             }
 
-            function animateSpace() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                stars.forEach(star => star.update());
-                requestAnimationFrame(animateSpace);
-            }
-
-            animateSpace();
-            // --- END SPACE GALAXY SCRIPT ---
+            animate();
+            // --- END ADVANCED NEBULA SCRIPT ---
             
             // LOGIKA MUSIC PLAYER
             const musicBtn = document.getElementById('music-control-btn');
