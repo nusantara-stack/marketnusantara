@@ -31,7 +31,10 @@
             --color-orange-transparent: rgba(34, 211, 238, 0.15); 
 
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
+            /* PERBAIKAN: Definisi variabel hover yang sebelumnya hilang */
+            --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%); 
             --color-gradient-glow: linear-gradient(to right, #22d3ee, #8b5cf6);
+            --color-gradient-stats: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
 
             --color-glass-bg: rgba(15, 23, 42, 0.4); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
@@ -199,13 +202,16 @@
             background-clip: text;
         }
 
-        .btn-shine { position: relative; overflow: hidden; }
+        /* PERBAIKAN TOMBOL: Pastikan background dan text color benar saat hover */
+        .btn-shine { position: relative; overflow: hidden; z-index: 1; }
         .btn-shine.btn-primary {
             background: var(--color-gradient-main);
             color: #000;
         }
         .btn-shine.btn-primary:hover {
             background: var(--color-gradient-hover);
+            color: #000;
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.6);
         }
         
         .btn-shine::before {
@@ -217,6 +223,7 @@
             height: 100%;
             background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.6), transparent);
             transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: -1;
         }
         .btn-shine:hover::before { left: 100%; }
 
@@ -251,22 +258,53 @@
             opacity: 0.3;
         }
 
-        /* Stats Section */
+        /* === REVISI KARTU STATISTIK (Gradient & Modern) === */
         #statistik {
-            /* Background transparan agar parallax terlihat */
             background-color: transparent; 
             background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
+            position: relative; /* Ensure relative positioning for UFO absolute child */
         }
         .stat-card {
-            background: linear-gradient(to right, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-            border: 0.0625rem solid var(--color-glass-border);
-            transition: all 0.3s ease;
+            /* REVISI: Background Gradient */
+            background: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 1.5rem; /* Lebih rounded */
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--color-gradient-main);
+            opacity: 0;
+            z-index: 0;
+            transition: opacity 0.4s ease;
+            mix-blend-mode: overlay;
+        }
+
+        /* Garis neon di bagian bawah */
+        .stat-card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 4px;
+            background: var(--color-gradient-main);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
         .stat-card:hover {
-            transform: translateY(-0.5rem);
-            border-color: var(--color-cyan);
-            box-shadow: 0 0 20px var(--color-accent-transparent);
+            transform: translateY(-0.75rem) scale(1.02);
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5), 0 0 20px rgba(34, 211, 238, 0.2);
         }
+
+        .stat-card:hover::before { opacity: 0.1; }
+        .stat-card:hover::after { transform: scaleX(1); }
+
 
         /* Mitra Section */
         #mitra {
@@ -298,91 +336,99 @@
         .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); } 
         .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
+        /* === REVISI KARTU MITRA (Konten Lebih Kaya, No Text BG) === */
         .mitra-card {
-            height: 380px; 
+            height: 400px; /* Sedikit lebih tinggi untuk konten tambahan */
             width: 100%;
-            background-color: #0a0a0a; 
-            border-radius: 0.75rem; 
+            background-color: #0d0f14; /* Lebih gelap */
+            border-radius: 1rem;
             position: relative;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            border: 1px solid rgba(255, 255, 255, 0.1); 
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+            border: 1px solid rgba(255, 255, 255, 0.08); 
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
         }
 
         .mitra-card::before {
+            /* Hapus text background, ganti dengan top bar accent */
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            border-radius: 0.75rem;
-            padding: 2px;
-            background: linear-gradient(45deg, transparent, var(--card-accent), transparent);
-            -webkit-mask: 
-                linear-gradient(#fff 0 0) content-box, 
-                linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.5;
-            transition: opacity 0.3s ease;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: var(--card-accent);
+            box-shadow: 0 0 15px var(--card-accent);
+            opacity: 0.7;
+        }
+        
+        /* Background pattern halus */
+        .mitra-card-pattern {
+            position: absolute;
+            inset: 0;
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 20px 20px;
+            opacity: 0.3;
+            z-index: 0;
         }
 
         .mitra-card:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: var(--card-accent);
-            box-shadow: 
-                0 0 20px var(--card-accent-dim), 
-                inset 0 0 20px var(--card-accent-dim); 
-        }
-
-        .mitra-card:hover::before {
-            opacity: 1;
-        }
-
-        .card-bg-text {
-            position: absolute;
-            top: 20%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 3rem;
-            font-weight: 900;
-            color: rgba(255, 255, 255, 0.03);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            pointer-events: none;
-            z-index: 0;
-            line-height: 1;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--card-accent-dim);
         }
 
         .mitra-image-wrapper {
             position: relative;
             z-index: 2;
-            height: 60%;
+            height: 50%;
             width: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-top: 1rem;
+            margin-top: 1.5rem;
         }
 
         .mitra-img {
-            width: 120px; 
-            height: 120px;
+            width: 110px; 
+            height: 110px;
             object-fit: cover;
             border-radius: 50%; 
-            border: 2px solid rgba(255,255,255,0.2);
-            filter: brightness(0.8); 
+            border: 3px solid rgba(255,255,255,0.1);
+            padding: 3px;
+            background: #0d0f14;
             transition: all 0.4s ease;
-            box-shadow: 0 0 15px rgba(0,0,0,0.5);
         }
 
         .mitra-card:hover .mitra-img {
-            filter: brightness(1.1);
-            transform: scale(1.05);
+            transform: scale(1.1);
             border-color: var(--card-accent);
-            box-shadow: 0 0 25px var(--card-accent-dim);
+            box-shadow: 0 0 20px var(--card-accent-dim);
+        }
+        
+        /* Status Badge */
+        .mitra-status {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 0.65rem;
+            padding: 0.25rem 0.6rem;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--color-text-secondary);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            backdrop-filter: blur(4px);
+        }
+        .mitra-status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--card-accent);
+            box-shadow: 0 0 5px var(--card-accent);
         }
 
         .mitra-info {
@@ -391,9 +437,9 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: flex-end;
+            justify-content: space-between; /* Layout diubah */
             padding: 1.5rem;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.6) 60%, transparent 100%);
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(13, 15, 20, 0.8) 50%, transparent 100%);
         }
 
         .mitra-role-label {
@@ -404,16 +450,28 @@
             color: var(--card-accent);
             display: block;
             margin-bottom: 0.25rem;
-            text-shadow: 0 0 5px var(--card-accent-dim);
         }
 
         .mitra-name {
-            font-size: 1.25rem;
-            font-weight: 800;
+            font-size: 1.15rem;
+            font-weight: 700;
             color: #fff;
-            line-height: 1.1;
+            line-height: 1.2;
             text-transform: capitalize;
+            margin-bottom: 0.5rem;
+        }
+        
+        .mitra-stats-row {
+            display: flex;
+            gap: 1rem;
             margin-bottom: 1rem;
+            font-size: 0.75rem;
+            color: var(--color-text-secondary);
+        }
+        .mitra-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .mitra-action-bar {
@@ -421,12 +479,12 @@
         }
 
         .btn-feed {
-            background-color: transparent;
+            background-color: rgba(255,255,255,0.05); /* Sedikit bg */
             color: #fff; 
-            padding: 0.5rem 1rem;
-            border-radius: 999px;
-            font-size: 0.75rem;
-            font-weight: 700;
+            padding: 0.6rem 1rem;
+            border-radius: 0.5rem; /* Kotak rounded */
+            font-size: 0.8rem;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             display: flex;
@@ -436,13 +494,12 @@
             width: 100%; 
             border: 1px solid var(--card-accent); 
             transition: all 0.3s ease;
-            box-shadow: 0 0 5px var(--card-accent-dim);
         }
         
         .btn-feed:hover {
             background-color: var(--card-accent);
             color: #000; 
-            box-shadow: 0 0 20px var(--card-accent);
+            box-shadow: 0 0 15px var(--card-accent);
         }
 
         .mitra-swiper-button {
@@ -527,32 +584,58 @@
             z-index: 2;
         }
 
+        /* === REVISI CONTACT FORM GALAXY THEME === */
+        .contact-form-container {
+            background: rgba(10, 10, 15, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(139, 92, 246, 0.3); /* Ungu */
+            border-radius: 1rem;
+            padding: 2.5rem;
+            box-shadow: 
+                0 0 30px rgba(139, 92, 246, 0.1),
+                inset 0 0 20px rgba(34, 211, 238, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Galaxy decoration form */
+        .contact-form-container::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.4), transparent 70%);
+            filter: blur(20px);
+            pointer-events: none;
+        }
+
         .contact-form-input {
-            background-color: transparent;
-            border: none;
-            border-bottom: 0.0625rem solid #4a4a4a; 
+            background-color: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
             color: var(--color-text-primary);
-            padding: 0.75rem 0;
-            transition: border-color 0.3s ease;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
         }
         .contact-form-input:focus {
             outline: none;
-            border-bottom-color: var(--color-cyan);
-            box-shadow: 0 1px 0 0 var(--color-cyan);
-        }
-        .form-bracket {
-            position: absolute;
-            width: 2rem;
-            height: 2rem;
+            background-color: rgba(34, 211, 238, 0.05);
             border-color: var(--color-cyan);
-            opacity: 0.8;
-            transition: all 0.3s ease;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
-        .relative:hover .form-bracket {
-            width: 2.5rem;
-            height: 2.5rem;
-            opacity: 1;
-            box-shadow: 0 0 10px var(--color-accent-transparent);
+        .form-label {
+            color: var(--color-cyan);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+        
+        .form-bracket {
+            /* Keep brackets but styling updated */
+            border-color: var(--color-violet);
         }
         
         footer {
@@ -943,11 +1026,130 @@
         }
 
 
+        /* === UFO ANIMATION === */
+        .ufo-container {
+            position: absolute;
+            top: 15%; /* Floating near top right of statistics section */
+            right: 5%;
+            width: 100px;
+            height: auto;
+            z-index: 20;
+            pointer-events: none;
+            animation: ufo-float 4s ease-in-out infinite;
+            filter: drop-shadow(0 0 15px rgba(34, 211, 238, 0.4));
+        }
+
+        @keyframes ufo-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        .ufo-beam {
+            position: absolute;
+            top: 60%; /* Start beam from bottom of UFO */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 20px solid transparent;
+            border-right: 20px solid transparent;
+            border-bottom: 120px solid rgba(34, 211, 238, 0.15); /* Light cyan beam */
+            opacity: 0;
+            transform-origin: top center;
+            animation: beam-pulse 6s infinite;
+        }
+
+        @keyframes beam-pulse {
+            0%, 45%, 100% { opacity: 0; transform: translateX(-50%) scaleY(0); }
+            50% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+            70% { opacity: 1; transform: translateX(-50%) scaleY(1); }
+            80% { opacity: 0; transform: translateX(-50%) scaleY(1); }
+        }
+
+        /* === NEW ANIMATIONS === */
+
+        /* 1. PLANET ANIMATION */
+        .planet-container {
+            position: absolute;
+            top: 10%;
+            right: 5%;
+            width: 120px;
+            height: 120px;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.6;
+        }
+        .planet-svg {
+            width: 100%;
+            height: 100%;
+            animation: planet-spin 60s linear infinite;
+        }
+        @keyframes planet-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* 2. FLOATING ASTRONAUT */
+        .astronaut-container {
+            position: absolute;
+            bottom: 20%;
+            right: 10%;
+            width: 80px;
+            height: auto;
+            z-index: 20;
+            pointer-events: none;
+            animation: astronaut-float 6s ease-in-out infinite;
+        }
+        @keyframes astronaut-float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(3deg); }
+        }
+
+        /* 3. PEEKING ALIEN */
+        .alien-container {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%) translateX(100%); /* Start hidden */
+            width: 60px;
+            height: auto;
+            z-index: 40;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+        .alien-container.peek {
+            transform: translateY(-50%) translateX(-10%); /* Peek out */
+        }
+
+
         @media (max-width: 768px) {
             html {
                 font-size: 13px !important;
             }
             
+            .ufo-container {
+                width: 60px; /* Smaller on mobile */
+                top: 5%;
+                right: 2%;
+            }
+            
+            .planet-container {
+                width: 80px;
+                height: 80px;
+                top: 5%;
+                right: 2%;
+            }
+            
+            .astronaut-container {
+                width: 50px;
+                bottom: 10%;
+                right: 5%;
+            }
+            
+            .alien-container {
+                width: 40px;
+            }
+
             header#home {
                 min-height: auto !important; 
                 height: auto !important;
@@ -1101,7 +1303,34 @@
                 </div>
             </nav>
 
-            <div class="hero-section flex-grow flex items-start md:items-end justify-center text-left pb-12 md:pb-16">
+            <div class="hero-section flex-grow flex items-start md:items-end justify-center text-left pb-12 md:pb-16 relative">
+                 <!-- 1. PLANET ANIMATION ADDED HERE -->
+                 <div class="planet-container">
+                    <svg class="planet-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="50" cy="50" r="25" fill="#3b82f6" opacity="0.8"/>
+                        <ellipse cx="50" cy="50" rx="40" ry="10" stroke="#22d3ee" stroke-width="2" transform="rotate(-15 50 50)" fill="none" opacity="0.6"/>
+                        <ellipse cx="50" cy="50" rx="45" ry="12" stroke="#8b5cf6" stroke-width="1" transform="rotate(-15 50 50)" fill="none" opacity="0.4"/>
+                    </svg>
+                </div>
+                
+                <!-- 2. ASTRONAUT ANIMATION ADDED HERE -->
+                <div class="astronaut-container">
+                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Helmet -->
+                        <circle cx="50" cy="35" r="20" fill="#f3f4f6" stroke="#fff" stroke-width="2"/>
+                        <!-- Visor -->
+                        <path d="M38 30 C38 22, 62 22, 62 30 C62 40, 38 40, 38 30" fill="#22d3ee"/>
+                        <!-- Body -->
+                        <rect x="35" y="55" width="30" height="35" rx="5" fill="#f3f4f6"/>
+                        <!-- Arms -->
+                        <path d="M35 60 L20 70" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M65 60 L80 50" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
+                        <!-- Legs -->
+                        <path d="M40 90 L35 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
+                        <path d="M60 90 L65 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
+                    </svg>
+                </div>
+
                 <div class="container mx-auto px-6 z-10 w-full">
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
                         <div class="w-full pt-24 md:pt-0 pb-4">
@@ -1113,7 +1342,7 @@
                                 Platform terpercaya untuk segala transaksi online Anda. Aman, cepat, dan didukung oleh komunitas.
                             </p>
                             <div class="flex flex-row flex-wrap items-center gap-4 mb-10">
-                                <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" id="cta-lihat-mitra" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold text-black rounded-lg transform hover:scale-105 transition-all duration-300">
+                                <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" id="cta-lihat-mitra" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-4 py-2 sm:px-8 sm:py-3 text-sm font-semibold rounded-lg transform hover:scale-105 transition-all duration-300">
                                     Saluran
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
                                 </a>
@@ -1232,7 +1461,7 @@
                             <div class="glass-box p-6 rounded-lg" style="border-color: rgba(34, 211, 238, 0.3);">
                                 <h3 class="font-bold text-lg mb-2">Masih punya pertanyaan?</h3>
                                 <p class="text-sm text-[var(--color-text-secondary)] mb-4">Tidak menemukan jawaban yang Anda cari? Hubungi tim dukungan kami.</p>
-                                <a href="#kontak" class="btn-shine btn-primary inline-block w-full text-center px-6 py-3 text-sm font-semibold text-black rounded-lg transition-colors duration-300">
+                                <a href="#kontak" class="btn-shine btn-primary inline-block w-full text-center px-6 py-3 text-sm font-semibold rounded-lg transition-colors duration-300">
                                     Kirim Email
                                 </a>
                             </div>
@@ -1314,7 +1543,7 @@
                     
                     <!-- NEW: BUTTON GABUNG MITRA -->
                     <div class="text-center mt-12 animate-on-scroll fade-up">
-                         <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-bold text-black rounded-lg transform hover:scale-105 transition-all duration-300">
+                         <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-bold rounded-lg transform hover:scale-105 transition-all duration-300">
                             Gabung Mitra
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                                 <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd" />
@@ -1332,6 +1561,23 @@
             </div>
 
             <section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
+                <!-- UFO ANIMATION ELEMENT ADDED HERE -->
+                <div class="ufo-container">
+                    <div class="ufo-body">
+                         <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Dome -->
+                            <path d="M30 25 C30 10, 70 10, 70 25" fill="rgba(139, 92, 246, 0.4)" stroke="#8b5cf6" stroke-width="2"/>
+                            <!-- Body -->
+                            <ellipse cx="50" cy="30" rx="45" ry="12" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
+                            <!-- Lights -->
+                            <circle cx="20" cy="30" r="3" fill="#22d3ee" class="animate-pulse"/>
+                            <circle cx="50" cy="35" r="3" fill="#22d3ee" class="animate-pulse" style="animation-delay: 0.3s"/>
+                            <circle cx="80" cy="30" r="3" fill="#22d3ee" class="animate-pulse" style="animation-delay: 0.6s"/>
+                        </svg>
+                    </div>
+                    <div class="ufo-beam"></div>
+                </div>
+
                 <div class="container mx-auto px-6">
                     <div class="grid lg:grid-cols-5 gap-12 items-center">
                         <div class="lg:col-span-3 animate-on-scroll fade-right">
@@ -1365,7 +1611,7 @@
             
             <section id="kontak" class="py-8 md:py-20">
             <div class="container mx-auto px-6">
-                <div class="grid md:grid-cols-2 gap-16 items-center">
+                <div class="grid md:grid-cols-2 gap-16 items-start">
                     <div class="text-white animate-on-scroll fade-right">
                         <h2 class="text-4xl md:text-5xl font-bold flex items-center gap-3">
                             Hubungi Kami
@@ -1383,13 +1629,14 @@
                                     <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">support@marketnusantara.xyz</p>
                                 </div>
                             </a>
-                            <a href="https://wa.me/6281214745949" target="_blank" class="flex items-center gap-4 group">
+                            <a href="https://wa.me/6281330730463" target="_blank" class="flex items-center gap-4 group">
                                 <div class="bg-white/10 p-3 rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
                                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
                                 </div>
                                 <div>
                                     <p class="text-sm text-[var(--color-text-secondary)]">WhatsApp</p>
-                                    <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">0812-1474-5949</p>
+                                    <!-- UPDATED WHATSAPP -->
+                                    <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">0813-3073-0463</p>
                                 </div>
                             </a>
                             <div class="flex items-center gap-4 group">
@@ -1405,39 +1652,29 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="mt-8 rounded-lg overflow-hidden border border-[var(--color-glass-border)]">
-                            <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!m12!1m3!1d253496.2483584852!2d106.73356223528738!3d-6.921619424613207!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e684e12d3261a85%3A0x1b14806875b61c2c!2sSukabumi%2C%2C%20Kota%20Sukabumi%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1668612188682!5m2!1sid!2sid" 
-                                width="100%" 
-                                height="200" 
-                                style="border:0; filter: invert(100%) grayscale(80%)" 
-                                allowfullscreen="" 
-                                loading="lazy" 
-                                referrerpolicy="no-referrer-when-downgrade">
-                            </iframe>
-                        </div>
+                        <!-- MAP REMOVED HERE -->
                     </div>
 
-                    <div class="relative bg-black/50 backdrop-blur-sm p-8 md:p-12 rounded-lg animate-on-scroll fade-left" style="transition-delay: 200ms">
+                    <div class="contact-form-container animate-on-scroll fade-left" style="transition-delay: 200ms">
                         <div class="form-bracket -top-3 -left-3 border-t-2 border-l-2"></div>
                         <div class="form-bracket -top-3 -right-3 border-t-2 border-r-2"></div>
                         <div class="form-bracket -bottom-3 -left-3 border-b-2 border-l-2"></div>
                         <div class="form-bracket -bottom-3 -right-3 border-b-2 border-r-2"></div>
 
-                        <h3 class="text-2xl font-bold mb-6">Formulir Kontak</h3>
+                        <h3 class="text-2xl font-bold mb-6 text-white">Formulir Kontak</h3>
                         <form id="contact-form" class="space-y-6">
                             <input type="hidden" name="_subject" value="Pesan Baru dari Website Market Nusantara!">
                             <div>
-                                <label for="name" class="text-sm uppercase tracking-widest text-[var(--color-text-secondary)]">Nama</label>
-                                <input type="text" id="name" name="name" class="contact-form-input w-full mt-1" required>
+                                <label for="name" class="form-label">Nama</label>
+                                <input type="text" id="name" name="name" class="contact-form-input w-full" placeholder="Masukkan nama Anda" required>
                             </div>
                             <div>
-                                <label for="email" class="text-sm uppercase tracking-widest text-[var(--color-text-secondary)]">Email</label>
-                                <input type="email" id="email" name="email" class="contact-form-input w-full mt-1" required>
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" id="email" name="email" class="contact-form-input w-full" placeholder="Masukkan email Anda" required>
                             </div>
                             <div>
-                                <label for="message" class="text-sm uppercase tracking-widest text-[var(--color-text-secondary)]">Pesan</label>
-                                <textarea id="message" name="message" rows="4" class="contact-form-input w-full mt-1" required></textarea>
+                                <label for="message" class="form-label">Pesan</label>
+                                <textarea id="message" name="message" rows="4" class="contact-form-input w-full" placeholder="Tulis pesan Anda disini..." required></textarea>
                             </div>
                             <div>
                                 <button type="submit" class="btn-shine w-full inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-semibold text-black rounded-lg bg-[var(--color-accent)] hover:bg-[var(--color-accent-hover)] transform hover:scale-105 transition-all duration-300">
@@ -1453,6 +1690,16 @@
 
     </main>
     
+    <!-- 3. ALIEN PEEKING ELEMENT ADDED HERE -->
+    <div id="alien-peek" class="alien-container">
+        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+             <path d="M50 20 C30 20 15 40 15 65 C15 85 30 95 50 95 C70 95 85 85 85 65 C85 40 70 20 50 20" fill="#a78bfa"/>
+             <ellipse cx="35" cy="60" rx="10" ry="15" fill="#000" transform="rotate(-15 35 60)"/>
+             <ellipse cx="65" cy="60" rx="10" ry="15" fill="#000" transform="rotate(15 65 60)"/>
+             <circle cx="38" cy="55" r="3" fill="#fff"/>
+             <circle cx="62" cy="55" r="3" fill="#fff"/>
+        </svg>
+    </div>
     
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
@@ -1593,6 +1840,10 @@
             let shootingStars = [];
             const starCount = 100; 
             const nebulaCount = 5; 
+            
+            // WARP SPEED VARIABLES
+            let isWarping = false;
+            let warpSpeedMultiplier = 1;
 
             const nebulaColors = [
                 'rgba(139, 92, 246, 0.15)', 
@@ -1622,32 +1873,61 @@
                     this.alpha = Math.random();
                     this.alphaDirection = Math.random() < 0.5 ? 1 : -1;
                     this.vy = Math.random() * 0.2; 
-                    this.color = Math.random() > 0.8 ? '#22d3ee' : '#ffffff'; 
+                    this.color = Math.random() > 0.8 ? '#22d3ee' : '#ffffff';
+                    this.warpLength = 0;
                 }
                 update() {
-                    if (this.alphaDirection === 1) {
-                        this.alpha += this.blinkSpeed;
-                        if (this.alpha >= 1) { this.alpha = 1; this.alphaDirection = -1; }
+                    if (isWarping) {
+                        // WARP SPEED LOGIC
+                        this.vy = (Math.random() * 20 + 10) * warpSpeedMultiplier; 
+                        this.warpLength = Math.min(this.vy * 2, 100); 
                     } else {
-                        this.alpha -= this.blinkSpeed;
-                        if (this.alpha <= 0.2) { this.alpha = 0.2; this.alphaDirection = 1; }
+                        // NORMAL LOGIC
+                        if (this.alphaDirection === 1) {
+                            this.alpha += this.blinkSpeed;
+                            if (this.alpha >= 1) { this.alpha = 1; this.alphaDirection = -1; }
+                        } else {
+                            this.alpha -= this.blinkSpeed;
+                            if (this.alpha <= 0.2) { this.alpha = 0.2; this.alphaDirection = 1; }
+                        }
+                        this.vy = Math.random() * 0.2;
+                        this.warpLength = 0;
                     }
 
-                    this.y -= this.vy;
+                    this.y -= this.vy; 
+                    // When warping, stars move DOWN fast to simulate forward movement if we look up, 
+                    // or usually stars streak outwards. Simple vertical streak is easiest.
+                    // Wait, usually space travel looks like stars coming AT you. 
+                    // Let's stick to vertical movement for consistency with parallax, but faster.
+                    
                     if (this.y < 0) {
                         this.y = height;
                         this.x = Math.random() * width;
+                    }
+                    // Wrap around if warp makes them go off screen too fast
+                    if (this.y > height && isWarping) { 
+                       // Do nothing, we want them to go up? 
+                       // Wait, original logic: y -= vy. So they move UP.
+                       // If y < 0, reset to height.
                     }
 
                     this.draw();
                 }
                 draw() {
                     ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fillStyle = this.color;
-                    ctx.globalAlpha = this.alpha;
-                    ctx.fill();
-                    ctx.globalAlpha = 1.0;
+                    if (isWarping) {
+                        ctx.moveTo(this.x, this.y);
+                        ctx.lineTo(this.x, this.y + this.warpLength); // Draw tail downwards
+                        ctx.strokeStyle = this.color;
+                        ctx.lineWidth = this.size;
+                        ctx.stroke();
+                    } else {
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fillStyle = this.color;
+                        ctx.globalAlpha = this.alpha;
+                        ctx.fill();
+                        ctx.globalAlpha = 1.0;
+                    }
                 }
             }
 
@@ -1666,8 +1946,10 @@
                     this.vy = (Math.random() - 0.5) * 0.3;
                 }
                 update() {
-                    this.x += this.vx;
-                    this.y += this.vy;
+                    // Nebulas move faster during warp too
+                    const speed = isWarping ? 5 : 1;
+                    this.x += this.vx * speed;
+                    this.y += this.vy * speed;
 
                     if (this.x < -this.radius) this.x = width + this.radius;
                     if (this.x > width + this.radius) this.x = -this.radius;
@@ -1760,6 +2042,46 @@
 
             animate();
             
+            // --- WARP SPEED TRIGGER ---
+            function triggerWarp() {
+                isWarping = true;
+                setTimeout(() => {
+                    isWarping = false;
+                }, 800); // Warp for 800ms
+            }
+
+            // Hook warp to nav links
+            document.querySelectorAll('.nav-link, .hero-tab-button').forEach(link => {
+                link.addEventListener('click', () => {
+                   triggerWarp(); 
+                });
+            });
+
+
+            // --- ALIEN PEEKING LOGIC ---
+            const alien = document.getElementById('alien-peek');
+            if(alien) {
+                // Randomly peek out every 5-15 seconds
+                function randomPeek() {
+                    const randomTime = Math.random() * 10000 + 5000;
+                    setTimeout(() => {
+                        alien.classList.add('peek');
+                        
+                        // Hide after 2 seconds
+                        setTimeout(() => {
+                            alien.classList.remove('peek');
+                            randomPeek(); // Schedule next
+                        }, 2000);
+                    }, randomTime);
+                }
+                randomPeek();
+                
+                // Click interaction
+                alien.addEventListener('click', () => {
+                    alien.classList.remove('peek');
+                });
+            }
+            
             // --- PARALLAX SCROLLING LOGIC ---
             // Saat scroll, kita menggeser canvas sedikit untuk efek kedalaman
             window.addEventListener('scroll', () => {
@@ -1772,28 +2094,26 @@
             });
 
 
-            // --- GLITCH EFFECT LOGIC ---
+            // --- GLITCH EFFECT LOGIC (REVISI: LEBIH CEPAT) ---
             const heroTitle = document.getElementById('hero-title');
             
-            // Fungsi untuk memicu glitch secara acak
             function triggerGlitch() {
-                // Tambahkan kelas
                 heroTitle.classList.add('glitch-active');
                 
-                // Durasi glitch acak antara 200ms - 800ms
-                const duration = Math.random() * 600 + 200;
+                // Durasi glitch acak antara 100ms - 500ms
+                const duration = Math.random() * 400 + 100;
                 
                 setTimeout(() => {
                     heroTitle.classList.remove('glitch-active');
                 }, duration);
 
-                // Jadwalkan glitch berikutnya (acak antara 3 - 10 detik)
-                const nextGlitch = Math.random() * 7000 + 3000;
+                // Jadwalkan glitch berikutnya (acak antara 500ms - 2000ms = Lebih sering)
+                const nextGlitch = Math.random() * 1500 + 500;
                 setTimeout(triggerGlitch, nextGlitch);
             }
 
-            // Mulai glitch loop setelah beberapa detik load
-            setTimeout(triggerGlitch, 3000);
+            // Mulai glitch lebih cepat
+            setTimeout(triggerGlitch, 1000);
 
 
             // --- MUSIC PLAYER & VISUALIZER ---
@@ -1866,10 +2186,20 @@
                     let htmlContent = '';
                     mitraData.forEach(mitra => {
                         const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
+                        
+                        // Status simulasi (misal Online/Offline)
+                        const status = Math.random() > 0.3 ? 'Online' : 'Away';
+                        const statusColor = status === 'Online' ? '#4ade80' : '#fbbf24';
+
                         htmlContent += `
                             <div class="swiper-slide h-auto">
                                 <div class="mitra-card ${roleInfo.class}">
-                                    <div class="card-bg-text">MARKET</div>
+                                    <div class="mitra-card-pattern"></div>
+                                    
+                                    <div class="mitra-status">
+                                        <div class="mitra-status-dot" style="background-color: ${statusColor}"></div>
+                                        ${status}
+                                    </div>
                                     
                                     <div class="mitra-image-wrapper">
                                         <img src="${mitra.foto}" alt="${mitra.nama}" class="mitra-img" onerror="this.src='https://placehold.co/200x200/1c1c1c/a1a1aa?text=${mitra.nama.substring(0,2)}'">
@@ -1879,11 +2209,23 @@
                                         <div>
                                             <span class="mitra-role-label">${roleInfo.label}</span>
                                             <h3 class="mitra-name">${mitra.nama}</h3>
+                                            
+                                            <div class="mitra-stats-row">
+                                                <div class="mitra-stat-item">
+                                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                                                    <span>4.9</span>
+                                                </div>
+                                                <div class="mitra-stat-item">
+                                                    <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                                                    <span>Verified</span>
+                                                </div>
+                                            </div>
                                         </div>
                                         
                                         <div class="mitra-action-bar">
                                             <a href="${mitra.link}" target="_blank" class="btn-feed">
-                                                SALURAN
+                                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
+                                                Hubungi
                                             </a>
                                         </div>
                                     </div>
@@ -1936,32 +2278,26 @@
                     const statsData = await response.json();
                     
                     const htmlContent = `
-                        <div class="stat-card group p-4 sm:p-6 rounded-xl flex flex-col items-center justify-center relative overflow-hidden animate-on-scroll zoom-in border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300">
-                            <!-- Decorative Glow -->
-                            <div class="absolute inset-0 bg-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                            
-                            <div class="relative z-10 mb-3 p-3 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)]">
-                                <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in">
+                            <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
                                 </svg>
                             </div>
                             
-                            <h3 class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-white mb-1 stat-number" data-target="${statsData.total_transaksi}" data-plus="true">0</h3>
-                            <p class="relative z-10 text-xs sm:text-sm text-[var(--color-text-secondary)] font-medium uppercase tracking-wider">Total Transaksi</p>
+                            <h3 class="relative z-10 text-4xl font-black text-white mb-1 stat-number tracking-tight" data-target="${statsData.total_transaksi}" data-plus="true">0</h3>
+                            <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Total Transaksi</p>
                         </div>
 
-                        <div class="stat-card group p-4 sm:p-6 rounded-xl flex flex-col items-center justify-center relative overflow-hidden animate-on-scroll zoom-in border border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300" style="transition-delay: 100ms">
-                             <!-- Decorative Glow -->
-                            <div class="absolute inset-0 bg-[var(--color-accent)]/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-
-                            <div class="relative z-10 mb-3 p-3 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)]">
-                                <svg class="w-6 h-6 sm:w-8 sm:h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                        <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in" style="transition-delay: 100ms">
+                            <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                   <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
                                 </svg>
                             </div>
                             
-                            <h3 class="relative z-10 text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[var(--color-accent)] mb-1">Rp ${statsData.uang_display}</h3>
-                            <p class="relative z-10 text-xs sm:text-sm text-[var(--color-text-secondary)] font-medium uppercase tracking-wider">Dana Diamankan</p>
+                            <h3 class="relative z-10 text-3xl font-black text-[var(--color-accent)] mb-1">Rp ${statsData.uang_display}</h3>
+                            <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Dana Diamankan</p>
                         </div>
                     `;
 
