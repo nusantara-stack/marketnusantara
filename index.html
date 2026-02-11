@@ -39,7 +39,6 @@
             --color-glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* Preloader */
         #preloader {
             position: fixed;
             top: 0;
@@ -169,6 +168,7 @@
             position: relative;
             padding-top: 2rem;
             transition: border-color 0.3s ease;
+            z-index: 2; 
         }
         .glass-box:hover {
             border-color: var(--color-cyan);
@@ -190,7 +190,8 @@
         }
 
         .hero-swiper { width: 100%; }
-        .swiper-slide { height: auto; display: flex; }
+        .swiper-slide { height: auto; display: flex; position: relative; z-index: 1; }
+        .swiper-slide-active { z-index: 10; } 
         
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
         
@@ -201,7 +202,6 @@
             background-clip: text;
         }
 
-        /* PERBAIKAN TOMBOL: Pastikan background dan text color benar saat hover */
         .btn-shine { position: relative; overflow: hidden; z-index: 1; }
         .btn-shine.btn-primary {
             background: var(--color-gradient-main);
@@ -257,7 +257,6 @@
             opacity: 0.3;
         }
 
-        /* === REVISI KARTU STATISTIK (Gradient & Modern) === */
         #statistik {
             background-color: transparent; 
             background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
@@ -302,16 +301,13 @@
         .stat-card:hover::before { opacity: 0.1; }
         .stat-card:hover::after { transform: scaleX(1); }
 
-
-        /* Mitra Section */
         #mitra {
             position: relative;
         }
         .mitra-swiper {
             width: 100%;
             padding: 2rem 0 3rem; 
-            /* REVISI: Pastikan overflow visible agar alien bisa muncul di luar kartu jika perlu (tangan di atas) */
-            /* Namun swiper butuh hidden. Kita akali dengan z-index */
+            overflow: visible; 
         }
         
         .mitra-swiper .swiper-pagination-progressbar {
@@ -330,16 +326,10 @@
             box-shadow: 0 0 10px var(--color-cyan);
         }
         
-        /* === ALIEN PEEKING FROM CARD STYLES === */
-        .swiper-slide {
-            position: relative; /* Penting untuk positioning alien */
-            z-index: 1;
+        .mitra-swiper-button {
+            display: none !important;
         }
-        /* Saat slide aktif, z-index naik agar alien tidak tertutup slide sebelah */
-        .swiper-slide-active {
-            z-index: 10;
-        }
-
+        
         .alien-wrapper {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -348,14 +338,14 @@
         
         .alien-hand {
             position: absolute;
-            top: -6px; /* Muncul sedikit di atas border kartu */
+            top: -6px; 
             width: 16px;
             height: 20px;
-            background-color: #a78bfa; /* Warna ungu alien */
+            background-color: #a78bfa; 
             border-radius: 6px;
             border: 1px solid #000;
-            z-index: 5; /* Di atas kartu */
-            transform: translateY(20px); /* Start hidden (turun) */
+            z-index: 5; 
+            transform: translateY(20px); 
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -370,18 +360,17 @@
 
         .alien-head-card {
             position: absolute;
-            top: 0; /* Mulai dari batas atas */
+            top: 0; 
             left: 50%;
-            transform: translateX(-50%) translateY(0); /* Posisi awal di belakang kartu */
+            transform: translateX(-50%) translateY(0); 
             width: 50px;
             height: auto;
-            z-index: -1; /* DI BELAKANG KARTU */
+            z-index: -1; 
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
         .alien-head-card.peeking {
-            transform: translateX(-50%) translateY(-75%); /* Nongol ke atas */
+            transform: translateX(-50%) translateY(-75%); 
         }
-
 
         .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); } 
         .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); } 
@@ -394,14 +383,13 @@
             background-color: #0d0f14; 
             border-radius: 1rem;
             position: relative;
-            /* REVISI: overflow hidden tetap ada untuk efek hover, tapi alien ditaruh di parent (.swiper-slide) */
             overflow: hidden; 
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
-            z-index: 2; /* Kartu di depan kepala alien */
+            z-index: 2; 
         }
 
         .mitra-card::before {
@@ -552,20 +540,6 @@
             box-shadow: 0 0 15px var(--card-accent);
         }
 
-        .mitra-swiper-button {
-            color: #fff;
-            background: rgba(0,0,0,0.5);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            backdrop-filter: blur(4px);
-        }
-        .mitra-swiper-button:after {
-            font-size: 1rem !important;
-        }
 
         #faq {
             background-color: transparent; 
@@ -634,11 +608,10 @@
             z-index: 2;
         }
 
-        /* === REVISI CONTACT FORM GALAXY THEME === */
         .contact-form-container {
             background: rgba(10, 10, 15, 0.6);
             backdrop-filter: blur(16px);
-            border: 1px solid rgba(139, 92, 246, 0.3); /* Ungu */
+            border: 1px solid rgba(139, 92, 246, 0.3); 
             border-radius: 1rem;
             padding: 2.5rem;
             box-shadow: 
@@ -648,7 +621,6 @@
             overflow: hidden;
         }
         
-        /* Galaxy decoration form */
         .contact-form-container::before {
             content: '';
             position: absolute;
@@ -683,7 +655,6 @@
             display: block;
         }
         
-        /* Removed .form-bracket CSS */
         
         footer {
             position: relative;
@@ -861,8 +832,8 @@
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
             max-height: 5000px; 
             overflow: hidden;
-            background-color: var(--color-background); /* Pastikan punya background agar menutupi parallax */
-            position: relative; /* Penting untuk z-index di atas fixed bg */
+            background-color: var(--color-background); 
+            position: relative; 
             z-index: 10;
         }
         #informasi-section-container.hidden {
@@ -905,7 +876,7 @@
         .service-card:hover {
             transform: translateY(-8px);
             background: var(--color-glass-bg);
-            border-color: var(--color-cyan); /* Border accent */
+            border-color: var(--color-cyan); 
             box-shadow: 0 10px 30px -10px var(--color-accent-transparent);
         }
         .service-card-number {
@@ -930,7 +901,7 @@
 
         main {
             transition: opacity 0.4s ease-in-out, max-height 0.6s ease;
-            position: relative; /* Agar di atas fixed background */
+            position: relative; 
             z-index: 10;
         }
         main.hidden-by-tab {
@@ -940,7 +911,6 @@
             overflow: hidden;
         }
 
-        /* === NEW ROCKET BACK TO TOP STYLES === */
         #back-to-top-btn {
             position: fixed;
             bottom: 2rem; 
@@ -950,7 +920,7 @@
             transform: translateY(20px);
             pointer-events: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            background: none; /* No background for rocket */
+            background: none; 
             border: none;
             box-shadow: none;
             padding: 0;
@@ -962,7 +932,6 @@
             pointer-events: auto;
         }
         
-        /* Rocket Idle Animation */
         #back-to-top-btn.visible .rocket-svg-container {
             animation: rocket-idle 2s ease-in-out infinite;
         }
@@ -971,28 +940,24 @@
             50% { transform: translateY(-8px); }
         }
 
-        /* Rocket Launch Animation */
         #back-to-top-btn.launching .rocket-svg-container {
-            animation: none; /* Stop idle */
+            animation: none; 
         }
         #back-to-top-btn.launching {
             transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.5s ease-in 0.5s;
-            transform: translateY(-120vh) scale(0.8); /* Fly up and out */
+            transform: translateY(-120vh) scale(0.8); 
             opacity: 0;
         }
         
-        /* REVISI: Pastikan roket berada di depan api */
         .rocket-svg {
             position: relative;
             z-index: 10;
         }
 
-        /* Fire effect only visible when launching */
         .rocket-fire {
             opacity: 0;
             transition: opacity 0.3s ease;
             transform-origin: top center;
-            /* REVISI: Tarik api ke atas agar menyatu dengan roket & taruh di belakang */
             margin-top: -15px; 
             z-index: -1;
         }
@@ -1001,7 +966,6 @@
             animation: fire-pulse 0.1s infinite alternate;
         }
         
-        /* REVISI FIX: Menambahkan translateX(-50%) ke dalam keyframes agar api tetap di tengah */
         @keyframes fire-pulse {
             from { transform: translateX(-50%) scaleY(1); }
             to { transform: translateX(-50%) scaleY(1.3); }
@@ -1034,11 +998,10 @@
             border-color: var(--color-cyan);
         }
         
-        /* === AUDIO VISUALIZER === */
         #audio-visualizer {
             position: fixed;
             bottom: 2rem;
-            left: 5rem; /* Sebelah tombol musik */
+            left: 5rem; 
             z-index: 44;
             display: flex;
             align-items: flex-end;
@@ -1085,24 +1048,17 @@
             opacity: 1;
         }
 
-        /* === PARALLAX & GLITCH UPDATES === */
-        
-        /* 1. Updated Space Canvas untuk Parallax Global */
         #space-canvas {
-            position: fixed; /* Ubah ke fixed agar jadi global background */
+            position: fixed; 
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
             background: #000000;
-            /* Will be transformed via JS for Parallax */
             will-change: transform; 
         }
 
-        /* 2. Glitch Effect CSS - REMOVED SKEW TO FIX LAYOUT JITTER */
-        /* Only colors shifting now, no physical distortion */
-        
         @keyframes glitch-anim {
             0% { text-shadow: 2px 0 var(--color-cyan), -2px 0 var(--color-violet); }
             25% { text-shadow: -2px 0 var(--color-cyan), 2px 0 var(--color-violet); }
@@ -1112,15 +1068,13 @@
         }
 
         .glitch-active {
-            /* REVISI: Dihapus animation skew agar layout tidak goyang */
             animation: glitch-anim 0.3s infinite linear;
         }
 
 
-        /* === UFO ANIMATION === */
         .ufo-container {
             position: absolute;
-            top: 15%; /* Floating near top right of statistics section */
+            top: 15%; 
             right: 5%;
             width: 100px;
             height: auto;
@@ -1137,14 +1091,14 @@
 
         .ufo-beam {
             position: absolute;
-            top: 60%; /* Start beam from bottom of UFO */
+            top: 60%; 
             left: 50%;
             transform: translateX(-50%);
             width: 0;
             height: 0;
             border-left: 20px solid transparent;
             border-right: 20px solid transparent;
-            border-bottom: 120px solid rgba(34, 211, 238, 0.15); /* Light cyan beam */
+            border-bottom: 120px solid rgba(34, 211, 238, 0.15); 
             opacity: 0;
             transform-origin: top center;
             animation: beam-pulse 6s infinite;
@@ -1157,9 +1111,6 @@
             80% { opacity: 0; transform: translateX(-50%) scaleY(1); }
         }
 
-        /* === NEW ANIMATIONS === */
-
-        /* 1. PLANET ANIMATION */
         .planet-container {
             position: absolute;
             top: 10%;
@@ -1180,7 +1131,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* 2. FLOATING ASTRONAUT */
         .astronaut-container {
             position: absolute;
             bottom: 20%;
@@ -1203,7 +1153,7 @@
             }
             
             .ufo-container {
-                width: 60px; /* Smaller on mobile */
+                width: 60px; 
                 top: 5%;
                 right: 2%;
             }
@@ -1225,7 +1175,6 @@
                 width: 40px;
             }
             
-            /* Alien Card adjustments for mobile */
             .alien-head-card {
                 width: 40px;
             }
@@ -1334,13 +1283,11 @@
     <div id="main-content">
         <div id="scroll-progress-bar"></div>
 
-        <!-- Canvas Background is now FIXED position in CSS, placed outside header to act as global background -->
         <canvas id="space-canvas"></canvas>
         <div class="fixed inset-0 z-[-1]" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%); pointer-events: none;"></div>
 
 
         <header id="home" class="relative min-h-screen flex flex-col">
-            <!-- Background elements removed from header as they are now global fixed -->
             
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
                 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
@@ -1387,7 +1334,6 @@
             </nav>
 
             <div class="hero-section flex-grow flex items-start md:items-end justify-center text-left pb-12 md:pb-16 relative">
-                 <!-- 1. PLANET ANIMATION ADDED HERE -->
                  <div class="planet-container">
                     <svg class="planet-svg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <circle cx="50" cy="50" r="25" fill="#3b82f6" opacity="0.8"/>
@@ -1396,19 +1342,13 @@
                     </svg>
                 </div>
                 
-                <!-- 2. ASTRONAUT ANIMATION ADDED HERE -->
                 <div class="astronaut-container">
                     <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Helmet -->
                         <circle cx="50" cy="35" r="20" fill="#f3f4f6" stroke="#fff" stroke-width="2"/>
-                        <!-- Visor -->
                         <path d="M38 30 C38 22, 62 22, 62 30 C62 40, 38 40, 38 30" fill="#22d3ee"/>
-                        <!-- Body -->
                         <rect x="35" y="55" width="30" height="35" rx="5" fill="#f3f4f6"/>
-                        <!-- Arms -->
                         <path d="M35 60 L20 70" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
                         <path d="M65 60 L80 50" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
-                        <!-- Legs -->
                         <path d="M40 90 L35 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
                         <path d="M60 90 L65 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
                     </svg>
@@ -1417,7 +1357,6 @@
                 <div class="container mx-auto px-6 z-10 w-full">
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
                         <div class="w-full pt-24 md:pt-0 pb-4">
-                            <!-- ADDED GLITCH CLASS TARGET -->
                             <h1 id="hero-title" class="text-5xl md:text-7xl lg:text-8xl font-extrabold text-white leading-tight mb-4 text-shadow-dark">
                                 MARKET<br>NUSANTARA
                             </h1>
@@ -1591,7 +1530,6 @@
         </div>
 
         <main>
-            <!-- MITRA SECTION (DYNAMIC CAROUSEL) -->
             <section id="mitra" class="pb-8 md:pb-16 pt-8">
                 <div class="container mx-auto px-6">
                     <div class="text-center mb-12 animate-on-scroll zoom-in">
@@ -1600,10 +1538,8 @@
                     </div>
                     
                     <div class="relative group">
-                        <!-- Swiper Mitra -->
                         <div class="swiper mitra-swiper">
                             <div class="swiper-wrapper" id="mitra-container">
-                                <!-- Data dari mitra.json akan dimuat di sini -->
                                 <div class="swiper-slide h-full">
                                     <div class="mitra-card skeleton w-full"></div>
                                 </div>
@@ -1615,16 +1551,13 @@
                                 </div>
                             </div>
                             
-                            <!-- Navigation buttons -->
                             <div class="swiper-button-next mitra-swiper-button"></div>
                             <div class="swiper-button-prev mitra-swiper-button"></div>
                             
-                            <!-- Pagination -->
                             <div class="swiper-pagination"></div>
                         </div>
                     </div>
                     
-                    <!-- NEW: BUTTON GABUNG MITRA -->
                     <div class="text-center mt-12 animate-on-scroll fade-up">
                          <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-bold rounded-lg transform hover:scale-105 transition-all duration-300">
                             Gabung Mitra
@@ -1644,15 +1577,11 @@
             </div>
 
             <section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
-                <!-- UFO ANIMATION ELEMENT ADDED HERE -->
                 <div class="ufo-container">
                     <div class="ufo-body">
                          <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <!-- Dome -->
                             <path d="M30 25 C30 10, 70 10, 70 25" fill="rgba(139, 92, 246, 0.4)" stroke="#8b5cf6" stroke-width="2"/>
-                            <!-- Body -->
                             <ellipse cx="50" cy="30" rx="45" ry="12" fill="#1e293b" stroke="#22d3ee" stroke-width="2"/>
-                            <!-- Lights -->
                             <circle cx="20" cy="30" r="3" fill="#22d3ee" class="animate-pulse"/>
                             <circle cx="50" cy="35" r="3" fill="#22d3ee" class="animate-pulse" style="animation-delay: 0.3s"/>
                             <circle cx="80" cy="30" r="3" fill="#22d3ee" class="animate-pulse" style="animation-delay: 0.6s"/>
@@ -1681,9 +1610,7 @@
                             </div>
                         </div>
 
-                        <!-- STATISTIK CONTAINER (DYNAMIC CONTENT) -->
                         <div id="statistik-container" class="lg:col-span-2 grid grid-cols-2 gap-6">
-                            <!-- Skeleton Loader Statistik -->
                             <div class="skeleton h-32 rounded-lg"></div>
                             <div class="skeleton h-32 rounded-lg"></div>
                         </div>
@@ -1718,7 +1645,6 @@
                                 </div>
                                 <div>
                                     <p class="text-sm text-[var(--color-text-secondary)]">WhatsApp</p>
-                                    <!-- UPDATED WHATSAPP -->
                                     <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">0813-3073-0463</p>
                                 </div>
                             </a>
@@ -1735,11 +1661,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- MAP REMOVED HERE -->
                     </div>
 
                     <div class="contact-form-container animate-on-scroll fade-left" style="transition-delay: 200ms">
-                        <!-- REVISI: Dihapus bracket ungu -->
+                        
 
                         <h3 class="text-2xl font-bold mb-6 text-white">Formulir Kontak</h3>
                         <form id="contact-form" class="space-y-6">
@@ -1769,9 +1694,6 @@
         </section>
 
     </main>
-    
-    <!-- 3. ALIEN PEEKING ELEMENT REMOVED FROM HERE TO BE INJECTED DYNAMICALLY -->
-    <!-- <div id="alien-peek" class="alien-container"></div> -->
     
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
@@ -1856,7 +1778,6 @@
     </div>
 
     
-    <!-- Music Player Button & VISUALIZER -->
     <button id="music-control-btn" title="Play/Pause Music">
         <svg id="music-play-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
@@ -1868,7 +1789,6 @@
     </button>
     <audio id="bg-music" src="assets/song.mp3" loop></audio>
     
-    <!-- Audio Visualizer Element -->
     <div id="audio-visualizer">
         <div class="visualizer-bar" style="height: 40%; animation-delay: 0.1s;"></div>
         <div class="visualizer-bar" style="height: 70%; animation-delay: 0.3s;"></div>
@@ -1878,26 +1798,18 @@
     </div>
 
 
-    <!-- REVISI: Tombol Back to Top dengan ROKET SVG -->
     <button id="back-to-top-btn" title="Kembali ke Atas">
         <div class="rocket-svg-container relative w-12 h-20">
-             <!-- ROCKET BODY SVG -->
             <svg class="rocket-svg w-full h-full drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <!-- Fins -->
                 <path d="M20 100 L10 130 L30 120 Z" fill="#ef4444" stroke="#fff" stroke-width="2"/>
                 <path d="M80 100 L90 130 L70 120 Z" fill="#ef4444" stroke="#fff" stroke-width="2"/>
-                <!-- Body -->
                 <ellipse cx="50" cy="70" rx="30" ry="60" fill="#f3f4f6" stroke="#fff" stroke-width="2"/>
-                <!-- Window -->
                 <circle cx="50" cy="50" r="15" fill="#22d3ee" stroke="#3b82f6" stroke-width="3"/>
                 <circle cx="50" cy="50" r="5" fill="rgba(255,255,255,0.8)"/>
-                <!-- Nose Cone -->
                 <path d="M28 35 Q50 -10 72 35" fill="#ef4444" stroke="#fff" stroke-width="2"/>
-                <!-- Middle fin -->
                 <path d="M45 120 L55 120 L50 135 Z" fill="#ef4444"/>
             </svg>
             
-            <!-- FIRE TRAIL (Only visible on launch) - REVISI PATH AGAR SIMETRIS -->
             <div class="rocket-fire absolute top-full left-1/2 -translate-x-1/2 w-8 h-12">
                  <svg viewBox="0 0 50 80" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M10 0 Q10 40 25 80 Q40 40 40 0 Z" fill="#fbbf24"/>
@@ -1938,7 +1850,6 @@
             const starCount = 100; 
             const nebulaCount = 5; 
             
-            // WARP SPEED VARIABLES
             let isWarping = false;
             let warpSpeedMultiplier = 1;
 
@@ -1975,11 +1886,9 @@
                 }
                 update() {
                     if (isWarping) {
-                        // WARP SPEED LOGIC
                         this.vy = (Math.random() * 20 + 10) * warpSpeedMultiplier; 
                         this.warpLength = Math.min(this.vy * 2, 100); 
                     } else {
-                        // NORMAL LOGIC
                         if (this.alphaDirection === 1) {
                             this.alpha += this.blinkSpeed;
                             if (this.alpha >= 1) { this.alpha = 1; this.alphaDirection = -1; }
@@ -2006,7 +1915,7 @@
                     ctx.beginPath();
                     if (isWarping) {
                         ctx.moveTo(this.x, this.y);
-                        ctx.lineTo(this.x, this.y + this.warpLength); // Draw tail downwards
+                        ctx.lineTo(this.x, this.y + this.warpLength); 
                         ctx.strokeStyle = this.color;
                         ctx.lineWidth = this.size;
                         ctx.stroke();
@@ -2035,7 +1944,6 @@
                     this.vy = (Math.random() - 0.5) * 0.3;
                 }
                 update() {
-                    // Nebulas move faster during warp too
                     const speed = isWarping ? 5 : 1;
                     this.x += this.vx * speed;
                     this.y += this.vy * speed;
@@ -2131,15 +2039,13 @@
 
             animate();
             
-            // --- WARP SPEED TRIGGER ---
             function triggerWarp() {
                 isWarping = true;
                 setTimeout(() => {
                     isWarping = false;
-                }, 800); // Warp for 800ms
+                }, 800); 
             }
 
-            // Hook warp to nav links
             document.querySelectorAll('.nav-link, .hero-tab-button').forEach(link => {
                 link.addEventListener('click', () => {
                    triggerWarp(); 
@@ -2147,9 +2053,8 @@
             });
 
 
-            // --- ALIEN PEEKING LOGIC (REVISI: PEEK BEHIND CARD) ---
-            
-            const alienHeadSVG = `
+            const alienVariations = [
+                `
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
                      <path d="M50 20 C30 20 15 40 15 65 C15 85 30 95 50 95 C70 95 85 85 85 65 C85 40 70 20 50 20" fill="#a78bfa" stroke="#000" stroke-width="2"/>
                      <ellipse cx="35" cy="60" rx="10" ry="15" fill="#000" transform="rotate(-15 35 60)"/>
@@ -2158,116 +2063,158 @@
                      <circle cx="62" cy="55" r="3" fill="#fff"/>
                      <path d="M45 75 Q50 80 55 75" stroke="#000" stroke-width="2" fill="none"/>
                 </svg>
-            `;
+                `,
+                `
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
+                    <path d="M20,70 Q10,60 20,40 Q30,10 50,10 Q70,10 80,40 Q90,60 80,70 Q70,90 50,85 Q30,90 20,70" fill="#4ade80" stroke="#000" stroke-width="2" />
+                    <circle cx="30" cy="45" r="6" fill="black"/>
+                    <circle cx="50" cy="35" r="8" fill="black"/>
+                    <circle cx="70" cy="45" r="6" fill="black"/>
+                    <circle cx="32" cy="42" r="2" fill="white"/>
+                    <circle cx="52" cy="32" r="3" fill="white"/>
+                    <circle cx="72" cy="42" r="2" fill="white"/>
+                    <path d="M40,65 Q50,75 60,65" stroke="black" stroke-width="2" fill="none"/>
+                </svg>
+                `,
+                `
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
+                    <circle cx="50" cy="50" r="35" fill="#fbbf24" stroke="#000" stroke-width="2"/>
+                    <circle cx="50" cy="40" r="14" fill="white"/>
+                    <circle cx="50" cy="40" r="6" fill="black"/>
+                    <path d="M35,65 Q50,75 65,65" stroke="#000" stroke-width="3" fill="none"/>
+                    <!-- Horns -->
+                    <path d="M20 30 Q30 40 35 35" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
+                    <path d="M80 30 Q70 40 65 35" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
+                </svg>
+                `,
+                `
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
+                     <path d="M30,60 Q30,20 50,20 Q70,20 70,60 L70,70 Q80,90 60,80 Q50,100 40,80 Q20,90 30,70 Z" fill="#22d3ee" stroke="#000" stroke-width="2"/>
+                     <circle cx="45" cy="50" r="4" fill="black"/>
+                     <circle cx="65" cy="50" r="4" fill="black"/>
+                     <path d="M50 65 Q55 70 60 65" stroke="#000" stroke-width="2" fill="none"/>
+                </svg>
+                `
+            ];
+            
+            const alienHandColors = [
+                '#a78bfa', 
+                '#4ade80', 
+                '#fbbf24', 
+                '#22d3ee'  
+            ];
 
-            function triggerMitraAlien() {
-                // Find active slide in Mitra section
-                const activeSlide = document.querySelector('.mitra-swiper .swiper-slide-active');
+            function triggerAlienSpawn() {
+                if (document.querySelectorAll('.alien-wrapper').length >= 2) return;
+
+                const mitraSwiperEl = document.querySelector('.mitra-swiper');
+                if (!mitraSwiperEl) return;
+
+                const activeSlide = mitraSwiperEl.querySelector('.swiper-slide-active');
                 if (!activeSlide) return;
 
-                // Check if alien is already there to prevent dupes
-                if (activeSlide.querySelector('.alien-wrapper')) return;
+                let candidates = [activeSlide];
+                let next = activeSlide.nextElementSibling;
+                for(let i=0; i<4; i++) { 
+                    if(next) {
+                        candidates.push(next);
+                        next = next.nextElementSibling;
+                    }
+                }
 
-                // Create Alien Elements
+                candidates = candidates.filter(slide => !slide.querySelector('.alien-wrapper'));
+
+                if (candidates.length === 0) return;
+
+                const targetSlide = candidates[Math.floor(Math.random() * candidates.length)];
+
+                const variationIndex = Math.floor(Math.random() * alienVariations.length);
+                const selectedSVG = alienVariations[variationIndex];
+                const handColor = alienHandColors[variationIndex];
+
                 const wrapper = document.createElement('div');
                 wrapper.className = 'alien-wrapper';
                 
                 const leftHand = document.createElement('div');
                 leftHand.className = 'alien-hand left';
+                leftHand.style.backgroundColor = handColor;
                 
                 const rightHand = document.createElement('div');
                 rightHand.className = 'alien-hand right';
+                rightHand.style.backgroundColor = handColor;
                 
                 const head = document.createElement('div');
                 head.className = 'alien-head-card';
-                head.innerHTML = alienHeadSVG;
+                head.innerHTML = selectedSVG;
 
-                wrapper.appendChild(head); // Head first (behind)
+                wrapper.appendChild(head); 
                 wrapper.appendChild(leftHand);
                 wrapper.appendChild(rightHand);
                 
-                activeSlide.appendChild(wrapper);
+                targetSlide.appendChild(wrapper);
 
-                // Animation Sequence
-                // 1. Hands appear
                 setTimeout(() => {
                     leftHand.classList.add('visible');
                     rightHand.classList.add('visible');
                 }, 100);
 
-                // 2. Head peeks up
                 setTimeout(() => {
                     head.classList.add('peeking');
                 }, 800);
 
-                // 3. Stay for a while, then hide head
                 setTimeout(() => {
                     head.classList.remove('peeking');
                 }, 3500);
 
-                // 4. Hide hands
                 setTimeout(() => {
                     leftHand.classList.remove('visible');
                     rightHand.classList.remove('visible');
                 }, 4200);
 
-                // 5. Remove from DOM
                 setTimeout(() => {
                     wrapper.remove();
-                    // Schedule next peek
-                    scheduleNextAlien();
                 }, 5000);
             }
 
-            function scheduleNextAlien() {
-                const randomTime = Math.random() * 10000 + 8000; // 8-18 seconds
-                setTimeout(triggerMitraAlien, randomTime);
+            function startAlienCycle() {
+                triggerAlienSpawn();
+                
+                const nextCheck = Math.random() * 2000 + 1000; 
+                setTimeout(startAlienCycle, nextCheck);
             }
 
-            // Start the cycle
-            scheduleNextAlien();
+            startAlienCycle();
 
             
-            // --- PARALLAX SCROLLING LOGIC ---
-            // Saat scroll, kita menggeser canvas sedikit untuk efek kedalaman
             window.addEventListener('scroll', () => {
                 const scrolled = window.scrollY;
-                // Geser background 50% lebih lambat dari scroll konten (moves down as we scroll down = stays relative)
-                // Sebenarnya untuk efek "jauh", background harus bergerak sedikit ke arah berlawanan scroll (fixed does this relative to content),
-                // atau bergerak sedikit searah scroll (agar tidak diam total).
-                // Kita gerakkan sedikit ke atas (negatif) agar terasa 'mengambang'
                 canvas.style.transform = `translateY(${scrolled * 0.2}px)`;
             });
 
 
-            // --- GLITCH EFFECT LOGIC (REVISI: LEBIH CEPAT) ---
             const heroTitle = document.getElementById('hero-title');
             
             function triggerGlitch() {
                 heroTitle.classList.add('glitch-active');
                 
-                // Durasi glitch acak antara 100ms - 500ms
                 const duration = Math.random() * 400 + 100;
                 
                 setTimeout(() => {
                     heroTitle.classList.remove('glitch-active');
                 }, duration);
 
-                // Jadwalkan glitch berikutnya (acak antara 500ms - 2000ms = Lebih sering)
                 const nextGlitch = Math.random() * 1500 + 500;
                 setTimeout(triggerGlitch, nextGlitch);
             }
 
-            // Mulai glitch lebih cepat
             setTimeout(triggerGlitch, 1000);
 
 
-            // --- MUSIC PLAYER & VISUALIZER ---
             const musicBtn = document.getElementById('music-control-btn');
             const bgMusic = document.getElementById('bg-music');
             const playIcon = document.getElementById('music-play-icon');
             const pauseIcon = document.getElementById('music-pause-icon');
-            const visualizer = document.getElementById('audio-visualizer'); // Get Visualizer
+            const visualizer = document.getElementById('audio-visualizer'); 
             let isPlaying = false;
 
             if (musicBtn && bgMusic) {
@@ -2277,13 +2224,13 @@
                         playIcon.classList.remove('hidden');
                         pauseIcon.classList.add('hidden');
                         musicBtn.classList.remove('playing');
-                        visualizer.classList.remove('active'); // Hide visualizer
+                        visualizer.classList.remove('active'); 
                     } else {
                         bgMusic.play().then(() => {
                             playIcon.classList.add('hidden');
                             pauseIcon.classList.remove('hidden');
                             musicBtn.classList.add('playing');
-                            visualizer.classList.add('active'); // Show visualizer
+                            visualizer.classList.add('active'); 
                         }).catch(error => {
                             console.log("Audio playback failed: ", error);
                         });
@@ -2316,7 +2263,6 @@
                 breakpoints: { 768: { slidesPerView: 3, spaceBetween: 16 } },
             });
 
-            // LOGIKA SECTION MITRA (CAROUSEL & DATABASE)
             const mitraContainer = document.getElementById('mitra-container');
             const roleLabels = {
                 'own': { label: 'OWNER', class: 'accent-own' },
@@ -2333,7 +2279,6 @@
                     mitraData.forEach(mitra => {
                         const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
                         
-                        // Status simulasi (misal Online/Offline)
                         const status = Math.random() > 0.3 ? 'Online' : 'Away';
                         const statusColor = status === 'Online' ? '#4ade80' : '#fbbf24';
 
@@ -2399,10 +2344,9 @@
                             prevEl: ".swiper-button-prev",
                         },
                         breakpoints: {
-                            // REVISI BREAKPOINTS: Desktop jadi 5
                             640: { slidesPerView: 2, spaceBetween: 12 },
                             768: { slidesPerView: 3, spaceBetween: 14 },
-                            1024: { slidesPerView: 5, spaceBetween: 16 }, // Menampilkan 5 kartu di Desktop
+                            1024: { slidesPerView: 5, spaceBetween: 16 }, 
                             1280: { slidesPerView: 5, spaceBetween: 20 }
                         },
                     });
@@ -2415,7 +2359,6 @@
 
             loadMitraData();
 
-            // LOGIKA STATISTIK (NEW DATABASE)
             const statsContainer = document.getElementById('statistik-container');
 
             const loadStatistikData = async () => {
@@ -2449,7 +2392,6 @@
 
                     statsContainer.innerHTML = htmlContent;
 
-                    // FIX: Ensure elements fade in by adding is-visible class
                     const newCards = statsContainer.querySelectorAll('.animate-on-scroll');
                     const visibilityObserver = new IntersectionObserver((entries) => {
                         entries.forEach(entry => {
@@ -2460,7 +2402,6 @@
                     }, { threshold: 0.1 });
                     newCards.forEach(card => visibilityObserver.observe(card));
 
-                    // Re-attach observer for animation (only needed for the number counter)
                     const animateCounter = (el) => {
                         const target = +el.getAttribute('data-target');
                         const duration = 2000; 
@@ -2486,7 +2427,6 @@
                         });
                     }, { threshold: 0.3 }); 
                     
-                    // Observe again since content changed
                     statObserver.observe(document.getElementById('statistik'));
 
                 } catch (error) {
@@ -2618,9 +2558,6 @@
                 });
             });
 
-            
-            // STATS OBSERVER moved to loadStatistikData function to handle dynamic content
-            
             const infoModalContainer = document.getElementById('info-modal-container');
             const infoModalContent = document.getElementById('info-modal-content');
             const closeInfoModalBtn = document.getElementById('close-info-modal-btn');
@@ -2653,44 +2590,36 @@
                 });
             });
 
-            // REVISI PENTING: GLOBAL CLICK LISTENER UNTUK NAVIGASI FOOTER/LINK YANG CERDAS
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href').substring(1);
                     if (!targetId) return;
 
-                    // Daftar section untuk setiap tab
                     const berandaSections = ['home', 'mitra', 'statistik', 'kontak'];
                     const infoSections = ['layanan', 'faq'];
 
                     let targetTab = null;
 
-                    // Cek apakah target ada di Beranda
                     if (berandaSections.includes(targetId)) {
                         targetTab = 'tab-beranda';
                     } 
-                    // Cek apakah target ada di Informasi
                     else if (infoSections.includes(targetId)) {
                         targetTab = 'tab-informasi';
                     }
 
-                    // Jika target membutuhkan tab tertentu
                     if (targetTab) {
                         const targetTabButton = document.querySelector(`.hero-tab-button[data-tab="${targetTab}"]`);
                         
-                        // Jika tab yang dibutuhkan belum aktif
                         if (targetTabButton && !targetTabButton.classList.contains('active')) {
-                            // Klik tab secara programatik
                             targetTabButton.click();
                             
-                            // Tunggu sebentar agar layout berubah, baru scroll
-                            e.preventDefault(); // Mencegah scroll default yang mungkin gagal karena elemen hidden
+                            e.preventDefault(); 
                             setTimeout(() => {
                                 const targetElement = document.getElementById(targetId);
                                 if (targetElement) {
                                     targetElement.scrollIntoView({ behavior: 'smooth' });
                                 }
-                            }, 100); // Delay 100ms cukup untuk transisi JS
+                            }, 100); 
                         }
                     }
                 });
@@ -2703,7 +2632,6 @@
             document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
 
 
-            // LOGIKA SHARE BUTTON YANG DIPERBAIKI
             const shareButton = document.getElementById('share-button');
             const toast = document.getElementById('toast-notification');
 
@@ -2715,7 +2643,6 @@
                         url: window.location.href
                     };
 
-                    // Mencoba menggunakan Web Share API (Mobile)
                     try {
                         if (navigator.share) {
                             await navigator.share(shareData);
@@ -2723,10 +2650,8 @@
                             throw new Error('Web Share API not supported');
                         }
                     } catch (err) {
-                        // Fallback: Copy to clipboard (Desktop)
                         try {
                             await navigator.clipboard.writeText(window.location.href);
-                            // Tampilkan Toast
                             toast.classList.add('show');
                             setTimeout(() => {
                                 toast.classList.remove('show');
@@ -2738,22 +2663,18 @@
                 });
             }
 
-            // ROCKET BACK TO TOP ANIMATION LOGIC
             const backToTopBtn = document.getElementById('back-to-top-btn');
             window.addEventListener('scroll', () => {
                 window.scrollY > 400 ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible');
             });
             backToTopBtn.addEventListener('click', () => {
-                // Add class to trigger CSS animation
                 backToTopBtn.classList.add('launching');
                 
-                // Scroll up smoothly
                 window.scrollTo({ top: 0, behavior: 'smooth' });
 
-                // Reset button state after animation finishes (approx 1.5s)
                 setTimeout(() => {
                     backToTopBtn.classList.remove('launching');
-                    backToTopBtn.classList.remove('visible'); // Hide it since we are at top
+                    backToTopBtn.classList.remove('visible'); 
                 }, 1000);
             });
         });
