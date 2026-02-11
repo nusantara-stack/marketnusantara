@@ -31,7 +31,6 @@
             --color-orange-transparent: rgba(34, 211, 238, 0.15); 
 
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
-            /* PERBAIKAN: Definisi variabel hover yang sebelumnya hilang */
             --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%); 
             --color-gradient-glow: linear-gradient(to right, #22d3ee, #8b5cf6);
             --color-gradient-stats: linear-gradient(135deg, rgba(34, 211, 238, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
@@ -262,13 +261,12 @@
         #statistik {
             background-color: transparent; 
             background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
-            position: relative; /* Ensure relative positioning for UFO absolute child */
+            position: relative; 
         }
         .stat-card {
-            /* REVISI: Background Gradient */
             background: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 1.5rem; /* Lebih rounded */
+            border-radius: 1.5rem; 
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -285,7 +283,6 @@
             mix-blend-mode: overlay;
         }
 
-        /* Garis neon di bagian bawah */
         .stat-card::after {
             content: '';
             position: absolute;
@@ -313,6 +310,8 @@
         .mitra-swiper {
             width: 100%;
             padding: 2rem 0 3rem; 
+            /* REVISI: Pastikan overflow visible agar alien bisa muncul di luar kartu jika perlu (tangan di atas) */
+            /* Namun swiper butuh hidden. Kita akali dengan z-index */
         }
         
         .mitra-swiper .swiper-pagination-progressbar {
@@ -330,29 +329,82 @@
             border-radius: 3px;
             box-shadow: 0 0 10px var(--color-cyan);
         }
+        
+        /* === ALIEN PEEKING FROM CARD STYLES === */
+        .swiper-slide {
+            position: relative; /* Penting untuk positioning alien */
+            z-index: 1;
+        }
+        /* Saat slide aktif, z-index naik agar alien tidak tertutup slide sebelah */
+        .swiper-slide-active {
+            z-index: 10;
+        }
+
+        .alien-wrapper {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+        }
+        
+        .alien-hand {
+            position: absolute;
+            top: -6px; /* Muncul sedikit di atas border kartu */
+            width: 16px;
+            height: 20px;
+            background-color: #a78bfa; /* Warna ungu alien */
+            border-radius: 6px;
+            border: 1px solid #000;
+            z-index: 5; /* Di atas kartu */
+            transform: translateY(20px); /* Start hidden (turun) */
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .alien-hand.left { left: 25%; transform: translateY(20px) rotate(-10deg); }
+        .alien-hand.right { right: 25%; transform: translateY(20px) rotate(10deg); }
+        
+        .alien-hand.visible {
+            opacity: 1;
+        }
+        .alien-hand.left.visible { transform: translateY(0) rotate(-10deg); }
+        .alien-hand.right.visible { transform: translateY(0) rotate(10deg); }
+
+        .alien-head-card {
+            position: absolute;
+            top: 0; /* Mulai dari batas atas */
+            left: 50%;
+            transform: translateX(-50%) translateY(0); /* Posisi awal di belakang kartu */
+            width: 50px;
+            height: auto;
+            z-index: -1; /* DI BELAKANG KARTU */
+            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .alien-head-card.peeking {
+            transform: translateX(-50%) translateY(-75%); /* Nongol ke atas */
+        }
+
 
         .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); } 
         .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); } 
         .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); } 
         .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
-        /* === REVISI KARTU MITRA (Konten Lebih Kaya, No Text BG) === */
         .mitra-card {
-            height: 400px; /* Sedikit lebih tinggi untuk konten tambahan */
+            height: 400px; 
             width: 100%;
-            background-color: #0d0f14; /* Lebih gelap */
+            background-color: #0d0f14; 
             border-radius: 1rem;
             position: relative;
-            overflow: hidden;
+            /* REVISI: overflow hidden tetap ada untuk efek hover, tapi alien ditaruh di parent (.swiper-slide) */
+            overflow: hidden; 
             display: flex;
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             transition: all 0.3s ease;
+            z-index: 2; /* Kartu di depan kepala alien */
         }
 
         .mitra-card::before {
-            /* Hapus text background, ganti dengan top bar accent */
             content: '';
             position: absolute;
             top: 0; left: 0; right: 0;
@@ -362,7 +414,6 @@
             opacity: 0.7;
         }
         
-        /* Background pattern halus */
         .mitra-card-pattern {
             position: absolute;
             inset: 0;
@@ -406,7 +457,6 @@
             box-shadow: 0 0 20px var(--card-accent-dim);
         }
         
-        /* Status Badge */
         .mitra-status {
             position: absolute;
             top: 1rem;
@@ -437,7 +487,7 @@
             flex-grow: 1;
             display: flex;
             flex-direction: column;
-            justify-content: space-between; /* Layout diubah */
+            justify-content: space-between; 
             padding: 1.5rem;
             background: linear-gradient(to top, rgba(0,0,0,0.95) 10%, rgba(13, 15, 20, 0.8) 50%, transparent 100%);
         }
@@ -479,10 +529,10 @@
         }
 
         .btn-feed {
-            background-color: rgba(255,255,255,0.05); /* Sedikit bg */
+            background-color: rgba(255,255,255,0.05); 
             color: #fff; 
             padding: 0.6rem 1rem;
-            border-radius: 0.5rem; /* Kotak rounded */
+            border-radius: 0.5rem; 
             font-size: 0.8rem;
             font-weight: 600;
             text-transform: uppercase;
@@ -518,7 +568,7 @@
         }
 
         #faq {
-            background-color: transparent; /* Update untuk parallax */
+            background-color: transparent; 
             background-image: radial-gradient(circle at top left, var(--color-accent-transparent), transparent 40%);
         }
         .faq-item {
@@ -633,10 +683,7 @@
             display: block;
         }
         
-        .form-bracket {
-            /* Keep brackets but styling updated */
-            border-color: var(--color-violet);
-        }
+        /* Removed .form-bracket CSS */
         
         footer {
             position: relative;
@@ -893,23 +940,73 @@
             overflow: hidden;
         }
 
+        /* === NEW ROCKET BACK TO TOP STYLES === */
         #back-to-top-btn {
             position: fixed;
-            bottom: 1.5rem; 
-            right: 1.5rem; 
-            z-index: 40; 
+            bottom: 2rem; 
+            right: 2rem; 
+            z-index: 90; 
             opacity: 0;
             transform: translateY(20px);
             pointer-events: none;
             transition: opacity 0.3s ease, transform 0.3s ease;
-            background: var(--color-gradient-main); /* Gradient button */
+            background: none; /* No background for rocket */
             border: none;
+            box-shadow: none;
+            padding: 0;
+            cursor: pointer;
         }
         #back-to-top-btn.visible {
             opacity: 1;
             transform: translateY(0);
             pointer-events: auto;
         }
+        
+        /* Rocket Idle Animation */
+        #back-to-top-btn.visible .rocket-svg-container {
+            animation: rocket-idle 2s ease-in-out infinite;
+        }
+        @keyframes rocket-idle {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Rocket Launch Animation */
+        #back-to-top-btn.launching .rocket-svg-container {
+            animation: none; /* Stop idle */
+        }
+        #back-to-top-btn.launching {
+            transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.5s ease-in 0.5s;
+            transform: translateY(-120vh) scale(0.8); /* Fly up and out */
+            opacity: 0;
+        }
+        
+        /* REVISI: Pastikan roket berada di depan api */
+        .rocket-svg {
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Fire effect only visible when launching */
+        .rocket-fire {
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            transform-origin: top center;
+            /* REVISI: Tarik api ke atas agar menyatu dengan roket & taruh di belakang */
+            margin-top: -15px; 
+            z-index: -1;
+        }
+        #back-to-top-btn.launching .rocket-fire {
+            opacity: 1;
+            animation: fire-pulse 0.1s infinite alternate;
+        }
+        
+        /* REVISI FIX: Menambahkan translateX(-50%) ke dalam keyframes agar api tetap di tengah */
+        @keyframes fire-pulse {
+            from { transform: translateX(-50%) scaleY(1); }
+            to { transform: translateX(-50%) scaleY(1.3); }
+        }
+
 
         #music-control-btn {
             position: fixed;
@@ -1003,15 +1100,8 @@
             will-change: transform; 
         }
 
-        /* 2. Glitch Effect CSS */
-        @keyframes glitch-skew {
-            0% { transform: skew(0deg); }
-            20% { transform: skew(-2deg); }
-            40% { transform: skew(2deg); }
-            60% { transform: skew(-1deg); }
-            80% { transform: skew(1deg); }
-            100% { transform: skew(0deg); }
-        }
+        /* 2. Glitch Effect CSS - REMOVED SKEW TO FIX LAYOUT JITTER */
+        /* Only colors shifting now, no physical distortion */
         
         @keyframes glitch-anim {
             0% { text-shadow: 2px 0 var(--color-cyan), -2px 0 var(--color-violet); }
@@ -1022,7 +1112,8 @@
         }
 
         .glitch-active {
-            animation: glitch-anim 0.3s infinite linear, glitch-skew 0.3s infinite linear;
+            /* REVISI: Dihapus animation skew agar layout tidak goyang */
+            animation: glitch-anim 0.3s infinite linear;
         }
 
 
@@ -1105,22 +1196,6 @@
             50% { transform: translateY(-15px) rotate(3deg); }
         }
 
-        /* 3. PEEKING ALIEN */
-        .alien-container {
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%) translateX(100%); /* Start hidden */
-            width: 60px;
-            height: auto;
-            z-index: 40;
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-        }
-        .alien-container.peek {
-            transform: translateY(-50%) translateX(-10%); /* Peek out */
-        }
-
 
         @media (max-width: 768px) {
             html {
@@ -1148,6 +1223,14 @@
             
             .alien-container {
                 width: 40px;
+            }
+            
+            /* Alien Card adjustments for mobile */
+            .alien-head-card {
+                width: 40px;
+            }
+            .alien-hand {
+                width: 12px; height: 16px;
             }
 
             header#home {
@@ -1656,10 +1739,7 @@
                     </div>
 
                     <div class="contact-form-container animate-on-scroll fade-left" style="transition-delay: 200ms">
-                        <div class="form-bracket -top-3 -left-3 border-t-2 border-l-2"></div>
-                        <div class="form-bracket -top-3 -right-3 border-t-2 border-r-2"></div>
-                        <div class="form-bracket -bottom-3 -left-3 border-b-2 border-l-2"></div>
-                        <div class="form-bracket -bottom-3 -right-3 border-b-2 border-r-2"></div>
+                        <!-- REVISI: Dihapus bracket ungu -->
 
                         <h3 class="text-2xl font-bold mb-6 text-white">Formulir Kontak</h3>
                         <form id="contact-form" class="space-y-6">
@@ -1690,16 +1770,8 @@
 
     </main>
     
-    <!-- 3. ALIEN PEEKING ELEMENT ADDED HERE -->
-    <div id="alien-peek" class="alien-container">
-        <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-             <path d="M50 20 C30 20 15 40 15 65 C15 85 30 95 50 95 C70 95 85 85 85 65 C85 40 70 20 50 20" fill="#a78bfa"/>
-             <ellipse cx="35" cy="60" rx="10" ry="15" fill="#000" transform="rotate(-15 35 60)"/>
-             <ellipse cx="65" cy="60" rx="10" ry="15" fill="#000" transform="rotate(15 65 60)"/>
-             <circle cx="38" cy="55" r="3" fill="#fff"/>
-             <circle cx="62" cy="55" r="3" fill="#fff"/>
-        </svg>
-    </div>
+    <!-- 3. ALIEN PEEKING ELEMENT REMOVED FROM HERE TO BE INJECTED DYNAMICALLY -->
+    <!-- <div id="alien-peek" class="alien-container"></div> -->
     
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
@@ -1806,8 +1878,33 @@
     </div>
 
 
-    <button id="back-to-top-btn" title="Kembali ke Atas" class="w-12 h-12 rounded-full bg-[var(--color-accent)] text-black flex items-center justify-center shadow-lg hover:bg-[var(--color-accent-hover)] transform hover:scale-110 transition-all duration-300">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path></svg>
+    <!-- REVISI: Tombol Back to Top dengan ROKET SVG -->
+    <button id="back-to-top-btn" title="Kembali ke Atas">
+        <div class="rocket-svg-container relative w-12 h-20">
+             <!-- ROCKET BODY SVG -->
+            <svg class="rocket-svg w-full h-full drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" viewBox="0 0 100 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Fins -->
+                <path d="M20 100 L10 130 L30 120 Z" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+                <path d="M80 100 L90 130 L70 120 Z" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+                <!-- Body -->
+                <ellipse cx="50" cy="70" rx="30" ry="60" fill="#f3f4f6" stroke="#fff" stroke-width="2"/>
+                <!-- Window -->
+                <circle cx="50" cy="50" r="15" fill="#22d3ee" stroke="#3b82f6" stroke-width="3"/>
+                <circle cx="50" cy="50" r="5" fill="rgba(255,255,255,0.8)"/>
+                <!-- Nose Cone -->
+                <path d="M28 35 Q50 -10 72 35" fill="#ef4444" stroke="#fff" stroke-width="2"/>
+                <!-- Middle fin -->
+                <path d="M45 120 L55 120 L50 135 Z" fill="#ef4444"/>
+            </svg>
+            
+            <!-- FIRE TRAIL (Only visible on launch) - REVISI PATH AGAR SIMETRIS -->
+            <div class="rocket-fire absolute top-full left-1/2 -translate-x-1/2 w-8 h-12">
+                 <svg viewBox="0 0 50 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10 0 Q10 40 25 80 Q40 40 40 0 Z" fill="#fbbf24"/>
+                    <path d="M15 0 Q15 30 25 55 Q35 30 35 0 Z" fill="#ef4444"/>
+                 </svg>
+            </div>
+        </div>
     </button>
 
     <div id="social-proof-notification">
@@ -1849,7 +1946,7 @@
                 'rgba(139, 92, 246, 0.15)', 
                 'rgba(34, 211, 238, 0.15)', 
                 'rgba(59, 130, 246, 0.15)', 
-                'rgba(76, 29, 149, 0.15)'   
+                'rgba(76, 29, 149, 0.15)'    
             ];
 
             function resize() {
@@ -1895,20 +1992,12 @@
                     }
 
                     this.y -= this.vy; 
-                    // When warping, stars move DOWN fast to simulate forward movement if we look up, 
-                    // or usually stars streak outwards. Simple vertical streak is easiest.
-                    // Wait, usually space travel looks like stars coming AT you. 
-                    // Let's stick to vertical movement for consistency with parallax, but faster.
                     
                     if (this.y < 0) {
                         this.y = height;
                         this.x = Math.random() * width;
                     }
-                    // Wrap around if warp makes them go off screen too fast
                     if (this.y > height && isWarping) { 
-                       // Do nothing, we want them to go up? 
-                       // Wait, original logic: y -= vy. So they move UP.
-                       // If y < 0, reset to height.
                     }
 
                     this.draw();
@@ -2058,29 +2147,86 @@
             });
 
 
-            // --- ALIEN PEEKING LOGIC ---
-            const alien = document.getElementById('alien-peek');
-            if(alien) {
-                // Randomly peek out every 5-15 seconds
-                function randomPeek() {
-                    const randomTime = Math.random() * 10000 + 5000;
-                    setTimeout(() => {
-                        alien.classList.add('peek');
-                        
-                        // Hide after 2 seconds
-                        setTimeout(() => {
-                            alien.classList.remove('peek');
-                            randomPeek(); // Schedule next
-                        }, 2000);
-                    }, randomTime);
-                }
-                randomPeek();
+            // --- ALIEN PEEKING LOGIC (REVISI: PEEK BEHIND CARD) ---
+            
+            const alienHeadSVG = `
+                <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
+                     <path d="M50 20 C30 20 15 40 15 65 C15 85 30 95 50 95 C70 95 85 85 85 65 C85 40 70 20 50 20" fill="#a78bfa" stroke="#000" stroke-width="2"/>
+                     <ellipse cx="35" cy="60" rx="10" ry="15" fill="#000" transform="rotate(-15 35 60)"/>
+                     <ellipse cx="65" cy="60" rx="10" ry="15" fill="#000" transform="rotate(15 65 60)"/>
+                     <circle cx="38" cy="55" r="3" fill="#fff"/>
+                     <circle cx="62" cy="55" r="3" fill="#fff"/>
+                     <path d="M45 75 Q50 80 55 75" stroke="#000" stroke-width="2" fill="none"/>
+                </svg>
+            `;
+
+            function triggerMitraAlien() {
+                // Find active slide in Mitra section
+                const activeSlide = document.querySelector('.mitra-swiper .swiper-slide-active');
+                if (!activeSlide) return;
+
+                // Check if alien is already there to prevent dupes
+                if (activeSlide.querySelector('.alien-wrapper')) return;
+
+                // Create Alien Elements
+                const wrapper = document.createElement('div');
+                wrapper.className = 'alien-wrapper';
                 
-                // Click interaction
-                alien.addEventListener('click', () => {
-                    alien.classList.remove('peek');
-                });
+                const leftHand = document.createElement('div');
+                leftHand.className = 'alien-hand left';
+                
+                const rightHand = document.createElement('div');
+                rightHand.className = 'alien-hand right';
+                
+                const head = document.createElement('div');
+                head.className = 'alien-head-card';
+                head.innerHTML = alienHeadSVG;
+
+                wrapper.appendChild(head); // Head first (behind)
+                wrapper.appendChild(leftHand);
+                wrapper.appendChild(rightHand);
+                
+                activeSlide.appendChild(wrapper);
+
+                // Animation Sequence
+                // 1. Hands appear
+                setTimeout(() => {
+                    leftHand.classList.add('visible');
+                    rightHand.classList.add('visible');
+                }, 100);
+
+                // 2. Head peeks up
+                setTimeout(() => {
+                    head.classList.add('peeking');
+                }, 800);
+
+                // 3. Stay for a while, then hide head
+                setTimeout(() => {
+                    head.classList.remove('peeking');
+                }, 3500);
+
+                // 4. Hide hands
+                setTimeout(() => {
+                    leftHand.classList.remove('visible');
+                    rightHand.classList.remove('visible');
+                }, 4200);
+
+                // 5. Remove from DOM
+                setTimeout(() => {
+                    wrapper.remove();
+                    // Schedule next peek
+                    scheduleNextAlien();
+                }, 5000);
             }
+
+            function scheduleNextAlien() {
+                const randomTime = Math.random() * 10000 + 8000; // 8-18 seconds
+                setTimeout(triggerMitraAlien, randomTime);
+            }
+
+            // Start the cycle
+            scheduleNextAlien();
+
             
             // --- PARALLAX SCROLLING LOGIC ---
             // Saat scroll, kita menggeser canvas sedikit untuk efek kedalaman
@@ -2592,11 +2738,24 @@
                 });
             }
 
+            // ROCKET BACK TO TOP ANIMATION LOGIC
             const backToTopBtn = document.getElementById('back-to-top-btn');
             window.addEventListener('scroll', () => {
                 window.scrollY > 400 ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible');
             });
-            backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+            backToTopBtn.addEventListener('click', () => {
+                // Add class to trigger CSS animation
+                backToTopBtn.classList.add('launching');
+                
+                // Scroll up smoothly
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                // Reset button state after animation finishes (approx 1.5s)
+                setTimeout(() => {
+                    backToTopBtn.classList.remove('launching');
+                    backToTopBtn.classList.remove('visible'); // Hide it since we are at top
+                }, 1000);
+            });
         });
     </script>
 </body>
