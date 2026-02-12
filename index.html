@@ -70,6 +70,7 @@
             font-size: 16px;
             scrollbar-width: none;
             -ms-overflow-style: none;
+            cursor: none;
         }
 
         body {
@@ -1146,10 +1147,69 @@
             50% { transform: translateY(-15px) rotate(3deg); }
         }
 
+        .cursor-trail {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 10px;
+            height: 10px;
+            background: var(--color-cyan);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            mix-blend-mode: screen;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px var(--color-cyan);
+            animation: trail-fade 0.8s forwards;
+        }
+
+        @keyframes trail-fade {
+            0% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+
+        .asteroid-blur {
+            position: absolute;
+            z-index: 1;
+            pointer-events: none;
+            filter: blur(3px);
+            opacity: 0.4;
+            animation: asteroid-drift 20s infinite linear;
+        }
+        @keyframes asteroid-drift {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+            100% { transform: translateY(0) rotate(360deg); }
+        }
+
+        #custom-cursor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border: 1px solid var(--color-cyan);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 10000;
+            transition: width 0.2s, height 0.2s, background-color 0.2s;
+            mix-blend-mode: difference;
+        }
+        #custom-cursor.hovering {
+            width: 50px;
+            height: 50px;
+            background-color: rgba(34, 211, 238, 0.1);
+            border-color: var(--color-violet);
+        }
 
         @media (max-width: 768px) {
             html {
                 font-size: 13px !important;
+                cursor: auto; 
+            }
+            #custom-cursor, .cursor-trail {
+                display: none; 
             }
             
             .ufo-container {
@@ -1250,6 +1310,7 @@
     </style>
 </head>
 <body class="antialiased" oncontextmenu="return false;">
+    <div id="custom-cursor"></div>
     
     <div id="preloader">
         <div class="container mx-auto px-6 h-full">
@@ -1285,6 +1346,17 @@
 
         <canvas id="space-canvas"></canvas>
         <div class="fixed inset-0 z-[-1]" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%); pointer-events: none;"></div>
+        
+        <div class="asteroid-blur" style="top: 20%; left: 10%; width: 60px; height: 60px;">
+            <svg viewBox="0 0 100 100" fill="#4b5563">
+                <path d="M20 20 L40 10 L80 20 L90 50 L70 90 L30 80 L10 50 Z" />
+            </svg>
+        </div>
+        <div class="asteroid-blur" style="top: 70%; right: 15%; width: 40px; height: 40px; animation-duration: 25s;">
+             <svg viewBox="0 0 100 100" fill="#6b7280">
+                <path d="M30 10 L80 15 L90 60 L50 90 L10 60 Z" />
+            </svg>
+        </div>
 
 
         <header id="home" class="relative min-h-screen flex flex-col">
@@ -2676,6 +2748,48 @@
                     backToTopBtn.classList.remove('launching');
                     backToTopBtn.classList.remove('visible'); 
                 }, 1000);
+            });
+
+            const customCursor = document.getElementById('custom-cursor');
+            
+            document.addEventListener('mousemove', (e) => {
+                if (window.innerWidth > 768) { 
+                    customCursor.style.left = e.clientX + 'px';
+                    customCursor.style.top = e.clientY + 'px';
+                    
+                    const particle = document.createElement('div');
+                    particle.className = 'cursor-trail';
+                    particle.style.left = e.clientX + 'px';
+                    particle.style.top = e.clientY + 'px';
+                    document.body.appendChild(particle);
+                    
+                    setTimeout(() => {
+                        particle.remove();
+                    }, 800);
+                }
+            });
+
+            const interactiveElements = document.querySelectorAll('a, button, .mitra-card, .stat-card');
+            interactiveElements.forEach(el => {
+                el.addEventListener('mouseenter', () => customCursor.classList.add('hovering'));
+                el.addEventListener('mouseleave', () => customCursor.classList.remove('hovering'));
+            });
+
+            const magneticButtons = document.querySelectorAll('.btn-shine');
+            magneticButtons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    if (window.innerWidth > 768) {
+                        const rect = btn.getBoundingClientRect();
+                        const x = e.clientX - rect.left - rect.width / 2;
+                        const y = e.clientY - rect.top - rect.height / 2;
+                        
+                        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px) scale(1.05)`;
+                    }
+                });
+                
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = 'translate(0, 0) scale(1)';
+                });
             });
         });
     </script>
