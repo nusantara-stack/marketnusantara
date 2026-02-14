@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Market Nusantara - Marketplace Komunitas Kreatif</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
@@ -39,20 +39,25 @@
             --color-glass-border: rgba(255, 255, 255, 0.08);
         }
 
-        /* --- STABILIZATION FIXES (Anti-Jitter) --- */
-        /* Menerapkan Hardware Acceleration pada elemen fixed/sticky */
+        /* --- GLOBAL STABILIZATION --- */
+        html, body {
+            overflow-x: hidden; /* Mencegah geser kiri-kanan */
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+        }
+
+        /* Menerapkan Hardware Acceleration pada elemen fixed/sticky untuk mencegah jitter */
         .navbar-glass,
         #music-control-btn,
         #back-to-top-btn,
         #share-button,
-        #mobile-menu-button,
-        .mitra-card {
-            -webkit-transform: translate3d(0, 0, 0);
-            transform: translate3d(0, 0, 0);
+        #mobile-menu-button {
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            perspective: 1000px;
-            will-change: transform; /* Memberitahu browser untuk memisahkan layer */
+            will-change: transform; 
         }
 
         #preloader {
@@ -124,8 +129,7 @@
             z-index: 100;
             transition: width 0.1s ease-out;
             box-shadow: 0 0 15px var(--color-cyan);
-            /* Fix Jitter */
-            transform: translate3d(0,0,0);
+            transform: translateZ(0);
         }
         .nav-link {
             position: relative;
@@ -177,7 +181,6 @@
             backdrop-filter: blur(0.625rem);
             -webkit-backdrop-filter: blur(0.625rem);
             border-bottom: 0.0625rem solid var(--color-glass-border);
-            /* Fix Jitter Mobile Header */
             position: fixed;
             top: 0;
             left: 0;
@@ -220,7 +223,7 @@
             display: flex; 
             position: relative; 
             z-index: 1; 
-            transform: translate3d(0,0,0);
+            transform: translateZ(0);
         }
         
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
@@ -964,13 +967,12 @@
             box-shadow: none;
             padding: 0;
             cursor: pointer;
-            /* Fix Jitter */
-            transform: translate3d(0,0,0);
+            transform: translateZ(0);
             will-change: transform, opacity;
         }
         #back-to-top-btn.visible {
             opacity: 1;
-            transform: translate3d(0,0,0);
+            transform: translateZ(0);
             pointer-events: auto;
         }
         
@@ -1030,8 +1032,7 @@
             justify-content: center;
             color: var(--color-cyan);
             transition: all 0.3s ease;
-            /* Fix Jitter */
-            transform: translate3d(0,0,0);
+            transform: translateZ(0);
             will-change: transform;
         }
         #music-control-btn:hover {
@@ -1248,6 +1249,41 @@
         }
 
         @media (max-width: 768px) {
+            html, body {
+                /* Fix untuk "bergeser kanan kiri" */
+                overflow-x: hidden;
+                width: 100%;
+                max-width: 100%;
+                position: relative;
+                overscroll-behavior-x: none;
+            }
+
+            /* --- MEMATIKAN ZOOM IN/OUT DI MOBILE --- */
+            .animate-on-scroll.zoom-in {
+                transform: none !important;
+                opacity: 0;
+            }
+            .animate-on-scroll.is-visible {
+                opacity: 1;
+                transform: none !important;
+            }
+            .btn-shine:hover, .mitra-card:hover, .stat-card:hover {
+                transform: none !important;
+                box-shadow: none !important;
+            }
+
+            /* --- STABILISASI ELEMEN FIXED --- */
+            #music-control-btn, #back-to-top-btn {
+                transform: translateZ(0) !important;
+                /* Pastikan posisi aman dari tepi layar untuk menghindari layout shift */
+                left: 1.5rem; 
+                right: auto;
+            }
+            #back-to-top-btn {
+                left: auto;
+                right: 1.5rem;
+            }
+            
             html {
                 font-size: 13px !important;
                 cursor: auto; 
@@ -2300,8 +2336,6 @@
             startAlienCycle();
 
             
-            // REVISI: Menggunakan requestAnimationFrame untuk scroll event
-            // untuk menghindari "jitter" pada mobile
             let lastKnownScrollPosition = 0;
             let ticking = false;
 
@@ -2310,8 +2344,11 @@
 
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
-                        // Update background parallax dengan posisi scroll
-                        canvas.style.transform = `translate3d(0, ${lastKnownScrollPosition * 0.2}px, 0)`;
+                        // Hanya update posisi canvas jika LEBAR LAYAR > 768px (Desktop)
+                        // Untuk menghindari jitter di Mobile
+                        if (window.innerWidth > 768) {
+                            canvas.style.transform = `translate3d(0, ${lastKnownScrollPosition * 0.2}px, 0)`;
+                        }
                         
                         // Update progress bar
                         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -2657,8 +2694,6 @@
                 targetProps = getActiveLinkProps();
             });
 
-            // REVISI: Event listener scroll dipindahkan ke requestAnimationFrame di atas
-            // untuk performa lebih baik dan mengurangi jitter
             
             setTimeout(() => {
                 const initialProps = getActiveLinkProps();
@@ -2804,7 +2839,7 @@
             }
 
             const backToTopBtn = document.getElementById('back-to-top-btn');
-            // REVISI: Scroll event listener dipindahkan ke bagian atas dengan requestAnimationFrame
+            
             backToTopBtn.addEventListener('click', () => {
                 backToTopBtn.classList.add('launching');
                 
