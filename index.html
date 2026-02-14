@@ -191,8 +191,20 @@
         }
 
         .hero-swiper { width: 100%; }
-        .swiper-slide { height: auto; display: flex; position: relative; z-index: 1; }
-        .swiper-slide-active { z-index: 10; } 
+        
+        /* FIX: Stabilized Swiper Slides */
+        .swiper-slide { 
+            height: auto; 
+            display: flex; 
+            position: relative; 
+            z-index: 1; 
+            /* Fix for flickering during transition */
+            transform: translate3d(0,0,0);
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+        }
+        /* Removed dynamic z-index switching to prevent flickering */
+        /* .swiper-slide-active { z-index: 10; }  <-- Removed this cause of bug */
         
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
         
@@ -309,6 +321,8 @@
             width: 100%;
             padding: 2rem 0 3rem; 
             overflow: visible; 
+            /* Fix clipping issues */
+            contain: layout style; 
         }
         
         .mitra-swiper .swiper-pagination-progressbar {
@@ -389,8 +403,15 @@
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: all 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             z-index: 2; 
+            
+            /* Hardware Acceleration to fix disappearing children */
+            transform: translateZ(0); 
+            will-change: transform;
+            -webkit-font-smoothing: subpixel-antialiased;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
         }
 
         .mitra-card::before {
@@ -413,7 +434,9 @@
         }
 
         .mitra-card:hover {
-            transform: translateY(-8px);
+            /* Force Z-Index on hover only */
+            z-index: 20;
+            transform: translateY(-8px) translateZ(0);
             border-color: var(--card-accent);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--card-accent-dim);
         }
@@ -2004,8 +2027,6 @@
             class Nebula {
                 constructor() {
                     this.reset();
-                    this.x = Math.random() * width;
-                    this.y = Math.random() * height;
                 }
                 reset() {
                     this.x = Math.random() * width;
