@@ -191,20 +191,14 @@
         }
 
         .hero-swiper { width: 100%; }
-        
-        /* FIX: Stabilized Swiper Slides */
         .swiper-slide { 
             height: auto; 
             display: flex; 
             position: relative; 
             z-index: 1; 
-            /* Fix for flickering during transition */
+            /* REVISI: Menghapus properti yang menyebabkan repaint berlebih */
             transform: translate3d(0,0,0);
-            backface-visibility: hidden;
-            -webkit-backface-visibility: hidden;
         }
-        /* Removed dynamic z-index switching to prevent flickering */
-        /* .swiper-slide-active { z-index: 10; }  <-- Removed this cause of bug */
         
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
         
@@ -321,8 +315,14 @@
             width: 100%;
             padding: 2rem 0 3rem; 
             overflow: visible; 
-            /* Fix clipping issues */
-            contain: layout style; 
+            contain: layout style;
+            perspective: 1000px; /* REVISI: Menambahkan perspektif pada container utama */
+        }
+        
+        /* REVISI: Memastikan wrapper bergerak mulus secara linear */
+        .mitra-swiper .swiper-wrapper {
+            transition-timing-function: linear;
+            -webkit-transition-timing-function: linear;
         }
         
         .mitra-swiper .swiper-pagination-progressbar {
@@ -403,15 +403,17 @@
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            
+            /* REVISI: Menghapus transisi pada properti transform secara global untuk mencegah jitter */
+            /* Transisi transform hanya boleh aktif saat hover */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease; 
+            
             z-index: 2; 
             
-            /* Hardware Acceleration to fix disappearing children */
-            transform: translateZ(0); 
-            will-change: transform;
-            -webkit-font-smoothing: subpixel-antialiased;
-            backface-visibility: hidden;
+            /* REVISI: Menggunakan backface-visibility standar untuk performa */
             -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            transform: translate3d(0, 0, 0); /* Force GPU */
         }
 
         .mitra-card::before {
@@ -433,12 +435,14 @@
             z-index: 0;
         }
 
+        /* REVISI: Transisi transform didefinisikan secara eksplisit di sini */
         .mitra-card:hover {
-            /* Force Z-Index on hover only */
             z-index: 20;
-            transform: translateY(-8px) translateZ(0);
+            /* REVISI: Mengurangi jarak pergeseran agar tidak terlalu drastis */
+            transform: translateY(-5px) translateZ(0);
             border-color: var(--card-accent);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--card-accent-dim);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
         }
 
         .mitra-image-wrapper {
@@ -2354,6 +2358,8 @@
                 navigation: { nextEl: "#swiper-next" },
                 pagination: { el: '.hero-swiper-pagination', type: 'progressbar' },
                 breakpoints: { 768: { slidesPerView: 3, spaceBetween: 16 } },
+                // REVISI: Pastikan posisi bulat untuk menghindari teks kabur
+                roundLengths: true, 
             });
 
             const mitraContainer = document.getElementById('mitra-container');
@@ -2424,9 +2430,14 @@
                         slidesPerView: 2,
                         spaceBetween: 10, 
                         loop: true,
+                        speed: 3000, // REVISI: Menetapkan kecepatan konsisten
+                        // REVISI: Perbaikan konfigurasi untuk mencegah jitter
+                        roundLengths: true, // Wajib agar pixel tidak pecah
+                        grabCursor: true, 
                         autoplay: {
-                            delay: 3000,
+                            delay: 0,
                             disableOnInteraction: false,
+                            pauseOnMouseEnter: true // Jeda saat hover agar user bisa klik
                         },
                         pagination: {
                             el: ".swiper-pagination",
