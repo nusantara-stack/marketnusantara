@@ -39,6 +39,22 @@
             --color-glass-border: rgba(255, 255, 255, 0.08);
         }
 
+        /* --- STABILIZATION FIXES (Anti-Jitter) --- */
+        /* Menerapkan Hardware Acceleration pada elemen fixed/sticky */
+        .navbar-glass,
+        #music-control-btn,
+        #back-to-top-btn,
+        #share-button,
+        #mobile-menu-button,
+        .mitra-card {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            perspective: 1000px;
+            will-change: transform; /* Memberitahu browser untuk memisahkan layer */
+        }
+
         #preloader {
             position: fixed;
             top: 0;
@@ -108,6 +124,8 @@
             z-index: 100;
             transition: width 0.1s ease-out;
             box-shadow: 0 0 15px var(--color-cyan);
+            /* Fix Jitter */
+            transform: translate3d(0,0,0);
         }
         .nav-link {
             position: relative;
@@ -159,6 +177,12 @@
             backdrop-filter: blur(0.625rem);
             -webkit-backdrop-filter: blur(0.625rem);
             border-bottom: 0.0625rem solid var(--color-glass-border);
+            /* Fix Jitter Mobile Header */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
         }
         
         .glass-box {
@@ -196,7 +220,6 @@
             display: flex; 
             position: relative; 
             z-index: 1; 
-            /* REVISI: Menghapus properti yang menyebabkan repaint berlebih */
             transform: translate3d(0,0,0);
         }
         
@@ -316,10 +339,9 @@
             padding: 2rem 0 3rem; 
             overflow: visible; 
             contain: layout style;
-            perspective: 1000px; /* REVISI: Menambahkan perspektif pada container utama */
+            perspective: 1000px;
         }
         
-        /* REVISI: Memastikan wrapper bergerak mulus secara linear */
         .mitra-swiper .swiper-wrapper {
             transition-timing-function: linear;
             -webkit-transition-timing-function: linear;
@@ -403,17 +425,8 @@
             flex-direction: column;
             border: 1px solid rgba(255, 255, 255, 0.08); 
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            
-            /* REVISI: Menghapus transisi pada properti transform secara global untuk mencegah jitter */
-            /* Transisi transform hanya boleh aktif saat hover */
             transition: box-shadow 0.3s ease, border-color 0.3s ease; 
-            
             z-index: 2; 
-            
-            /* REVISI: Menggunakan backface-visibility standar untuk performa */
-            -webkit-backface-visibility: hidden;
-            backface-visibility: hidden;
-            transform: translate3d(0, 0, 0); /* Force GPU */
         }
 
         .mitra-card::before {
@@ -435,10 +448,8 @@
             z-index: 0;
         }
 
-        /* REVISI: Transisi transform didefinisikan secara eksplisit di sini */
         .mitra-card:hover {
             z-index: 20;
-            /* REVISI: Mengurangi jarak pergeseran agar tidak terlalu drastis */
             transform: translateY(-5px) translateZ(0);
             border-color: var(--card-accent);
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5), 0 0 15px var(--card-accent-dim);
@@ -953,10 +964,13 @@
             box-shadow: none;
             padding: 0;
             cursor: pointer;
+            /* Fix Jitter */
+            transform: translate3d(0,0,0);
+            will-change: transform, opacity;
         }
         #back-to-top-btn.visible {
             opacity: 1;
-            transform: translateY(0);
+            transform: translate3d(0,0,0);
             pointer-events: auto;
         }
         
@@ -1016,6 +1030,9 @@
             justify-content: center;
             color: var(--color-cyan);
             transition: all 0.3s ease;
+            /* Fix Jitter */
+            transform: translate3d(0,0,0);
+            will-change: transform;
         }
         #music-control-btn:hover {
             background: var(--color-accent-transparent);
@@ -2283,9 +2300,40 @@
             startAlienCycle();
 
             
+            // REVISI: Menggunakan requestAnimationFrame untuk scroll event
+            // untuk menghindari "jitter" pada mobile
+            let lastKnownScrollPosition = 0;
+            let ticking = false;
+
             window.addEventListener('scroll', () => {
-                const scrolled = window.scrollY;
-                canvas.style.transform = `translateY(${scrolled * 0.2}px)`;
+                lastKnownScrollPosition = window.scrollY;
+
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        // Update background parallax dengan posisi scroll
+                        canvas.style.transform = `translate3d(0, ${lastKnownScrollPosition * 0.2}px, 0)`;
+                        
+                        // Update progress bar
+                        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                        progressBar.style.width = `${(lastKnownScrollPosition / scrollHeight) * 100}%`;
+                        
+                        // Check back-to-top button
+                        if (lastKnownScrollPosition > 400) {
+                            backToTopBtn.classList.add('visible');
+                        } else {
+                            backToTopBtn.classList.remove('visible');
+                        }
+                        
+                        // Navbar logic (if needed)
+                        if (!desktopMenuContainer.matches(':hover')) {
+                            targetProps = getActiveLinkProps();
+                        }
+
+                        ticking = false;
+                    });
+
+                    ticking = true;
+                }
             });
 
 
@@ -2358,7 +2406,6 @@
                 navigation: { nextEl: "#swiper-next" },
                 pagination: { el: '.hero-swiper-pagination', type: 'progressbar' },
                 breakpoints: { 768: { slidesPerView: 3, spaceBetween: 16 } },
-                // REVISI: Pastikan posisi bulat untuk menghindari teks kabur
                 roundLengths: true, 
             });
 
@@ -2430,14 +2477,13 @@
                         slidesPerView: 2,
                         spaceBetween: 10, 
                         loop: true,
-                        speed: 3000, // REVISI: Menetapkan kecepatan konsisten
-                        // REVISI: Perbaikan konfigurasi untuk mencegah jitter
-                        roundLengths: true, // Wajib agar pixel tidak pecah
+                        speed: 3000, 
+                        roundLengths: true, 
                         grabCursor: true, 
                         autoplay: {
                             delay: 0,
                             disableOnInteraction: false,
-                            pauseOnMouseEnter: true // Jeda saat hover agar user bisa klik
+                            pauseOnMouseEnter: true 
                         },
                         pagination: {
                             el: ".swiper-pagination",
@@ -2611,18 +2657,8 @@
                 targetProps = getActiveLinkProps();
             });
 
-            
-            window.addEventListener('scroll', () => {
-                const scrollTop = document.documentElement.scrollTop;
-                const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-                progressBar.style.width = `${(scrollTop / scrollHeight) * 100}%`;
-                
-                
-                if (!desktopMenuContainer.matches(':hover')) {
-                    targetProps = getActiveLinkProps();
-                }
-            });
-            
+            // REVISI: Event listener scroll dipindahkan ke requestAnimationFrame di atas
+            // untuk performa lebih baik dan mengurangi jitter
             
             setTimeout(() => {
                 const initialProps = getActiveLinkProps();
@@ -2768,9 +2804,7 @@
             }
 
             const backToTopBtn = document.getElementById('back-to-top-btn');
-            window.addEventListener('scroll', () => {
-                window.scrollY > 400 ? backToTopBtn.classList.add('visible') : backToTopBtn.classList.remove('visible');
-            });
+            // REVISI: Scroll event listener dipindahkan ke bagian atas dengan requestAnimationFrame
             backToTopBtn.addEventListener('click', () => {
                 backToTopBtn.classList.add('launching');
                 
