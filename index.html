@@ -832,9 +832,11 @@
             transform: translateX(-150%);
             transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden; 
+            pointer-events: none; /* DEFAULT: Agar tidak menghalangi tombol saat invisible */
         }
         #social-proof-notification.visible {
             transform: translateX(0);
+            pointer-events: auto; /* ENABLE CLICK: Hanya saat visible */
         }
         #notification-progress-bar {
             position: absolute;
@@ -1079,7 +1081,7 @@
             position: fixed;
             bottom: 1.5rem;
             left: 1.5rem;
-            z-index: 45;
+            z-index: 100; /* Z-INDEX TINGGI (DIATAS 50) */
             width: 3.5rem;
             height: 3.5rem;
             background: var(--color-gradient-main);
@@ -1093,6 +1095,8 @@
             will-change: transform;
             border: none;
             box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
+            cursor: pointer; /* Pastikan cursor pointer */
+            touch-action: manipulation; /* Optimasi touch */
         }
         #music-control-btn:hover {
             transform: scale(1.05);
@@ -1112,7 +1116,7 @@
             position: fixed;
             bottom: 1.5rem;
             left: 1.5rem;
-            z-index: 46;
+            z-index: 101; /* Z-INDEX LEBIH TINGGI DARI BTN */
             background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
@@ -1130,6 +1134,7 @@
             opacity: 0;
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             overflow: hidden;
+            touch-action: manipulation;
         }
         #music-player-bar.active {
             transform: translateY(0);
@@ -1187,6 +1192,8 @@
             padding: 4px;
             border-radius: 50%;
             transition: color 0.2s;
+            cursor: pointer;
+            touch-action: manipulation;
         }
         .btn-mini-control:hover {
             color: #fff;
@@ -2588,18 +2595,28 @@
                 }
             }
 
-            if (musicBtn && bgMusic) {
-                // Main Button Click -> Start Music
-                musicBtn.addEventListener('click', () => {
-                    bgMusic.play().then(() => {
-                        isPlaying = true;
-                        musicBtn.classList.add('hidden-btn'); // Hide main button
-                        playerBar.classList.add('active'); // Show detailed player
-                        progressInterval = setInterval(updateProgress, 100);
-                    }).catch(error => {
-                        console.log("Audio playback failed: ", error);
-                    });
+            const handlePlay = (e) => {
+                // Prevent duplicate events
+                if (isPlaying && !playerBar.classList.contains('active')) {
+                     playerBar.classList.add('active');
+                     musicBtn.classList.add('hidden-btn');
+                     return;
+                }
+                
+                bgMusic.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.classList.add('hidden-btn'); 
+                    playerBar.classList.add('active'); 
+                    progressInterval = setInterval(updateProgress, 100);
+                }).catch(error => {
+                    console.log("Audio playback failed: ", error);
                 });
+            };
+
+            if (musicBtn && bgMusic) {
+                musicBtn.addEventListener('click', handlePlay);
+                // Also add touchstart for faster response on mobile if click is blocked
+                // musicBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handlePlay(); }, {passive: false});
 
                 // Mini Pause Button Click -> Stop Music & Reset UI
                 if(btnPauseMini) {
