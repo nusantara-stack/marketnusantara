@@ -51,6 +51,7 @@
         /* Hardware Acceleration untuk elemen fixed */
         .navbar-glass,
         #music-control-btn,
+        #music-player-bar,
         #back-to-top-btn,
         #share-button,
         #mobile-menu-button {
@@ -259,44 +260,6 @@
             z-index: -1;
         }
         .btn-shine:hover::before { left: 100%; }
-
-        /* --- ORBITING SATELLITE ANIMATION --- */
-        .orbit-container {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 120%;
-            height: 140%;
-            pointer-events: none;
-            z-index: 0;
-        }
-        .orbit-ring {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
-            border: 1px dashed rgba(34, 211, 238, 0.2);
-            animation: spin-slow 10s linear infinite;
-        }
-        .orbit-object {
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 8px;
-            height: 8px;
-            background: var(--color-cyan);
-            border-radius: 50%;
-            box-shadow: 0 0 10px var(--color-cyan);
-            transform: translate(-50%, -50%);
-        }
-        @keyframes spin-slow {
-            from { transform: translate(-50%, -50%) rotate(0deg); }
-            to { transform: translate(-50%, -50%) rotate(360deg); }
-        }
 
         /* --- FLOATING ROCKS (ASTEROIDS) --- */
         .floating-rock {
@@ -1117,58 +1080,122 @@
             bottom: 1.5rem;
             left: 1.5rem;
             z-index: 45;
-            width: 3rem;
-            height: 3rem;
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(5px);
-            border: 1px solid var(--color-glass-border);
-            border-radius: 9999px;
+            width: 3.5rem;
+            height: 3.5rem;
+            background: var(--color-gradient-main);
+            border-radius: 0.75rem; 
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-cyan);
+            color: #000;
             transition: all 0.3s ease;
             transform: translateZ(0);
             will-change: transform;
+            border: none;
+            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
         }
         #music-control-btn:hover {
-            background: var(--color-accent-transparent);
-            transform: scale(1.1);
+            transform: scale(1.05);
+            box-shadow: 0 6px 16px rgba(34, 211, 238, 0.5);
         }
         #music-control-btn.playing {
-            box-shadow: 0 0 15px var(--color-accent-transparent);
-            border-color: var(--color-cyan);
+            /* Keep it visible in logic, but visually we might hide it or change it */
         }
-        
-        #audio-visualizer {
-            position: fixed;
-            bottom: 2rem;
-            left: 5rem; 
-            z-index: 44;
-            display: flex;
-            align-items: flex-end;
-            gap: 2px;
-            height: 30px;
+        #music-control-btn.hidden-btn {
             opacity: 0;
-            transition: opacity 0.3s ease;
+            pointer-events: none;
+            transform: translateY(20px);
         }
-        #audio-visualizer.active {
+
+        /* --- NEW MUSIC PLAYER BAR --- */
+        #music-player-bar {
+            position: fixed;
+            bottom: 1.5rem;
+            left: 1.5rem;
+            z-index: 46;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.75rem;
+            padding: 0.75rem 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            width: auto;
+            min-width: 280px;
+            max-width: 90vw;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+            transform: translateY(150%);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            overflow: hidden;
+        }
+        #music-player-bar.active {
+            transform: translateY(0);
             opacity: 1;
         }
-        .visualizer-bar {
-            width: 3px;
-            background: var(--color-cyan);
-            border-radius: 2px;
-            animation: visualize 0.6s infinite ease-in-out alternate;
-            box-shadow: 0 0 3px var(--color-cyan);
+        
+        .music-cover {
+            width: 48px;
+            height: 48px;
+            border-radius: 6px;
+            background-color: #000;
+            object-fit: cover;
+            border: 1px solid rgba(255,255,255,0.1);
         }
-        .visualizer-bar:nth-child(even) {
-            background: var(--color-violet);
-            box-shadow: 0 0 3px var(--color-violet);
+        .music-info {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow: hidden;
         }
-        @keyframes visualize {
-            0% { height: 10%; }
-            100% { height: 100%; }
+        .music-title {
+            color: #fff;
+            font-size: 0.9rem;
+            font-weight: 700;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .music-artist {
+            color: var(--color-text-secondary);
+            font-size: 0.75rem;
+        }
+        .music-progress-container {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .music-progress-fill {
+            height: 100%;
+            background: var(--color-gradient-main);
+            width: 0%;
+            transition: width 0.1s linear;
+        }
+        .music-controls-mini {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .btn-mini-control {
+            color: var(--color-text-secondary);
+            padding: 4px;
+            border-radius: 50%;
+            transition: color 0.2s;
+        }
+        .btn-mini-control:hover {
+            color: #fff;
+            background: rgba(255,255,255,0.1);
+        }
+        
+        
+        #audio-visualizer {
+            display: none; /* Hide old visualizer */
         }
 
 
@@ -1368,7 +1395,7 @@
             }
 
             /* --- STABILISASI ELEMEN FIXED --- */
-            #music-control-btn, #back-to-top-btn {
+            #music-control-btn, #music-player-bar, #back-to-top-btn {
                 transform: translateZ(0) !important;
                 /* Pastikan posisi aman dari tepi layar untuk menghindari layout shift */
                 left: 1.5rem; 
@@ -1476,10 +1503,6 @@
                 top: -0.25rem !important;
             }
             .stat-card h3 { font-size: 1.5rem !important; }
-            
-            .faq-question { padding: 0.75rem !important; }
-            .faq-answer { padding: 0 0.75rem !important; }
-            .faq-item.active .faq-answer { padding: 0 0.75rem 0.75rem !important; }
             
             /* Filter Scroll on Mobile */
             .mitra-filter-container {
@@ -1848,11 +1871,6 @@
                     </div>
                     
                     <div class="text-center mt-12 animate-on-scroll fade-up relative">
-                        <div class="orbit-container">
-                             <div class="orbit-ring"></div>
-                             <div class="orbit-object"></div>
-                        </div>
-                        
                          <a href="https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V" target="_blank" class="btn-shine btn-primary inline-flex items-center justify-center gap-2 px-8 py-3 text-base font-bold rounded-lg transform hover:scale-105 transition-all duration-300 relative z-10">
                             Gabung Mitra
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
@@ -2071,32 +2089,45 @@
         Link disalin ke clipboard!
     </div>
 
+    <!-- Music Player Elements -->
     
-    <button id="music-control-btn" title="Play/Pause Music">
-        <svg id="music-play-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <!-- 1. The Play Button (Box Gradient) -->
+    <button id="music-control-btn" title="Play Music">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
-        <svg id="music-pause-icon" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
     </button>
+    
+    <!-- 2. The Detailed Player Bar (Hidden initially) -->
+    <div id="music-player-bar">
+        <!-- Progress Bar Background & Fill -->
+        <div class="music-progress-container">
+            <div id="music-progress-fill" class="music-progress-fill"></div>
+        </div>
+        
+        <!-- Album Art -->
+        <img src="https://files.catbox.moe/zq9ca1.png" alt="Album Art" class="music-cover">
+        
+        <!-- Info -->
+        <div class="music-info">
+            <div class="music-title">Space Melody</div>
+            <div class="music-artist">Market Nusantara</div>
+        </div>
+        
+        <!-- Mini Controls -->
+        <div class="music-controls-mini">
+            <button id="btn-pause-mini" class="btn-mini-control" title="Pause">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6" />
+                </svg>
+            </button>
+        </div>
+    </div>
+    
     <audio id="bg-music" src="assets/song.mp3" loop></audio>
     
-    <div id="audio-visualizer">
-        <div class="visualizer-bar" style="height: 40%; animation-delay: 0.1s;"></div>
-        <div class="visualizer-bar" style="height: 70%; animation-delay: 0.3s;"></div>
-        <div class="visualizer-bar" style="height: 50%; animation-delay: 0.0s;"></div>
-        <div class="visualizer-bar" style="height: 90%; animation-delay: 0.4s;"></div>
-        <div class="visualizer-bar" style="height: 60%; animation-delay: 0.2s;"></div>
-        <div class="visualizer-bar" style="height: 45%; animation-delay: 0.15s;"></div>
-        <div class="visualizer-bar" style="height: 80%; animation-delay: 0.35s;"></div>
-        <div class="visualizer-bar" style="height: 55%; animation-delay: 0.05s;"></div>
-        <div class="visualizer-bar" style="height: 95%; animation-delay: 0.45s;"></div>
-        <div class="visualizer-bar" style="height: 65%; animation-delay: 0.25s;"></div>
-        <div class="visualizer-bar" style="height: 50%; animation-delay: 0.1s;"></div>
-        <div class="visualizer-bar" style="height: 75%; animation-delay: 0.3s;"></div>
-    </div>
+    <!-- Removed Old Visualizer -->
 
 
     <button id="back-to-top-btn" title="Kembali ke Atas">
@@ -2541,34 +2572,49 @@
             setTimeout(triggerGlitch, 1000);
 
 
+            // --- MUSIC PLAYER LOGIC ---
             const musicBtn = document.getElementById('music-control-btn');
             const bgMusic = document.getElementById('bg-music');
-            const playIcon = document.getElementById('music-play-icon');
-            const pauseIcon = document.getElementById('music-pause-icon');
-            const visualizer = document.getElementById('audio-visualizer'); 
+            const playerBar = document.getElementById('music-player-bar');
+            const btnPauseMini = document.getElementById('btn-pause-mini');
+            const progressFill = document.getElementById('music-progress-fill');
             let isPlaying = false;
+            let progressInterval;
+
+            function updateProgress() {
+                if(bgMusic.duration) {
+                    const percent = (bgMusic.currentTime / bgMusic.duration) * 100;
+                    progressFill.style.width = percent + '%';
+                }
+            }
 
             if (musicBtn && bgMusic) {
+                // Main Button Click -> Start Music
                 musicBtn.addEventListener('click', () => {
-                    if (isPlaying) {
-                        bgMusic.pause();
-                        playIcon.classList.remove('hidden');
-                        pauseIcon.classList.add('hidden');
-                        musicBtn.classList.remove('playing');
-                        visualizer.classList.remove('active'); 
-                    } else {
-                        bgMusic.play().then(() => {
-                            playIcon.classList.add('hidden');
-                            pauseIcon.classList.remove('hidden');
-                            musicBtn.classList.add('playing');
-                            visualizer.classList.add('active'); 
-                        }).catch(error => {
-                            console.log("Audio playback failed: ", error);
-                        });
-                    }
-                    isPlaying = !isPlaying;
+                    bgMusic.play().then(() => {
+                        isPlaying = true;
+                        musicBtn.classList.add('hidden-btn'); // Hide main button
+                        playerBar.classList.add('active'); // Show detailed player
+                        progressInterval = setInterval(updateProgress, 100);
+                    }).catch(error => {
+                        console.log("Audio playback failed: ", error);
+                    });
                 });
+
+                // Mini Pause Button Click -> Stop Music & Reset UI
+                if(btnPauseMini) {
+                    btnPauseMini.addEventListener('click', () => {
+                        bgMusic.pause();
+                        isPlaying = false;
+                        clearInterval(progressInterval);
+                        
+                        // Revert UI
+                        playerBar.classList.remove('active');
+                        musicBtn.classList.remove('hidden-btn');
+                    });
+                }
             }
+
 
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('main-content');
