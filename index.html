@@ -50,8 +50,6 @@
 
         /* Hardware Acceleration untuk elemen fixed */
         .navbar-glass,
-        #music-control-btn,
-        #music-player-bar,
         #back-to-top-btn,
         #share-button,
         #mobile-menu-button {
@@ -1077,135 +1075,6 @@
         }
 
 
-        #music-control-btn {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 100; /* Z-INDEX TINGGI (DIATAS 50) */
-            width: 3.5rem;
-            height: 3.5rem;
-            background: var(--color-gradient-main);
-            border-radius: 0.75rem; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #000;
-            transition: all 0.3s ease;
-            transform: translateZ(0);
-            will-change: transform;
-            border: none;
-            box-shadow: 0 4px 12px rgba(34, 211, 238, 0.3);
-            cursor: pointer; /* Pastikan cursor pointer */
-            touch-action: manipulation; /* Optimasi touch */
-        }
-        #music-control-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 16px rgba(34, 211, 238, 0.5);
-        }
-        #music-control-btn.playing {
-            /* Keep it visible in logic, but visually we might hide it or change it */
-        }
-        #music-control-btn.hidden-btn {
-            opacity: 0;
-            pointer-events: none;
-            transform: translateY(20px);
-        }
-
-        /* --- NEW MUSIC PLAYER BAR --- */
-        #music-player-bar {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 101; /* Z-INDEX LEBIH TINGGI DARI BTN */
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 0.75rem;
-            padding: 0.75rem 1rem;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            width: auto;
-            min-width: 280px;
-            max-width: 90vw;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
-            transform: translateY(150%);
-            opacity: 0;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden;
-            touch-action: manipulation;
-        }
-        #music-player-bar.active {
-            transform: translateY(0);
-            opacity: 1;
-        }
-        
-        .music-cover {
-            width: 48px;
-            height: 48px;
-            border-radius: 6px;
-            background-color: #000;
-            object-fit: cover;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .music-info {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            overflow: hidden;
-        }
-        .music-title {
-            color: #fff;
-            font-size: 0.9rem;
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-        .music-artist {
-            color: var(--color-text-secondary);
-            font-size: 0.75rem;
-        }
-        .music-progress-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: rgba(255, 255, 255, 0.1);
-        }
-        .music-progress-fill {
-            height: 100%;
-            background: var(--color-gradient-main);
-            width: 0%;
-            transition: width 0.1s linear;
-        }
-        .music-controls-mini {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-        .btn-mini-control {
-            color: var(--color-text-secondary);
-            padding: 4px;
-            border-radius: 50%;
-            transition: color 0.2s;
-            cursor: pointer;
-            touch-action: manipulation;
-        }
-        .btn-mini-control:hover {
-            color: #fff;
-            background: rgba(255,255,255,0.1);
-        }
-        
-        
-        #audio-visualizer {
-            display: none; /* Hide old visualizer */
-        }
-
-
         #welcome-modal-content {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
             
@@ -1402,13 +1271,9 @@
             }
 
             /* --- STABILISASI ELEMEN FIXED --- */
-            #music-control-btn, #music-player-bar, #back-to-top-btn {
+            #back-to-top-btn {
                 transform: translateZ(0) !important;
                 /* Pastikan posisi aman dari tepi layar untuk menghindari layout shift */
-                left: 1.5rem; 
-                right: auto;
-            }
-            #back-to-top-btn {
                 left: auto;
                 right: 1.5rem;
             }
@@ -1850,10 +1715,10 @@
                     <!-- Mitra Filters -->
                     <div class="flex flex-wrap justify-center gap-2 mb-8 animate-on-scroll fade-up mitra-filter-container">
                         <button class="mitra-filter-btn active" data-filter="all">Semua</button>
-                        <button class="mitra-filter-btn" data-filter="own">Owner</button>
-                        <button class="mitra-filter-btn" data-filter="tk">Tangan Kanan</button>
-                        <button class="mitra-filter-btn" data-filter="pt">Partner</button>
-                        <button class="mitra-filter-btn" data-filter="pp">Paid Promote</button>
+                        <button class="mitra-filter-btn" data-filter="pp">PP</button>
+                        <button class="mitra-filter-btn" data-filter="own">OWN</button>
+                        <button class="mitra-filter-btn" data-filter="pt">PT</button>
+                        <button class="mitra-filter-btn" data-filter="tk">TK</button>
                     </div>
                     
                     <div class="relative group">
@@ -2095,46 +1960,6 @@
     <div id="toast-notification" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-md text-white text-sm px-4 py-2 rounded-full shadow-lg opacity-0 transform translate-y-4 transition-all duration-300">
         Link disalin ke clipboard!
     </div>
-
-    <!-- Music Player Elements -->
-    
-    <!-- 1. The Play Button (Box Gradient) -->
-    <button id="music-control-btn" title="Play Music">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-    </button>
-    
-    <!-- 2. The Detailed Player Bar (Hidden initially) -->
-    <div id="music-player-bar">
-        <!-- Progress Bar Background & Fill -->
-        <div class="music-progress-container">
-            <div id="music-progress-fill" class="music-progress-fill"></div>
-        </div>
-        
-        <!-- Album Art -->
-        <img src="https://files.catbox.moe/zq9ca1.png" alt="Album Art" class="music-cover">
-        
-        <!-- Info -->
-        <div class="music-info">
-            <div class="music-title">Space Melody</div>
-            <div class="music-artist">Market Nusantara</div>
-        </div>
-        
-        <!-- Mini Controls -->
-        <div class="music-controls-mini">
-            <button id="btn-pause-mini" class="btn-mini-control" title="Pause">
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 9v6m4-6v6" />
-                </svg>
-            </button>
-        </div>
-    </div>
-    
-    <audio id="bg-music" src="assets/song.mp3" loop></audio>
-    
-    <!-- Removed Old Visualizer -->
 
 
     <button id="back-to-top-btn" title="Kembali ke Atas">
@@ -2577,61 +2402,6 @@
             }
 
             setTimeout(triggerGlitch, 1000);
-
-
-            // --- MUSIC PLAYER LOGIC ---
-            const musicBtn = document.getElementById('music-control-btn');
-            const bgMusic = document.getElementById('bg-music');
-            const playerBar = document.getElementById('music-player-bar');
-            const btnPauseMini = document.getElementById('btn-pause-mini');
-            const progressFill = document.getElementById('music-progress-fill');
-            let isPlaying = false;
-            let progressInterval;
-
-            function updateProgress() {
-                if(bgMusic.duration) {
-                    const percent = (bgMusic.currentTime / bgMusic.duration) * 100;
-                    progressFill.style.width = percent + '%';
-                }
-            }
-
-            const handlePlay = (e) => {
-                // Prevent duplicate events
-                if (isPlaying && !playerBar.classList.contains('active')) {
-                     playerBar.classList.add('active');
-                     musicBtn.classList.add('hidden-btn');
-                     return;
-                }
-                
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicBtn.classList.add('hidden-btn'); 
-                    playerBar.classList.add('active'); 
-                    progressInterval = setInterval(updateProgress, 100);
-                }).catch(error => {
-                    console.log("Audio playback failed: ", error);
-                });
-            };
-
-            if (musicBtn && bgMusic) {
-                musicBtn.addEventListener('click', handlePlay);
-                // Also add touchstart for faster response on mobile if click is blocked
-                // musicBtn.addEventListener('touchstart', (e) => { e.preventDefault(); handlePlay(); }, {passive: false});
-
-                // Mini Pause Button Click -> Stop Music & Reset UI
-                if(btnPauseMini) {
-                    btnPauseMini.addEventListener('click', () => {
-                        bgMusic.pause();
-                        isPlaying = false;
-                        clearInterval(progressInterval);
-                        
-                        // Revert UI
-                        playerBar.classList.remove('active');
-                        musicBtn.classList.remove('hidden-btn');
-                    });
-                }
-            }
-
 
             const preloader = document.getElementById('preloader');
             const mainContent = document.getElementById('main-content');
