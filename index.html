@@ -315,6 +315,21 @@
             background-image: radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.1), transparent 40%);
             position: relative; 
         }
+        
+        /* NUSANTARA STARMAP CANVAS */
+        #nusantara-starmap {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; /* Behind content */
+            pointer-events: none;
+            opacity: 0.8;
+            mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+            -webkit-mask-image: radial-gradient(circle at center, black 60%, transparent 100%);
+        }
+
         .stat-card {
             background: linear-gradient(160deg, rgba(15, 23, 42, 0.8) 0%, rgba(30, 41, 59, 0.6) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -322,6 +337,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 2; /* Above starmap */
         }
         
         .stat-card::before {
@@ -918,6 +934,81 @@
             max-height: 0;
             pointer-events: none;
         }
+        
+        /* GRUP NUSANTARA STYLES - UPDATED DESIGN */
+        #grup-nusantara-container .group-card {
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        /* Efek Glow di pinggiran saat hover */
+        #grup-nusantara-container .group-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 2px;
+            background: linear-gradient(45deg, transparent, var(--color-cyan), transparent);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.3;
+            transition: opacity 0.4s ease;
+        }
+        
+        #grup-nusantara-container .group-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.15);
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
+        }
+        #grup-nusantara-container .group-card:hover::before {
+            opacity: 1;
+        }
+
+        #grup-nusantara-container .group-image {
+            width: 54px;
+            height: 54px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+        #grup-nusantara-container .group-card:hover .group-image {
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 15px var(--color-accent-transparent);
+        }
+
+        #grup-nusantara-container .join-btn {
+            background: var(--color-gradient-main);
+            color: #000;
+            font-size: 0.8rem;
+            font-weight: 800;
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            white-space: nowrap;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            border: none;
+            position: relative;
+            z-index: 2;
+        }
+        #grup-nusantara-container .join-btn:hover {
+            box-shadow: 0 0 15px var(--color-cyan), 0 0 30px var(--color-violet);
+            transform: scale(1.05);
+            color: white;
+        }
 
         header {
             transition: min-height 0.6s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1175,21 +1266,6 @@
             to { transform: rotate(360deg); }
         }
 
-        .astronaut-container {
-            position: absolute;
-            bottom: 20%;
-            right: 10%;
-            width: 80px;
-            height: auto;
-            z-index: 20;
-            pointer-events: none;
-            animation: astronaut-float 6s ease-in-out infinite;
-        }
-        @keyframes astronaut-float {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-15px) rotate(3deg); }
-        }
-
         .cursor-trail {
             position: fixed;
             top: 0;
@@ -1299,12 +1375,6 @@
                 right: 2%;
             }
             
-            .astronaut-container {
-                width: 50px;
-                bottom: 10%;
-                right: 5%;
-            }
-            
             .alien-container {
                 width: 40px;
             }
@@ -1388,6 +1458,15 @@
             .mitra-filter-container::-webkit-scrollbar {
                 display: none;
             }
+            
+            /* Grup Nusantara Mobile Fix */
+            #grup-nusantara-container .group-card {
+                padding: 10px;
+            }
+            #grup-nusantara-container .group-image {
+                width: 40px;
+                height: 40px;
+            }
         }
 
     </style>
@@ -1467,7 +1546,8 @@
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
                 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                     <a href="#home">
-                        <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="h-10 w-auto">
+                        <!-- HEADER LOGO UPDATED -->
+                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto">
                     </a>
                     
                     <div id="desktop-menu-container" class="hidden md:flex items-center space-x-8 relative">
@@ -1516,18 +1596,6 @@
                         <ellipse cx="50" cy="50" rx="45" ry="12" stroke="#8b5cf6" stroke-width="1" transform="rotate(-15 50 50)" fill="none" opacity="0.4"/>
                     </svg>
                 </div>
-                
-                <div class="astronaut-container">
-                    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="50" cy="35" r="20" fill="#f3f4f6" stroke="#fff" stroke-width="2"/>
-                        <path d="M38 30 C38 22, 62 22, 62 30 C62 40, 38 40, 38 30" fill="#22d3ee"/>
-                        <rect x="35" y="55" width="30" height="35" rx="5" fill="#f3f4f6"/>
-                        <path d="M35 60 L20 70" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M65 60 L80 50" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M40 90 L35 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
-                        <path d="M60 90 L65 110" stroke="#f3f4f6" stroke-width="8" stroke-linecap="round"/>
-                    </svg>
-                </div>
 
                 <div class="container mx-auto px-6 z-10 w-full">
                     <div class="flex flex-col md:flex-row items-end justify-between gap-8">
@@ -1543,7 +1611,8 @@
                                     Saluran
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
                                 </a>
-                                <a href="#" class="btn-shine inline-block px-4 py-2 sm:px-8 sm:py-3 text-sm text-center font-semibold text-white rounded-lg border border-[var(--color-glass-border)] bg-[var(--color-glass-bg)] hover:bg-white/20 transform hover:scale-105 transition-all duration-300">
+                                <!-- REVISION: Added ID for JS logic to switch tabs -->
+                                <a href="#" id="cta-gabung-komunitas" class="btn-shine inline-block px-4 py-2 sm:px-8 sm:py-3 text-sm text-center font-semibold text-white rounded-lg border border-[var(--color-glass-border)] bg-[var(--color-glass-bg)] hover:bg-white/20 transform hover:scale-105 transition-all duration-300">
                                     Gabung Komunitas
                                 </a>
                             </div>
@@ -1579,6 +1648,20 @@
                                     </div>
                                     
                                     <div id="tab-komunitas" class="tab-panel hidden">
+                                        <div class="glass-box p-6 rounded-lg border border-white/10">
+                                            <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
+                                                <span class="w-1 h-6 bg-[var(--color-cyan)] rounded-full"></span>
+                                                Grup Nusantara
+                                            </h3>
+                                            <p class="text-sm text-[var(--color-text-secondary)] mb-6">Bergabunglah dengan berbagai grup komunitas resmi kami untuk berdiskusi dan bertransaksi.</p>
+                                            
+                                            <!-- Container Grup Nusantara -->
+                                            <div id="grup-nusantara-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                <!-- Data akan di-load via JS -->
+                                                <div class="skeleton h-20 w-full rounded-xl"></div>
+                                                <div class="skeleton h-20 w-full rounded-xl"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1761,6 +1844,9 @@
             </div>
 
             <section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
+                <!-- Nusantara Starmap Canvas Background -->
+                <canvas id="nusantara-starmap"></canvas>
+                
                 <div class="ufo-container">
                     <div class="ufo-body">
                          <svg viewBox="0 0 100 60" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1774,7 +1860,7 @@
                     <div class="ufo-beam"></div>
                 </div>
 
-                <div class="container mx-auto px-6">
+                <div class="container mx-auto px-6 relative z-10">
                     <div class="grid lg:grid-cols-5 gap-12 items-center">
                         <div class="lg:col-span-3 animate-on-scroll fade-right">
                             <p class="text-sm font-bold flex items-center gap-2 text-[var(--color-accent)] mb-2">
@@ -1879,6 +1965,9 @@
 
     </main>
     
+    <!-- ... (Modals and Footers) ... -->
+    <!-- Kept intact as requested -->
+    
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div class="flex items-center justify-center w-full h-full p-4 md:p-8">
@@ -1909,7 +1998,8 @@
             <div class="container relative z-10 mx-auto px-6 lg:px-8 py-12">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
-                        <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="h-10 w-auto">
+                        <!-- FOOTER LOGO UPDATED -->
+                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto">
                     </a>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
@@ -2786,6 +2876,66 @@
                 });
             });
 
+            /* --- NEW: HERO CTA TO KOMUNITAS TAB LOGIC --- */
+            const ctaGabungKomunitas = document.getElementById('cta-gabung-komunitas');
+            if (ctaGabungKomunitas) {
+                ctaGabungKomunitas.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    // Cari tombol tab komunitas dan klik secara programatik
+                    const komunitasTabBtn = document.querySelector('.hero-tab-button[data-tab="tab-komunitas"]');
+                    if (komunitasTabBtn) {
+                        komunitasTabBtn.click();
+                        // Scroll sedikit agar tab terlihat penuh jika perlu (opsional)
+                        document.getElementById('hero-tabs-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            }
+            
+            /* --- LOAD DATA GRUP NUSANTARA (NEW) --- */
+            const grupNusantaraContainer = document.getElementById('grup-nusantara-container');
+            
+            const loadGrupNusantara = async () => {
+                try {
+                    const response = await fetch('DATABASE/grupnusantara.json');
+                    const data = await response.json();
+                    
+                    if (!data || data.length === 0) {
+                        grupNusantaraContainer.innerHTML = '<p class="text-gray-500 text-sm">Belum ada grup yang tersedia.</p>';
+                        return;
+                    }
+
+                    let htmlContent = '';
+                    data.forEach(grup => {
+                        // Layout: Image (Left) - Text (Middle) - Join Button (Right)
+                        // Sesuai dengan "Di kanan gambar ada nama..."
+                        htmlContent += `
+                            <div class="group-card">
+                                <div class="flex items-center gap-3 flex-grow">
+                                    <img src="${grup.image}" alt="${grup.nama}" class="group-image" onerror="this.src='https://placehold.co/48x48/1e293b/fff?text=${grup.nama.charAt(0)}'">
+                                    <div>
+                                        <h4 class="font-bold text-white text-sm leading-tight">${grup.nama}</h4>
+                                        <p class="text-xs text-[var(--color-text-secondary)] mt-0.5">${grup.member}</p>
+                                    </div>
+                                </div>
+                                <a href="${grup.link}" target="_blank" class="join-btn">
+                                    Gabung
+                                </a>
+                            </div>
+                        `;
+                    });
+                    
+                    grupNusantaraContainer.innerHTML = htmlContent;
+                    
+                } catch (error) {
+                    console.error('Error loading grup nusantara:', error);
+                    grupNusantaraContainer.innerHTML = '<p class="text-red-400 text-sm">Gagal memuat data grup.</p>';
+                }
+            };
+            
+            // Panggil saat tab komunitas diklik pertama kali, atau langsung saat load
+            loadGrupNusantara();
+
+
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     const targetId = this.getAttribute('href').substring(1);
@@ -2913,6 +3063,168 @@
                     btn.style.transform = 'translate(0, 0) scale(1)';
                 });
             });
+
+            /* ----------------------------------------------------------------
+               NUSANTARA STARMAP LOGIC
+               Membentuk pulau-pulau di Indonesia dengan partikel dan garis transaksi
+            ----------------------------------------------------------------- */
+            function initNusantaraStarmap() {
+                const container = document.getElementById('statistik');
+                const canvas = document.getElementById('nusantara-starmap');
+                if (!canvas || !container) return;
+
+                const ctx = canvas.getContext('2d');
+                let width, height;
+                let particles = [];
+                let transactions = [];
+                
+                // Koordinat relatif (0.0 - 1.0) untuk membentuk gugusan pulau
+                // Format: [xCenter, yCenter, widthSpread, heightSpread, count]
+                const islandClusters = [
+                    // Sumatera (Diagonal)
+                    { x: 0.15, y: 0.45, w: 0.12, h: 0.25, count: 50 }, 
+                    // Jawa (Horizontal)
+                    { x: 0.35, y: 0.75, w: 0.15, h: 0.08, count: 60 },
+                    // Kalimantan (Bulat/Kotak)
+                    { x: 0.45, y: 0.40, w: 0.12, h: 0.15, count: 55 },
+                    // Sulawesi (Bentuk K)
+                    { x: 0.62, y: 0.45, w: 0.08, h: 0.18, count: 40 },
+                    // Papua (Horizontal Besar)
+                    { x: 0.85, y: 0.50, w: 0.12, h: 0.12, count: 45 },
+                    // Nusa Tenggara & Bali
+                    { x: 0.55, y: 0.78, w: 0.10, h: 0.05, count: 20 },
+                    // Maluku
+                    { x: 0.72, y: 0.45, w: 0.06, h: 0.10, count: 15 }
+                ];
+
+                function resize() {
+                    width = container.offsetWidth;
+                    height = container.offsetHeight;
+                    canvas.width = width;
+                    canvas.height = height;
+                    createMapParticles();
+                }
+
+                function createMapParticles() {
+                    particles = [];
+                    islandClusters.forEach(cluster => {
+                        for (let i = 0; i < cluster.count; i++) {
+                            // Random gaussian-like distribution inside cluster
+                            const u = Math.random();
+                            const v = Math.random();
+                            // Box-muller transform approximation for organic spread
+                            const randX = (Math.random() - 0.5) * 2; 
+                            const randY = (Math.random() - 0.5) * 2;
+                            
+                            const x = (cluster.x + randX * cluster.w) * width;
+                            const y = (cluster.y + randY * cluster.h) * height;
+
+                            particles.push({
+                                x: x,
+                                y: y,
+                                baseAlpha: Math.random() * 0.5 + 0.1,
+                                size: Math.random() * 1.5 + 0.5,
+                                active: false // Highlighted status
+                            });
+                        }
+                    });
+                }
+
+                // Create a transaction line
+                function spawnTransaction() {
+                    if (particles.length < 2) return;
+                    const startNode = particles[Math.floor(Math.random() * particles.length)];
+                    const endNode = particles[Math.floor(Math.random() * particles.length)];
+                    
+                    // Don't connect if too close (optional)
+                    const dist = Math.hypot(startNode.x - endNode.x, startNode.y - endNode.y);
+                    if (dist < 50) return; 
+
+                    transactions.push({
+                        start: startNode,
+                        end: endNode,
+                        progress: 0,
+                        speed: Math.random() * 0.01 + 0.005,
+                        life: 1,
+                        color: Math.random() > 0.5 ? '#22d3ee' : '#8b5cf6'
+                    });
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, width, height);
+
+                    // Draw Map Particles
+                    particles.forEach(p => {
+                        ctx.fillStyle = '#ffffff';
+                        ctx.globalAlpha = p.baseAlpha;
+                        ctx.beginPath();
+                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+
+                    // Update & Draw Transactions
+                    for (let i = transactions.length - 1; i >= 0; i--) {
+                        let t = transactions[i];
+                        t.progress += t.speed;
+                        
+                        if (t.progress >= 1) {
+                            t.life -= 0.02; // Fade out
+                        }
+
+                        if (t.life <= 0) {
+                            transactions.splice(i, 1);
+                            continue;
+                        }
+
+                        // Calculate current head position
+                        const currentX = t.start.x + (t.end.x - t.start.x) * Math.min(t.progress, 1);
+                        const currentY = t.start.y + (t.end.y - t.start.y) * Math.min(t.progress, 1);
+
+                        // Draw Line
+                        ctx.strokeStyle = t.color;
+                        ctx.lineWidth = 1;
+                        ctx.globalAlpha = t.life * 0.4;
+                        ctx.beginPath();
+                        ctx.moveTo(t.start.x, t.start.y);
+                        ctx.lineTo(currentX, currentY);
+                        ctx.stroke();
+
+                        // Draw Glowing Head
+                        if (t.progress <= 1) {
+                            ctx.globalAlpha = 1;
+                            ctx.fillStyle = '#fff';
+                            ctx.shadowBlur = 10;
+                            ctx.shadowColor = t.color;
+                            ctx.beginPath();
+                            ctx.arc(currentX, currentY, 2, 0, Math.PI * 2);
+                            ctx.fill();
+                            ctx.shadowBlur = 0;
+                        } else {
+                            // Flash effect at destination
+                            ctx.globalAlpha = t.life;
+                            ctx.fillStyle = t.color;
+                            ctx.beginPath();
+                            ctx.arc(t.end.x, t.end.y, 4 * (1 - t.life) + 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+
+                    // Randomly spawn new transaction
+                    if (Math.random() < 0.05) { // Adjust probability for frequency
+                        spawnTransaction();
+                    }
+
+                    requestAnimationFrame(animate);
+                }
+
+                // Initial setup
+                window.addEventListener('resize', resize);
+                resize();
+                animate();
+            }
+
+            // Call function
+            initNusantaraStarmap();
         });
     </script>
 </body>
