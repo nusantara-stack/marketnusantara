@@ -1,30 +1,31 @@
 [
   {
     "nama": "REPPZ",
-    "foto": "assets/reppz.webp",
+    "foto": "assets/profile/reppz.webp",
     "role": "own",
     "link": "https://whatsapp.com/channel/0029VbCAHQxDOQIgRWg7EC0i"
   },
   {
     "nama": "NOXTT",
-    "foto": "assets/noxt.webp",
+    "foto": "assets/profile/noxt.webp",
     "role": "pp",
     "link": "https://www.whatsapp.com/channel/0029VbC3XXOHAdNVsPUeRh3y"
   },
   {
     "nama": "SAMUEL",
-    "foto": "assets/samuel.webp",
+    "foto": "assets/profile/samuel.webp",
     "role": "pp",
     "link": "https://whatsapp.com/channel/0029VbBzkQDDDmFWgcBVAw3G"
   },
   {
     "nama": "IKI STORE",
-    "foto": "iki.webp",
+    "foto": "assets/profile/iki.webp",
     "role": "pp",
     "link": "https://whatsapp.com/channel/0029Vb7BmcZJENxx46xaXl22"
   }
 
 ]
+
 
 
 
