@@ -926,8 +926,13 @@
         .tab-panel {
             transition: opacity 0.4s ease-in-out, max-height 0.5s ease-in-out;
             opacity: 1;
-            max-height: 500px; 
+            max-height: 0; 
             overflow: hidden;
+        }
+        /* FIX MOBILE LAYOUT: Saat tab panel tidak hidden, allow height tumbuh */
+        .tab-panel:not(.hidden) {
+            max-height: 5000px; /* Nilai besar agar konten tidak terpotong */
+            overflow: visible;
         }
         .tab-panel.hidden {
             opacity: 0;
@@ -935,79 +940,73 @@
             pointer-events: none;
         }
         
-        /* GRUP NUSANTARA STYLES - UPDATED DESIGN */
+        /* GRUP NUSANTARA STYLES - REVISED (Darker, Glow, Modern) */
+        #grup-nusantara-container {
+            /* Container styling (optional if needed) */
+        }
+
         #grup-nusantara-container .group-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.8));
+            /* Glassmorphism Dark Style similar to reference */
+            background: linear-gradient(180deg, rgba(20, 20, 25, 0.8) 0%, rgba(10, 10, 15, 0.95) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
+            border-radius: 12px;
             padding: 16px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 16px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            gap: 12px;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
         }
-        /* Efek Glow di pinggiran saat hover */
+        
+        /* Glow Effect on Hover */
+        #grup-nusantara-container .group-card:hover {
+            border-color: rgba(34, 211, 238, 0.3);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.1), inset 0 0 20px rgba(34, 211, 238, 0.05);
+            transform: translateY(-2px);
+        }
+
+        /* Subtle inner gradient highlight */
         #grup-nusantara-container .group-card::before {
             content: '';
             position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            padding: 2px;
-            background: linear-gradient(45deg, transparent, var(--color-cyan), transparent);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.3;
-            transition: opacity 0.4s ease;
-        }
-        
-        #grup-nusantara-container .group-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.5), 0 0 20px rgba(34, 211, 238, 0.15);
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.95));
-        }
-        #grup-nusantara-container .group-card:hover::before {
-            opacity: 1;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
         }
 
         #grup-nusantara-container .group-image {
-            width: 54px;
-            height: 54px;
-            border-radius: 12px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%; /* Circle icon */
             object-fit: cover;
             border: 2px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 10px rgba(0,0,0,0.3);
-            transition: all 0.3s ease;
-        }
-        #grup-nusantara-container .group-card:hover .group-image {
-            border-color: var(--color-cyan);
-            box-shadow: 0 0 15px var(--color-accent-transparent);
+            background-color: #1a1a2e;
         }
 
         #grup-nusantara-container .join-btn {
-            background: var(--color-gradient-main);
-            color: #000;
-            font-size: 0.8rem;
-            font-weight: 800;
-            padding: 8px 16px;
-            border-radius: 8px;
+            background: transparent;
+            color: var(--color-cyan);
+            border: 1px solid rgba(34, 211, 238, 0.3);
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 6px 16px;
+            border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
             white-space: nowrap;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-            border: none;
-            position: relative;
-            z-index: 2;
         }
+        
         #grup-nusantara-container .join-btn:hover {
-            box-shadow: 0 0 15px var(--color-cyan), 0 0 30px var(--color-violet);
-            transform: scale(1.05);
-            color: white;
+            background: rgba(34, 211, 238, 0.1);
+            border-color: var(--color-cyan);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
+            color: #fff;
         }
 
         header {
@@ -1460,12 +1459,15 @@
             }
             
             /* Grup Nusantara Mobile Fix */
+            #grup-nusantara-container {
+                grid-template-columns: 1fr;
+            }
             #grup-nusantara-container .group-card {
-                padding: 10px;
+                padding: 14px;
             }
             #grup-nusantara-container .group-image {
-                width: 40px;
-                height: 40px;
+                width: 44px;
+                height: 44px;
             }
         }
 
@@ -1546,8 +1548,8 @@
             <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
                 <div class="container mx-auto px-6 py-4 flex justify-between items-center">
                     <a href="#home">
-                        <!-- HEADER LOGO UPDATED -->
-                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto">
+                        <!-- HEADER LOGO UPDATED TO ROUNDED-FULL -->
+                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full">
                     </a>
                     
                     <div id="desktop-menu-container" class="hidden md:flex items-center space-x-8 relative">
@@ -1649,10 +1651,11 @@
                                     
                                     <div id="tab-komunitas" class="tab-panel hidden">
                                         <div class="glass-box p-6 rounded-lg border border-white/10">
-                                            <h3 class="text-xl font-bold mb-4 text-white flex items-center gap-2">
-                                                <span class="w-1 h-6 bg-[var(--color-cyan)] rounded-full"></span>
-                                                Grup Nusantara
-                                            </h3>
+                                            <div class="flex items-center gap-2 mb-4">
+                                                <div class="w-1 h-6 bg-[var(--color-cyan)] rounded-full"></div>
+                                                <h3 class="text-xl font-bold text-white">Grup Nusantara</h3>
+                                            </div>
+                                            
                                             <p class="text-sm text-[var(--color-text-secondary)] mb-6">Bergabunglah dengan berbagai grup komunitas resmi kami untuk berdiskusi dan bertransaksi.</p>
                                             
                                             <!-- Container Grup Nusantara -->
@@ -1966,7 +1969,6 @@
     </main>
     
     <!-- ... (Modals and Footers) ... -->
-    <!-- Kept intact as requested -->
     
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
@@ -1998,8 +2000,8 @@
             <div class="container relative z-10 mx-auto px-6 lg:px-8 py-12">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
-                        <!-- FOOTER LOGO UPDATED -->
-                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto">
+                        <!-- FOOTER LOGO UPDATED TO ROUNDED-FULL -->
+                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full">
                     </a>
                     <div class="flex space-x-4">
                         <a href="#" class="text-gray-400 hover:text-white transition-colors"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" /></svg></a>
@@ -2012,9 +2014,8 @@
                     <div>
                         <h3 class="font-bold mb-4 text-white">Mitra</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <li><a href="#mitra" class="hover:text-white transition-colors">Bank Digital</a></li>
-                            <li><a href="#mitra" class="hover:text-white transition-colors">Logistik</a></li>
-                            <li><a href="#mitra" class="hover:text-white transition-colors">Komunitas</a></li>
+                            <!-- Updated Footer Links to match sections -->
+                            <li><a href="#mitra" class="hover:text-white transition-colors">Semua Mitra</a></li>
                         </ul>
                     </div>
                     <div>
@@ -2028,7 +2029,8 @@
                     <div>
                         <h3 class="font-bold mb-4 text-white">Perusahaan</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <li><a href="#" class="footer-tab-link hover:text-white transition-colors" data-tab-target="tab-informasi" data-scroll-target="#tim-kami">Tentang Kami</a></li>
+                            <li><a href="#home" class="hover:text-white transition-colors">Tentang Kami</a></li>
+                            <li><a href="#home" class="hover:text-white transition-colors">Visi & Misi</a></li>
                         </ul>
                     </div>
                     <div>
@@ -2036,6 +2038,7 @@
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
                             <li><a href="#layanan" class="footer-tab-link hover:text-white transition-colors">Proses Layanan</a></li>
                             <li><a href="#faq" class="footer-tab-link hover:text-white transition-colors">FAQ</a></li>
+                            <li><a href="#kontak" class="hover:text-white transition-colors">Kontak Kami</a></li>
                         </ul>
                     </div>
                 </div>
@@ -2891,7 +2894,7 @@
                 });
             }
             
-            /* --- LOAD DATA GRUP NUSANTARA (NEW) --- */
+            /* --- LOAD DATA GRUP NUSANTARA (NEW DESIGN) --- */
             const grupNusantaraContainer = document.getElementById('grup-nusantara-container');
             
             const loadGrupNusantara = async () => {
@@ -2906,15 +2909,18 @@
 
                     let htmlContent = '';
                     data.forEach(grup => {
-                        // Layout: Image (Left) - Text (Middle) - Join Button (Right)
-                        // Sesuai dengan "Di kanan gambar ada nama..."
+                        // NEW CARD LAYOUT based on reference images
+                        // Dark background, rounded icon on left, name/member count in middle, small "GABUNG" button on right
                         htmlContent += `
                             <div class="group-card">
-                                <div class="flex items-center gap-3 flex-grow">
+                                <div class="flex items-center gap-3">
                                     <img src="${grup.image}" alt="${grup.nama}" class="group-image" onerror="this.src='https://placehold.co/48x48/1e293b/fff?text=${grup.nama.charAt(0)}'">
                                     <div>
-                                        <h4 class="font-bold text-white text-sm leading-tight">${grup.nama}</h4>
-                                        <p class="text-xs text-[var(--color-text-secondary)] mt-0.5">${grup.member}</p>
+                                        <h4 class="font-bold text-white text-sm leading-tight group-hover:text-[var(--color-cyan)] transition-colors">${grup.nama}</h4>
+                                        <p class="text-xs text-[var(--color-text-secondary)] mt-1 flex items-center gap-1">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                            ${grup.member} Anggota
+                                        </p>
                                     </div>
                                 </div>
                                 <a href="${grup.link}" target="_blank" class="join-btn">
