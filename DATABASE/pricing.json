@@ -1,0 +1,47 @@
+[
+  {
+    "tier": "PAID PROMOTE",
+    "price": "100.000",
+    "period": "3 Bulan",
+    "desc": "",
+    "features": [
+      "Akses Grup Komunitas",
+      "Rekber Aman Terpercaya",
+      "Biaya Admin Standar",
+      "Support via Tiket"
+    ],
+    "color": "silver",
+    "buttonGradient": "linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%)"
+  },
+  {
+    "tier": "VERIFIED",
+    "price": "Rp 49K",
+    "period": "permanent",
+    "desc": "Bangun reputasi & kepercayaan pelanggan.",
+    "features": [
+      "Badge Verified Seller",
+      "Diskon Fee Rekber 20%",
+      "Prioritas Posting FJB",
+      "Akses Grup VIP Seller",
+      "sf",
+      "Support WhatsApp Prioritas"
+    ],
+    "color": "gold",
+    "buttonGradient": "linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%)"
+  },
+  {
+    "tier": "PARTNER",
+    "price": "Rp 149K",
+    "period": "/ Bulan",
+    "desc": "Solusi bisnis maksimal & branding eksklusif.",
+    "features": [
+      "Badge Official Partner",
+      "Diskon Fee Rekber 50%",
+      "Slot Iklan di Website",
+      "Broadcast Promosi Mingguan",
+      "Jalur Support Pribadi (VIP)"
+    ],
+    "color": "platinum",
+    "buttonGradient": "linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)"
+  }
+]
