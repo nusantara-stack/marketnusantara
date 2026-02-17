@@ -2996,8 +2996,8 @@
                     pricingSwiperInstance = new Swiper(".pricing-swiper", {
                         slidesPerView: 1.25, // Mobile: Preview kartu kiri & kanan lebih jelas
                         centeredSlides: true, // Kartu aktif di tengah
-                        spaceBetween: 10, // REVISI: Jarak diperdekat (sebelumnya 20)
-                        loop: true, // Unlimited swipe
+                        spaceBetween: 7, // REVISI: Jarak diperdekat lagi (Mobile: 7)
+                        loop: true, // Unlimited swipe (kiri & kanan)
                         initialSlide: 1, // REVISI: Mulai dari kartu ke-2 (index 1)
                         grabCursor: true,
                         speed: 500, // Kecepatan transisi lebih smooth
@@ -3006,8 +3006,8 @@
                             type: "progressbar",
                         },
                         breakpoints: {
-                            640: { slidesPerView: 2, spaceBetween: 15, centeredSlides: true },
-                            1024: { slidesPerView: 3, spaceBetween: 20, centeredSlides: true } // Desktop: Jarak diperdekat
+                            640: { slidesPerView: 2, spaceBetween: 10, centeredSlides: true }, // Tablet
+                            1024: { slidesPerView: 3, spaceBetween: 10, centeredSlides: true } // Desktop: Jarak diperdekat (10)
                         },
                     });
 
