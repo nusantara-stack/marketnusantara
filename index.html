@@ -1885,8 +1885,6 @@
             </div>
 
             <section id="statistik" class="py-8 md:py-20 overflow-hidden" style="background-color: var(--color-background);">
-                <!-- Nusantara Starmap Canvas Background -->
-                <canvas id="nusantara-starmap"></canvas>
                 
                 <div class="ufo-container">
                     <div class="ufo-body">
@@ -1913,7 +1911,7 @@
                                 Kami bangga telah memfasilitasi ribuan transaksi, menghubungkan kreator dengan pelanggan, dan membangun komunitas yang kuat. Angka-angka ini adalah cerminan dari dedikasi dan kepercayaan yang Anda berikan.
                             </p>
                              <div class="glass-box p-6 rounded-lg flex items-center gap-4 border border-[var(--color-accent)]/30">
-                                <img src="https://files.catbox.moe/zq9ca1.png" alt="Market Nusantara Logo" class="w-16 h-16 object-contain rounded-full border-2 border-[var(--color-accent)] p-1 bg-white">
+                                <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="w-16 h-16 object-contain rounded-full border-2 border-[var(--color-accent)] p-1 bg-white">
                                 <div>
                                     <p class="text-white font-semibold">"Setiap transaksi adalah sebuah cerita. Kami berkomitmen untuk memastikan setiap cerita berakhir bahagia."</p>
                                     <p class="text-sm text-[var(--color-text-secondary)] mt-2">- Parhan M.P, Founder & CEO</p>
@@ -3109,167 +3107,6 @@
                 });
             });
 
-            /* ----------------------------------------------------------------
-               NUSANTARA STARMAP LOGIC
-               Membentuk pulau-pulau di Indonesia dengan partikel dan garis transaksi
-            ----------------------------------------------------------------- */
-            function initNusantaraStarmap() {
-                const container = document.getElementById('statistik');
-                const canvas = document.getElementById('nusantara-starmap');
-                if (!canvas || !container) return;
-
-                const ctx = canvas.getContext('2d');
-                let width, height;
-                let particles = [];
-                let transactions = [];
-                
-                // Koordinat relatif (0.0 - 1.0) untuk membentuk gugusan pulau
-                // Format: [xCenter, yCenter, widthSpread, heightSpread, count]
-                const islandClusters = [
-                    // Sumatera (Diagonal)
-                    { x: 0.15, y: 0.45, w: 0.12, h: 0.25, count: 50 }, 
-                    // Jawa (Horizontal)
-                    { x: 0.35, y: 0.75, w: 0.15, h: 0.08, count: 60 },
-                    // Kalimantan (Bulat/Kotak)
-                    { x: 0.45, y: 0.40, w: 0.12, h: 0.15, count: 55 },
-                    // Sulawesi (Bentuk K)
-                    { x: 0.62, y: 0.45, w: 0.08, h: 0.18, count: 40 },
-                    // Papua (Horizontal Besar)
-                    { x: 0.85, y: 0.50, w: 0.12, h: 0.12, count: 45 },
-                    // Nusa Tenggara & Bali
-                    { x: 0.55, y: 0.78, w: 0.10, h: 0.05, count: 20 },
-                    // Maluku
-                    { x: 0.72, y: 0.45, w: 0.06, h: 0.10, count: 15 }
-                ];
-
-                function resize() {
-                    width = container.offsetWidth;
-                    height = container.offsetHeight;
-                    canvas.width = width;
-                    canvas.height = height;
-                    createMapParticles();
-                }
-
-                function createMapParticles() {
-                    particles = [];
-                    islandClusters.forEach(cluster => {
-                        for (let i = 0; i < cluster.count; i++) {
-                            // Random gaussian-like distribution inside cluster
-                            const u = Math.random();
-                            const v = Math.random();
-                            // Box-muller transform approximation for organic spread
-                            const randX = (Math.random() - 0.5) * 2; 
-                            const randY = (Math.random() - 0.5) * 2;
-                            
-                            const x = (cluster.x + randX * cluster.w) * width;
-                            const y = (cluster.y + randY * cluster.h) * height;
-
-                            particles.push({
-                                x: x,
-                                y: y,
-                                baseAlpha: Math.random() * 0.5 + 0.1,
-                                size: Math.random() * 1.5 + 0.5,
-                                active: false // Highlighted status
-                            });
-                        }
-                    });
-                }
-
-                // Create a transaction line
-                function spawnTransaction() {
-                    if (particles.length < 2) return;
-                    const startNode = particles[Math.floor(Math.random() * particles.length)];
-                    const endNode = particles[Math.floor(Math.random() * particles.length)];
-                    
-                    // Don't connect if too close (optional)
-                    const dist = Math.hypot(startNode.x - endNode.x, startNode.y - endNode.y);
-                    if (dist < 50) return; 
-
-                    transactions.push({
-                        start: startNode,
-                        end: endNode,
-                        progress: 0,
-                        speed: Math.random() * 0.01 + 0.005,
-                        life: 1,
-                        color: Math.random() > 0.5 ? '#22d3ee' : '#8b5cf6'
-                    });
-                }
-
-                function animate() {
-                    ctx.clearRect(0, 0, width, height);
-
-                    // Draw Map Particles
-                    particles.forEach(p => {
-                        ctx.fillStyle = '#ffffff';
-                        ctx.globalAlpha = p.baseAlpha;
-                        ctx.beginPath();
-                        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-                        ctx.fill();
-                    });
-
-                    // Update & Draw Transactions
-                    for (let i = transactions.length - 1; i >= 0; i--) {
-                        let t = transactions[i];
-                        t.progress += t.speed;
-                        
-                        if (t.progress >= 1) {
-                            t.life -= 0.02; // Fade out
-                        }
-
-                        if (t.life <= 0) {
-                            transactions.splice(i, 1);
-                            continue;
-                        }
-
-                        // Calculate current head position
-                        const currentX = t.start.x + (t.end.x - t.start.x) * Math.min(t.progress, 1);
-                        const currentY = t.start.y + (t.end.y - t.start.y) * Math.min(t.progress, 1);
-
-                        // Draw Line
-                        ctx.strokeStyle = t.color;
-                        ctx.lineWidth = 1;
-                        ctx.globalAlpha = t.life * 0.4;
-                        ctx.beginPath();
-                        ctx.moveTo(t.start.x, t.start.y);
-                        ctx.lineTo(currentX, currentY);
-                        ctx.stroke();
-
-                        // Draw Glowing Head
-                        if (t.progress <= 1) {
-                            ctx.globalAlpha = 1;
-                            ctx.fillStyle = '#fff';
-                            ctx.shadowBlur = 10;
-                            ctx.shadowColor = t.color;
-                            ctx.beginPath();
-                            ctx.arc(currentX, currentY, 2, 0, Math.PI * 2);
-                            ctx.fill();
-                            ctx.shadowBlur = 0;
-                        } else {
-                            // Flash effect at destination
-                            ctx.globalAlpha = t.life;
-                            ctx.fillStyle = t.color;
-                            ctx.beginPath();
-                            ctx.arc(t.end.x, t.end.y, 4 * (1 - t.life) + 2, 0, Math.PI * 2);
-                            ctx.fill();
-                        }
-                    }
-
-                    // Randomly spawn new transaction
-                    if (Math.random() < 0.05) { // Adjust probability for frequency
-                        spawnTransaction();
-                    }
-
-                    requestAnimationFrame(animate);
-                }
-
-                // Initial setup
-                window.addEventListener('resize', resize);
-                resize();
-                animate();
-            }
-
-            // Call function
-            initNusantaraStarmap();
         });
     </script>
 </body>
