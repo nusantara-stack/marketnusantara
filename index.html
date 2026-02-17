@@ -2945,28 +2945,25 @@
             const loadPricingData = async () => {
                 try {
                     const response = await fetch('DATABASE/pricing.json');
-                    let pricingData = await response.json(); // Ubah ke 'let' agar bisa dimodifikasi
+                    let pricingData = await response.json(); 
                     
                     if (!pricingData || pricingData.length === 0) {
                         pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-gray-500 text-center w-full">Tidak ada data harga.</p></div>';
                         return;
                     }
 
-                    // --- FIX LOOPING: DUPLIKASI DATA ---
-                    // Agar swipe kiri & kanan bisa unlimited tanpa macet, Swiper butuh jumlah slide yang cukup banyak 
-                    // (lebih dari jumlah slide yang ditampilkan). Kita duplikasi data jika sedikit.
-                    const minSlidesForLoop = 12; // Jumlah aman agar loop sempurna di semua ukuran layar
+                    // --- FIX LOOPING & SPACING ---
+                    // 1. Duplikasi data agar loop swiper berjalan mulus ke segala arah
+                    const minSlidesForLoop = 12; 
                     if (pricingData.length > 0) {
                          const originalData = [...pricingData];
                          while (pricingData.length < minSlidesForLoop) {
                              pricingData = [...pricingData, ...originalData];
                          }
                     }
-                    // -----------------------------------
 
                     let html = '';
                     pricingData.forEach((item) => {
-                        // Features List
                         let featuresHtml = '';
                         item.features.forEach(feat => {
                             featuresHtml += `
@@ -3002,13 +2999,14 @@
                     
                     pricingWrapper.innerHTML = html;
 
-                    // Initialize Pricing Swiper with CLOSE SPACING & LOOP FIX
+                    // Initialize Pricing Swiper
+                    // REVISI: Mengubah slidesPerView Desktop agar kartu lebih rapat (anti-LDR)
                     pricingSwiperInstance = new Swiper(".pricing-swiper", {
-                        slidesPerView: 1.25, // Mobile: Preview kanan kiri terlihat
-                        centeredSlides: true, // Fokus tengah
-                        spaceBetween: 7, // PERTAHANKAN JARAK DEKAT (Mobile)
-                        loop: true, // Loop bekerja karena data sudah diduplikasi
-                        initialSlide: 1, // Mulai dari kartu ke-2 (Tengah)
+                        slidesPerView: 1.25, // Mobile: Kanan kiri terlihat dikit
+                        centeredSlides: true, 
+                        spaceBetween: 10, // Mobile gap
+                        loop: true, 
+                        initialSlide: 1, 
                         grabCursor: true,
                         speed: 500, 
                         pagination: {
@@ -3016,8 +3014,21 @@
                             type: "progressbar",
                         },
                         breakpoints: {
-                            640: { slidesPerView: 2, spaceBetween: 10, centeredSlides: true }, // Tablet: Jarak 10
-                            1024: { slidesPerView: 3, spaceBetween: 10, centeredSlides: true } // Desktop: PERTAHANKAN JARAK DEKAT (10)
+                            640: { 
+                                slidesPerView: 2.2, // Tablet: Sedikit lebih rapat dari 2
+                                spaceBetween: 15, 
+                                centeredSlides: true 
+                            }, 
+                            1024: { 
+                                slidesPerView: 3.75, // Desktop FIX: Angka ini membuat slot slide pas dengan lebar kartu (350px), menghilangkan gap kosong.
+                                spaceBetween: 20, // Jarak antar kartu yang nyaman (tidak terlalu jauh, tidak nempel)
+                                centeredSlides: true 
+                            },
+                            1280: {
+                                slidesPerView: 4, // Large Desktop: Lebih rapat lagi
+                                spaceBetween: 20,
+                                centeredSlides: true
+                            }
                         },
                     });
 
