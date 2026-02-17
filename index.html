@@ -446,44 +446,87 @@
         .mitra-swiper-button {
             display: none !important;
         }
+
+        /* --- PRICING SWIPER & CARDS --- */
+        .pricing-swiper {
+            width: 100%;
+            padding: 2rem 0 3rem; 
+            overflow: visible;
+        }
+        .pricing-swiper .swiper-pagination-progressbar {
+            position: absolute !important;
+            bottom: 0 !important;
+            top: auto !important;
+            left: 0 !important;
+            width: 100% !important;
+            height: 3px !important;
+            background: rgba(255, 255, 255, 0.15) !important;
+            border-radius: 3px;
+        }
+        .pricing-swiper .swiper-pagination-progressbar-fill {
+            background: var(--color-cyan) !important; 
+            border-radius: 3px;
+            box-shadow: 0 0 10px var(--color-cyan);
+        }
         
-        /* PRICING CARD STYLES */
+        /* PRICING CARD STYLES UPDATED */
         .pricing-card {
-            background: linear-gradient(160deg, #181b21 0%, #0f1115 100%);
+            /* Subtle Gradient Background */
+            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-radius: 1.5rem;
             padding: 2rem;
             position: relative;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
             display: flex;
             flex-direction: column;
             height: 100%;
+            overflow: hidden;
         }
+        
+        /* Halus Glow effect */
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 100%;
+            background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.05), transparent 60%);
+            pointer-events: none;
+        }
+
         .pricing-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5);
+            box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), inset 0 0 20px rgba(34, 211, 238, 0.05);
+            border-color: rgba(34, 211, 238, 0.3);
         }
+
         .pricing-badge {
             display: inline-block;
-            padding: 0.25rem 1rem;
+            padding: 0.35rem 1.2rem;
             border-radius: 9999px;
             font-size: 0.75rem;
-            font-weight: 700;
+            font-weight: 800;
             text-transform: uppercase;
-            color: white;
+            letter-spacing: 0.05em;
+            color: black !important;
+            background: var(--color-gradient-main) !important; /* Unified Gradient */
             margin-bottom: 1.5rem;
             align-self: flex-start;
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
+        
         .pricing-price {
             font-size: 3rem;
             font-weight: 800;
             color: white;
             line-height: 1;
             margin-bottom: 0.5rem;
+            text-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
         .pricing-period {
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 500;
             color: var(--color-text-secondary);
         }
         .pricing-desc {
@@ -511,28 +554,42 @@
             width: 1.25rem;
             height: 1.25rem;
             border-radius: 50%;
-            background: rgba(255,255,255,0.1);
+            background: rgba(34, 211, 238, 0.15); /* Cyan tint */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: var(--color-violet);
+            color: var(--color-cyan);
             flex-shrink: 0;
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
         }
         .pricing-btn {
             width: 100%;
-            padding: 0.75rem;
-            border-radius: 9999px;
-            font-weight: 600;
+            padding: 0.85rem;
+            border-radius: 0.75rem;
+            font-weight: 700;
             text-align: center;
             transition: all 0.3s ease;
-            background: transparent;
-            border: 1px solid rgba(255,255,255,0.2);
-            color: white;
+            background: var(--color-gradient-main) !important; /* Unified Gradient */
+            color: black !important;
             margin-top: auto;
+            border: none;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
         }
         .pricing-btn:hover {
-            border-color: transparent;
             transform: scale(1.02);
+            box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
+        }
+        .pricing-btn::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s ease;
+        }
+        .pricing-btn:hover::before {
+            left: 100%;
         }
 
 
@@ -1465,6 +1522,21 @@
                 overscroll-behavior-x: none;
             }
 
+            /* --- PRICING MOBILE ADJUSTMENTS --- */
+            .pricing-card {
+                padding: 1.5rem !important; 
+            }
+            .pricing-price {
+                font-size: 2.5rem !important; 
+            }
+            .pricing-badge {
+                font-size: 0.7rem !important;
+            }
+            .pricing-btn {
+                padding: 0.6rem !important;
+                font-size: 0.85rem !important;
+            }
+
             /* --- MEMATIKAN ZOOM IN/OUT DI MOBILE --- */
             .animate-on-scroll.zoom-in {
                 transform: none !important;
@@ -1608,6 +1680,7 @@
     </style>
 </head>
 <body class="antialiased" oncontextmenu="return false;">
+    <!-- ... (body content preserved until pricing section) ... -->
     <div id="custom-cursor"></div>
     
     <div id="preloader">
@@ -1970,13 +2043,16 @@
                         </div>
                     </div>
 
-                    <!-- PANEL: PRICING (New) -->
+                    <!-- PANEL: PRICING (New Carousel Layout) -->
                     <div id="pricing-panel" class="mitra-tab-content hidden">
-                        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto" id="pricing-container">
-                            <!-- Content loaded via JS -->
-                            <div class="skeleton h-96 w-full rounded-2xl"></div>
-                            <div class="skeleton h-96 w-full rounded-2xl"></div>
-                            <div class="skeleton h-96 w-full rounded-2xl"></div>
+                        <div class="swiper pricing-swiper">
+                            <div class="swiper-wrapper" id="pricing-wrapper">
+                                <!-- Content loaded via JS -->
+                                <div class="swiper-slide">
+                                    <div class="pricing-card skeleton h-96 w-full"></div>
+                                </div>
+                            </div>
+                            <div class="swiper-pagination"></div>
                         </div>
                     </div>
                 </div>
@@ -2108,9 +2184,8 @@
         </section>
 
     </main>
-    
-    <!-- ... (Modals and Footers) ... -->
-    
+
+    <!-- ... (Modals and Footers - Kept Same) ... -->
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div class="flex items-center justify-center w-full h-full p-4 md:p-8">
@@ -2229,7 +2304,7 @@
         </div>
         <div id="notification-progress-bar"></div>
     </div>
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
@@ -2446,7 +2521,7 @@
                 });
             });
 
-
+            // ... Alien Animation Code Preserved ... 
             const alienVariations = [
                 `
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
@@ -2684,6 +2759,9 @@
                         if (targetId === 'mitra-panel' && mitraSwiperInstance) {
                             mitraSwiperInstance.update();
                         }
+                        if (targetId === 'pricing-panel' && pricingSwiperInstance) {
+                             pricingSwiperInstance.update();
+                        }
                     }
                 });
             });
@@ -2827,37 +2905,29 @@
                 });
             });
 
-             /* --- PRICING DATA LOADING (NEW) --- */
-            const pricingContainer = document.getElementById('pricing-container');
+             /* --- PRICING DATA LOADING & SWIPER (REVISED) --- */
+            const pricingWrapper = document.getElementById('pricing-wrapper');
+            let pricingSwiperInstance = null;
+
             const loadPricingData = async () => {
                 try {
                     const response = await fetch('DATABASE/pricing.json');
                     const pricingData = await response.json();
                     
                     if (!pricingData || pricingData.length === 0) {
-                        pricingContainer.innerHTML = '<p class="text-gray-500 text-center col-span-full">Tidak ada data harga.</p>';
+                        pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-gray-500 text-center w-full">Tidak ada data harga.</p></div>';
                         return;
                     }
 
                     let html = '';
-                    pricingData.forEach((item, index) => {
-                        let gradientClass = '';
-                        // Assign gradient based on index or color property
-                        if (index % 3 === 0) gradientClass = 'background: var(--color-gradient-silver);';
-                        else if (index % 3 === 1) gradientClass = 'background: var(--color-gradient-gold);';
-                        else gradientClass = 'background: var(--color-gradient-platinum);';
-                        
-                        // Or use color from JSON if available
-                        if(item.color === 'pink') gradientClass = 'background: linear-gradient(135deg, #ec4899, #8b5cf6);';
-                        if(item.color === 'blue') gradientClass = 'background: linear-gradient(135deg, #3b82f6, #22d3ee);';
-
+                    pricingData.forEach((item) => {
                         // Features List
                         let featuresHtml = '';
                         item.features.forEach(feat => {
                             featuresHtml += `
                                 <li>
                                     <div class="check-icon-circle">
-                                        <svg class="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
                                         </svg>
                                     </div>
@@ -2866,28 +2936,46 @@
                             `;
                         });
 
+                        // Note: Badge and Button now use global CSS class gradient
                         html += `
-                            <div class="pricing-card">
-                                <div class="pricing-badge" style="${gradientClass}">${item.tier}</div>
-                                <div class="pricing-price">${item.price} <span class="pricing-period">${item.period}</span></div>
-                                <p class="pricing-desc">${item.desc}</p>
-                                
-                                <ul class="pricing-features">
-                                    ${featuresHtml}
-                                </ul>
-                                
-                                <button class="pricing-btn" style="border-color: rgba(255,255,255,0.2); background: transparent;" onmouseover="this.style.background='${item.buttonGradient || gradientClass.replace('background: ','')}'" onmouseout="this.style.background='transparent'">
-                                    Buy Ticket
-                                </button>
+                            <div class="swiper-slide h-auto">
+                                <div class="pricing-card">
+                                    <div class="pricing-badge">${item.tier}</div>
+                                    <div class="pricing-price">${item.price} <span class="pricing-period">${item.period}</span></div>
+                                    <p class="pricing-desc">${item.desc}</p>
+                                    
+                                    <ul class="pricing-features">
+                                        ${featuresHtml}
+                                    </ul>
+                                    
+                                    <a href="https://wa.me/6281330730463?text=Halo%20Admin,%20saya%20tertarik%20dengan%20paket%20${item.tier}" target="_blank" class="pricing-btn">
+                                        Hubungi Admin
+                                    </a>
+                                </div>
                             </div>
                         `;
                     });
                     
-                    pricingContainer.innerHTML = html;
+                    pricingWrapper.innerHTML = html;
+
+                    // Initialize Pricing Swiper
+                    pricingSwiperInstance = new Swiper(".pricing-swiper", {
+                        slidesPerView: 1.2, // Show part of next slide on mobile
+                        spaceBetween: 16,
+                        grabCursor: true,
+                        pagination: {
+                            el: ".swiper-pagination",
+                            type: "progressbar",
+                        },
+                        breakpoints: {
+                            640: { slidesPerView: 2, spaceBetween: 20 },
+                            1024: { slidesPerView: 3, spaceBetween: 30 }
+                        },
+                    });
 
                 } catch (error) {
                     console.error('Error loading pricing data:', error);
-                    pricingContainer.innerHTML = '<p class="text-red-400 text-center col-span-full">Gagal memuat data pricing.</p>';
+                    pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-red-400 text-center w-full">Gagal memuat data pricing.</p></div>';
                 }
             };
             loadPricingData();
