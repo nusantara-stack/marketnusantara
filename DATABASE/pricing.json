@@ -1,8 +1,8 @@
 [
   {
     "tier": "PAID PROMOTE",
-    "price": "100.000",
-    "period": "3 Bulan",
+    "price": "Rp 80K",
+    "period": "2 Bulan",
     "desc": "",
     "features": [
       "Akses Grup Komunitas",
@@ -10,13 +10,13 @@
       "Biaya Admin Standar",
       "Support via Tiket"
     ],
-    "color": "silver",
+    "color": "gold",
     "buttonGradient": "linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%)"
   },
   {
-    "tier": "VERIFIED",
-    "price": "Rp 49K",
-    "period": "permanent",
+    "tier": "OWNER",
+    "price": "Rp 100K",
+    "period": "Permanent",
     "desc": "Bangun reputasi & kepercayaan pelanggan.",
     "features": [
       "Badge Verified Seller",
@@ -31,8 +31,8 @@
   },
   {
     "tier": "PARTNER",
-    "price": "Rp 149K",
-    "period": "/ Bulan",
+    "price": "Rp 300K",
+    "period": "Permanent",
     "desc": "Solusi bisnis maksimal & branding eksklusif.",
     "features": [
       "Badge Official Partner",
