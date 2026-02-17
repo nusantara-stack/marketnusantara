@@ -2945,12 +2945,24 @@
             const loadPricingData = async () => {
                 try {
                     const response = await fetch('DATABASE/pricing.json');
-                    const pricingData = await response.json();
+                    let pricingData = await response.json(); // Ubah ke 'let' agar bisa dimodifikasi
                     
                     if (!pricingData || pricingData.length === 0) {
                         pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-gray-500 text-center w-full">Tidak ada data harga.</p></div>';
                         return;
                     }
+
+                    // --- FIX LOOPING: DUPLIKASI DATA ---
+                    // Agar swipe kiri & kanan bisa unlimited tanpa macet, Swiper butuh jumlah slide yang cukup banyak 
+                    // (lebih dari jumlah slide yang ditampilkan). Kita duplikasi data jika sedikit.
+                    const minSlidesForLoop = 12; // Jumlah aman agar loop sempurna di semua ukuran layar
+                    if (pricingData.length > 0) {
+                         const originalData = [...pricingData];
+                         while (pricingData.length < minSlidesForLoop) {
+                             pricingData = [...pricingData, ...originalData];
+                         }
+                    }
+                    // -----------------------------------
 
                     let html = '';
                     pricingData.forEach((item) => {
@@ -2969,8 +2981,6 @@
                             `;
                         });
 
-                        // Note: Badge and Button now use global CSS class gradient
-                        // REVISI: NOMOR WHATSAPP DIPERBARUI DISINI
                         html += `
                             <div class="swiper-slide h-auto">
                                 <div class="pricing-card">
@@ -2992,22 +3002,22 @@
                     
                     pricingWrapper.innerHTML = html;
 
-                    // Initialize Pricing Swiper with CENTER FOCUS & PREVIEW
+                    // Initialize Pricing Swiper with CLOSE SPACING & LOOP FIX
                     pricingSwiperInstance = new Swiper(".pricing-swiper", {
-                        slidesPerView: 1.25, // Mobile: Preview kartu kiri & kanan lebih jelas
-                        centeredSlides: true, // Kartu aktif di tengah
-                        spaceBetween: 7, // REVISI: Jarak diperdekat lagi (Mobile: 7)
-                        loop: true, // Unlimited swipe (kiri & kanan)
-                        initialSlide: 1, // REVISI: Mulai dari kartu ke-2 (index 1)
+                        slidesPerView: 1.25, // Mobile: Preview kanan kiri terlihat
+                        centeredSlides: true, // Fokus tengah
+                        spaceBetween: 7, // PERTAHANKAN JARAK DEKAT (Mobile)
+                        loop: true, // Loop bekerja karena data sudah diduplikasi
+                        initialSlide: 1, // Mulai dari kartu ke-2 (Tengah)
                         grabCursor: true,
-                        speed: 500, // Kecepatan transisi lebih smooth
+                        speed: 500, 
                         pagination: {
                             el: ".swiper-pagination",
                             type: "progressbar",
                         },
                         breakpoints: {
-                            640: { slidesPerView: 2, spaceBetween: 10, centeredSlides: true }, // Tablet
-                            1024: { slidesPerView: 3, spaceBetween: 10, centeredSlides: true } // Desktop: Jarak diperdekat (10)
+                            640: { slidesPerView: 2, spaceBetween: 10, centeredSlides: true }, // Tablet: Jarak 10
+                            1024: { slidesPerView: 3, spaceBetween: 10, centeredSlides: true } // Desktop: PERTAHANKAN JARAK DEKAT (10)
                         },
                     });
 
