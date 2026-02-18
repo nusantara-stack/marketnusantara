@@ -1,0 +1,32 @@
+[
+  {
+    "nama": "Agus Susanto",
+    "nomor": "0812-3456-7890",
+    "rekening": "BCA 1234567890",
+    "kasus": "Lari bawa kabur akun MLBB (Sultan)",
+    "tanggal": "12 Feb 2026",
+    "kerugian": "Rp 1.500.000",
+    "status": "DIPANTAU",
+    "bukti": "#"
+  },
+  {
+    "nama": "Budi Gaming Store (Palsu)",
+    "nomor": "0857-9876-5432",
+    "rekening": "DANA 085798765432",
+    "kasus": "Penipuan Top Up Diamond Ilegal",
+    "tanggal": "10 Feb 2026",
+    "kerugian": "Rp 500.000",
+    "status": "BLACKLIST",
+    "bukti": "#"
+  },
+  {
+    "nama": "Citra Lestari",
+    "nomor": "0896-1122-3344",
+    "rekening": "OVO 089611223344",
+    "kasus": "Jual beli akun FF, akun di-hackback",
+    "tanggal": "05 Feb 2026",
+    "kerugian": "Rp 250.000",
+    "status": "BLACKLIST",
+    "bukti": "#"
+  }
+]
