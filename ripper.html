@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Blacklist Ripper - Market Nusantara</title>
+    <title>Security Database - Market Nusantara</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
+        /* --- COPY DARI STYLE HOMEPAGE AGAR SERAGAM --- */
         :root {
             --color-background: #050505; 
-            --color-surface: #0f1115;
+            --color-surface-1: #0f1115;  
+            --color-surface-2: #181b21; 
             --color-text-primary: #f3f4f6;
             --color-text-secondary: #94a3b8; 
             
-            /* DANGER THEME COLORS */
-            --color-danger: #ef4444;
-            --color-danger-dark: #991b1b;
-            --color-danger-glow: rgba(239, 68, 68, 0.5);
-            
             --color-cyan: #22d3ee; 
+            --color-cyan-dark: #0891b2;
+            --color-violet: #8b5cf6;
+            
+            /* Danger Color untuk Status Blacklist */
+            --color-danger: #ef4444; 
+            --color-warning: #eab308;
+
             --color-glass-bg: rgba(15, 23, 42, 0.6); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
+            
+            --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
         }
 
         body {
@@ -32,206 +38,330 @@
             overflow-x: hidden;
         }
 
-        /* --- BACKGROUND SPACE --- */
+        /* --- BACKGROUND SPACE ALA HOMEPAGE --- */
         #space-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: #000;
         }
 
-        /* --- UI COMPONENTS --- */
-        .glass-panel {
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--color-glass-border);
-            border-radius: 1rem;
-        }
-
+        /* --- NAVBAR --- */
         .navbar-glass {
             background: rgba(5, 5, 5, 0.8);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-bottom: 1px solid var(--color-glass-border);
             position: fixed; top: 0; left: 0; right: 0; z-index: 50;
         }
 
-        /* --- RIPPER CARD STYLES --- */
-        .ripper-card {
-            background: linear-gradient(145deg, rgba(20, 0, 0, 0.6) 0%, rgba(40, 0, 0, 0.4) 100%);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            border-radius: 1rem;
-            padding: 1.5rem;
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-        }
-
-        .ripper-card:hover {
-            transform: translateY(-5px);
-            border-color: var(--color-danger);
-            box-shadow: 0 0 20px var(--color-danger-glow);
-        }
-
-        /* STAMP EFFECT */
-        .ripper-stamp {
-            position: absolute;
-            top: 20px;
-            right: -30px;
-            background: var(--color-danger);
-            color: black;
-            font-weight: 900;
-            font-size: 0.8rem;
-            padding: 5px 40px;
-            transform: rotate(45deg);
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            z-index: 10;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
+        /* --- SEARCH INPUT --- */
+        .search-container { max-width: 800px; margin: 0 auto; position: relative; }
         .search-input {
             width: 100%;
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--color-glass-border);
             color: white;
-            padding: 1rem 1.5rem;
-            border-radius: 999px;
-            transition: all 0.3s ease;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border-radius: 999px; /* Rounded full ala homepage */
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s;
         }
         .search-input:focus {
             outline: none;
-            border-color: var(--color-danger);
-            box-shadow: 0 0 15px var(--color-danger-glow);
+            border-color: var(--color-cyan);
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.2);
+        }
+        .search-icon { position: absolute; left: 1.25rem; top: 50%; transform: translateY(-50%); color: #94a3b8; }
+
+        /* --- LIST VIEW STYLES --- */
+        .database-container {
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
         }
 
-        .btn-report {
-            background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
-            color: white;
-            padding: 0.5rem 1rem;
+        /* Header Tabel (Desktop) */
+        .list-header {
+            display: grid;
+            grid-template-columns: 2.5fr 1.5fr 1.5fr 1fr 1fr; /* Kolom Identity lebih lebar */
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            background: rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            color: var(--color-cyan);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* List Item Row (Desktop & Mobile Base) */
+        .ripper-row {
+            display: grid;
+            grid-template-columns: 2.5fr 1.5fr 1.5fr 1fr 1fr;
+            gap: 1rem;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .ripper-row:last-child { border-bottom: none; }
+        
+        .ripper-row:hover {
+            background: rgba(34, 211, 238, 0.05);
+            z-index: 10;
+        }
+
+        /* --- MOBILE LIST VIEW (CUSTOM) --- */
+        @media (max-width: 768px) {
+            .list-header { display: none; } /* Hide header on mobile */
+            
+            .ripper-row {
+                /* Ubah grid menjadi Flex Column tapi tampilan compact */
+                display: flex;
+                flex-direction: column;
+                gap: 0.5rem;
+                padding: 1rem;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+                position: relative;
+            }
+
+            /* Identity Section (Avatar + Nama) */
+            .col-identity { 
+                width: 100%; 
+                display: flex; 
+                align-items: center; 
+                gap: 0.75rem; 
+                margin-bottom: 0.25rem;
+            }
+            
+            /* Info Grid kecil di dalam row */
+            .mobile-info-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.5rem;
+                width: 100%;
+                font-size: 0.8rem;
+            }
+            
+            .col-contact, .col-rekening, .col-stats, .col-action {
+                display: block; /* Reset grid placement */
+            }
+
+            /* Action Button Full Width Mobile */
+            .col-action { width: 100%; margin-top: 0.5rem; }
+            
+            /* Styling text mobile */
+            .mobile-label {
+                display: block;
+                font-size: 0.65rem;
+                color: #64748b;
+                margin-bottom: 2px;
+            }
+        }
+        /* Hide mobile helpers on desktop */
+        @media (min-width: 769px) {
+            .mobile-info-grid { display: contents; } /* Gunakan grid parent */
+            .mobile-label { display: none; }
+        }
+
+        /* Columns Styling */
+        .col-identity { display: flex; align-items: center; gap: 1rem; }
+        .avatar-small {
+            width: 40px; height: 40px;
+            border-radius: 50%; /* Circle ala homepage */
+            background: #1a0505;
+            border: 2px solid rgba(255,255,255,0.1);
+            object-fit: cover;
+        }
+        .ripper-name { font-weight: 700; color: white; font-size: 0.95rem; }
+        .ripper-case-preview { 
+            font-size: 0.75rem; 
+            color: var(--color-text-secondary); 
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .col-text { font-size: 0.85rem; color: #cbd5e1; font-family: 'Inter', sans-serif; }
+        .col-loss { color: var(--color-danger); font-weight: 700; }
+        
+        /* Badges */
+        .badge-status {
+            display: inline-flex; align-items: center; gap: 4px;
+            padding: 2px 8px; border-radius: 99px;
+            font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-blacklist { 
+            color: white; 
+            background: var(--color-danger);
+            box-shadow: 0 0 10px rgba(239, 68, 68, 0.4);
+        }
+        .badge-warning { 
+            color: black; 
+            background: var(--color-warning); 
+        }
+
+        /* Buttons */
+        .btn-view-sm {
+            display: inline-flex; justify-content: center; items-center;
+            width: 100%;
+            padding: 0.5rem 0.8rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--color-text-secondary);
             border-radius: 0.5rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            font-size: 0.85rem;
-            transition: all 0.3s ease;
+            transition: all 0.2s;
+            cursor: pointer;
         }
-        .btn-report:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 10px var(--color-danger);
+        .btn-view-sm:hover {
+            border-color: var(--color-cyan);
+            color: white;
+            background: rgba(34, 211, 238, 0.1);
+            box-shadow: 0 0 10px rgba(34, 211, 238, 0.2);
         }
 
+        /* --- STATS BAR --- */
+        .stats-bar {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem;
+            max-width: 600px; margin: 0 auto 2rem;
+        }
+        .stat-item { 
+            text-align: center; 
+            padding: 1rem;
+            background: var(--color-glass-bg);
+            border: 1px solid var(--color-glass-border);
+            border-radius: 1rem;
+        }
+        .stat-val { font-size: 1.5rem; font-weight: 800; color: white; line-height: 1; margin-bottom: 0.25rem; }
+        .stat-lbl { font-size: 0.75rem; color: var(--color-text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+
+        .glitch-text { animation: glitch 3s infinite; }
+        @keyframes glitch { 0% { text-shadow: 2px 0 var(--color-cyan); } 5% { text-shadow: -2px 0 var(--color-violet); } 10% { text-shadow: none; } 100% { text-shadow: none; } }
+        
         .skeleton {
             background: rgba(255,255,255,0.05);
             animation: pulse 1.5s infinite;
-            border-radius: 0.5rem;
+            border-radius: 4px;
         }
-        @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
-        }
+        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
-        .glitch-text {
-            position: relative;
-            animation: glitch-anim 3s infinite;
-        }
-        @keyframes glitch-anim {
-            0% { text-shadow: 2px 0 var(--color-danger), -2px 0 blue; }
-            5% { text-shadow: 2px 0 var(--color-danger), -2px 0 blue; }
-            10% { text-shadow: none; }
-            100% { text-shadow: none; }
-        }
     </style>
 </head>
 <body>
 
-    <!-- Canvas Background -->
+    <!-- BACKGROUND SAMA SEPERTI BERANDA -->
     <canvas id="space-canvas"></canvas>
-    <div style="position: fixed; inset: 0; background: linear-gradient(to top, #050505 0%, transparent 100%); z-index: -1;"></div>
+    <div style="position: fixed; inset: 0; background: linear-gradient(to top, #050505 0%, rgba(34, 211, 238, 0.05) 100%); z-index: -1;"></div>
 
-    <!-- Navbar -->
     <nav class="navbar-glass">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <a href="index.html" class="flex items-center gap-3">
-                <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-10 w-10 rounded-full border border-white/20">
-                <span class="font-bold text-lg hidden sm:block">Market Nusantara</span>
+                <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-8 w-8 rounded-full border border-white/20">
+                <div class="leading-none">
+                    <span class="block font-bold text-white text-sm">Market Nusantara</span>
+                    <span class="block text-[10px] text-cyan-400 font-mono tracking-widest">SECURITY DB</span>
+                </div>
             </a>
-            <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
-                Kembali ke Home
+            <a href="index.html" class="text-xs font-semibold text-gray-400 hover:text-white transition-colors flex items-center gap-1">
+                <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/></svg>
+                Kembali
             </a>
         </div>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container mx-auto px-6 pt-32 pb-20">
+    <main class="container mx-auto px-4 pt-28 pb-20 relative z-10">
         
-        <!-- Header Section -->
-        <div class="text-center mb-12">
-            <div class="inline-block p-2 rounded-full bg-red-500/10 border border-red-500/30 mb-4">
-                <svg class="w-8 h-8 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        <div class="text-center mb-8">
+            <div class="inline-block p-2 rounded-full bg-cyan-500/10 border border-cyan-500/30 mb-4">
+                <svg class="w-6 h-6 text-cyan-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
             </div>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-white mb-4 glitch-text">BLACKLIST RIPPER</h1>
-            <p class="text-gray-400 max-w-2xl mx-auto">
-                Daftar data penipu yang telah terverifikasi merugikan komunitas. Harap berhati-hati sebelum bertransaksi dengan identitas di bawah ini.
+            <h1 class="text-3xl md:text-4xl font-black text-white mb-2 glitch-text">BLACKLIST DATABASE</h1>
+            <p class="text-gray-400 text-sm max-w-lg mx-auto">
+                Cek identitas sebelum bertransaksi. Data diambil langsung dari laporan komunitas yang terverifikasi.
             </p>
         </div>
 
-        <!-- Search Section -->
-        <div class="max-w-xl mx-auto mb-12 relative">
-            <input type="text" id="searchInput" placeholder="Cari Nama / No. WhatsApp / No. Rekening..." class="search-input">
-            <svg class="w-6 h-6 text-gray-500 absolute right-4 top-1/2 transform -translate-y-1/2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-        </div>
-
-        <!-- Stats Grid (Optional) -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
-            <div class="glass-panel p-4 text-center border-red-500/30">
-                <div class="text-2xl font-bold text-red-500" id="total-kasus">0</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wider">Total Kasus</div>
+        <div class="stats-bar">
+            <div class="stat-item">
+                <div class="stat-val text-cyan-400" id="total-kasus">0</div>
+                <div class="stat-lbl">Total Laporan</div>
             </div>
-            <div class="glass-panel p-4 text-center border-red-500/30">
-                <div class="text-2xl font-bold text-red-500" id="total-kerugian">Rp 0</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wider">Total Kerugian</div>
-            </div>
-            <!-- Additional dummy stats -->
-            <div class="glass-panel p-4 text-center border-red-500/30 opacity-50">
-                <div class="text-2xl font-bold text-gray-300">24/7</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wider">Monitoring</div>
-            </div>
-             <div class="glass-panel p-4 text-center border-red-500/30 opacity-50">
-                <div class="text-2xl font-bold text-gray-300">100%</div>
-                <div class="text-xs text-gray-400 uppercase tracking-wider">Valid Data</div>
+            <div class="stat-item">
+                <div class="stat-val text-red-500" id="total-kerugian">0</div>
+                <div class="stat-lbl">Total Kerugian</div>
             </div>
         </div>
 
-        <!-- Ripper List Container -->
-        <div id="ripper-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <!-- Loading Skeletons -->
-            <div class="ripper-card h-64 skeleton"></div>
-            <div class="ripper-card h-64 skeleton"></div>
-            <div class="ripper-card h-64 skeleton"></div>
+        <!-- Search -->
+        <div class="search-container mb-8">
+            <svg class="search-icon w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            <input type="text" id="searchInput" placeholder="Cari Nama, No. HP, atau Rekening..." class="search-input" autocomplete="off">
         </div>
 
-        <!-- Empty State (Hidden by default) -->
-        <div id="empty-state" class="hidden text-center py-12">
-            <div class="text-gray-500 text-lg">Data tidak ditemukan. Semoga aman!</div>
+        <!-- DATABASE LIST CONTAINER -->
+        <div class="database-container max-w-5xl mx-auto">
+            
+            <!-- Desktop Header -->
+            <div class="list-header hidden md:grid">
+                <div>Identitas</div>
+                <div>Kontak</div>
+                <div>Rekening / E-Wallet</div>
+                <div>Status / Kerugian</div>
+                <div class="text-center">Aksi</div>
+            </div>
+
+            <!-- Rows Container -->
+            <div id="ripper-list-body">
+                <!-- Skeleton Row Loading -->
+                <div class="p-4 border-b border-white/5 animate-pulse flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-white/5 rounded-full"></div>
+                    <div class="flex-1 space-y-2">
+                        <div class="h-4 bg-white/5 rounded w-1/3"></div>
+                        <div class="h-3 bg-white/5 rounded w-1/4"></div>
+                    </div>
+                </div>
+                <div class="p-4 border-b border-white/5 animate-pulse flex gap-4 items-center">
+                    <div class="w-10 h-10 bg-white/5 rounded-full"></div>
+                    <div class="flex-1 space-y-2">
+                        <div class="h-4 bg-white/5 rounded w-1/3"></div>
+                        <div class="h-3 bg-white/5 rounded w-1/4"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div id="empty-state" class="hidden py-12 text-center">
+                <div class="inline-block p-4 rounded-full bg-white/5 mb-3">
+                    <svg class="w-8 h-8 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                </div>
+                <p class="text-gray-400 text-sm">Data tidak ditemukan.</p>
+            </div>
         </div>
 
     </main>
 
-    <!-- Footer Simple -->
-    <footer class="border-t border-white/10 bg-black/50 py-8 text-center">
-        <p class="text-gray-500 text-sm">&copy; 2025 Market Nusantara Security Division.</p>
-        <div class="mt-4">
-            <a href="https://wa.me/6281330730466?text=Lapor%20Ripper" target="_blank" class="text-red-500 hover:text-red-400 text-sm font-semibold border border-red-500/30 px-4 py-2 rounded-full hover:bg-red-500/10 transition-all">
-                Lapor Penipu Baru
-            </a>
-        </div>
+    <footer class="fixed bottom-0 w-full bg-black/80 backdrop-blur-md border-t border-white/10 py-4 text-center z-40">
+        <a href="https://wa.me/6281330730466?text=Lapor%20Ripper" target="_blank" class="text-xs text-cyan-400 hover:text-white font-bold uppercase tracking-wider flex items-center justify-center gap-2 transition-colors">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            Lapor Penipu Baru
+        </a>
     </footer>
 
     <script>
-        // --- SPACE BACKGROUND ANIMATION (Slightly Reddish) ---
+        // --- SPACE BACKGROUND ANIMATION (SAMA PERSIS BERANDA) ---
         const canvas = document.getElementById('space-canvas');
         const ctx = canvas.getContext('2d');
-        let width, height, particles = [];
+        let width, height;
 
         function resize() {
             width = window.innerWidth;
@@ -242,126 +372,123 @@
         window.addEventListener('resize', resize);
         resize();
 
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * height;
-                this.size = Math.random() * 2;
-                this.speed = Math.random() * 0.5 + 0.1;
-                // Color shift to Red/White for danger vibe
-                this.color = Math.random() > 0.8 ? '#ef4444' : '#ffffff'; 
-                this.opacity = Math.random() * 0.5 + 0.1;
-            }
-            update() {
-                this.y -= this.speed;
-                if (this.y < 0) this.reset();
-                this.draw();
-            }
-            draw() {
-                ctx.globalAlpha = this.opacity;
-                ctx.fillStyle = this.color;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-
-        for(let i=0; i<100; i++) particles.push(new Particle());
+        // Simple Star Animation to match homepage vibe
+        const stars = Array.from({ length: 100 }, () => ({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            size: Math.random() * 2,
+            speed: Math.random() * 0.2 + 0.1,
+            opacity: Math.random()
+        }));
 
         function animate() {
             ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => p.update());
+            ctx.fillStyle = "white";
+            stars.forEach(star => {
+                ctx.globalAlpha = star.opacity;
+                ctx.beginPath();
+                ctx.arc(star.x, star.y, star.size, 0, Math.PI * 2);
+                ctx.fill();
+                star.y -= star.speed;
+                if (star.y < 0) star.y = height;
+            });
             requestAnimationFrame(animate);
         }
         animate();
 
-
-        // --- LOAD RIPPER DATA ---
-        const container = document.getElementById('ripper-container');
+        // --- DATA LOGIC ---
+        const container = document.getElementById('ripper-list-body');
         const emptyState = document.getElementById('empty-state');
         const searchInput = document.getElementById('searchInput');
         let allData = [];
 
         async function loadData() {
             try {
-                // Fetch mock data
+                // FETCH DATA DARI DATABASE/ripper.json
                 const response = await fetch('DATABASE/ripper.json');
-                allData = await response.json();
+                const data = await response.json();
+                
+                // Gunakan data yang diambil
+                allData = data;
                 
                 // Update Stats
                 document.getElementById('total-kasus').innerText = allData.length;
-                // Calculate total loss (simple parsing)
-                // Note: In real app, cleaner number parsing is needed
+                let totalLoss = 0;
+                allData.forEach(item => {
+                    let num = item.kerugian.replace(/[^0-9]/g, '');
+                    totalLoss += parseInt(num) || 0;
+                });
+                document.getElementById('total-kerugian').innerText = new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumSignificantDigits: 3 }).format(totalLoss);
                 
                 renderData(allData);
+
             } catch (error) {
-                console.error("Gagal load data", error);
-                container.innerHTML = '<p class="text-red-500 text-center col-span-full">Gagal memuat database.</p>';
+                console.error("Error loading data:", error);
+                container.innerHTML = `<div class="p-8 text-center text-red-500">Gagal memuat database. Pastikan file DATABASE/ripper.json tersedia.</div>`;
             }
         }
 
         function renderData(data) {
             container.innerHTML = '';
             
-            if (data.length === 0) {
+            if (!data || data.length === 0) {
                 emptyState.classList.remove('hidden');
                 return;
             } else {
                 emptyState.classList.add('hidden');
             }
 
-            data.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'ripper-card animate-fade-up';
+            data.forEach((item) => {
+                const row = document.createElement('div');
+                row.className = 'ripper-row group';
                 
-                card.innerHTML = `
-                    <div class="ripper-stamp">${item.status}</div>
-                    
-                    <div class="flex items-start justify-between mb-4">
+                const badgeClass = item.status === 'BLACKLIST' ? 'badge-blacklist' : 'badge-warning';
+                
+                row.innerHTML = `
+                    <!-- Column 1: Identity -->
+                    <div class="col-identity">
+                        <img src="https://placehold.co/100x100/1a0505/22d3ee?text=${item.nama.charAt(0)}" class="avatar-small">
+                        <div style="flex: 1; min-width: 0;">
+                            <div class="ripper-name truncate">${item.nama}</div>
+                            <!-- Mobile: Show Case preview under name -->
+                            <div class="ripper-case-preview md:hidden">"${item.kasus}"</div>
+                            <!-- Desktop: Show Date -->
+                            <div class="ripper-case-preview hidden md:block">${item.tanggal}</div>
+                        </div>
+                    </div>
+
+                    <!-- Column 2: Contact -->
+                    <div class="col-contact mobile-info-grid">
+                        <span class="mobile-label">Kontak</span>
+                        <div class="col-text text-gray-300">${item.nomor}</div>
+                    </div>
+
+                    <!-- Column 3: Rekening -->
+                    <div class="col-rekening mobile-info-grid">
+                        <span class="mobile-label">Rekening</span>
+                        <div class="col-text text-white font-medium">${item.rekening}</div>
+                    </div>
+
+                    <!-- Column 4: Status/Stats -->
+                    <div class="col-stats mobile-info-grid">
+                        <span class="mobile-label">Status & Kerugian</span>
                         <div>
-                            <h3 class="text-xl font-bold text-white mb-1">${item.nama}</h3>
-                            <p class="text-red-400 text-sm font-mono">${item.nomor}</p>
-                        </div>
-                        <div class="bg-red-500/20 p-2 rounded-lg">
-                            <svg class="w-6 h-6 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
+                            <div class="${badgeClass} badge-status mb-1">${item.status}</div>
+                            <div class="col-loss text-xs">${item.kerugian}</div>
                         </div>
                     </div>
 
-                    <div class="space-y-3 text-sm text-gray-300 mb-6">
-                        <div class="flex justify-between border-b border-white/5 pb-2">
-                            <span class="text-gray-500">Rekening</span>
-                            <span class="font-mono text-white">${item.rekening}</span>
-                        </div>
-                        <div class="flex justify-between border-b border-white/5 pb-2">
-                            <span class="text-gray-500">Kerugian</span>
-                            <span class="text-red-400 font-bold">${item.kerugian}</span>
-                        </div>
-                        <div class="flex justify-between border-b border-white/5 pb-2">
-                            <span class="text-gray-500">Tanggal</span>
-                            <span>${item.tanggal}</span>
-                        </div>
-                         <div class="pt-2">
-                            <span class="text-gray-500 block mb-1">Kasus:</span>
-                            <p class="italic text-gray-400">"${item.kasus}"</p>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-2">
-                         <a href="https://wa.me/6281330730466?text=Halo%20Admin,%20saya%20ingin%20cek%20bukti%20ripper%20atas%20nama%20${item.nama}" target="_blank" class="btn-report w-full text-center">
+                    <!-- Column 5: Action -->
+                    <div class="col-action">
+                        <a href="https://wa.me/6281330730466?text=Halo%20Admin,%20saya%20ingin%20cek%20bukti%20kasus%20atas%20nama%20${item.nama}" target="_blank" class="btn-view-sm">
                             Lihat Bukti
                         </a>
                     </div>
                 `;
-                container.appendChild(card);
+                container.appendChild(row);
             });
         }
 
-        // Search Filter Logic
         searchInput.addEventListener('input', (e) => {
             const keyword = e.target.value.toLowerCase();
             const filtered = allData.filter(item => 
@@ -372,7 +499,7 @@
             renderData(filtered);
         });
 
-        // Init
+        // Initialize
         loadData();
 
     </script>
