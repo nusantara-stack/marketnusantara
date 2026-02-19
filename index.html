@@ -179,7 +179,31 @@
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .navbar-glass {
+        /* --- REVISED SIDEBAR CSS --- */
+        :root {
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 80px;
+            --mobile-topbar-height: 70px;
+        }
+
+        .app-sidebar {
+            background: var(--color-glass-bg);
+            backdrop-filter: blur(0.625rem);
+            -webkit-backdrop-filter: blur(0.625rem);
+            border-right: 0.0625rem solid var(--color-glass-border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: var(--sidebar-width);
+            z-index: 60;
+            transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        .mobile-topbar {
             background: var(--color-glass-bg);
             backdrop-filter: blur(0.625rem);
             -webkit-backdrop-filter: blur(0.625rem);
@@ -188,7 +212,138 @@
             top: 0;
             left: 0;
             right: 0;
+            height: var(--mobile-topbar-height);
+            z-index: 40;
+            display: none; 
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 1.5rem;
+        }
+
+        .sidebar-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(4px);
             z-index: 50;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            display: none;
+        }
+
+        .sidebar-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: var(--color-text-secondary);
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .sidebar-item:hover, .sidebar-item.active {
+            background: rgba(34, 211, 238, 0.08);
+            color: white;
+            border-color: rgba(34, 211, 238, 0.2);
+            box-shadow: inset 0 0 15px rgba(34, 211, 238, 0.05);
+        }
+        .sidebar-item svg {
+            color: var(--color-text-secondary);
+            transition: color 0.3s ease;
+            flex-shrink: 0;
+        }
+        .sidebar-item:hover svg, .sidebar-item.active svg {
+            color: var(--color-cyan);
+        }
+
+        .sidebar-item-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-group-title {
+            font-size: 10px;
+            font-weight: 700;
+            color: #6b7280;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin: 1.5rem 0 0.5rem 1rem;
+            transition: opacity 0.3s ease, margin 0.3s ease, height 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .sidebar-logo-text {
+            transition: opacity 0.3s ease, width 0.3s ease;
+            white-space: nowrap;
+            opacity: 1;
+        }
+
+        /* Desktop Collapse State */
+        body.sidebar-collapsed .app-sidebar {
+            width: var(--sidebar-collapsed-width);
+        }
+        body.sidebar-collapsed .sidebar-logo-text,
+        body.sidebar-collapsed .sidebar-item-text {
+            opacity: 0;
+            width: 0;
+            display: none;
+        }
+        body.sidebar-collapsed .sidebar-group-title {
+            opacity: 0;
+            height: 0;
+            margin-top: 0;
+            margin-bottom: 0;
+            overflow: hidden;
+        }
+        body.sidebar-collapsed .sidebar-item {
+            padding: 0.75rem;
+            justify-content: center;
+        }
+
+        /* Desktop Adjustments */
+        @media (min-width: 768px) {
+            #main-content {
+                padding-left: var(--sidebar-width);
+                transition: padding-left 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            body.sidebar-collapsed #main-content {
+                padding-left: var(--sidebar-collapsed-width);
+            }
+            #scroll-progress-bar {
+                left: var(--sidebar-width);
+                width: calc(100% - var(--sidebar-width));
+                transition: left 0.4s cubic-bezier(0.25, 1, 0.5, 1), width 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+            }
+            body.sidebar-collapsed #scroll-progress-bar {
+                left: var(--sidebar-collapsed-width);
+                width: calc(100% - var(--sidebar-collapsed-width));
+            }
+            #nav-follower { display: none !important; }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 767px) {
+            .mobile-topbar, .sidebar-overlay {
+                display: flex;
+            }
+            .sidebar-overlay {
+                display: block;
+            }
+            .app-sidebar {
+                transform: translateX(-100%);
+                width: 80%;
+                max-width: 300px;
+            }
+            body.mobile-sidebar-open .app-sidebar {
+                transform: translateX(0);
+            }
+            body.mobile-sidebar-open .sidebar-overlay {
+                opacity: 1;
+                pointer-events: auto;
+            }
         }
         
         .glass-box {
@@ -1784,48 +1939,97 @@
 
         <header id="home" class="relative min-h-screen flex flex-col">
             
-            <nav class="navbar-glass fixed top-0 left-0 right-0 z-50">
-                <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <a href="#home">
-                        <!-- HEADER LOGO UPDATED TO ROUNDED-FULL -->
-                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full">
+            <!-- Mobile Topbar (Hidden on Desktop) -->
+            <div class="mobile-topbar md:hidden">
+                <a href="#home" class="flex items-center gap-3">
+                    <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-10 rounded-full border border-[var(--color-cyan)] p-0.5">
+                    <span class="font-bold text-lg text-white leading-tight tracking-wider">
+                        Market<br>
+                        <span class="text-[10px] text-[var(--color-cyan)] font-mono tracking-widest uppercase">Nusantara</span>
+                    </span>
+                </a>
+                <div class="flex items-center gap-3">
+                    <button class="share-btn text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
+                    </button>
+                    <button id="mobile-sidebar-toggle" class="text-white focus:outline-none p-2 rounded-md hover:bg-white/10">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sidebar Overlay for Mobile -->
+            <div id="sidebar-overlay" class="sidebar-overlay"></div>
+
+            <!-- App Sidebar (Main Navigation) -->
+            <nav id="app-sidebar" class="app-sidebar">
+                
+                <!-- Sidebar Header -->
+                <div class="flex items-center justify-between p-4 md:p-5 mb-2 border-b border-white/5 md:border-none">
+                    <a href="#home" class="flex items-center gap-3 overflow-hidden">
+                        <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-11 w-11 shrink-0 rounded-full border border-[var(--color-cyan)] p-0.5">
+                        <span class="sidebar-logo-text font-bold text-lg text-white leading-tight tracking-wider">
+                            Market<br>
+                            <span class="text-[10px] text-[var(--color-cyan)] font-mono tracking-widest uppercase">Nusantara</span>
+                        </span>
                     </a>
                     
-                    <div id="desktop-menu-container" class="hidden md:flex items-center space-x-8 relative">
-                        <div id="nav-follower"></div>
-                        
-                        <a href="#home" class="nav-link main-nav-link">Home</a>
-                        <a href="#mitra" class="nav-link main-nav-link">Mitra</a>
-                        <a href="#statistik" class="nav-link main-nav-link">Statistik</a>
-                        <a href="#kontak" class="nav-link main-nav-link">Kontak</a>
-                        
-                        <a href="#layanan" class="nav-link info-nav-link">Proses Layanan</a>
-                        <a href="#faq" class="nav-link info-nav-link">FAQ</a>
-                    </div>
-                    
-                    
-                    <div class="flex items-center gap-2 sm:gap-4">
-                        
-                        <button id="share-button" title="Bagikan Halaman" class="text-gray-400 hover:text-white transition-colors p-2 rounded-full hover:bg-white/10">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
-                        </button>
-                        
-                        
-                        <div class="md:hidden">
-                            <button id="mobile-menu-button" class="text-white focus:outline-none">
-                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
-                            </button>
-                        </div>
-                    </div>
+                    <!-- Desktop Collapse Toggle -->
+                    <button id="desktop-sidebar-toggle" class="hidden md:flex text-gray-400 hover:text-white p-2 rounded-md bg-white/5 hover:bg-white/10 shrink-0 transition-transform duration-300">
+                        <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
+                    </button>
+
+                    <!-- Mobile Close Button -->
+                    <button id="mobile-sidebar-close" class="md:hidden text-gray-400 hover:text-white p-2 rounded-md hover:bg-white/10 shrink-0">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
                 </div>
-                <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-                    <a href="#home" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Home</a>
-                    <a href="#mitra" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Mitra</a>
-                    <a href="#statistik" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Statistik</a>
-                    <a href="#kontak" class="nav-link main-nav-link block text-gray-300 hover:text-white py-2">Kontak</a>
+
+                <!-- Sidebar Menu Items -->
+                <div id="desktop-menu-container" class="flex-1 overflow-y-auto hide-scrollbar px-3 md:px-4 pb-6 flex flex-col gap-1">
+                    <div id="nav-follower"></div>
                     
-                    <a href="#layanan" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">Proses Layanan</a>
-                    <a href="#faq" class="nav-link info-nav-link block text-gray-300 hover:text-white py-2">FAQ</a>
+                    <p class="sidebar-group-title">General</p>
+                    
+                    <a href="#home" class="nav-link main-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
+                        <span class="sidebar-item-text">Dashboard</span>
+                    </a>
+                    <a href="#mitra" class="nav-link main-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+                        <span class="sidebar-item-text">Mitra & Pricing</span>
+                    </a>
+                    <a href="ripper.html" class="nav-link main-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+                        <span class="sidebar-item-text">Database Ripper</span>
+                    </a>
+                    
+                    <p class="sidebar-group-title mt-6">Tools & Info</p>
+                    
+                    <a href="#statistik" class="nav-link main-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" /></svg>
+                        <span class="sidebar-item-text">Statistik</span>
+                    </a>
+                    <a href="#layanan" class="nav-link info-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="sidebar-item-text">Proses Layanan</span>
+                    </a>
+                    <a href="#faq" class="nav-link info-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                        <span class="sidebar-item-text">FAQ</span>
+                    </a>
+                    <a href="#kontak" class="nav-link main-nav-link sidebar-item">
+                        <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                        <span class="sidebar-item-text">Kontak</span>
+                    </a>
+                </div>
+
+                <!-- Sidebar Footer -->
+                <div class="hidden md:flex w-full mt-auto pt-6 border-t border-white/10 px-3 md:px-4 pb-4">
+                    <button class="share-btn sidebar-item w-full flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
+                        <span class="sidebar-item-text">Bagikan Website</span>
+                    </button>
                 </div>
             </nav>
 
@@ -2755,9 +2959,47 @@
             });
             
             
-            const mobileMenuButton = document.getElementById('mobile-menu-button');
-            const mobileMenu = document.getElementById('mobile-menu');
-            mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
+            // --- NEW SIDEBAR LOGIC ---
+            const desktopSidebarToggle = document.getElementById('desktop-sidebar-toggle');
+            const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
+            const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
+            const sidebarOverlay = document.getElementById('sidebar-overlay');
+            const body = document.body;
+
+            // Desktop Toggle Logic
+            if (desktopSidebarToggle) {
+                desktopSidebarToggle.addEventListener('click', () => {
+                    body.classList.toggle('sidebar-collapsed');
+                    const icon = desktopSidebarToggle.querySelector('svg');
+                    // Putar tombol ikon 180 derajat saat collapse
+                    if (body.classList.contains('sidebar-collapsed')) {
+                        icon.style.transform = 'rotate(180deg)';
+                    } else {
+                        icon.style.transform = 'rotate(0deg)';
+                    }
+                });
+            }
+
+            // Mobile Toggle Logic
+            if (mobileSidebarToggle) {
+                mobileSidebarToggle.addEventListener('click', () => {
+                    body.classList.add('mobile-sidebar-open');
+                });
+            }
+
+            const closeMobileSidebar = () => {
+                body.classList.remove('mobile-sidebar-open');
+            };
+
+            if (mobileSidebarClose) mobileSidebarClose.addEventListener('click', closeMobileSidebar);
+            if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeMobileSidebar);
+
+            // Menutup Sidebar Mobile Otomatis saat Link Ditekan
+            document.querySelectorAll('.app-sidebar .sidebar-item').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth < 768) closeMobileSidebar();
+                });
+            });
 
             
             var swiperHero = new Swiper(".hero-swiper", {
@@ -3158,6 +3400,7 @@
             }
 
             function animateFollower() {
+                if (!navFollower) return; // Prevent error when follower is hidden
                 
                 currentProps.left += (targetProps.left - currentProps.left) * LERP_FACTOR;
                 currentProps.width += (targetProps.width - currentProps.width) * LERP_FACTOR;
@@ -3367,11 +3610,11 @@
             document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
 
 
-            const shareButton = document.getElementById('share-button');
+            const shareButtons = document.querySelectorAll('.share-btn');
             const toast = document.getElementById('toast-notification');
 
-            if (shareButton) {
-                shareButton.addEventListener('click', async () => {
+            shareButtons.forEach(btn => {
+                btn.addEventListener('click', async () => {
                     const shareData = {
                         title: 'Market Nusantara',
                         text: 'Platform marketplace komunitas kreatif terpercaya.',
@@ -3396,7 +3639,7 @@
                         }
                     }
                 });
-            }
+            });
 
             const backToTopBtn = document.getElementById('back-to-top-btn');
             
