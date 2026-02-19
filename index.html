@@ -33,16 +33,19 @@
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
             --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%); 
             --color-gradient-glow: linear-gradient(to right, #22d3ee, #8b5cf6);
-            /* New Gradients for Pricing */
+
             --color-gradient-silver: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);
             --color-gradient-gold: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
             --color-gradient-platinum: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
 
             --color-glass-bg: rgba(15, 23, 42, 0.4); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
+
+            --sidebar-width: 260px;
+            --sidebar-collapsed-width: 80px;
+            --mobile-topbar-height: 70px;
         }
 
-        /* --- GLOBAL STABILIZATION (MOBILE FIX) --- */
         html, body {
             overflow-x: hidden; 
             width: 100%;
@@ -51,7 +54,6 @@
             overscroll-behavior-x: none;
         }
 
-        /* Hardware Acceleration untuk elemen fixed */
         .navbar-glass,
         #back-to-top-btn,
         #share-button,
@@ -73,17 +75,21 @@
             z-index: 9999;
             transition: opacity 0.5s ease;
         }
+        
         #main-content {
             opacity: 0;
             transition: opacity 0.5s ease;
         }
+        
         #main-content.loaded {
             opacity: 1;
         }
+        
         @keyframes skeleton-pulse {
             0%, 100% { background-color: rgba(255, 255, 255, 0.05); }
             50% { background-color: rgba(255, 255, 255, 0.1); }
         }
+        
         .skeleton {
             animation: skeleton-pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
             border-radius: 0.5rem;
@@ -118,10 +124,12 @@
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
+        
         .hide-scrollbar {
             -ms-overflow-style: none;  
             scrollbar-width: none;
         }
+        
         #scroll-progress-bar {
             position: fixed;
             top: 0;
@@ -134,6 +142,7 @@
             box-shadow: 0 0 15px var(--color-cyan);
             transform: translateZ(0);
         }
+        
         .nav-link {
             position: relative;
             z-index: 10;
@@ -141,52 +150,17 @@
             color: var(--color-text-secondary);
             font-weight: 500;
         }
+        
         .nav-link.active,
         .nav-link:hover {
             color: var(--color-cyan);
             text-shadow: 0 0 10px var(--color-accent-transparent);
         }
         
-        #nav-follower {
-            position: absolute;
-            z-index: 5;
-            height: 2.25rem; 
-            background: rgba(255, 255, 255, 0.03); 
-            border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
-            box-shadow: 
-                0 0 15px rgba(34, 211, 238, 0.4), 
-                0 0 15px rgba(139, 92, 246, 0.4), 
-                inset 0 0 10px rgba(34, 211, 238, 0.1); 
-            transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-        #nav-follower::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            border-radius: 9999px;
-            padding: 1px;
-            background: var(--color-gradient-main);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            opacity: 0.5;
-        }
-
         .hero-section {
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        /* --- REVISED SIDEBAR CSS --- */
-        :root {
-            --sidebar-width: 260px;
-            --sidebar-collapsed-width: 80px;
-            --mobile-topbar-height: 70px;
-        }
-
-        /* MATIKAN TOTAL ELEMEN NAV-FOLLOWER LAMA AGAR TIDAK BUG VISUAL */
         #nav-follower {
             display: none !important;
         }
@@ -252,20 +226,22 @@
             position: relative;
         }
         
-        /* STATE AKTIF DAN HOVER DIPERBAIKI SINKRONISASINYA */
         .sidebar-item:hover, .sidebar-item.active {
-            background: rgba(34, 211, 238, 0.1); /* Background cyan tipis */
+            background: rgba(34, 211, 238, 0.1);
             color: white;
             border-color: rgba(34, 211, 238, 0.3);
         }
+        
         .sidebar-item.active {
-            box-shadow: inset 4px 0 0 var(--color-cyan); /* Indikator garis di kiri */
+            box-shadow: inset 4px 0 0 var(--color-cyan);
         }
+        
         .sidebar-item svg {
             color: var(--color-text-secondary);
             transition: color 0.3s ease;
             flex-shrink: 0;
         }
+        
         .sidebar-item:hover svg, .sidebar-item.active svg {
             color: var(--color-cyan);
         }
@@ -291,16 +267,17 @@
             opacity: 1;
         }
 
-        /* Desktop Collapse State */
         body.sidebar-collapsed .app-sidebar {
             width: var(--sidebar-collapsed-width);
         }
+        
         body.sidebar-collapsed .sidebar-logo-text,
         body.sidebar-collapsed .sidebar-item-text {
             opacity: 0;
             width: 0;
             display: none;
         }
+        
         body.sidebar-collapsed .sidebar-group-title {
             opacity: 0;
             height: 0;
@@ -308,17 +285,17 @@
             margin-bottom: 0;
             overflow: hidden;
         }
+        
         body.sidebar-collapsed .sidebar-item {
             padding: 0.75rem;
             justify-content: center;
         }
-        /* Penyesuaian shadow saat di-collapse agar rapi */
+        
         body.sidebar-collapsed .sidebar-item.active {
             box-shadow: inset 0 0 10px rgba(34, 211, 238, 0.2); 
             border-left-color: var(--color-cyan);
         }
 
-        /* Desktop Adjustments */
         @media (min-width: 768px) {
             #main-content {
                 padding-left: var(--sidebar-width);
@@ -338,7 +315,6 @@
             }
         }
 
-        /* Mobile Adjustments */
         @media (max-width: 767px) {
             .mobile-topbar, .sidebar-overlay {
                 display: flex;
@@ -370,6 +346,7 @@
             transition: border-color 0.3s ease;
             z-index: 2; 
         }
+        
         .glass-box:hover {
             border-color: var(--color-cyan);
         }
@@ -382,6 +359,7 @@
             background: rgba(255, 255, 255, 0.15);
             border-radius: 3px;
         }
+        
         .hero-swiper-pagination .swiper-pagination-progressbar-fill {
             background: var(--color-gradient-main); 
             border-radius: 3px;
@@ -390,6 +368,7 @@
         }
 
         .hero-swiper { width: 100%; }
+        
         .swiper-slide { 
             height: auto; 
             display: flex; 
@@ -408,10 +387,12 @@
         }
 
         .btn-shine { position: relative; overflow: hidden; z-index: 1; }
+        
         .btn-shine.btn-primary {
             background: var(--color-gradient-main);
             color: #000;
         }
+        
         .btn-shine.btn-primary:hover {
             background: var(--color-gradient-hover);
             color: #000;
@@ -429,9 +410,9 @@
             transition: left 0.7s cubic-bezier(0.23, 1, 0.32, 1);
             z-index: -1;
         }
+        
         .btn-shine:hover::before { left: 100%; }
 
-        /* --- FLOATING ROCKS (ASTEROIDS) --- */
         .floating-rock {
             position: fixed;
             z-index: 0;
@@ -440,6 +421,7 @@
             filter: drop-shadow(0 0 5px rgba(0,0,0,0.5));
             animation: rock-tumble 20s linear infinite;
         }
+        
         .rock-1 { width: 40px; top: 20%; left: 5%; animation-duration: 25s; }
         .rock-2 { width: 60px; top: 60%; right: 8%; animation-duration: 35s; animation-direction: reverse; opacity: 0.4; }
         .rock-3 { width: 30px; bottom: 15%; left: 20%; animation-duration: 15s; }
@@ -449,7 +431,6 @@
             50% { transform: translateY(-20px) rotate(180deg); }
             100% { transform: translateY(0) rotate(360deg); }
         }
-
 
         .slide-tag {
             position: absolute;
@@ -475,6 +456,7 @@
             justify-content: space-between;
             align-items: center;
         }
+        
         .section-divider-line {
             height: 1px; 
             width: 40%; 
@@ -495,7 +477,7 @@
             position: relative;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            z-index: 2; /* Above starmap */
+            z-index: 2;
         }
         
         .stat-card::before {
@@ -532,14 +514,13 @@
             position: relative;
         }
         
-        /* Filter Tabs Styles - Updated for Mobile Horizontal Scroll */
         .mitra-filter-container {
             display: flex;
-            flex-wrap: wrap; /* Default desktop */
-            justify-content: center; /* Default desktop */
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 0.5rem;
             margin-bottom: 2rem;
-            padding-bottom: 0.5rem; /* Space for potential scrollbar */
+            padding-bottom: 0.5rem;
         }
 
         .mitra-filter-btn {
@@ -552,13 +533,15 @@
             background: rgba(255,255,255,0.05);
             color: var(--color-text-secondary);
             cursor: pointer;
-            white-space: nowrap; /* Prevent text wrapping */
-            flex-shrink: 0; /* Prevent buttons from shrinking */
+            white-space: nowrap;
+            flex-shrink: 0;
         }
+        
         .mitra-filter-btn:hover {
             background: rgba(255,255,255,0.1);
             color: white;
         }
+        
         .mitra-filter-btn.active {
             background: var(--color-gradient-main);
             color: black;
@@ -566,7 +549,6 @@
             box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
 
-        /* --- MITRA & PRICING TABS --- */
         .mitra-section-tab {
             font-size: 0.9rem;
             font-weight: 700;
@@ -578,6 +560,7 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
+        
         .mitra-section-tab.active {
             color: white;
             border-bottom-color: var(--color-cyan);
@@ -606,6 +589,7 @@
             background: rgba(255, 255, 255, 0.15) !important;
             border-radius: 3px;
         }
+        
         .mitra-swiper .swiper-pagination-progressbar-fill {
             background: var(--color-cyan) !important; 
             border-radius: 3px;
@@ -616,27 +600,25 @@
             display: none !important;
         }
 
-        /* --- PRICING SWIPER & CARDS --- */
         .pricing-swiper {
             width: 100%;
             padding: 2rem 0 3rem; 
             overflow: visible;
         }
         
-        /* FIX: Ensure all slides match height for uniformity */
         .pricing-swiper .swiper-slide {
             height: auto; 
             display: flex; 
-            justify-content: center; /* Center content inside slide */
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smooth transition */
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
         }
 
-        /* REVISI: Efek Fokus Lebih Tajam agar logika swipe terasa benar */
         .pricing-swiper .swiper-slide:not(.swiper-slide-active) {
-            transform: scale(0.85); /* Kartu samping lebih kecil */
-            opacity: 0.4; /* Kartu samping lebih redup */
-            filter: blur(1px); /* Optional: blur kartu samping */
+            transform: scale(0.85);
+            opacity: 0.4;
+            filter: blur(1px);
         }
+        
         .pricing-swiper .swiper-slide.swiper-slide-active {
             transform: scale(1);
             opacity: 1;
@@ -654,20 +636,19 @@
             background: rgba(255, 255, 255, 0.15) !important;
             border-radius: 3px;
         }
+        
         .pricing-swiper .swiper-pagination-progressbar-fill {
             background: var(--color-cyan) !important; 
             border-radius: 3px;
             box-shadow: 0 0 10px var(--color-cyan);
         }
         
-        /* PRICING CARD STYLES UPDATED (SMALLER SIZE) */
         .pricing-card {
-            /* Subtle Gradient Background */
             background: linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            border-radius: 1.25rem; /* Reduced radius */
-            padding: 1.5rem; /* Reduced padding from 2rem */
+            border-radius: 1.25rem;
+            padding: 1.5rem;
             position: relative;
             border: 1px solid rgba(255,255,255,0.08);
             transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
@@ -676,10 +657,9 @@
             width: 100%; 
             height: 100%; 
             overflow: hidden;
-            max-width: 350px; /* Limit max width for better desktop aesthetic */
+            max-width: 350px;
         }
         
-        /* Halus Glow effect */
         .pricing-card::before {
             content: '';
             position: absolute;
@@ -689,62 +669,67 @@
         }
 
         .pricing-card:hover {
-            transform: translateY(-5px); /* Reduced hover lift */
+            transform: translateY(-5px);
             box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5), inset 0 0 20px rgba(34, 211, 238, 0.05);
             border-color: rgba(34, 211, 238, 0.3);
         }
 
         .pricing-badge {
             display: inline-block;
-            padding: 0.25rem 1rem; /* Smaller padding */
+            padding: 0.25rem 1rem;
             border-radius: 9999px;
-            font-size: 0.7rem; /* Smaller font */
+            font-size: 0.7rem;
             font-weight: 800;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: black !important;
             background: var(--color-gradient-main) !important; 
-            margin-bottom: 1rem; /* Reduced margin */
+            margin-bottom: 1rem;
             align-self: flex-start;
             box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
         }
         
         .pricing-price {
-            font-size: 2.25rem; /* Reduced from 3rem */
+            font-size: 2.25rem;
             font-weight: 800;
             color: white;
             line-height: 1;
             margin-bottom: 0.25rem;
             text-shadow: 0 0 20px rgba(0,0,0,0.5);
         }
+        
         .pricing-period {
-            font-size: 0.85rem; /* Smaller */
+            font-size: 0.85rem;
             font-weight: 500;
             color: var(--color-text-secondary);
         }
+        
         .pricing-desc {
             color: var(--color-text-secondary);
-            font-size: 0.85rem; /* Smaller */
+            font-size: 0.85rem;
             margin-bottom: 1.25rem;
             padding-bottom: 1.25rem;
             border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+        
         .pricing-features {
             list-style: none;
             padding: 0;
             margin: 0 0 1.5rem 0;
             flex-grow: 1;
         }
+        
         .pricing-features li {
             display: flex;
             align-items: center;
             gap: 0.5rem;
             color: var(--color-text-primary);
-            font-size: 0.85rem; /* Smaller */
+            font-size: 0.85rem;
             margin-bottom: 0.5rem;
         }
+        
         .check-icon-circle {
-            width: 1rem; /* Smaller icon bg */
+            width: 1rem;
             height: 1rem;
             border-radius: 50%;
             background: rgba(34, 211, 238, 0.15); 
@@ -755,11 +740,12 @@
             flex-shrink: 0;
             box-shadow: 0 0 8px rgba(34, 211, 238, 0.1);
         }
+        
         .pricing-btn {
             width: 100%;
-            padding: 0.75rem; /* Smaller padding */
+            padding: 0.75rem;
             border-radius: 0.6rem;
-            font-size: 0.9rem; /* Smaller font */
+            font-size: 0.9rem;
             font-weight: 700;
             text-align: center;
             transition: all 0.3s ease;
@@ -771,10 +757,12 @@
             overflow: hidden;
             cursor: pointer;
         }
+        
         .pricing-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
         }
+        
         .pricing-btn::before {
             content: '';
             position: absolute;
@@ -782,10 +770,10 @@
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s ease;
         }
+        
         .pricing-btn:hover::before {
             left: 100%;
         }
-
 
         .alien-wrapper {
             position: absolute;
@@ -806,12 +794,14 @@
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+        
         .alien-hand.left { left: 25%; transform: translateY(20px) rotate(-10deg); }
         .alien-hand.right { right: 25%; transform: translateY(20px) rotate(10deg); }
         
         .alien-hand.visible {
             opacity: 1;
         }
+        
         .alien-hand.left.visible { transform: translateY(0) rotate(-10deg); }
         .alien-hand.right.visible { transform: translateY(0) rotate(10deg); }
 
@@ -825,15 +815,15 @@
             z-index: -1; 
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
+        
         .alien-head-card.peeking {
             transform: translateX(-50%) translateY(-75%); 
         }
 
-        /* ROLE ACCENTS */
-        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); } /* Violet */
-        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); } /* Blue */
-        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); } /* Yellow */
-        .accent-pp { --card-accent: #10b981; --card-accent-dim: rgba(16, 185, 129, 0.4); } /* Emerald/Green for Paid Promote */
+        .accent-own { --card-accent: #8b5cf6; --card-accent-dim: rgba(139, 92, 246, 0.4); }
+        .accent-pt { --card-accent: #3b82f6; --card-accent-dim: rgba(59, 130, 246, 0.4); }
+        .accent-tk { --card-accent: #eab308; --card-accent-dim: rgba(234, 179, 8, 0.4); }
+        .accent-pp { --card-accent: #10b981; --card-accent-dim: rgba(16, 185, 129, 0.4); }
         .accent-default { --card-accent: var(--color-cyan); --card-accent-dim: var(--color-orange-transparent); } 
 
         .mitra-card {
@@ -922,6 +912,7 @@
             gap: 4px;
             backdrop-filter: blur(4px);
         }
+        
         .mitra-status-dot {
             width: 6px;
             height: 6px;
@@ -967,6 +958,7 @@
             font-size: 0.75rem;
             color: var(--color-text-secondary);
         }
+        
         .mitra-stat-item {
             display: flex;
             align-items: center;
@@ -1001,11 +993,11 @@
             box-shadow: 0 0 15px var(--card-accent);
         }
 
-
         #faq {
             background-color: transparent; 
             background-image: radial-gradient(circle at top left, var(--color-accent-transparent), transparent 40%);
         }
+        
         .faq-item {
             background: linear-gradient(to right, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
             border: 0.0625rem solid rgba(255,255,255,0.1); 
@@ -1014,28 +1006,35 @@
             backdrop-filter: blur(0.3125rem); 
             -webkit-backdrop-filter: blur(0.3125rem);
         }
+        
         .faq-answer {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.5s cubic-bezier(0.23, 1, 0.32, 1), padding 0.5s ease;
             padding: 0 1.5rem;
         }
+        
         .faq-item.active {
             border-color: var(--color-cyan);
             box-shadow: 0 0 15px var(--color-accent-transparent);
         }
+        
         .faq-item.active .faq-answer {
             max-height: 12.5rem; 
             padding: 0 1.5rem 1.5rem;
         }
+        
         .faq-item.active .faq-arrow-container {
             background: var(--color-gradient-main); 
         }
+        
         .faq-item.active .faq-arrow {
             transform: rotate(180deg);
             color: #000; 
         }
+        
         .faq-arrow { transition: transform 0.3s ease; color: #fff; }
+        
         .faq-arrow-container {
             background-color: rgba(255,255,255,0.1);
             border-radius: 0.375rem;
@@ -1050,6 +1049,7 @@
             background-position: center;
             background-attachment: fixed;
         }
+        
         #kontak::before {
             content: '';
             position: absolute;
@@ -1064,6 +1064,7 @@
                 var(--color-surface-1) 100%);
             z-index: 1;
         }
+        
         #kontak .container {
             position: relative;
             z-index: 2;
@@ -1100,12 +1101,14 @@
             padding: 0.75rem 1rem;
             transition: all 0.3s ease;
         }
+        
         .contact-form-input:focus {
             outline: none;
             background-color: rgba(34, 211, 238, 0.05);
             border-color: var(--color-cyan);
             box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
+        
         .form-label {
             color: var(--color-cyan);
             text-transform: uppercase;
@@ -1115,7 +1118,6 @@
             margin-bottom: 0.25rem;
             display: block;
         }
-        
         
         footer {
             position: relative;
@@ -1166,6 +1168,7 @@
             animation: float-particle 10s ease-in-out infinite;
             opacity: 0;
         }
+        
         .footer-particle:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
         .footer-particle:nth-child(2) { top: 60%; right: 15%; animation-delay: 3s; background: var(--color-violet); box-shadow: 0 0 10px var(--color-violet); }
         .footer-particle:nth-child(3) { bottom: 30%; left: 40%; animation-delay: 6s; }
@@ -1176,40 +1179,10 @@
             100% { transform: translateY(-40px) scale(0); opacity: 0; }
         }
 
-        #social-proof-notification {
-            position: fixed;
-            bottom: 1.5rem;
-            left: 1.5rem;
-            z-index: 50;
-            background: var(--color-glass-bg);
-            backdrop-filter: blur(0.625rem);
-            -webkit-backdrop-filter: blur(0.625rem);
-            border: 0.0625rem solid var(--color-glass-border);
-            border-radius: 0.75rem;
-            width: calc(100% - 3rem);
-            max-width: 350px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transform: translateX(-150%);
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            overflow: hidden; 
-            pointer-events: none; /* DEFAULT: Agar tidak menghalangi tombol saat invisible */
-        }
-        #social-proof-notification.visible {
-            transform: translateX(0);
-            pointer-events: auto; /* ENABLE CLICK: Hanya saat visible */
-        }
-        #notification-progress-bar {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            height: 0.1875rem; 
-            background: var(--color-gradient-main);
-            width: 100%;
-        }
-
         #info-modal-content {
             transition: all 0.3s cubic-bezier(0.23, 1, 0.32, 1);
         }
+        
         #info-modal-body h3 {
             font-size: 1.25rem;
             font-weight: 700;
@@ -1219,9 +1192,11 @@
             border-bottom: 1px solid var(--color-surface-2);
             padding-bottom: 0.5rem;
         }
+        
         #info-modal-body h3:first-child {
             margin-top: 0;
         }
+        
         #info-modal-body ul {
             list-style-position: inside;
             list-style-type: disc;
@@ -1238,18 +1213,23 @@
             opacity: 0;
             transition: opacity 0.6s ease-out, transform 0.8s cubic-bezier(0.23, 1, 0.32, 1);
         }
+        
         .animate-on-scroll.fade-up {
             transform: translateY(50px);
         }
+        
         .animate-on-scroll.fade-right {
             transform: translateX(-50px);
         }
+        
         .animate-on-scroll.fade-left {
             transform: translateX(50px);
         }
+        
         .animate-on-scroll.zoom-in {
             transform: scale(0.9);
         }
+        
         .animate-on-scroll.is-visible {
             opacity: 1;
             transform: none;
@@ -1261,50 +1241,53 @@
             border-bottom: 2px solid transparent;
             padding-bottom: 0.5rem; 
         }
+        
         .hero-tab-button.active,
         .hero-tab-button:hover {
             color: var(--color-text-primary);
         }
+        
         .hero-tab-button.active {
             border-bottom-color: var(--color-cyan);
             text-shadow: 0 0 10px var(--color-accent-transparent);
         }
+        
         .tab-panel {
             transition: opacity 0.4s ease-in-out, max-height 0.5s ease-in-out;
             opacity: 1;
             max-height: 0; 
             overflow: hidden;
         }
-        /* FIX MOBILE LAYOUT: Saat tab panel tidak hidden, allow height tumbuh */
+        
         .tab-panel:not(.hidden) {
-            max-height: 5000px; /* Nilai besar agar konten tidak terpotong */
+            max-height: 5000px;
             overflow: visible;
         }
+        
         .tab-panel.hidden {
             opacity: 0;
             max-height: 0;
             pointer-events: none;
         }
         
-        /* GRUP NUSANTARA STYLES */
         #grup-nusantara-container {
              display: grid;
              grid-template-columns: repeat(1, minmax(0, 1fr));
              gap: 1rem;
         }
+        
         @media (min-width: 768px) {
             #grup-nusantara-container {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
         }
 
-        /* Revised Card Style: Transparent Glass + Neon Gradient Border */
         .group-card-glass {
             position: relative;
-            background: rgba(15, 23, 42, 0.3); /* Transparent dark */
+            background: rgba(15, 23, 42, 0.3);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
-            border-radius: 12px; /* Rounded corners */
+            border-radius: 12px;
             padding: 16px;
             display: flex;
             align-items: center;
@@ -1312,20 +1295,17 @@
             gap: 12px;
             overflow: hidden;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            
-            /* Logic for border-radius with gradient border */
             border: 1px solid transparent;
             background-clip: padding-box;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
-        /* Gradient Border Pseudo-element */
         .group-card-glass::before {
             content: '';
             position: absolute;
             inset: 0;
             border-radius: 12px; 
-            padding: 1.5px; /* Border width */
+            padding: 1.5px;
             background: linear-gradient(45deg, #22d3ee, #8b5cf6, #22d3ee); 
             -webkit-mask: 
             linear-gradient(#fff 0 0) content-box, 
@@ -1336,7 +1316,6 @@
             opacity: 0.8;
         }
 
-        /* Kilatan Cahaya (Flash) Effect on Hover */
         .group-card-glass::after {
             content: "";
             position: absolute;
@@ -1355,7 +1334,6 @@
             transition: left 0.7s ease-in-out;
         }
 
-        /* Hover State */
         .group-card-glass:hover {
             transform: translateY(-3px);
             box-shadow: 0 0 20px rgba(139, 92, 246, 0.3), inset 0 0 10px rgba(34, 211, 238, 0.1);
@@ -1397,9 +1375,11 @@
         header {
             transition: min-height 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
+        
         header.focus-mode-active {
             min-height: auto;
         }
+        
         header.focus-mode-active .hero-section {
             padding-bottom: 0;
         }
@@ -1412,12 +1392,12 @@
             position: relative; 
             z-index: 10;
         }
+        
         #informasi-section-container.hidden {
             opacity: 0;
             pointer-events: none;
             max-height: 0;
         }
-
 
         #tim-kami::before {
             content: '';
@@ -1429,6 +1409,7 @@
             background: linear-gradient(to bottom, var(--color-background), transparent);
             z-index: 2;
         }
+        
         #tim-kami::after {
             content: '';
             position: absolute;
@@ -1449,12 +1430,14 @@
             overflow: hidden;
             transition: transform 0.3s ease, background 0.3s ease;
         }
+        
         .service-card:hover {
             transform: translateY(-8px);
             background: var(--color-glass-bg);
             border-color: var(--color-cyan); 
             box-shadow: 0 10px 30px -10px var(--color-accent-transparent);
         }
+        
         .service-card-number {
             position: absolute;
             top: -1.5rem;
@@ -1470,6 +1453,7 @@
         #mobile-menu.info-mode .main-nav-link {
             display: none;
         }
+        
         #desktop-menu-container:not(.info-mode) .info-nav-link,
         #mobile-menu:not(.info-mode) .info-nav-link {
             display: none;
@@ -1480,6 +1464,7 @@
             position: relative; 
             z-index: 10;
         }
+        
         main.hidden-by-tab {
             opacity: 0;
             pointer-events: none;
@@ -1504,6 +1489,7 @@
             transform: translateZ(0);
             will-change: transform, opacity;
         }
+        
         #back-to-top-btn.visible {
             opacity: 1;
             transform: translateZ(0);
@@ -1513,6 +1499,7 @@
         #back-to-top-btn.visible .rocket-svg-container {
             animation: rocket-idle 2s ease-in-out infinite;
         }
+        
         @keyframes rocket-idle {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-8px); }
@@ -1521,6 +1508,7 @@
         #back-to-top-btn.launching .rocket-svg-container {
             animation: none; 
         }
+        
         #back-to-top-btn.launching {
             transition: transform 1s cubic-bezier(0.45, 0, 0.55, 1), opacity 0.5s ease-in 0.5s;
             transform: translateY(-120vh) scale(0.8); 
@@ -1539,6 +1527,7 @@
             margin-top: -15px; 
             z-index: -1;
         }
+        
         #back-to-top-btn.launching .rocket-fire {
             opacity: 1;
             animation: fire-pulse 0.1s infinite alternate;
@@ -1549,19 +1538,19 @@
             to { transform: translateX(-50%) scaleY(1.3); }
         }
 
-
         #welcome-modal-content {
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-            
             background: var(--color-glass-bg);
             backdrop-filter: blur(1rem); 
             -webkit-backdrop-filter: blur(1rem);
             border-top: 4px solid var(--color-cyan); 
         }
+        
         #welcome-modal-container.visible {
             opacity: 1;
             pointer-events: auto;
         }
+        
         #welcome-modal-container.visible #welcome-modal-content {
             transform: scale(1);
             opacity: 1;
@@ -1589,7 +1578,6 @@
         .glitch-active {
             animation: glitch-anim 0.3s infinite linear;
         }
-
 
         .ufo-container {
             position: absolute;
@@ -1640,11 +1628,13 @@
             pointer-events: none;
             opacity: 0.6;
         }
+        
         .planet-svg {
             width: 100%;
             height: 100%;
             animation: planet-spin 60s linear infinite;
         }
+        
         @keyframes planet-spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -1679,6 +1669,7 @@
             opacity: 0.4;
             animation: asteroid-drift 20s infinite linear;
         }
+        
         @keyframes asteroid-drift {
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-20px) rotate(180deg); }
@@ -1699,6 +1690,7 @@
             transition: width 0.2s, height 0.2s, background-color 0.2s;
             mix-blend-mode: difference;
         }
+        
         #custom-cursor.hovering {
             width: 50px;
             height: 50px;
@@ -1708,7 +1700,6 @@
 
         @media (max-width: 768px) {
             html, body {
-                /* Fix untuk "bergeser kanan kiri" */
                 overflow-x: hidden;
                 width: 100%;
                 max-width: 100%;
@@ -1716,14 +1707,13 @@
                 overscroll-behavior-x: none;
             }
 
-            /* --- PRICING MOBILE ADJUSTMENTS --- */
             .pricing-card {
-                padding: 1.25rem !important; /* Even smaller padding on mobile */
+                padding: 1.25rem !important; 
                 border-radius: 1rem !important;
                 max-width: 100% !important;
             }
             .pricing-price {
-                font-size: 1.75rem !important; /* Smaller price text mobile */
+                font-size: 1.75rem !important; 
             }
             .pricing-badge {
                 font-size: 0.65rem !important;
@@ -1738,7 +1728,6 @@
                 font-size: 0.75rem !important;
             }
 
-            /* --- MEMATIKAN ZOOM IN/OUT DI MOBILE --- */
             .animate-on-scroll.zoom-in {
                 transform: none !important;
                 opacity: 0;
@@ -1752,10 +1741,8 @@
                 box-shadow: none !important;
             }
 
-            /* --- STABILISASI ELEMEN FIXED --- */
             #back-to-top-btn {
                 transform: translateZ(0) !important;
-                /* Pastikan posisi aman dari tepi layar untuk menghindari layout shift */
                 left: auto;
                 right: 1.5rem;
             }
@@ -1852,12 +1839,11 @@
             }
             .stat-card h3 { font-size: 1.5rem !important; }
             
-            /* Filter Scroll on Mobile */
             .mitra-filter-container {
                 overflow-x: auto;
                 padding-bottom: 0.5rem;
                 justify-content: flex-start !important;
-                flex-wrap: nowrap !important; /* Ensure it stays in one line */
+                flex-wrap: nowrap !important; 
                 -ms-overflow-style: none;
                 scrollbar-width: none;
             }
@@ -1865,7 +1851,6 @@
                 display: none;
             }
             
-            /* Grup Nusantara Mobile Fix */
             #grup-nusantara-container {
                 grid-template-columns: 1fr;
             }
@@ -1877,11 +1862,9 @@
                 height: 44px;
             }
         }
-
     </style>
 </head>
 <body class="antialiased" oncontextmenu="return false;">
-    <!-- ... (body content preserved until pricing section) ... -->
     <div id="custom-cursor"></div>
     
     <div id="preloader">
@@ -1919,7 +1902,6 @@
         <canvas id="space-canvas"></canvas>
         <div class="fixed inset-0 z-[-1]" style="background: linear-gradient(to top, var(--color-background) 10%, rgba(5, 5, 5, 0.5) 50%, rgba(5, 5, 5, 0.3) 100%); pointer-events: none;"></div>
         
-        <!-- Floating Rocks (Asteroids) -->
         <div class="floating-rock rock-1">
             <svg viewBox="0 0 100 100" fill="#4b5563">
                 <path d="M20 20 L40 10 L80 20 L90 50 L70 90 L30 80 L10 50 Z" />
@@ -1953,7 +1935,6 @@
 
         <header id="home" class="relative min-h-screen flex flex-col section-target">
             
-            <!-- Mobile Topbar (Hidden on Desktop) -->
             <div class="mobile-topbar md:hidden">
                 <a href="#home" class="flex items-center gap-3">
                     <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-10 rounded-full border border-[var(--color-cyan)] p-0.5">
@@ -1972,13 +1953,10 @@
                 </div>
             </div>
 
-            <!-- Sidebar Overlay for Mobile -->
             <div id="sidebar-overlay" class="sidebar-overlay"></div>
 
-            <!-- App Sidebar (Main Navigation) -->
             <nav id="app-sidebar" class="app-sidebar">
                 
-                <!-- Sidebar Header -->
                 <div class="flex items-center justify-between p-4 md:p-5 mb-2 border-b border-white/5 md:border-none">
                     <a href="#home" class="flex items-center gap-3 overflow-hidden">
                         <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-11 w-11 shrink-0 rounded-full border border-[var(--color-cyan)] p-0.5">
@@ -1988,23 +1966,19 @@
                         </span>
                     </a>
                     
-                    <!-- Desktop Collapse Toggle -->
                     <button id="desktop-sidebar-toggle" class="hidden md:flex text-gray-400 hover:text-white p-2 rounded-md bg-white/5 hover:bg-white/10 shrink-0 transition-transform duration-300">
                         <svg class="w-4 h-4 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 19l-7-7 7-7m8 14l-7-7 7-7"></path></svg>
                     </button>
 
-                    <!-- Mobile Close Button -->
                     <button id="mobile-sidebar-close" class="md:hidden text-gray-400 hover:text-white p-2 rounded-md hover:bg-white/10 shrink-0">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
                 </div>
 
-                <!-- Sidebar Menu Items -->
                 <div id="desktop-menu-container" class="flex-1 overflow-y-auto hide-scrollbar px-3 md:px-4 pb-6 flex flex-col gap-1">
                     
                     <p class="sidebar-group-title">General</p>
                     
-                    <!-- Ditambahkan class nav-link agar terdeteksi scroll spy -->
                     <a href="#home" class="nav-link sidebar-item active">
                         <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                         <span class="sidebar-item-text">Dashboard</span>
@@ -2013,7 +1987,7 @@
                         <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
                         <span class="sidebar-item-text">Mitra & Pricing</span>
                     </a>
-                    <a href="ripper.html" class="sidebar-item"> <!-- Hapus nav-link untuk halaman eksternal -->
+                    <a href="ripper.html" class="sidebar-item"> 
                         <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
                         <span class="sidebar-item-text">Database Ripper</span>
                     </a>
@@ -2038,7 +2012,6 @@
                     </a>
                 </div>
 
-                <!-- Sidebar Footer -->
                 <div class="hidden md:flex w-full mt-auto pt-6 border-t border-white/10 px-3 md:px-4 pb-4">
                     <button class="share-btn sidebar-item w-full flex items-center gap-3 text-gray-400 hover:text-white transition-colors">
                         <svg class="w-5 h-5 opacity-80" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z"></path></svg>
@@ -2070,7 +2043,6 @@
                                     Saluran
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-5 h-5"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
                                 </a>
-                                <!-- REVISION: Added ID for JS logic to switch tabs -->
                                 <a href="#" id="cta-gabung-komunitas" class="btn-shine inline-block px-4 py-2 sm:px-8 sm:py-3 text-sm text-center font-semibold text-white rounded-lg border border-[var(--color-glass-border)] bg-[var(--color-glass-bg)] hover:bg-white/20 transform hover:scale-105 transition-all duration-300">
                                     Gabung Komunitas
                                 </a>
@@ -2115,9 +2087,7 @@
                                             <p class="text-sm text-[var(--color-text-secondary)]">Bergabunglah dengan berbagai grup komunitas resmi kami untuk berdiskusi dan bertransaksi.</p>
                                         </div>
                                         
-                                        <!-- Container Grup Nusantara -->
                                         <div id="grup-nusantara-container" class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                            <!-- Data akan di-load via JS -->
                                             <div class="skeleton h-20 w-full rounded-xl"></div>
                                             <div class="skeleton h-20 w-full rounded-xl"></div>
                                         </div>
@@ -2254,15 +2224,12 @@
                         <p class="mt-2 text-[var(--color-text-secondary)]">Berkolaborasi dengan brand dan komunitas terpercaya untuk ekosistem yang lebih baik.</p>
                     </div>
                     
-                    <!-- NEW: Section Tabs (Mitra / Pricing) -->
                     <div class="flex justify-center gap-8 mb-8 border-b border-white/10">
                         <div class="mitra-section-tab active" data-target="mitra-panel">Mitra</div>
                         <div class="mitra-section-tab" data-target="pricing-panel">Pricing & Benefits</div>
                     </div>
                     
-                    <!-- PANEL: MITRA SLIDER (Existing) -->
                     <div id="mitra-panel" class="mitra-tab-content">
-                        <!-- Mitra Filters -->
                         <div class="flex flex-wrap justify-center gap-2 mb-8 animate-on-scroll fade-up mitra-filter-container">
                             <button class="mitra-filter-btn active" data-filter="all">Semua</button>
                             <button class="mitra-filter-btn" data-filter="pp">PP</button>
@@ -2293,11 +2260,9 @@
                         </div>
                     </div>
 
-                    <!-- PANEL: PRICING (New Carousel Layout) -->
                     <div id="pricing-panel" class="mitra-tab-content hidden">
                         <div class="swiper pricing-swiper">
                             <div class="swiper-wrapper" id="pricing-wrapper">
-                                <!-- Content loaded via JS -->
                                 <div class="swiper-slide">
                                     <div class="pricing-card skeleton h-96 w-full"></div>
                                 </div>
@@ -2371,7 +2336,7 @@
                             <a href="mailto:support@marketnusantara.xyz" class="flex items-center gap-4 group">
                                 <div class="bg-white/10 p-3 rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 002-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                                 <div>
@@ -2379,7 +2344,6 @@
                                     <p class="text-lg text-white group-hover:text-[var(--color-accent)] transition-colors duration-300">support@marketnusantara.xyz</p>
                                 </div>
                             </a>
-                            <!-- REVISI: NOMOR WHATSAPP DIPERBARUI -->
                             <a href="https://wa.me/6281330730466" target="_blank" class="flex items-center gap-4 group">
                                 <div class="bg-white/10 p-3 rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
                                     <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.487 5.235 3.487 8.413.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.269.655 4.502 1.908 6.387l-.473 1.724 1.743-.459z"/></svg>
@@ -2405,8 +2369,6 @@
                     </div>
 
                     <div class="contact-form-container animate-on-scroll fade-left" style="transition-delay: 200ms">
-                        
-
                         <h3 class="text-2xl font-bold mb-6 text-white">Formulir Kontak</h3>
                         <form id="contact-form" class="space-y-6">
                             <input type="hidden" name="_subject" value="Pesan Baru dari Website Market Nusantara!">
@@ -2436,7 +2398,6 @@
 
     </main>
 
-    <!-- ... (Modals and Footers - Kept Same) ... -->
     <div id="info-modal-container" class="fixed inset-0 z-[110] opacity-0 pointer-events-none transition-opacity duration-300">
         <div id="info-modal-backdrop" class="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
         <div class="flex items-center justify-center w-full h-full p-4 md:p-8">
@@ -2467,19 +2428,14 @@
             <div class="container relative z-10 mx-auto px-6 lg:px-8 py-12">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
-                        <!-- FOOTER LOGO UPDATED TO ROUNDED-FULL -->
                         <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full">
                     </a>
-                    
-                    <!-- REMOVED SOCIAL ICONS HERE AS REQUESTED -->
-                    
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-8 py-8 border-t" style="border-color: var(--color-surface-2);">
                     <div>
                         <h3 class="font-bold mb-4 text-white">Mitra</h3>
                         <ul class="space-y-3 text-sm text-[var(--color-text-secondary)]">
-                            <!-- Updated Footer Links to match sections -->
                             <li><a href="#mitra" class="hover:text-white transition-colors">Semua Mitra</a></li>
                         </ul>
                     </div>
@@ -2540,21 +2496,6 @@
             </div>
         </div>
     </button>
-
-    <div id="social-proof-notification">
-        <div class="p-4 flex items-start gap-4 relative">
-            <img id="notification-image" src="" alt="Produk" class="w-16 h-16 object-cover rounded-md">
-            <div class="flex-grow">
-                <p id="notification-title" class="font-bold text-sm text-white"></p>
-                <p id="notification-description" class="text-xs text-gray-300 mt-1"></p>
-                <p id="notification-time" class="text-xs text-gray-500 mt-2"></p>
-            </div>
-            <button id="notification-close" class="text-gray-500 hover:text-white transition-colors">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-            </button>
-        </div>
-        <div id="notification-progress-bar"></div>
-    </div>
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -2627,8 +2568,6 @@
                     if (this.y < 0) {
                         this.y = height;
                         this.x = Math.random() * width;
-                    }
-                    if (this.y > height && isWarping) { 
                     }
 
                     this.draw();
@@ -2748,7 +2687,6 @@
                 shootingStars.push(new ShootingStar());
             }
 
-
             function animate() {
                 ctx.clearRect(0, 0, width, height);
                 nebulas.forEach(nebula => nebula.update());
@@ -2772,7 +2710,6 @@
                 });
             });
 
-            // ... Alien Animation Code Preserved ... 
             const alienVariations = [
                 `
                 <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full drop-shadow-lg">
@@ -2802,7 +2739,6 @@
                     <circle cx="50" cy="40" r="14" fill="white"/>
                     <circle cx="50" cy="40" r="6" fill="black"/>
                     <path d="M35,65 Q50,75 65,65" stroke="#000" stroke-width="3" fill="none"/>
-                    <!-- Horns -->
                     <path d="M20 30 Q30 40 35 35" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
                     <path d="M80 30 Q70 40 65 35" stroke="#fbbf24" stroke-width="5" stroke-linecap="round"/>
                 </svg>
@@ -2905,7 +2841,19 @@
 
             startAlienCycle();
 
-            
+            // Pindahkan deklarasi selector utama ke atas sebelum fungsi scroll dijalankan
+            const mainSections = document.querySelectorAll('header#home, section[id]');
+            const sidebarLinks = document.querySelectorAll('.app-sidebar .nav-link');
+
+            sidebarLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    sidebarLinks.forEach(item => item.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    if (window.innerWidth < 768) closeMobileSidebar();
+                });
+            });
+
             let lastKnownScrollPosition = 0;
             let ticking = false;
 
@@ -2914,27 +2862,52 @@
 
                 if (!ticking) {
                     window.requestAnimationFrame(() => {
-                        // Hanya update posisi canvas jika LEBAR LAYAR > 768px (Desktop)
-                        // Untuk menghindari jitter di Mobile
                         if (window.innerWidth > 768) {
                             canvas.style.transform = `translate3d(0, ${lastKnownScrollPosition * 0.2}px, 0)`;
                         }
                         
-                        // Update progress bar
                         const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
                         progressBar.style.width = `${(lastKnownScrollPosition / scrollHeight) * 100}%`;
                         
-                        // Check back-to-top button
                         if (lastKnownScrollPosition > 400) {
                             backToTopBtn.classList.add('visible');
                         } else {
                             backToTopBtn.classList.remove('visible');
                         }
-                        
-                        // Navbar logic (if needed)
-                        if (!desktopMenuContainer.matches(':hover')) {
-                            targetProps = getActiveLinkProps();
+
+                        // --- SCROLL SPY LOGIC UPDATE ---
+                        let currentId = '';
+                        // Menentukan area deteksi (sedikit di atas area tengah layar)
+                        const scrollPos = lastKnownScrollPosition + (window.innerHeight / 2.5);
+
+                        mainSections.forEach(section => {
+                            // Hanya proses section yang saat ini tidak disembunyikan oleh sistem Tab
+                            if (section.offsetHeight > 0 || section.clientHeight > 0) {
+                                const sectionTop = section.getBoundingClientRect().top + lastKnownScrollPosition;
+                                if (scrollPos >= sectionTop) {
+                                    currentId = section.getAttribute('id');
+                                }
+                            }
+                        });
+
+                        // Cek toleransi ekstra jika user menyentuh dasar halaman
+                        if ((window.innerHeight + Math.round(lastKnownScrollPosition)) >= document.documentElement.scrollHeight - 50) {
+                            const visibleSections = Array.from(mainSections).filter(s => s.offsetHeight > 0);
+                            if(visibleSections.length > 0) {
+                                currentId = visibleSections[visibleSections.length - 1].getAttribute('id');
+                            }
                         }
+
+                        // Update kelas sidebar link
+                        if (currentId) {
+                            sidebarLinks.forEach(link => {
+                                link.classList.remove('active');
+                                if (link.getAttribute('href') === `#${currentId}`) {
+                                    link.classList.add('active');
+                                }
+                            });
+                        }
+                        // --- AKHIR SCROLL SPY ---
 
                         ticking = false;
                     });
@@ -2942,7 +2915,6 @@
                     ticking = true;
                 }
             });
-
 
             const heroTitle = document.getElementById('hero-title');
             
@@ -2972,15 +2944,12 @@
                 }, 500); 
             });
             
-            
-            // --- SIDEBAR LOGIC ---
             const desktopSidebarToggle = document.getElementById('desktop-sidebar-toggle');
             const mobileSidebarToggle = document.getElementById('mobile-sidebar-toggle');
             const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
             const sidebarOverlay = document.getElementById('sidebar-overlay');
             const body = document.body;
 
-            // Desktop Toggle Logic
             if (desktopSidebarToggle) {
                 desktopSidebarToggle.addEventListener('click', () => {
                     body.classList.toggle('sidebar-collapsed');
@@ -2993,7 +2962,6 @@
                 });
             }
 
-            // Mobile Toggle Logic
             if (mobileSidebarToggle) {
                 mobileSidebarToggle.addEventListener('click', () => {
                     body.classList.add('mobile-sidebar-open');
@@ -3006,53 +2974,6 @@
 
             if (mobileSidebarClose) mobileSidebarClose.addEventListener('click', closeMobileSidebar);
             if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeMobileSidebar);
-
-
-            // --- REVISED SCROLL SPY & MENU SYNC LOGIC ---
-            const mainSections = document.querySelectorAll('header#home, section[id]');
-            const sidebarLinks = document.querySelectorAll('.app-sidebar .nav-link');
-
-            // 1. Klik menu -> Langsung ubah warna & tutup sidebar mobile
-            sidebarLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    // Hilangkan aktif dari semua link
-                    sidebarLinks.forEach(item => item.classList.remove('active'));
-                    // Tambahkan aktif ke link yang diklik
-                    this.classList.add('active');
-                    
-                    // Tutup sidebar mobile (jika sedang buka di HP)
-                    if (window.innerWidth < 768) closeMobileSidebar();
-                });
-            });
-
-            // 2. Scroll halaman -> Deteksi section & update warna menu otomatis
-            const sectionObserverOptions = {
-                root: null,
-                rootMargin: '-20% 0px -70% 0px', // Aktif ketika section menyentuh 20% dari atas layar
-                threshold: 0
-            };
-
-            const sectionObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const currentId = entry.target.getAttribute('id');
-                        
-                        // Sinkronkan class active di sidebar
-                        sidebarLinks.forEach(link => {
-                            link.classList.remove('active');
-                            if (link.getAttribute('href') === `#${currentId}`) {
-                                link.classList.add('active');
-                            }
-                        });
-                    }
-                });
-            }, sectionObserverOptions);
-
-            // Observasi semua section yang punya ID
-            mainSections.forEach(section => {
-                sectionObserver.observe(section);
-            });
-            // Hapus fungsi animasi animateFollower yang lama (jika masih nyangkut di script bawah) agar bersih
             
             var swiperHero = new Swiper(".hero-swiper", {
                 slidesPerView: 1, spaceBetween: 16,
@@ -3062,27 +2983,21 @@
                 roundLengths: true, 
             });
 
-             /* --- MITRA & PRICING TABS LOGIC --- */
             const mitraSectionTabs = document.querySelectorAll('.mitra-section-tab');
             const mitraTabContents = document.querySelectorAll('.mitra-tab-content');
 
             mitraSectionTabs.forEach(tab => {
                 tab.addEventListener('click', () => {
-                    // Remove active class from all tabs
                     mitraSectionTabs.forEach(t => t.classList.remove('active'));
-                    // Add active to clicked tab
                     tab.classList.add('active');
                     
-                    // Hide all panels
                     mitraTabContents.forEach(content => content.classList.add('hidden'));
                     
-                    // Show target panel
                     const targetId = tab.getAttribute('data-target');
                     const targetPanel = document.getElementById(targetId);
                     if (targetPanel) {
                         targetPanel.classList.remove('hidden');
                         
-                        // Fix for Swiper not initializing correctly if hidden initially
                         if (targetId === 'mitra-panel' && mitraSwiperInstance) {
                             mitraSwiperInstance.update();
                         }
@@ -3102,17 +3017,16 @@
                 'pp': { label: 'PAID PROMOTE', class: 'accent-pp' }
             };
 
-            let allMitraData = []; // Store data globally for filtering
-            let mitraSwiperInstance = null; // Store swiper instance
+            let allMitraData = []; 
+            let mitraSwiperInstance = null; 
 
             const renderMitraSlider = (filter = 'all') => {
-                // Destroy existing swiper if it exists
                 if (mitraSwiperInstance !== null) {
                     mitraSwiperInstance.destroy(true, true);
                     mitraSwiperInstance = null;
                 }
 
-                mitraContainer.innerHTML = ''; // Clear current slides
+                mitraContainer.innerHTML = ''; 
                 
                 const filteredData = filter === 'all' 
                     ? allMitraData 
@@ -3175,11 +3089,10 @@
                 
                 mitraContainer.innerHTML = htmlContent;
 
-                // Re-initialize Swiper
                 mitraSwiperInstance = new Swiper(".mitra-swiper", {
                     slidesPerView: 2,
                     spaceBetween: 10, 
-                    loop: filteredData.length > 2, // Only loop if enough slides
+                    loop: filteredData.length > 2, 
                     speed: 3000, 
                     roundLengths: true, 
                     grabCursor: true, 
@@ -3218,13 +3131,10 @@
 
             loadMitraData();
 
-            // Filter Buttons Event Listeners
             const filterBtns = document.querySelectorAll('.mitra-filter-btn');
             filterBtns.forEach(btn => {
                 btn.addEventListener('click', () => {
-                    // Remove active class from all
                     filterBtns.forEach(b => b.classList.remove('active'));
-                    // Add active to clicked
                     btn.classList.add('active');
                     
                     const filterValue = btn.getAttribute('data-filter');
@@ -3232,7 +3142,6 @@
                 });
             });
 
-             /* --- PRICING DATA LOADING & SWIPER (REVISED) --- */
             const pricingWrapper = document.getElementById('pricing-wrapper');
             let pricingSwiperInstance = null;
 
@@ -3246,8 +3155,6 @@
                         return;
                     }
 
-                    // --- FIX LOOPING & SPACING ---
-                    // 1. Duplikasi data agar loop swiper berjalan mulus ke segala arah
                     const minSlidesForLoop = 12; 
                     if (pricingData.length > 0) {
                          const originalData = [...pricingData];
@@ -3293,12 +3200,10 @@
                     
                     pricingWrapper.innerHTML = html;
 
-                    // Initialize Pricing Swiper
-                    // REVISI: Mengubah slidesPerView Desktop agar kartu lebih rapat (anti-LDR)
                     pricingSwiperInstance = new Swiper(".pricing-swiper", {
-                        slidesPerView: 1.25, // Mobile: Kanan kiri terlihat dikit
+                        slidesPerView: 1.25, 
                         centeredSlides: true, 
-                        spaceBetween: 10, // Mobile gap
+                        spaceBetween: 10, 
                         loop: true, 
                         initialSlide: 1, 
                         grabCursor: true,
@@ -3309,17 +3214,17 @@
                         },
                         breakpoints: {
                             640: { 
-                                slidesPerView: 2.2, // Tablet: Sedikit lebih rapat dari 2
+                                slidesPerView: 2.2, 
                                 spaceBetween: 15, 
                                 centeredSlides: true 
                             }, 
                             1024: { 
-                                slidesPerView: 3.75, // Desktop FIX: Angka ini membuat slot slide pas dengan lebar kartu (350px), menghilangkan gap kosong.
-                                spaceBetween: 20, // Jarak antar kartu yang nyaman (tidak terlalu jauh, tidak nempel)
+                                slidesPerView: 3.75, 
+                                spaceBetween: 20, 
                                 centeredSlides: true 
                             },
                             1280: {
-                                slidesPerView: 4, // Large Desktop: Lebih rapat lagi
+                                slidesPerView: 4, 
                                 spaceBetween: 20,
                                 centeredSlides: true
                             }
@@ -3414,83 +3319,7 @@
             
             const progressBar = document.getElementById('scroll-progress-bar');
             const desktopMenuContainer = document.getElementById('desktop-menu-container');
-            const navFollower = document.getElementById('nav-follower');
-            const allNavLinks = document.querySelectorAll('.nav-link');
 
-            let targetProps = { left: 0, width: 0, opacity: 0 };
-            let currentProps = { left: 0, width: 0, opacity: 0 };
-            const LERP_FACTOR = 0.1; 
-
-            function getActiveLinkProps() {
-                let currentSectionId = '';
-                const isInfoMode = desktopMenuContainer.classList.contains('info-mode');
-                
-                const sectionsToCheck = isInfoMode 
-                    ? document.querySelectorAll('#informasi-section-container > section[id]')
-                    : document.querySelectorAll('header[id], main > section[id]');
-
-                sectionsToCheck.forEach(section => {
-                    const sectionTop = section.getBoundingClientRect().top + window.pageYOffset;
-                    if (window.pageYOffset >= sectionTop - 150) {
-                        currentSectionId = section.getAttribute('id');
-                    }
-                });
-
-                allNavLinks.forEach(link => link.classList.remove('active'));
-                
-                const activeLink = document.querySelector(`.nav-link[href="#${currentSectionId}"]`);
-                
-                if (activeLink && !activeLink.offsetParent === false) { 
-                    activeLink.classList.add('active');
-                    return {
-                        left: activeLink.offsetLeft - 12,
-                        width: activeLink.offsetWidth + 24,
-                        opacity: 1
-                    };
-                }
-                return { left: currentProps.left, width: currentProps.width, opacity: 0 };
-            }
-
-            function animateFollower() {
-                if (!navFollower) return; // Prevent error when follower is hidden
-                
-                currentProps.left += (targetProps.left - currentProps.left) * LERP_FACTOR;
-                currentProps.width += (targetProps.width - currentProps.width) * LERP_FACTOR;
-                currentProps.opacity += (targetProps.opacity - currentProps.opacity) * LERP_FACTOR;
-
-                navFollower.style.left = `${currentProps.left}px`;
-                navFollower.style.width = `${currentProps.width}px`;
-                navFollower.style.opacity = currentProps.opacity;
-
-                requestAnimationFrame(animateFollower);
-            }
-
-            animateFollower(); 
-
-            
-            desktopMenuContainer.querySelectorAll('.nav-link').forEach(link => {
-                link.addEventListener('mouseenter', () => {
-                    targetProps = {
-                        left: link.offsetLeft - 12,
-                        width: link.offsetWidth + 24,
-                        opacity: 1
-                    };
-                });
-            });
-
-            
-            desktopMenuContainer.addEventListener('mouseleave', () => {
-                targetProps = getActiveLinkProps();
-            });
-
-            
-            setTimeout(() => {
-                const initialProps = getActiveLinkProps();
-                targetProps = initialProps;
-                currentProps = initialProps; 
-            }, 300);
-            
-            
             const faqItems = document.querySelectorAll('.faq-item');
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
@@ -3503,7 +3332,6 @@
                 });
             });
 
-            
             $('#contact-form').on('submit', function(e) {
                 e.preventDefault(); 
 
@@ -3533,7 +3361,6 @@
             };
             if(closeInfoModalBtn) closeInfoModalBtn.addEventListener('click', closeInfoModal);
 
-            
             const tabButtons = document.querySelectorAll('.hero-tab-button');
             const heroHeader = document.querySelector('header#home'); 
             const mainContentForTabs = document.querySelector('main');
@@ -3554,22 +3381,18 @@
                 });
             });
 
-            /* --- NEW: HERO CTA TO KOMUNITAS TAB LOGIC --- */
             const ctaGabungKomunitas = document.getElementById('cta-gabung-komunitas');
             if (ctaGabungKomunitas) {
                 ctaGabungKomunitas.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // Cari tombol tab komunitas dan klik secara programatik
                     const komunitasTabBtn = document.querySelector('.hero-tab-button[data-tab="tab-komunitas"]');
                     if (komunitasTabBtn) {
                         komunitasTabBtn.click();
-                        // Scroll sedikit agar tab terlihat penuh jika perlu (opsional)
                         document.getElementById('hero-tabs-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
                 });
             }
             
-            /* --- LOAD DATA GRUP NUSANTARA (NEW DESIGN) --- */
             const grupNusantaraContainer = document.getElementById('grup-nusantara-container');
             
             const loadGrupNusantara = async () => {
@@ -3584,8 +3407,6 @@
 
                     let htmlContent = '';
                     data.forEach(grup => {
-                        // NEW CARD LAYOUT based on reference images
-                        // Transparent Glass, Neon Gradient Border, Flash Effect on Hover
                         htmlContent += `
                             <div class="group-card-glass">
                                 <div class="flex items-center gap-3 relative z-10">
@@ -3616,9 +3437,7 @@
                 }
             };
             
-            // Panggil saat tab komunitas diklik pertama kali, atau langsung saat load
             loadGrupNusantara();
-
 
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
@@ -3655,12 +3474,10 @@
                 });
             });
 
-            
             const scrollObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => entry.isIntersecting ? entry.target.classList.add('is-visible') : null);
             }, { threshold: 0.1 });
             document.querySelectorAll('.animate-on-scroll').forEach(el => scrollObserver.observe(el));
-
 
             const shareButtons = document.querySelectorAll('.share-btn');
             const toast = document.getElementById('toast-notification');
