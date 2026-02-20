@@ -2273,6 +2273,15 @@
                                 <div class="swiper-pagination"></div>
                             </div>
                         </div>
+
+                        <!-- TOMBOL LIHAT SEMUA MITRA -->
+                        <div class="mt-8 text-center animate-on-scroll fade-up">
+                            <a href="allmitra.html" class="btn-shine inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-[var(--color-cyan)] rounded-full border border-[var(--color-cyan)]/50 bg-[var(--color-cyan)]/10 hover:bg-[var(--color-cyan)]/20 hover:text-white transition-all duration-300">
+                                Lihat Semua Mitra
+                                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" /></svg>
+                            </a>
+                        </div>
+                        
                     </div>
 
                     <div id="pricing-panel" class="mitra-tab-content hidden">
@@ -3053,13 +3062,16 @@
                     ? allMitraData 
                     : allMitraData.filter(m => m.role === filter);
 
-                if (filteredData.length === 0) {
+                // Acak urutan dan batasi maksimal 25 kartu
+                const displayData = [...filteredData].sort(() => 0.5 - Math.random()).slice(0, 25);
+
+                if (displayData.length === 0) {
                     mitraContainer.innerHTML = '<div class="w-full text-center py-8 text-gray-500 col-span-full">Belum ada data untuk kategori ini.</div>';
                     return; 
                 }
 
                 let htmlContent = '';
-                filteredData.forEach(mitra => {
+                displayData.forEach(mitra => {
                     const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
                     
                     const status = Math.random() > 0.3 ? 'Online' : 'Away';
@@ -3113,7 +3125,7 @@
                 mitraSwiperInstance = new Swiper(".mitra-swiper", {
                     slidesPerView: 2,
                     spaceBetween: 10, 
-                    loop: filteredData.length > 2, 
+                    loop: displayData.length > 2, 
                     speed: 3000, 
                     roundLengths: true, 
                     grabCursor: true, 
