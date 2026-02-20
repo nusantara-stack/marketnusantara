@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     
+    <!-- FAVICON -->
+    <link rel="icon" type="image/webp" href="assets/profile/nusantaralogo.webp">
+    <link rel="apple-touch-icon" href="assets/profile/nusantaralogo.webp">
+
     <!-- ========================================== -->
     <!-- PRIMARY META TAGS & SEO -->
     <!-- ========================================== -->
@@ -40,25 +44,67 @@
     <meta property="twitter:image" content="https://marketnusantara.xyz/assets/profile/nusantaralogo.webp">
 
     <!-- ========================================== -->
-    <!-- STRUCTURED DATA (JSON-LD) UNTUK GOOGLE -->
+    <!-- STRUCTURED DATA (JSON-LD) UNTUK GOOGLE & SITELINKS -->
     <!-- ========================================== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "Organization",
-      "name": "Market Nusantara",
-      "url": "https://marketnusantara.xyz",
-      "logo": "https://marketnusantara.xyz/assets/profile/nusantaralogo.webp",
-      "description": "Platform Rekening Bersama (Rekber) dan marketplace komunitas digital terpercaya di Indonesia.",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+62-813-3073-0466",
-        "contactType": "customer service",
-        "areaServed": "ID",
-        "availableLanguage": "Indonesian"
-      },
-      "sameAs": [
-        "https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "Market Nusantara",
+          "url": "https://marketnusantara.xyz",
+          "logo": "https://marketnusantara.xyz/assets/profile/nusantaralogo.webp",
+          "description": "Platform Rekening Bersama (Rekber) dan marketplace komunitas digital terpercaya di Indonesia.",
+          "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+62-813-3073-0466",
+            "contactType": "customer service",
+            "areaServed": "ID",
+            "availableLanguage": "Indonesian"
+          },
+          "sameAs": [
+            "https://whatsapp.com/channel/0029VbCY5vgElah1G36m3Q0V"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "Market Nusantara",
+          "url": "https://marketnusantara.xyz"
+        },
+        {
+          "@type": "ItemList",
+          "itemListElement": [
+            {
+              "@type": "SiteNavigationElement",
+              "position": 1,
+              "name": "Database Ripper",
+              "description": "Cek daftar penipu dan riwayat kasus sebelum bertransaksi.",
+              "url": "https://marketnusantara.xyz/ripper.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 2,
+              "name": "Semua Mitra",
+              "description": "Daftar lengkap partner dan mitra resmi Market Nusantara.",
+              "url": "https://marketnusantara.xyz/allmitra.html"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 3,
+              "name": "Proses Layanan",
+              "description": "Panduan langkah demi langkah cara menggunakan layanan Rekber kami.",
+              "url": "https://marketnusantara.xyz/#layanan"
+            },
+            {
+              "@type": "SiteNavigationElement",
+              "position": 4,
+              "name": "Kontak Kami",
+              "description": "Hubungi admin Market Nusantara untuk bantuan dan dukungan.",
+              "url": "https://marketnusantara.xyz/#kontak"
+            }
+          ]
+        }
       ]
     }
     </script>
