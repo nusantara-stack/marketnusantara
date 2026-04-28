@@ -3,10 +3,27 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!mitraContainer) return; // Mencegah error jika elemen tidak ditemukan
 
     const roleLabels = {
-        'own': { label: 'OWN', class: 'accent-own' },
-        'pt': { label: 'PARTNER', class: 'accent-pt' },
-        'tk': { label: 'TANGAN KANAN', class: 'accent-tk' },
-        'pp': { label: 'PAID PROMOTE', class: 'accent-pp' }
+        'own': 'OWNER',
+        'pt': 'PARTNER',
+        'tk': 'TANGAN KANAN',
+        'pp': 'PAID PROMOTE'
+    };
+
+    // Helper untuk mengubah hex ke rgba untuk efek shadow transparan
+    const hexToRgba = (hex, alpha) => {
+        let r = 34, g = 211, b = 238; // Default Cyan fallback
+        if (hex && hex.startsWith('#')) {
+            let cleanHex = hex.replace('#', '');
+            if (cleanHex.length === 3) {
+                cleanHex = cleanHex.split('').map(char => char + char).join('');
+            }
+            if (cleanHex.length === 6) {
+                r = parseInt(cleanHex.substring(0, 2), 16);
+                g = parseInt(cleanHex.substring(2, 4), 16);
+                b = parseInt(cleanHex.substring(4, 6), 16);
+            }
+        }
+        return `rgba(${r}, ${g}, ${b}, ${alpha})`;
     };
 
     let allMitraData = []; 
@@ -33,14 +50,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let htmlContent = '';
         displayData.forEach(mitra => {
-            const roleInfo = roleLabels[mitra.role] || { label: 'MEMBER', class: 'accent-default' };
+            const roleName = roleLabels[mitra.role] || 'MEMBER';
+            
+            // Ambil warna dari JSON, default ke Cyan jika tidak ada
+            const accentColor = mitra.aksen_warna || '#22d3ee';
+            const accentDim = hexToRgba(accentColor, 0.4);
             
             const status = Math.random() > 0.3 ? 'Online' : 'Away';
             const statusColor = status === 'Online' ? '#4ade80' : '#fbbf24';
 
             htmlContent += `
                 <div class="swiper-slide h-auto">
-                    <div class="mitra-card ${roleInfo.class}">
+                    <div class="mitra-card" style="--card-accent: ${accentColor}; --card-accent-dim: ${accentDim};">
                         <div class="mitra-card-pattern"></div>
                         
                         <div class="mitra-status">
@@ -54,7 +75,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         
                         <div class="mitra-info">
                             <div>
-                                <span class="mitra-role-label">${roleInfo.label}</span>
+                                <span class="mitra-role-label">${roleName}</span>
                                 <h3 class="mitra-name">${mitra.nama}</h3>
                                 
                                 <div class="mitra-stats-row">
