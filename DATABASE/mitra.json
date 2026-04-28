@@ -24,14 +24,14 @@
     "nama": "XIERA",
     "foto": "assets/profile/xiera.webp",
     "role": "own",
-    "aksen_warna": "#ffffff",
+    "aksen_warna": "#E63609",
     "link": "https://wa.me/+6285833552338"
   },
   {
     "nama": "FRANX",
     "foto": "assets/profile/franx.webp",
     "role": "own",
-    "aksen_warna": "#2784F5",
+    "aksen_warna": "#EDC715",
     "link": "https://wa.me/+6285218726234"
   }
 ]
