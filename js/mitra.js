@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!mitraContainer) return; // Mencegah error jika elemen tidak ditemukan
 
     const roleLabels = {
-        'own': 'OWNER',
+        'own': 'OWN',
         'pt': 'PARTNER',
         'tk': 'TANGAN KANAN',
         'pp': 'PAID PROMOTE'
