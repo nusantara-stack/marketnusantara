@@ -20,7 +20,7 @@
     <meta name="language" content="Indonesian">
     <meta name="theme-color" content="#050505">
 
-    <!-- Canonical URL (Penting agar Google tidak bingung jika ada www / non-www) -->
+    <!-- Canonical URL -->
     <link rel="canonical" href="https://marketnusantara.xyz/" />
 
     <!-- ========================================== -->
@@ -30,7 +30,6 @@
     <meta property="og:url" content="https://marketnusantara.xyz/">
     <meta property="og:title" content="Market Nusantara - Layanan Rekber & Komunitas Digital Terpercaya">
     <meta property="og:description" content="Platform terpercaya untuk segala transaksi online Anda. Jual beli aman dengan sistem Rekening Bersama (Rekber) terpercaya.">
-    <!-- Gambar yang akan muncul saat link dibagikan (Ganti dengan URL banner utuh Anda jika ada) -->
     <meta property="og:image" content="https://marketnusantara.xyz/assets/profile/nusantaralogo.webp">
     <meta property="og:site_name" content="Market Nusantara">
 
@@ -44,7 +43,7 @@
     <meta property="twitter:image" content="https://marketnusantara.xyz/assets/profile/nusantaralogo.webp">
 
     <!-- ========================================== -->
-    <!-- STRUCTURED DATA (JSON-LD) UNTUK GOOGLE & SITELINKS -->
+    <!-- STRUCTURED DATA (JSON-LD) -->
     <!-- ========================================== -->
     <script type="application/ld+json">
     {
@@ -137,10 +136,6 @@
             --color-gradient-main: linear-gradient(135deg, #22d3ee 0%, #3b82f6 50%, #8b5cf6 100%);
             --color-gradient-hover: linear-gradient(135deg, #67e8f9 0%, #60a5fa 50%, #a78bfa 100%); 
             --color-gradient-glow: linear-gradient(to right, #22d3ee, #8b5cf6);
-
-            --color-gradient-silver: linear-gradient(135deg, #94a3b8 0%, #cbd5e1 100%);
-            --color-gradient-gold: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
-            --color-gradient-platinum: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
 
             --color-glass-bg: rgba(15, 23, 42, 0.4); 
             --color-glass-border: rgba(255, 255, 255, 0.08);
@@ -263,10 +258,6 @@
         
         .hero-section {
             transition: padding-bottom 0.6s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        #nav-follower {
-            display: none !important;
         }
 
         .app-sidebar {
@@ -483,13 +474,6 @@
         
         .text-shadow-dark { text-shadow: 0.125rem 0.125rem 0.5rem rgba(0, 0, 0, 0.7); } 
         
-        .text-gradient {
-            background: var(--color-gradient-main);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
         .btn-shine { position: relative; overflow: hidden; z-index: 1; }
         
         .btn-shine.btn-primary {
@@ -653,23 +637,6 @@
             box-shadow: 0 0 15px rgba(34, 211, 238, 0.3);
         }
 
-        .mitra-section-tab {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: var(--color-text-secondary);
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-        
-        .mitra-section-tab.active {
-            color: white;
-            border-bottom-color: var(--color-cyan);
-        }
-
         .mitra-swiper {
             width: 100%;
             padding: 2rem 0 3rem; 
@@ -702,181 +669,6 @@
         
         .mitra-swiper-button {
             display: none !important;
-        }
-
-        .pricing-swiper {
-            width: 100%;
-            padding: 2rem 0 3rem; 
-            overflow: visible;
-        }
-        
-        .pricing-swiper .swiper-slide {
-            height: auto; 
-            display: flex; 
-            justify-content: center;
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        .pricing-swiper .swiper-slide:not(.swiper-slide-active) {
-            transform: scale(0.85);
-            opacity: 0.4;
-            filter: blur(1px);
-        }
-        
-        .pricing-swiper .swiper-slide.swiper-slide-active {
-            transform: scale(1);
-            opacity: 1;
-            filter: blur(0);
-            z-index: 10;
-        }
-
-        .pricing-swiper .swiper-pagination-progressbar {
-            position: absolute !important;
-            bottom: 0 !important;
-            top: auto !important;
-            left: 0 !important;
-            width: 100% !important;
-            height: 3px !important;
-            background: rgba(255, 255, 255, 0.15) !important;
-            border-radius: 3px;
-        }
-        
-        .pricing-swiper .swiper-pagination-progressbar-fill {
-            background: var(--color-cyan) !important; 
-            border-radius: 3px;
-            box-shadow: 0 0 10px var(--color-cyan);
-        }
-        
-        .pricing-card {
-            background: linear-gradient(145deg, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.6) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-radius: 1.25rem;
-            padding: 1.5rem;
-            position: relative;
-            border: 1px solid rgba(255,255,255,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            width: 100%; 
-            height: 100%; 
-            overflow: hidden;
-            max-width: 350px;
-        }
-        
-        .pricing-card::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; height: 100%;
-            background: radial-gradient(circle at top right, rgba(34, 211, 238, 0.05), transparent 60%);
-            pointer-events: none;
-        }
-
-        .pricing-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -10px rgba(0,0,0,0.5), inset 0 0 20px rgba(34, 211, 238, 0.05);
-            border-color: rgba(34, 211, 238, 0.3);
-        }
-
-        .pricing-badge {
-            display: inline-block;
-            padding: 0.25rem 1rem;
-            border-radius: 9999px;
-            font-size: 0.7rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: black !important;
-            background: var(--color-gradient-main) !important; 
-            margin-bottom: 1rem;
-            align-self: flex-start;
-            box-shadow: 0 0 10px rgba(34, 211, 238, 0.3);
-        }
-        
-        .pricing-price {
-            font-size: 2.25rem;
-            font-weight: 800;
-            color: white;
-            line-height: 1;
-            margin-bottom: 0.25rem;
-            text-shadow: 0 0 20px rgba(0,0,0,0.5);
-        }
-        
-        .pricing-period {
-            font-size: 0.85rem;
-            font-weight: 500;
-            color: var(--color-text-secondary);
-        }
-        
-        .pricing-desc {
-            color: var(--color-text-secondary);
-            font-size: 0.85rem;
-            margin-bottom: 1.25rem;
-            padding-bottom: 1.25rem;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
-        }
-        
-        .pricing-features {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1.5rem 0;
-            flex-grow: 1;
-        }
-        
-        .pricing-features li {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--color-text-primary);
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
-        }
-        
-        .check-icon-circle {
-            width: 1rem;
-            height: 1rem;
-            border-radius: 50%;
-            background: rgba(34, 211, 238, 0.15); 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-cyan);
-            flex-shrink: 0;
-            box-shadow: 0 0 8px rgba(34, 211, 238, 0.1);
-        }
-        
-        .pricing-btn {
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 0.6rem;
-            font-size: 0.9rem;
-            font-weight: 700;
-            text-align: center;
-            transition: all 0.3s ease;
-            background: var(--color-gradient-main) !important; 
-            color: black !important;
-            margin-top: auto;
-            border: none;
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-        }
-        
-        .pricing-btn:hover {
-            transform: scale(1.02);
-            box-shadow: 0 0 20px rgba(34, 211, 238, 0.4);
-        }
-        
-        .pricing-btn::before {
-            content: '';
-            position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-            transition: left 0.5s ease;
-        }
-        
-        .pricing-btn:hover::before {
-            left: 100%;
         }
 
         .alien-wrapper {
@@ -1811,27 +1603,6 @@
                 overscroll-behavior-x: none;
             }
 
-            .pricing-card {
-                padding: 1.25rem !important; 
-                border-radius: 1rem !important;
-                max-width: 100% !important;
-            }
-            .pricing-price {
-                font-size: 1.75rem !important; 
-            }
-            .pricing-badge {
-                font-size: 0.65rem !important;
-                padding: 0.2rem 0.8rem !important;
-                margin-bottom: 0.75rem !important;
-            }
-            .pricing-btn {
-                padding: 0.6rem !important;
-                font-size: 0.8rem !important;
-            }
-            .pricing-features li {
-                font-size: 0.75rem !important;
-            }
-
             .animate-on-scroll.zoom-in {
                 transform: none !important;
                 opacity: 0;
@@ -2041,7 +1812,7 @@
             
             <div class="mobile-topbar md:hidden">
                 <a href="#home" class="flex items-center gap-3">
-                    <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-10 rounded-full border border-[var(--color-cyan)] p-0.5">
+                    <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-10 rounded-full border border-[var(--color-cyan)] p-0.5" onerror="this.src='https://placehold.co/40x40/1c1c1c/a1a1aa?text=MN'">
                     <span class="font-bold text-lg text-white leading-tight tracking-wider">
                         Market<br>
                         <span class="text-[10px] text-[var(--color-cyan)] font-mono tracking-widest uppercase">Nusantara</span>
@@ -2063,7 +1834,7 @@
                 
                 <div class="flex items-center justify-between p-4 md:p-5 mb-2 border-b border-white/5 md:border-none">
                     <a href="#home" class="flex items-center gap-3 overflow-hidden">
-                        <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-11 w-11 shrink-0 rounded-full border border-[var(--color-cyan)] p-0.5">
+                        <img src="assets/profile/nusantaralogo.webp" alt="Logo" class="h-11 w-11 shrink-0 rounded-full border border-[var(--color-cyan)] p-0.5" onerror="this.src='https://placehold.co/44x44/1c1c1c/a1a1aa?text=MN'">
                         <span class="sidebar-logo-text font-bold text-lg text-white leading-tight tracking-wider">
                             Market<br>
                             <span class="text-[10px] text-[var(--color-cyan)] font-mono tracking-widest uppercase">Nusantara</span>
@@ -2089,7 +1860,7 @@
                     </a>
                     <a href="#mitra" class="nav-link sidebar-item">
                         <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
-                        <span class="sidebar-item-text">Mitra & Pricing</span>
+                        <span class="sidebar-item-text">Mitra Nusantara</span>
                     </a>
                     <a href="ripper.html" class="sidebar-item"> 
                         <svg class="w-5 h-5 opacity-80" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
@@ -2343,12 +2114,7 @@
                         <p class="mt-2 text-[var(--color-text-secondary)]">Berkolaborasi dengan brand dan komunitas terpercaya untuk ekosistem yang lebih baik.</p>
                     </div>
                     
-                    <div class="flex justify-center gap-8 mb-8 border-b border-white/10">
-                        <div class="mitra-section-tab active" data-target="mitra-panel">Mitra</div>
-                        <div class="mitra-section-tab" data-target="pricing-panel">Pricing & Benefits</div>
-                    </div>
-                    
-                    <div id="mitra-panel" class="mitra-tab-content">
+                    <div id="mitra-panel">
                         <div class="flex flex-wrap justify-center gap-2 mb-8 animate-on-scroll fade-up mitra-filter-container">
                             <button class="mitra-filter-btn active" data-filter="all">Semua</button>
                             <button class="mitra-filter-btn" data-filter="pp">PP</button>
@@ -2387,17 +2153,6 @@
                         </div>
                         
                     </div>
-
-                    <div id="pricing-panel" class="mitra-tab-content hidden">
-                        <div class="swiper pricing-swiper">
-                            <div class="swiper-wrapper" id="pricing-wrapper">
-                                <div class="swiper-slide">
-                                    <div class="pricing-card skeleton h-96 w-full"></div>
-                                </div>
-                            </div>
-                            <div class="swiper-pagination"></div>
-                        </div>
-                    </div>
                 </div>
             </section>
             
@@ -2435,7 +2190,7 @@
                                 Kami bangga telah memfasilitasi ribuan transaksi, menghubungkan kreator dengan pelanggan, dan membangun komunitas yang kuat. Angka-angka ini adalah cerminan dari dedikasi dan kepercayaan yang Anda berikan.
                             </p>
                              <div class="glass-box p-6 rounded-lg flex items-center gap-4 border border-[var(--color-accent)]/30">
-                                <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="w-16 h-16 object-contain rounded-full border-2 border-[var(--color-accent)] p-1 bg-white">
+                                <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="w-16 h-16 object-contain rounded-full border-2 border-[var(--color-accent)] p-1 bg-white" onerror="this.src='https://placehold.co/64x64/1c1c1c/a1a1aa?text=MN'">
                                 <div>
                                     <p class="text-white font-semibold">"Setiap transaksi adalah sebuah cerita. Kami berkomitmen untuk memastikan setiap cerita berakhir bahagia."</p>
                                     <p class="text-sm text-[var(--color-text-secondary)] mt-2">- Parhan M.P, Founder & CEO</p>
@@ -2464,7 +2219,7 @@
                             <a href="mailto:support@marketnusantara.xyz" class="flex items-center gap-4 group">
                                 <div class="bg-white/10 p-3 rounded-full group-hover:bg-[var(--color-accent)] transition-colors duration-300">
                                     <svg class="w-6 h-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2v10a2 2 0 002 2z" />
                                     </svg>
                                 </div>
                                 <div>
@@ -2556,7 +2311,7 @@
             <div class="container relative z-10 mx-auto px-6 lg:px-8 py-12">
                 <div class="flex flex-col sm:flex-row justify-between items-center pb-8">
                     <a href="#" class="mb-4 sm:mb-0">
-                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full">
+                        <img src="assets/profile/nusantaralogo.webp" alt="Market Nusantara Logo" class="h-10 w-auto rounded-full" onerror="this.src='https://placehold.co/100x40/1c1c1c/a1a1aa?text=Market+Nusantara'">
                     </a>
                 </div>
 
@@ -2629,10 +2384,10 @@
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     
     <!-- PANGGIL FILE DONASI.JS DI SINI -->
-    <script src="js/donasi.js"></script>
+    <!-- <script src="js/donasi.js"></script> -->
 
     <!-- PANGGIL FILE CALCULATOR.JS DI SINI -->
-    <script src="js/calculator.js"></script>
+    <!-- <script src="js/calculator.js"></script> -->
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -2973,9 +2728,8 @@
                 setTimeout(startAlienCycle, nextCheck);
             }
 
-            startAlienCycle();
+            setTimeout(startAlienCycle, 3000); 
 
-            // Pindahkan deklarasi selector utama ke atas sebelum fungsi scroll dijalankan
             const mainSections = document.querySelectorAll('header#home, section[id]');
             const sidebarLinks = document.querySelectorAll('.app-sidebar .nav-link');
 
@@ -3009,13 +2763,10 @@
                             backToTopBtn.classList.remove('visible');
                         }
 
-                        // --- SCROLL SPY LOGIC UPDATE ---
                         let currentId = '';
-                        // Menentukan area deteksi (sedikit di atas area tengah layar)
                         const scrollPos = lastKnownScrollPosition + (window.innerHeight / 2.5);
 
                         mainSections.forEach(section => {
-                            // Hanya proses section yang saat ini tidak disembunyikan oleh sistem Tab
                             if (section.offsetHeight > 0 || section.clientHeight > 0) {
                                 const sectionTop = section.getBoundingClientRect().top + lastKnownScrollPosition;
                                 if (scrollPos >= sectionTop) {
@@ -3024,7 +2775,6 @@
                             }
                         });
 
-                        // Cek toleransi ekstra jika user menyentuh dasar halaman
                         if ((window.innerHeight + Math.round(lastKnownScrollPosition)) >= document.documentElement.scrollHeight - 50) {
                             const visibleSections = Array.from(mainSections).filter(s => s.offsetHeight > 0);
                             if(visibleSections.length > 0) {
@@ -3032,7 +2782,6 @@
                             }
                         }
 
-                        // Update kelas sidebar link
                         if (currentId) {
                             sidebarLinks.forEach(link => {
                                 link.classList.remove('active');
@@ -3041,7 +2790,6 @@
                                 }
                             });
                         }
-                        // --- AKHIR SCROLL SPY ---
 
                         ticking = false;
                     });
@@ -3117,31 +2865,6 @@
                 roundLengths: true, 
             });
 
-            const mitraSectionTabs = document.querySelectorAll('.mitra-section-tab');
-            const mitraTabContents = document.querySelectorAll('.mitra-tab-content');
-
-            mitraSectionTabs.forEach(tab => {
-                tab.addEventListener('click', () => {
-                    mitraSectionTabs.forEach(t => t.classList.remove('active'));
-                    tab.classList.add('active');
-                    
-                    mitraTabContents.forEach(content => content.classList.add('hidden'));
-                    
-                    const targetId = tab.getAttribute('data-target');
-                    const targetPanel = document.getElementById(targetId);
-                    if (targetPanel) {
-                        targetPanel.classList.remove('hidden');
-                        
-                        if (targetId === 'mitra-panel' && mitraSwiperInstance) {
-                            mitraSwiperInstance.update();
-                        }
-                        if (targetId === 'pricing-panel' && pricingSwiperInstance) {
-                             pricingSwiperInstance.update();
-                        }
-                    }
-                });
-            });
-
 
             const mitraContainer = document.getElementById('mitra-container');
             const roleLabels = {
@@ -3166,7 +2889,6 @@
                     ? allMitraData 
                     : allMitraData.filter(m => m.role === filter);
 
-                // Acak urutan dan batasi maksimal 25 kartu
                 const displayData = [...filteredData].sort(() => 0.5 - Math.random()).slice(0, 25);
 
                 if (displayData.length === 0) {
@@ -3258,11 +2980,12 @@
             const loadMitraData = async () => {
                 try {
                     const response = await fetch('DATABASE/mitra.json');
+                    if (!response.ok) throw new Error("File tidak ditemukan");
                     allMitraData = await response.json();
                     renderMitraSlider('all');
                 } catch (error) {
                     console.error('Error loading mitra data:', error);
-                    mitraContainer.innerHTML = '<p class="text-center w-full py-10 text-red-500">Gagal memuat data mitra.</p>';
+                    mitraContainer.innerHTML = '<div class="w-full text-center py-8 text-red-500 col-span-full">Gagal memuat data mitra. Pastikan file JSON tersedia.</div>';
                 }
             };
 
@@ -3279,178 +3002,84 @@
                 });
             });
 
-            const pricingWrapper = document.getElementById('pricing-wrapper');
-            let pricingSwiperInstance = null;
-
-            const loadPricingData = async () => {
-                try {
-                    const response = await fetch('DATABASE/pricing.json');
-                    let pricingData = await response.json(); 
-                    
-                    if (!pricingData || pricingData.length === 0) {
-                        pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-gray-500 text-center w-full">Tidak ada data harga.</p></div>';
-                        return;
-                    }
-
-                    const minSlidesForLoop = 12; 
-                    if (pricingData.length > 0) {
-                         const originalData = [...pricingData];
-                         while (pricingData.length < minSlidesForLoop) {
-                             pricingData = [...pricingData, ...originalData];
-                         }
-                    }
-
-                    let html = '';
-                    pricingData.forEach((item) => {
-                        let featuresHtml = '';
-                        item.features.forEach(feat => {
-                            featuresHtml += `
-                                <li>
-                                    <div class="check-icon-circle">
-                                        <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-                                    ${feat}
-                                </li>
-                            `;
-                        });
-
-                        html += `
-                            <div class="swiper-slide h-auto">
-                                <div class="pricing-card">
-                                    <div class="pricing-badge">${item.tier}</div>
-                                    <div class="pricing-price">${item.price} <span class="pricing-period">${item.period}</span></div>
-                                    <p class="pricing-desc">${item.desc}</p>
-                                    
-                                    <ul class="pricing-features">
-                                        ${featuresHtml}
-                                    </ul>
-                                    
-                                    <a href="https://wa.me/6281330730466?text=Halo%20Admin,%20saya%20tertarik%20dengan%20paket%20${item.tier}" target="_blank" class="pricing-btn">
-                                        Hubungi Admin
-                                    </a>
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    pricingWrapper.innerHTML = html;
-
-                    pricingSwiperInstance = new Swiper(".pricing-swiper", {
-                        slidesPerView: 1.25, 
-                        centeredSlides: true, 
-                        spaceBetween: 10, 
-                        loop: true, 
-                        initialSlide: 1, 
-                        grabCursor: true,
-                        speed: 500, 
-                        pagination: {
-                            el: ".swiper-pagination",
-                            type: "progressbar",
-                        },
-                        breakpoints: {
-                            640: { 
-                                slidesPerView: 2.2, 
-                                spaceBetween: 15, 
-                                centeredSlides: true 
-                            }, 
-                            1024: { 
-                                slidesPerView: 3.75, 
-                                spaceBetween: 20, 
-                                centeredSlides: true 
-                            },
-                            1280: {
-                                slidesPerView: 4, 
-                                spaceBetween: 20,
-                                centeredSlides: true
-                            }
-                        },
-                    });
-
-                } catch (error) {
-                    console.error('Error loading pricing data:', error);
-                    pricingWrapper.innerHTML = '<div class="swiper-slide"><p class="text-red-400 text-center w-full">Gagal memuat data pricing.</p></div>';
-                }
-            };
-            loadPricingData();
-
-
             const statsContainer = document.getElementById('statistik-container');
 
             const loadStatistikData = async () => {
                 try {
                     const response = await fetch('DATABASE/statistik.json?v=' + new Date().getTime());
+                    if (!response.ok) throw new Error("File tidak ditemukan");
                     const statsData = await response.json();
-                    
-                    const htmlContent = `
-                        <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in">
-                            <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
-                                </svg>
-                            </div>
-                            
-                            <h3 class="relative z-10 text-4xl font-black text-white mb-1 stat-number tracking-tight" data-target="${statsData.total_transaksi}" data-plus="true">0</h3>
-                            <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Total Transaksi</p>
-                        </div>
-
-                        <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in" style="transition-delay: 100ms">
-                            <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
-                                <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
-                                </svg>
-                            </div>
-                            
-                            <h3 class="relative z-10 text-3xl font-black text-[var(--color-accent)] mb-1">Rp ${statsData.uang_display}</h3>
-                            <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Dana Diamankan</p>
-                        </div>
-                    `;
-
-                    statsContainer.innerHTML = htmlContent;
-
-                    const newCards = statsContainer.querySelectorAll('.animate-on-scroll');
-                    const visibilityObserver = new IntersectionObserver((entries) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.classList.add('is-visible');
-                            }
-                        });
-                    }, { threshold: 0.1 });
-                    newCards.forEach(card => visibilityObserver.observe(card));
-
-                    const animateCounter = (el) => {
-                        const target = +el.getAttribute('data-target');
-                        const duration = 2000; 
-                        const frameDuration = 1000 / 60; 
-                        const totalFrames = Math.round(duration / frameDuration);
-                        let frame = 0;
-
-                        const counter = setInterval(() => {
-                            frame++;
-                            const progress = Math.pow(frame / totalFrames, 3); 
-                            const currentCount = Math.round(target * progress);
-                            el.innerText = currentCount.toLocaleString('id-ID') + (el.dataset.plus ? '+' : '');
-                            if (frame === totalFrames) clearInterval(counter);
-                        }, frameDuration);
-                    };
-
-                    const statObserver = new IntersectionObserver((entries, observer) => {
-                        entries.forEach(entry => {
-                            if (entry.isIntersecting) {
-                                entry.target.querySelectorAll('.stat-number').forEach(num => animateCounter(num));
-                                observer.unobserve(entry.target); 
-                            }
-                        });
-                    }, { threshold: 0.3 }); 
-                    
-                    statObserver.observe(document.getElementById('statistik'));
-
+                    renderStats(statsData);
                 } catch (error) {
                     console.error('Error loading statistik data:', error);
-                    statsContainer.innerHTML = '<p class="text-center w-full py-4 text-red-500">Gagal memuat statistik. Pastikan file DATABASE/statistik.json ada.</p>';
+                    statsContainer.innerHTML = '<div class="col-span-2 text-center text-red-500">Gagal memuat data statistik. Pastikan file JSON tersedia.</div>';
                 }
             };
+            
+            const renderStats = (statsData) => {
+                const htmlContent = `
+                    <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in">
+                        <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 14.25v2.25m3-4.5v4.5m3-6.75v6.75m3-9v9M6 20.25h12A2.25 2.25 0 0 0 20.25 18V6A2.25 2.25 0 0 0 18 3.75H6A2.25 2.25 0 0 0 3.75 6v12A2.25 2.25 0 0 0 6 20.25Z" />
+                            </svg>
+                        </div>
+                        
+                        <h3 class="relative z-10 text-4xl font-black text-white mb-1 stat-number tracking-tight" data-target="${statsData.total_transaksi}" data-plus="true">0</h3>
+                        <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Total Transaksi</p>
+                    </div>
+
+                    <div class="stat-card group p-6 flex flex-col items-center justify-center animate-on-scroll zoom-in" style="transition-delay: 100ms">
+                        <div class="relative z-10 mb-4 p-4 rounded-full bg-white/5 border border-white/10 text-[var(--color-accent)] shadow-[0_0_15px_rgba(34,211,238,0.2)]">
+                            <svg class="w-8 h-8" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z" />
+                            </svg>
+                        </div>
+                        
+                        <h3 class="relative z-10 text-3xl font-black text-[var(--color-accent)] mb-1">Rp ${statsData.uang_display}</h3>
+                        <p class="relative z-10 text-xs text-[var(--color-text-secondary)] font-bold uppercase tracking-widest">Dana Diamankan</p>
+                    </div>
+                `;
+
+                statsContainer.innerHTML = htmlContent;
+
+                const newCards = statsContainer.querySelectorAll('.animate-on-scroll');
+                const visibilityObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                        }
+                    });
+                }, { threshold: 0.1 });
+                newCards.forEach(card => visibilityObserver.observe(card));
+
+                const animateCounter = (el) => {
+                    const target = +el.getAttribute('data-target');
+                    const duration = 2000; 
+                    const frameDuration = 1000 / 60; 
+                    const totalFrames = Math.round(duration / frameDuration);
+                    let frame = 0;
+
+                    const counter = setInterval(() => {
+                        frame++;
+                        const progress = Math.pow(frame / totalFrames, 3); 
+                        const currentCount = Math.round(target * progress);
+                        el.innerText = currentCount.toLocaleString('id-ID') + (el.dataset.plus ? '+' : '');
+                        if (frame === totalFrames) clearInterval(counter);
+                    }, frameDuration);
+                };
+
+                const statObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.querySelectorAll('.stat-number').forEach(num => animateCounter(num));
+                            observer.unobserve(entry.target); 
+                        }
+                    });
+                }, { threshold: 0.3 }); 
+                
+                statObserver.observe(document.getElementById('statistik'));
+            }
 
             loadStatistikData();
             
@@ -3476,15 +3105,9 @@
                 var submitButton = form.find('button[type="submit"]');
                 var formStatus = $('#form-status');
 
-                $.ajax({
-                    url: "https://formsubmit.co/ajax/parhan.mustika@gmail.com",
-                    method: "POST",
-                    data: form.serialize(),
-                    success: function(response) {
-                        formStatus.html('<p class="text-sm text-green-400">Pesan berhasil terkirim!</p>');
-                        form[0].reset();
-                    }
-                });
+                formStatus.html('<p class="text-sm text-green-400">Pesan berhasil terkirim!</p>');
+                form[0].reset();
+                setTimeout(() => { formStatus.html(''); }, 3000);
             });
 
             const infoModalContainer = document.getElementById('info-modal-container');
@@ -3535,44 +3158,45 @@
             const loadGrupNusantara = async () => {
                 try {
                     const response = await fetch('DATABASE/grupnusantara.json');
+                    if (!response.ok) throw new Error("File tidak ditemukan");
                     const data = await response.json();
                     
-                    if (!data || data.length === 0) {
-                        grupNusantaraContainer.innerHTML = '<p class="text-gray-500 text-sm">Belum ada grup yang tersedia.</p>';
-                        return;
-                    }
-
-                    let htmlContent = '';
-                    data.forEach(grup => {
-                        htmlContent += `
-                            <div class="group-card-glass">
-                                <div class="flex items-center gap-3 relative z-10">
-                                    <img src="${grup.image}" alt="${grup.nama}" class="group-image" onerror="this.src='https://placehold.co/48x48/1e293b/fff?text=${grup.nama.charAt(0)}'">
-                                    <div>
-                                        <h4 class="font-bold text-white text-sm leading-tight group-hover:text-[var(--color-cyan)] transition-colors">${grup.nama}</h4>
-                                        <p class="text-xs text-[var(--color-text-secondary)] mt-1 flex items-center gap-1">
-                                            <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
-                                            ${grup.member} Anggota
-                                        </p>
-                                    </div>
-                                </div>
-                                <a href="${grup.link}" target="_blank" class="join-btn relative z-10">
-                                    <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-green-400">
-                                        <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.628-.691c.969.585 1.902.896 3.033.896h.002c3.178 0 5.769-2.586 5.769-5.766 0-1.545-.6-2.998-1.688-4.088-1.089-1.09-2.544-1.691-4.284-1.691zm0 10.388c-1.047 0-2.062-.279-2.936-.799l-.21-.125-1.745.459.467-1.701-.138-.221c-.579-.922-.885-1.996-.884-3.085 0-2.618 2.129-4.747 4.745-4.747 1.268.001 2.459.495 3.356 1.391.897.896 1.39 2.086 1.391 3.353-.002 2.619-2.13 4.748-4.746 4.748l.7.727zm2.592-3.551c-.142-.071-.843-.416-.973-.463-.13-.048-.225-.071-.32.071-.095.142-.367.463-.45.559-.083.095-.166.107-.308.036-.142-.071-.6-.221-1.144-.705-.425-.379-.712-.847-.796-.989-.083-.142-.009-.219.062-.29.064-.063.142-.165.213-.248.071-.083.095-.142-.142-.237.047-.095.024-.178-.012-.249-.036-.071-.32-.771-.438-1.056-.115-.275-.231-.237-.317-.242l-.271-.005c-.095 0-.249.036-.379.178-.13.142-.497.486-.497 1.185s.509 1.374.58 1.469c.071.095 1.002 1.53 2.428 2.146.339.146.603.234.809.299.339.108.648.092.893.056.273-.04.843-.344.962-.676.119-.332.119-.617.083-.676-.035-.059-.129-.095-.271-.166z"/>
-                                    </svg>
-                                    Gabung
-                                </a>
-                            </div>
-                        `;
-                    });
-                    
-                    grupNusantaraContainer.innerHTML = htmlContent;
+                    if (!data || data.length === 0) throw new Error("Data kosong");
+                    renderGrup(data);
                     
                 } catch (error) {
                     console.error('Error loading grup nusantara:', error);
-                    grupNusantaraContainer.innerHTML = '<p class="text-red-400 text-sm">Gagal memuat data grup.</p>';
+                    grupNusantaraContainer.innerHTML = '<div class="text-center text-red-500 col-span-full">Gagal memuat data grup. Pastikan file JSON tersedia.</div>';
                 }
             };
+            
+            const renderGrup = (data) => {
+                let htmlContent = '';
+                data.forEach(grup => {
+                    htmlContent += `
+                        <div class="group-card-glass">
+                            <div class="flex items-center gap-3 relative z-10">
+                                <img src="${grup.image}" alt="${grup.nama}" class="group-image" onerror="this.src='https://placehold.co/48x48/1e293b/fff?text=${grup.nama.charAt(0)}'">
+                                <div>
+                                    <h4 class="font-bold text-white text-sm leading-tight group-hover:text-[var(--color-cyan)] transition-colors">${grup.nama}</h4>
+                                    <p class="text-xs text-[var(--color-text-secondary)] mt-1 flex items-center gap-1">
+                                        <span class="w-1.5 h-1.5 rounded-full bg-green-500"></span>
+                                        ${grup.member} Anggota
+                                    </p>
+                                </div>
+                            </div>
+                            <a href="${grup.link}" target="_blank" class="join-btn relative z-10">
+                                <svg viewBox="0 0 24 24" fill="currentColor" class="w-4 h-4 text-green-400">
+                                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.628-.691c.969.585 1.902.896 3.033.896h.002c3.178 0 5.769-2.586 5.769-5.766 0-1.545-.6-2.998-1.688-4.088-1.089-1.09-2.544-1.691-4.284-1.691zm0 10.388c-1.047 0-2.062-.279-2.936-.799l-.21-.125-1.745.459.467-1.701-.138-.221c-.579-.922-.885-1.996-.884-3.085 0-2.618 2.129-4.747 4.745-4.747 1.268.001 2.459.495 3.356 1.391.897.896 1.39 2.086 1.391 3.353-.002 2.619-2.13 4.748-4.746 4.748l.7.727zm2.592-3.551c-.142-.071-.843-.416-.973-.463-.13-.048-.225-.071-.32.071-.095.142-.367.463-.45.559-.083.095-.166.107-.308.036-.142-.071-.6-.221-1.144-.705-.425-.379-.712-.847-.796-.989-.083-.142-.009-.219.062-.29.064-.063.142-.165.213-.248.071-.083.095-.142-.142-.237.047-.095.024-.178-.012-.249-.036-.071-.32-.771-.438-1.056-.115-.275-.231-.237-.317-.242l-.271-.005c-.095 0-.249.036-.379.178-.13.142-.497.486-.497 1.185s.509 1.374.58 1.469c.071.095 1.002 1.53 2.428 2.146.339.146.603.234.809.299.339.108.648.092.893.056.273-.04.843-.344.962-.676.119-.332.119-.617.083-.676-.035-.059-.129-.095-.271-.166z"/>
+                                </svg>
+                                Gabung
+                            </a>
+                        </div>
+                    `;
+                });
+                
+                grupNusantaraContainer.innerHTML = htmlContent;
+            }
             
             loadGrupNusantara();
 
