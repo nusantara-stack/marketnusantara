@@ -43,11 +43,20 @@
         .clip-button {
             clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
         }
+        .clip-button-reverse {
+            clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+        }
         .bg-grid {
             background-size: 30px 30px;
             background-image: 
                 linear-gradient(to right, rgba(65, 105, 225, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
+        }
+        .btn-hover-fx:hover .btn-text {
+            transform: translateX(4px);
+        }
+        .btn-text {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
     </style>
 </head>
@@ -64,11 +73,11 @@
         <div class="absolute -top-16 -right-16 w-40 h-40 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
         <div class="absolute top-8 right-8 w-3 h-3 md:w-4 md:h-4 bg-accent rounded-full z-0"></div>
 
-        <!-- ================= WRAPPER 2 KOLOM (UNTUK DESKTOP) ================= -->
-        <div class="flex flex-col md:flex-row w-full flex-1 z-10 relative">
+        <!-- ================= WRAPPER ATAS-BAWAH ================= -->
+        <div class="flex flex-col w-full flex-1 z-10 relative">
 
             <!-- ================= HEADER SECTION (HERO KARAKTER) ================= -->
-            <header class="relative pt-12 px-6 pb-0 w-full md:w-1/2 h-[450px] md:min-h-[600px] md:h-auto flex-shrink-0 overflow-hidden flex flex-col items-center justify-center">
+            <header class="relative pt-12 px-6 pb-0 w-full h-[450px] md:h-[600px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-center">
                 
                 <!-- Tipografi Latar Belakang Z-0 -->
                 <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-8 md:mt-0">
@@ -111,8 +120,7 @@
             </header>
 
             <!-- ================= SECTION BUTTON / LINKS ================= -->
-            <!-- Di desktop: mengambil 50% kanan, diletakkan ke tengah, tombol dibatasi max-w-md agar proporsional -->
-            <section class="relative w-full md:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 pt-6 md:pt-12 pb-12 z-10 md:border-l-2 md:border-dashed border-gray-200 bg-white/50 backdrop-blur-sm">
+            <section class="relative w-full flex flex-col justify-center items-center px-6 md:px-12 pt-6 md:pt-12 pb-12 z-10">
                 
                 <div class="w-full max-w-[420px] flex flex-col gap-4">
                     <!-- Link 1 (Primary / Yellow) -->
