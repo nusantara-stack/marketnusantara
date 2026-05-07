@@ -51,14 +51,14 @@
         }
     </style>
 </head>
-<!-- Menambahkan md:items-center dan md:py-10 agar di desktop berbentuk kartu di tengah layar -->
-<body class="bg-gray-900 min-h-screen flex justify-center font-display text-dark selection:bg-accent selection:text-dark md:items-center md:py-10 md:px-4">
+<!-- Menghilangkan padding dan justify agar website 100% fit (rata ujung) dengan layar -->
+<body class="bg-white min-h-screen font-display text-dark selection:bg-accent selection:text-dark">
 
-    <!-- Mobile Container (Max 420px) // Desktop Container (Max 900px, Rounded, Split Layout) -->
-    <main class="relative w-full max-w-[420px] md:max-w-[900px] mx-auto bg-white min-h-screen md:min-h-[600px] md:h-auto md:rounded-[2rem] shadow-[0_0_50px_rgba(0,0,0,0.5)] overflow-hidden bg-grid flex flex-col">
+    <!-- Mobile & Desktop Container: Menghapus max-w dan rounded agar melebar penuh -->
+    <main class="relative w-full min-h-screen overflow-hidden bg-grid flex flex-col">
         
         <!-- ================= Hiasan Background GFX ================= -->
-        <div class="absolute top-0 left-0 bg-royal text-white font-mono text-[8px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button md:rounded-tl-[2rem]">
+        <div class="absolute top-0 left-0 bg-royal text-white font-mono text-[8px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button">
             SYS.READY // V.2.0
         </div>
         <div class="absolute -top-16 -right-16 w-40 h-40 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
@@ -68,24 +68,23 @@
         <div class="flex flex-col md:flex-row w-full flex-1 z-10 relative">
 
             <!-- ================= HEADER SECTION (HERO KARAKTER) ================= -->
-            <!-- Di mobile tinggi tetap 450px, di desktop menyesuaikan (h-[550px]) dan mengambil 50% lebar -->
-            <header class="relative pt-12 px-6 pb-0 w-full md:w-1/2 h-[450px] md:h-[550px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-center">
+            <header class="relative pt-12 px-6 pb-0 w-full md:w-1/2 h-[450px] md:min-h-[600px] md:h-auto flex-shrink-0 overflow-hidden flex flex-col items-center justify-center">
                 
                 <!-- Tipografi Latar Belakang Z-0 -->
                 <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-8 md:mt-0">
                     <!-- Teks Sans-Serif Memanjang Vertikal -->
-                    <div class="font-bebas text-[110px] md:text-[140px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
+                    <div class="font-bebas text-[110px] md:text-[160px] lg:text-[200px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
                         <span>NUSANTARA</span>
                         <span class="text-royal/5" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.4);">NUSANTARA</span>
                     </div>
                     <!-- Teks Cursive Melintang -->
-                    <div class="absolute top-[40%] md:top-[45%] w-[120%] text-center font-cursive text-[70px] md:text-[90px] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
+                    <div class="absolute top-[40%] md:top-[45%] w-[120%] text-center font-cursive text-[70px] md:text-[110px] lg:text-[140px] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
                         Nusantara
                     </div>
                 </div>
 
                 <!-- Nameplate Info Profil (Nekomiya Style) Z-20 -->
-                <div class="absolute top-12 left-5 md:top-16 md:left-8 z-20">
+                <div class="absolute top-12 left-5 md:top-20 md:left-12 z-20">
                     <div class="flex items-stretch gap-2">
                         <!-- Bracket Kiri dengan Nomor Vertikal -->
                         <div class="relative w-2.5 border-t-2 border-b-2 border-l-2 border-dark">
@@ -95,10 +94,10 @@
                         <!-- Teks Profil -->
                         <div class="py-0.5">
                             <p class="text-[7px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0.5 uppercase">Nusantara Archives</p>
-                            <h1 class="text-3xl md:text-5xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
+                            <h1 class="text-3xl md:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
                                 NUSA<br>NTARA
                             </h1>
-                            <p class="text-[9px] md:text-[11px] font-medium text-gray-600 mt-1.5 md:mt-3 max-w-[120px] md:max-w-[160px] leading-snug">
+                            <p class="text-[9px] md:text-[12px] font-medium text-gray-600 mt-1.5 md:mt-3 max-w-[120px] md:max-w-[180px] leading-snug">
                                 Desainer, Kreator, dan Penggemar GFX.
                             </p>
                         </div>
@@ -108,45 +107,47 @@
                 <!-- Karakter di Tengah (Z-10) -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[260px] md:w-[350px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none">
+                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none">
             </header>
 
             <!-- ================= SECTION BUTTON / LINKS ================= -->
-            <!-- Di desktop mengambil sisa 50% ruang, posisinya di kanan karakter -->
-            <section class="relative w-full md:w-1/2 flex flex-col justify-center gap-4 px-6 md:px-12 pt-6 md:pt-12 pb-12 z-10 md:border-l-2 md:border-dashed border-gray-200">
+            <!-- Di desktop: mengambil 50% kanan, diletakkan ke tengah, tombol dibatasi max-w-md agar proporsional -->
+            <section class="relative w-full md:w-1/2 flex flex-col justify-center items-center px-6 md:px-12 pt-6 md:pt-12 pb-12 z-10 md:border-l-2 md:border-dashed border-gray-200 bg-white/50 backdrop-blur-sm">
                 
-                <!-- Link 1 (Primary / Yellow) -->
-                <a href="#" class="btn-hover-fx block w-full bg-accent text-dark px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-white border-2 border-transparent hover:border-accent group shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <i class="ph-bold ph-folder-star text-xl md:text-2xl group-hover:animate-bounce"></i>
-                            <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Portofolio</span>
+                <div class="w-full max-w-[420px] flex flex-col gap-4">
+                    <!-- Link 1 (Primary / Yellow) -->
+                    <a href="#" class="btn-hover-fx block w-full bg-accent text-dark px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-white border-2 border-transparent hover:border-accent group shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-bold ph-folder-star text-xl md:text-2xl group-hover:animate-bounce"></i>
+                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Portofolio</span>
+                            </div>
+                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
                         </div>
-                        <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Link 2 (Royal Blue) -->
-                <a href="#" class="btn-hover-fx block w-full bg-royal text-white px-4 py-3.5 md:py-4 md:px-6 clip-button-reverse transition-colors hover:bg-white hover:text-royal border-2 border-transparent hover:border-royal group shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <i class="ph-bold ph-instagram-logo text-xl md:text-2xl group-hover:-rotate-12 transition-transform"></i>
-                            <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Instagram</span>
+                    <!-- Link 2 (Royal Blue) -->
+                    <a href="#" class="btn-hover-fx block w-full bg-royal text-white px-4 py-3.5 md:py-4 md:px-6 clip-button-reverse transition-colors hover:bg-white hover:text-royal border-2 border-transparent hover:border-royal group shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-bold ph-instagram-logo text-xl md:text-2xl group-hover:-rotate-12 transition-transform"></i>
+                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Instagram</span>
+                            </div>
+                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
                         </div>
-                        <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
-                    </div>
-                </a>
+                    </a>
 
-                <!-- Link 3 (Dark Theme) -->
-                <a href="#" class="btn-hover-fx block w-full bg-dark text-white px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-gray-800 border-2 border-transparent hover:border-dark group shadow-sm">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center gap-3">
-                            <i class="ph-bold ph-x-logo text-xl md:text-2xl"></i>
-                            <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Twitter / X</span>
+                    <!-- Link 3 (Dark Theme) -->
+                    <a href="#" class="btn-hover-fx block w-full bg-dark text-white px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-gray-800 border-2 border-transparent hover:border-dark group shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center gap-3">
+                                <i class="ph-bold ph-x-logo text-xl md:text-2xl"></i>
+                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Twitter / X</span>
+                            </div>
+                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
                         </div>
-                        <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
-                    </div>
-                </a>
+                    </a>
+                </div>
 
             </section>
         </div>
