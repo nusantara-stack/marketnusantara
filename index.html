@@ -44,15 +44,12 @@
         .clip-button-reverse {
             clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
         }
-        /* Custom Clip Path untuk Service Boxes */
         .clip-service-box {
             clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
         }
-        /* Clip Path khusus Sidebar */
         .clip-sidebar {
             clip-path: polygon(25px 0, 100% 0, 100% 100%, 0 100%, 0 25px);
         }
-        /* Menyembunyikan Scrollbar pada swipe mobile */
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
         }
@@ -72,8 +69,6 @@
         .btn-text {
             transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        
-        /* Animasi Panah Sidebar */
         .sidebar-link:hover .sidebar-arrow {
             opacity: 1;
             transform: translateX(0);
@@ -82,6 +77,10 @@
             opacity: 0;
             transform: translateX(-10px);
             transition: all 0.2s ease;
+        }
+        /* Transisi halus untuk indikator titik mobile */
+        .dot-indicator {
+            transition: all 0.3s ease;
         }
     </style>
 </head>
@@ -98,7 +97,6 @@
     <!-- ================= SIDEBAR PANEL ================= -->
     <aside id="sidebar" class="fixed top-0 right-0 w-[280px] md:w-[320px] h-full bg-dark z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col border-l-2 border-royal clip-sidebar shadow-[-10px_0_30px_rgba(0,0,0,0.5)]">
         
-        <!-- Sidebar Header -->
         <div class="p-6 md:p-8 border-b border-gray-800 relative bg-stripes bg-opacity-[0.03]">
             <button id="close-sidebar" class="absolute top-6 right-6 text-gray-400 hover:text-accent transition-colors">
                 <i class="ph-bold ph-x text-2xl"></i>
@@ -107,7 +105,6 @@
             <h2 class="font-display font-black text-3xl text-white uppercase tracking-wider italic">NAV <span class="text-accent">//</span> MENU</h2>
         </div>
 
-        <!-- Sidebar Navigation -->
         <nav class="flex flex-col p-6 md:p-8 gap-4 md:gap-6 flex-1 overflow-y-auto hide-scrollbar">
             
             <a href="#" class="sidebar-link group flex items-center justify-between text-gray-400 hover:text-accent transition-colors border-b border-gray-800 pb-4">
@@ -152,14 +149,12 @@
 
         </nav>
 
-        <!-- Sidebar Footer / Dekorasi Tambahan -->
         <div class="p-6 border-t border-gray-800 bg-gray-900/50">
             <div class="flex items-center gap-2 mb-3">
                 <div class="w-1.5 h-1.5 bg-accent animate-pulse"></div>
                 <span class="font-mono text-[10px] text-accent uppercase tracking-widest">Network Online</span>
             </div>
             
-            <!-- Dummy Barcode (Visual GFX) -->
             <div class="w-full h-8 flex gap-[2px] opacity-30">
                 <div class="w-1 h-full bg-white"></div>
                 <div class="w-3 h-full bg-white"></div>
@@ -226,53 +221,73 @@
                      class="absolute bottom-0 w-[55vw] max-w-[200px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
 
-                <div class="w-full mt-auto z-20 flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 pt-2 px-4 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:flex-col md:overflow-visible md:px-0 md:pb-0 md:pt-0 md:mt-0">
+                <!-- ================= SERVICE BOXES WRAPPER ================= -->
+                <!-- Wrapper baru agar slider dan indikator titik tertata rapi di mobile -->
+                <div class="w-full mt-auto z-20 pb-4 pt-2 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:pb-0 md:pt-0 md:mt-0">
                     
-                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                <i class="ph-bold ph-shield-check text-lg md:text-xl"></i> REKBER
-                            </h3>
-                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
-                                Rekening bersama demi menghindari tindakan penipuan saat melakukan transaksi online.
-                            </p>
+                    <!-- Area Slider -->
+                    <div id="service-slider" class="w-full flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-4 md:px-0 md:flex-col md:overflow-visible scroll-smooth">
+                        
+                        <!-- Box 1: REKBER -->
+                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                            <!-- bg-white/60 digunakan untuk efek transparansi kaca -->
+                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
+                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                    <i class="ph-bold ph-shield-check text-lg md:text-xl"></i> REKBER
+                                </h3>
+                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
+                                    Rekening bersama demi menghindari tindakan penipuan saat melakukan transaksi online.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                <i class="ph-bold ph-browsers text-lg md:text-xl"></i> JASA WEB
-                            </h3>
-                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
-                                Pembuatan website link-in-bio kustom yang interaktif, responsif, dan bernuansa futuristik ala GFX.
-                            </p>
+                        <!-- Box 2: JASA WEB -->
+                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
+                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                    <i class="ph-bold ph-browsers text-lg md:text-xl"></i> JASA WEB
+                                </h3>
+                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
+                                    Pembuatan website link-in-bio kustom yang interaktif, responsif, dan bernuansa futuristik ala GFX.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                <i class="ph-bold ph-users-three text-lg md:text-xl"></i> GRUP SELLER
-                            </h3>
-                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
-                                Menjual grup jb dengan member aktif berkualitas.
-                            </p>
+                        <!-- Box 3: GRUP SELLER -->
+                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
+                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                    <i class="ph-bold ph-users-three text-lg md:text-xl"></i> GRUP SELLER
+                                </h3>
+                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
+                                    Menjual grup jb dengan member aktif berkualitas.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                <i class="ph-bold ph-trend-up text-lg md:text-xl"></i> JPM
-                            </h3>
-                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
-                                Meningkatkan member yang ada di grup customer sehingga grup menjadi aktif dan ramai.
-                            </p>
+                        <!-- Box 4: JPM -->
+                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
+                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                    <i class="ph-bold ph-trend-up text-lg md:text-xl"></i> JPM
+                                </h3>
+                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
+                                    Meningkatkan member yang ada di grup customer sehingga grup menjadi aktif dan ramai.
+                                </p>
+                            </div>
                         </div>
-                    </div>
 
+                    </div>
+                    
+                    <!-- Indikator Titik (Hanya terlihat di Mobile) -->
+                    <div class="flex justify-center gap-1.5 mt-3 md:hidden">
+                        <div class="dot-indicator w-4 h-1.5 rounded-full bg-royal"></div>
+                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                    </div>
                 </div>
+
             </header>
 
             <div class="w-full flex items-center px-4 md:px-12 my-2 md:my-4 z-20 relative">
@@ -352,9 +367,10 @@
 
     </main>
 
-    <!-- Script Kontrol Sidebar -->
+    <!-- Script Kontrol Sidebar & Auto-Swipe Slider -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // ================= SIDEBAR LOGIC =================
             const sidebar = document.getElementById('sidebar');
             const overlay = document.getElementById('sidebar-overlay');
             const openBtn = document.getElementById('open-sidebar');
@@ -362,21 +378,13 @@
 
             function toggleSidebar() {
                 const isOpen = !sidebar.classList.contains('translate-x-full');
-                
                 if (isOpen) {
-                    // Tutup Sidebar
                     sidebar.classList.add('translate-x-full');
                     overlay.classList.remove('opacity-100');
-                    setTimeout(() => {
-                        overlay.classList.add('hidden');
-                    }, 300);
+                    setTimeout(() => overlay.classList.add('hidden'), 300);
                 } else {
-                    // Buka Sidebar
                     overlay.classList.remove('hidden');
-                    // Timeout kecil agar transisi opacity bekerja setelah display:block
-                    setTimeout(() => {
-                        overlay.classList.add('opacity-100');
-                    }, 10);
+                    setTimeout(() => overlay.classList.add('opacity-100'), 10);
                     sidebar.classList.remove('translate-x-full');
                 }
             }
@@ -384,6 +392,76 @@
             openBtn.addEventListener('click', toggleSidebar);
             closeBtn.addEventListener('click', toggleSidebar);
             overlay.addEventListener('click', toggleSidebar);
+
+            // ================= AUTO-SWIPE SLIDER LOGIC =================
+            const slider = document.getElementById('service-slider');
+            const slides = document.querySelectorAll('.service-slide');
+            const dots = document.querySelectorAll('.dot-indicator');
+            let currentSlide = 0;
+            let autoScrollInterval;
+
+            // Fungsi untuk mengupdate gaya titik indikator
+            function updateDots(index) {
+                dots.forEach((dot, i) => {
+                    if (i === index) {
+                        dot.classList.remove('bg-gray-300', 'w-1.5');
+                        dot.classList.add('bg-royal', 'w-4');
+                    } else {
+                        dot.classList.remove('bg-royal', 'w-4');
+                        dot.classList.add('bg-gray-300', 'w-1.5');
+                    }
+                });
+            }
+
+            // Fungsi untuk menggeser slide
+            function scrollToSlide(index) {
+                if (window.innerWidth >= 768) return; // Hanya aktif di layar mobile
+                const slideWidth = slides[0].clientWidth;
+                // Kalkulasi scroll termasuk gap
+                const scrollLeft = index * (slideWidth + 12); // 12 adalah estimasi ukuran gap (gap-3)
+                slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+                updateDots(index);
+            }
+
+            // Memulai loop otomatis
+            function startAutoScroll() {
+                autoScrollInterval = setInterval(() => {
+                    if (window.innerWidth < 768) {
+                        currentSlide = (currentSlide + 1) % slides.length;
+                        scrollToSlide(currentSlide);
+                    }
+                }, 3000); // Ganti slide setiap 3 detik
+            }
+
+            // Menghentikan loop
+            function stopAutoScroll() {
+                clearInterval(autoScrollInterval);
+            }
+
+            // Update posisi jika di-swipe/scroll manual
+            slider.addEventListener('scroll', () => {
+                if (window.innerWidth < 768) {
+                    const scrollPosition = slider.scrollLeft;
+                    const slideWidth = slides[0].clientWidth + 12;
+                    const newIndex = Math.round(scrollPosition / slideWidth);
+                    
+                    if (newIndex !== currentSlide && newIndex >= 0 && newIndex < slides.length) {
+                        currentSlide = newIndex;
+                        updateDots(currentSlide);
+                    }
+                }
+            });
+
+            // Pause auto-scroll ketika disentuh agar tidak mengganggu pengguna membaca
+            slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
+            slider.addEventListener('touchend', startAutoScroll);
+            slider.addEventListener('mouseenter', stopAutoScroll);
+            slider.addEventListener('mouseleave', startAutoScroll);
+
+            // Inisialisasi awal
+            startAutoScroll();
+            // Panggil sekali untuk memastikan UI titik sesuai posisi awal
+            updateDots(currentSlide);
         });
     </script>
 </body>
