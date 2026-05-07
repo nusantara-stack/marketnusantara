@@ -2,7 +2,8 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Mencegah zoom in/out pada mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Nusantara | Link in Bio</title>
     
     <!-- Google Fonts -->
@@ -61,7 +62,8 @@
     </style>
 </head>
 <!-- Menghilangkan padding dan justify agar website 100% fit (rata ujung) dengan layar -->
-<body class="bg-white min-h-screen font-display text-dark selection:bg-accent selection:text-dark">
+<!-- Menambahkan oncontextmenu="return false" dan select-none untuk mematikan klik kanan & mencegah teks diblok -->
+<body class="bg-white min-h-screen font-display text-dark selection:bg-accent selection:text-dark select-none" oncontextmenu="return false;">
 
     <!-- Mobile & Desktop Container: Menghapus max-w dan rounded agar melebar penuh -->
     <main class="relative w-full min-h-screen overflow-hidden bg-grid flex flex-col">
@@ -104,7 +106,7 @@
                         <div class="py-0.5">
                             <p class="text-[7px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0.5 uppercase">Nusantara Archives</p>
                             <h1 class="text-3xl md:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
-                                MARKET<br>NUSANTARA
+                                NUSA<br>NTARA
                             </h1>
                             <p class="text-[9px] md:text-[12px] font-medium text-gray-600 mt-1.5 md:mt-3 max-w-[120px] md:max-w-[180px] leading-snug">
                                 Desainer, Kreator, dan Penggemar GFX.
@@ -114,9 +116,11 @@
                 </div>
 
                 <!-- Karakter di Tengah (Z-10) -->
+                <!-- Menambahkan draggable="false" agar gambar tidak bisa diseret/di-drag -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none">
+                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none"
+                     draggable="false">
             </header>
 
             <!-- ================= SECTION BUTTON / LINKS ================= -->
