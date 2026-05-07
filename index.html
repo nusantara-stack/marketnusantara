@@ -147,6 +147,19 @@
                 <i class="ph-bold ph-caret-right text-accent sidebar-arrow"></i>
             </a>
 
+            <!-- Highlighted Kalkulator Button -->
+            <div class="mt-auto pt-4">
+                <a href="#" onclick="loadKalkulator(event)" class="group flex items-center justify-between bg-accent text-dark p-3 clip-button transition-colors hover:bg-white shadow-[0_5px_15px_rgba(255,215,0,0.15)]">
+                    <div class="flex items-center gap-4">
+                        <div class="w-8 h-8 bg-dark text-white flex items-center justify-center clip-button group-hover:bg-royal transition-colors">
+                            <i class="ph-bold ph-calculator text-lg"></i>
+                        </div>
+                        <span class="font-display font-bold text-lg uppercase tracking-widest group-hover:translate-x-1 transition-transform">Kalkulator</span>
+                    </div>
+                    <i class="ph-bold ph-caret-right text-dark group-hover:translate-x-1 transition-transform"></i>
+                </a>
+            </div>
+
         </nav>
 
         <div class="p-6 border-t border-gray-800 bg-gray-900/50">
@@ -376,7 +389,7 @@
             const openBtn = document.getElementById('open-sidebar');
             const closeBtn = document.getElementById('close-sidebar');
 
-            function toggleSidebar() {
+            window.toggleSidebar = function() {
                 const isOpen = !sidebar.classList.contains('translate-x-full');
                 if (isOpen) {
                     sidebar.classList.add('translate-x-full');
@@ -400,7 +413,6 @@
             let currentSlide = 0;
             let autoScrollInterval;
 
-            // Fungsi untuk mengupdate gaya titik indikator
             function updateDots(index) {
                 dots.forEach((dot, i) => {
                     if (i === index) {
@@ -413,32 +425,27 @@
                 });
             }
 
-            // Fungsi untuk menggeser slide
             function scrollToSlide(index) {
-                if (window.innerWidth >= 768) return; // Hanya aktif di layar mobile
+                if (window.innerWidth >= 768) return; 
                 const slideWidth = slides[0].clientWidth;
-                // Kalkulasi scroll termasuk gap
-                const scrollLeft = index * (slideWidth + 12); // 12 adalah estimasi ukuran gap (gap-3)
+                const scrollLeft = index * (slideWidth + 12); 
                 slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
                 updateDots(index);
             }
 
-            // Memulai loop otomatis
             function startAutoScroll() {
                 autoScrollInterval = setInterval(() => {
                     if (window.innerWidth < 768) {
                         currentSlide = (currentSlide + 1) % slides.length;
                         scrollToSlide(currentSlide);
                     }
-                }, 3000); // Ganti slide setiap 3 detik
+                }, 3000); 
             }
 
-            // Menghentikan loop
             function stopAutoScroll() {
                 clearInterval(autoScrollInterval);
             }
 
-            // Update posisi jika di-swipe/scroll manual
             slider.addEventListener('scroll', () => {
                 if (window.innerWidth < 768) {
                     const scrollPosition = slider.scrollLeft;
@@ -452,17 +459,29 @@
                 }
             });
 
-            // Pause auto-scroll ketika disentuh agar tidak mengganggu pengguna membaca
             slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
             slider.addEventListener('touchend', startAutoScroll);
             slider.addEventListener('mouseenter', stopAutoScroll);
             slider.addEventListener('mouseleave', startAutoScroll);
 
-            // Inisialisasi awal
             startAutoScroll();
-            // Panggil sekali untuk memastikan UI titik sesuai posisi awal
             updateDots(currentSlide);
         });
+
+        // ================= ACTION LOAD SCRIPT KALKULATOR =================
+        window.loadKalkulator = function(e) {
+            e.preventDefault();
+            
+            // Tutup sidebar jika terbuka
+            if (typeof toggleSidebar === 'function') toggleSidebar();
+
+            // Panggil script kalkulator.js
+            const script = document.createElement('script');
+            script.src = 'JavaSript/kalkulator.js';
+            document.body.appendChild(script);
+            
+            console.log('Script Kalkulator.js telah dimuat.');
+        };
     </script>
 </body>
 </html>
