@@ -81,47 +81,48 @@
     <main class="relative w-full min-h-screen overflow-hidden bg-grid flex flex-col">
         
         <!-- ================= Hiasan Background GFX ================= -->
-        <div class="absolute top-0 left-0 bg-royal text-white font-mono text-[8px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button">
+        <div class="absolute top-0 left-0 bg-royal text-white font-mono text-[7px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button">
             SYS.READY // V.2.0
         </div>
-        <div class="absolute -top-16 -right-16 w-40 h-40 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
-        <div class="absolute top-8 right-8 w-3 h-3 md:w-4 md:h-4 bg-accent rounded-full z-0"></div>
+        <div class="absolute -top-16 -right-16 w-32 h-32 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
+        <div class="absolute top-8 right-8 w-2.5 h-2.5 md:w-4 md:h-4 bg-accent rounded-full z-0"></div>
 
         <!-- ================= WRAPPER ATAS-BAWAH ================= -->
         <div class="flex flex-col w-full flex-1 z-10 relative">
 
             <!-- ================= HEADER SECTION (HERO KARAKTER) ================= -->
-            <!-- Diberi min-h lebih besar agar memuat kartu layanan di mode mobile -->
-            <header class="relative pt-12 pb-0 w-full min-h-[580px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
+            <!-- Diberi min-h lebih besar agar memuat kartu layanan di mode mobile, namun dikurangi ukurannya dari sebelumnya -->
+            <header class="relative pt-12 pb-0 w-full min-h-[450px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
                 
                 <!-- Tipografi Latar Belakang Z-0 -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-8 md:mt-0">
-                    <!-- Teks Sans-Serif Memanjang Vertikal -->
-                    <div class="font-bebas text-[110px] md:text-[160px] lg:text-[200px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
+                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-6 md:mt-0">
+                    <!-- Teks Sans-Serif Memanjang Vertikal - Menggunakan ukuran responsif berbasis VW -->
+                    <div class="font-bebas text-[22vw] md:text-[160px] lg:text-[200px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
                         <span>NUSANTARA</span>
                         <span class="text-royal/5" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.4);">NUSANTARA</span>
                     </div>
                     <!-- Teks Cursive Melintang -->
-                    <div class="absolute top-[40%] md:top-[45%] w-[120%] text-center font-cursive text-[70px] md:text-[110px] lg:text-[140px] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
+                    <div class="absolute top-[40%] md:top-[45%] w-[120%] text-center font-cursive text-[15vw] md:text-[110px] lg:text-[140px] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
                         Nusantara
                     </div>
                 </div>
 
                 <!-- Nameplate Info Profil (Nekomiya Style) Z-20 -->
-                <div class="absolute top-12 left-5 md:top-20 md:left-12 z-20">
-                    <div class="flex items-stretch gap-2">
+                <!-- Diperkecil posisinya untuk mobile -->
+                <div class="absolute top-8 left-4 md:top-20 md:left-12 z-20">
+                    <div class="flex items-stretch gap-1.5 md:gap-2">
                         <!-- Bracket Kiri dengan Nomor Vertikal -->
-                        <div class="relative w-2.5 border-t-2 border-b-2 border-l-2 border-dark">
-                            <span class="absolute top-1/2 -left-2.5 transform -translate-y-1/2 -rotate-90 text-[7px] md:text-[8px] font-mono tracking-[0.2em] text-dark font-bold whitespace-nowrap">0 0 1</span>
+                        <div class="relative w-2 md:w-2.5 border-t-2 border-b-2 border-l-2 border-dark">
+                            <span class="absolute top-1/2 -left-2.5 md:-left-2.5 transform -translate-y-1/2 -rotate-90 text-[6px] md:text-[8px] font-mono tracking-[0.2em] text-dark font-bold whitespace-nowrap">0 0 1</span>
                         </div>
                         
                         <!-- Teks Profil -->
                         <div class="py-0.5">
-                            <p class="text-[7px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0.5 uppercase">Nusantara Archives</p>
-                            <h1 class="text-3xl md:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
-                                NUSA<br>NTARA
+                            <p class="text-[6px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0.5 uppercase">Nusantara Archives</p>
+                            <h1 class="text-2xl md:text-5xl lg:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
+                                MARKET<br>NUSANTARA
                             </h1>
-                            <p class="text-[9px] md:text-[12px] font-medium text-gray-600 mt-1.5 md:mt-3 max-w-[120px] md:max-w-[180px] leading-snug">
+                            <p class="text-[8px] md:text-[12px] font-medium text-gray-600 mt-1 md:mt-3 max-w-[100px] md:max-w-[180px] leading-snug">
                                 Desainer, Kreator, dan Penggemar GFX.
                             </p>
                         </div>
@@ -129,48 +130,47 @@
                 </div>
 
                 <!-- Karakter di Tengah (Z-10) -->
-                <!-- Menambahkan draggable="false" agar gambar tidak bisa diseret/di-drag -->
-                <!-- md:left-[45%] agar karakter sedikit geser kiri di layar besar menyisakan ruang kanan -->
+                <!-- Menambahkan draggable="false" dan ukuran persentase layar (w-[60vw]) agar responsif -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
+                     class="absolute bottom-0 w-[60vw] max-w-[220px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
 
                 <!-- ================= NEW: SERVICE BOXES (HERO SECTION) ================= -->
-                <!-- Mobile: di bawah (mt-auto) dengan slider horizontal | Desktop: absolute di panel kanan -->
-                <div class="w-full mt-auto z-20 flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-6 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:flex-col md:overflow-visible md:px-0 md:pb-0 md:pt-0 md:mt-0">
+                <!-- Mobile: Ukuran kotak, padding, gap dan text diperkecil. Desktop: Tetap proporsional -->
+                <div class="w-full mt-auto z-20 flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-6 pt-2 px-4 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:flex-col md:overflow-visible md:px-0 md:pb-0 md:pt-0 md:mt-0">
                     
                     <!-- Service 1: REKBER -->
-                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
-                                <i class="ph-bold ph-shield-check text-xl"></i> REKBER
+                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                <i class="ph-bold ph-shield-check text-lg md:text-xl"></i> REKBER
                             </h3>
-                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
                                 Rekening bersama demi menghindari tindakan penipuan saat melakukan transaksi online.
                             </p>
                         </div>
                     </div>
 
                     <!-- Service 2: GRUP SELLER -->
-                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
-                                <i class="ph-bold ph-users-three text-xl"></i> GRUP SELLER
+                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                <i class="ph-bold ph-users-three text-lg md:text-xl"></i> GRUP SELLER
                             </h3>
-                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
                                 Menjual grup jb dengan member aktif berkualitas.
                             </p>
                         </div>
                     </div>
 
                     <!-- Service 3: JPM -->
-                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
-                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
-                                <i class="ph-bold ph-trend-up text-xl"></i> JPM
+                    <div class="snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                <i class="ph-bold ph-trend-up text-lg md:text-xl"></i> JPM
                             </h3>
-                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
                                 Meningkatkan member yang ada di grup customer sehingga grup menjadi aktif dan ramai.
                             </p>
                         </div>
@@ -180,39 +180,40 @@
             </header>
 
             <!-- ================= SECTION BUTTON / LINKS ================= -->
-            <section class="relative w-full flex flex-col justify-center items-center px-6 md:px-12 pt-6 md:pt-12 pb-12 z-10">
+            <section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-6 md:pt-12 pb-12 z-10">
                 
-                <div class="w-full max-w-[420px] flex flex-col gap-4">
+                <div class="w-full max-w-[420px] flex flex-col gap-3 md:gap-4">
                     <!-- Link 1 (Primary / Yellow) -->
-                    <a href="#" class="btn-hover-fx block w-full bg-accent text-dark px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-white border-2 border-transparent hover:border-accent group shadow-sm">
+                    <!-- Di mobile padding diperkecil (py-2.5) -->
+                    <a href="#" class="btn-hover-fx block w-full bg-accent text-dark px-4 py-2.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-white border-2 border-transparent hover:border-accent group shadow-sm">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <i class="ph-bold ph-folder-star text-xl md:text-2xl group-hover:animate-bounce"></i>
-                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Portofolio</span>
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="ph-bold ph-folder-star text-lg md:text-2xl group-hover:animate-bounce"></i>
+                                <span class="btn-text font-bold uppercase text-xs md:text-base italic tracking-wide">Portofolio</span>
                             </div>
-                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
+                            <i class="ph-bold ph-arrow-right text-xs md:text-base"></i>
                         </div>
                     </a>
 
                     <!-- Link 2 (Royal Blue) -->
-                    <a href="#" class="btn-hover-fx block w-full bg-royal text-white px-4 py-3.5 md:py-4 md:px-6 clip-button-reverse transition-colors hover:bg-white hover:text-royal border-2 border-transparent hover:border-royal group shadow-sm">
+                    <a href="#" class="btn-hover-fx block w-full bg-royal text-white px-4 py-2.5 md:py-4 md:px-6 clip-button-reverse transition-colors hover:bg-white hover:text-royal border-2 border-transparent hover:border-royal group shadow-sm">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <i class="ph-bold ph-instagram-logo text-xl md:text-2xl group-hover:-rotate-12 transition-transform"></i>
-                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Instagram</span>
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="ph-bold ph-instagram-logo text-lg md:text-2xl group-hover:-rotate-12 transition-transform"></i>
+                                <span class="btn-text font-bold uppercase text-xs md:text-base italic tracking-wide">Instagram</span>
                             </div>
-                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
+                            <i class="ph-bold ph-arrow-right text-xs md:text-base"></i>
                         </div>
                     </a>
 
                     <!-- Link 3 (Dark Theme) -->
-                    <a href="#" class="btn-hover-fx block w-full bg-dark text-white px-4 py-3.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-gray-800 border-2 border-transparent hover:border-dark group shadow-sm">
+                    <a href="#" class="btn-hover-fx block w-full bg-dark text-white px-4 py-2.5 md:py-4 md:px-6 clip-button transition-colors hover:bg-gray-800 border-2 border-transparent hover:border-dark group shadow-sm">
                         <div class="flex items-center justify-between">
-                            <div class="flex items-center gap-3">
-                                <i class="ph-bold ph-x-logo text-xl md:text-2xl"></i>
-                                <span class="btn-text font-bold uppercase text-sm md:text-base italic tracking-wide">Twitter / X</span>
+                            <div class="flex items-center gap-2 md:gap-3">
+                                <i class="ph-bold ph-x-logo text-lg md:text-2xl"></i>
+                                <span class="btn-text font-bold uppercase text-xs md:text-base italic tracking-wide">Twitter / X</span>
                             </div>
-                            <i class="ph-bold ph-arrow-right text-sm md:text-base"></i>
+                            <i class="ph-bold ph-arrow-right text-xs md:text-base"></i>
                         </div>
                     </a>
                 </div>
@@ -224,27 +225,27 @@
         <footer class="relative w-full flex flex-col z-20 mt-auto">
             
             <!-- Wedge/Garis Biru Miring -->
-            <div class="absolute -top-3 left-0 w-full h-12 md:h-14 bg-royal shadow-[0_-5px_15px_rgba(65,105,225,0.3)]" style="clip-path: polygon(0 100%, 100% 0, 100% 100%); z-10;"></div>
+            <div class="absolute -top-2 left-0 w-full h-8 md:h-14 bg-royal shadow-[0_-5px_15px_rgba(65,105,225,0.3)]" style="clip-path: polygon(0 100%, 100% 0, 100% 100%); z-10;"></div>
             
             <!-- Dark Container Footer -->
             <!-- Tidak perlu diubah clip-path nya karena efek miringnya akan menyesuaikan dengan lebar elemen -->
-            <div class="relative bg-dark w-full flex flex-col pt-12 pb-6 px-6 md:pb-8" style="clip-path: polygon(0 25px, 100% 0, 100% 100%, 0 100%); margin-top: -10px;">
+            <div class="relative bg-dark w-full flex flex-col pt-8 md:pt-12 pb-6 px-6 md:pb-8" style="clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%); margin-top: -10px;">
                 
                 <!-- Title Footer -->
-                <div class="flex justify-center items-center gap-3 mt-2 mb-4 md:mb-6">
+                <div class="flex justify-center items-center gap-2 md:gap-3 mt-2 mb-3 md:mb-6">
                     <!-- Icon 4 Garis -->
-                    <div class="flex flex-col gap-[3px] w-8 md:w-10 transform -skew-x-[15deg]">
-                        <div class="h-[4px] md:h-[5px] w-full bg-white"></div>
-                        <div class="h-[4px] md:h-[5px] w-[95%] bg-white"></div>
-                        <div class="h-[4px] md:h-[5px] w-[75%] bg-white"></div>
-                        <div class="h-[4px] md:h-[5px] w-full bg-white"></div>
+                    <div class="flex flex-col gap-[2px] md:gap-[3px] w-6 md:w-10 transform -skew-x-[15deg]">
+                        <div class="h-[3px] md:h-[5px] w-full bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-[95%] bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-[75%] bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-full bg-white"></div>
                     </div>
                     <!-- Teks Judul -->
-                    <h2 class="text-[28px] md:text-[36px] font-black font-display uppercase tracking-widest text-white leading-none mt-1">NUSANTARA</h2>
+                    <h2 class="text-[20px] md:text-[36px] font-black font-display uppercase tracking-widest text-white leading-none mt-1">NUSANTARA</h2>
                 </div>
 
                 <!-- Copyright / Detail Bawah -->
-                <div class="mt-4 md:mt-6 pt-4 text-center font-mono text-[8px] md:text-[10px] text-gray-500 uppercase tracking-[0.15em] border-t border-gray-800/50">
+                <div class="mt-3 md:mt-6 pt-3 md:pt-4 text-center font-mono text-[7px] md:text-[10px] text-gray-500 uppercase tracking-[0.15em] border-t border-gray-800/50">
                     © 2026 NUSANTARA. ALL RIGHTS RESERVED.
                 </div>
 
