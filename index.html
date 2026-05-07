@@ -92,10 +92,10 @@
 
             <!-- ================= HEADER SECTION (HERO KARAKTER) ================= -->
             <!-- Diberi min-h lebih besar agar memuat kartu layanan di mode mobile, namun dikurangi ukurannya dari sebelumnya -->
-            <header class="relative pt-12 pb-0 w-full min-h-[450px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
+            <header class="relative pt-6 md:pt-12 pb-0 w-full min-h-[380px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
                 
                 <!-- Tipografi Latar Belakang Z-0 -->
-                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-6 md:mt-0">
+                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-2 md:mt-0">
                     <!-- Teks Sans-Serif Memanjang Vertikal - Menggunakan ukuran responsif berbasis VW -->
                     <div class="font-bebas text-[22vw] md:text-[160px] lg:text-[200px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
                         <span>NUSANTARA</span>
@@ -108,21 +108,21 @@
                 </div>
 
                 <!-- Nameplate Info Profil (Nekomiya Style) Z-20 -->
-                <!-- Diperkecil posisinya untuk mobile -->
-                <div class="absolute top-8 left-4 md:top-20 md:left-12 z-20">
-                    <div class="flex items-stretch gap-1.5 md:gap-2">
+                <!-- Diperkecil posisinya untuk mobile dan dibuat lebih menyatu (compact) -->
+                <div class="absolute top-4 left-4 md:top-20 md:left-12 z-20">
+                    <div class="flex items-stretch gap-1 md:gap-2">
                         <!-- Bracket Kiri dengan Nomor Vertikal -->
-                        <div class="relative w-2 md:w-2.5 border-t-2 border-b-2 border-l-2 border-dark">
-                            <span class="absolute top-1/2 -left-2.5 md:-left-2.5 transform -translate-y-1/2 -rotate-90 text-[6px] md:text-[8px] font-mono tracking-[0.2em] text-dark font-bold whitespace-nowrap">0 0 1</span>
+                        <div class="relative w-1.5 md:w-2.5 border-t-[1.5px] md:border-t-2 border-b-[1.5px] md:border-b-2 border-l-[1.5px] md:border-l-2 border-dark">
+                            <span class="absolute top-1/2 -left-2.5 md:-left-2.5 transform -translate-y-1/2 -rotate-90 text-[5px] md:text-[8px] font-mono tracking-[0.2em] text-dark font-bold whitespace-nowrap">0 0 1</span>
                         </div>
                         
                         <!-- Teks Profil -->
-                        <div class="py-0.5">
-                            <p class="text-[6px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0.5 uppercase">Nusantara Archives</p>
-                            <h1 class="text-2xl md:text-5xl lg:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark">
+                        <div class="py-0 md:py-0.5 flex flex-col justify-center">
+                            <p class="text-[5px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0 md:mb-0.5 uppercase leading-none">Nusantara Archives</p>
+                            <h1 class="text-xl md:text-5xl lg:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark mt-0.5 md:mt-0">
                                 MARKET<br>NUSANTARA
                             </h1>
-                            <p class="text-[8px] md:text-[12px] font-medium text-gray-600 mt-1 md:mt-3 max-w-[100px] md:max-w-[180px] leading-snug">
+                            <p class="text-[7px] md:text-[12px] font-medium text-gray-600 mt-0.5 md:mt-3 max-w-[110px] md:max-w-[180px] leading-tight">
                                 Desainer, Kreator, dan Penggemar GFX.
                             </p>
                         </div>
@@ -133,7 +133,7 @@
                 <!-- Menambahkan draggable="false" dan ukuran persentase layar (w-[60vw]) agar responsif -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[60vw] max-w-[220px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
+                     class="absolute bottom-0 w-[55vw] max-w-[200px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
 
                 <!-- ================= NEW: SERVICE BOXES (HERO SECTION) ================= -->
