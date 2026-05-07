@@ -47,6 +47,18 @@
         .clip-button-reverse {
             clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
         }
+        /* Custom Clip Path untuk Service Boxes */
+        .clip-service-box {
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+        /* Menyembunyikan Scrollbar pada swipe mobile */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
         .bg-grid {
             background-size: 30px 30px;
             background-image: 
@@ -79,7 +91,8 @@
         <div class="flex flex-col w-full flex-1 z-10 relative">
 
             <!-- ================= HEADER SECTION (HERO KARAKTER) ================= -->
-            <header class="relative pt-12 px-6 pb-0 w-full h-[450px] md:h-[600px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-center">
+            <!-- Diberi min-h lebih besar agar memuat kartu layanan di mode mobile -->
+            <header class="relative pt-12 pb-0 w-full min-h-[580px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
                 
                 <!-- Tipografi Latar Belakang Z-0 -->
                 <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-8 md:mt-0">
@@ -117,10 +130,53 @@
 
                 <!-- Karakter di Tengah (Z-10) -->
                 <!-- Menambahkan draggable="false" agar gambar tidak bisa diseret/di-drag -->
+                <!-- md:left-[45%] agar karakter sedikit geser kiri di layar besar menyisakan ruang kanan -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none"
+                     class="absolute bottom-0 w-[260px] md:w-[450px] max-w-[85%] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
+
+                <!-- ================= NEW: SERVICE BOXES (HERO SECTION) ================= -->
+                <!-- Mobile: di bawah (mt-auto) dengan slider horizontal | Desktop: absolute di panel kanan -->
+                <div class="w-full mt-auto z-20 flex gap-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-8 pt-4 px-6 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:flex-col md:overflow-visible md:px-0 md:pb-0 md:pt-0 md:mt-0">
+                    
+                    <!-- Service 1: REKBER -->
+                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
+                                <i class="ph-bold ph-shield-check text-xl"></i> REKBER
+                            </h3>
+                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                                Rekening bersama demi menghindari tindakan penipuan saat melakukan transaksi online.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: GRUP SELLER -->
+                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
+                                <i class="ph-bold ph-users-three text-xl"></i> GRUP SELLER
+                            </h3>
+                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                                Menjual grup jb dengan member aktif berkualitas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: JPM -->
+                    <div class="snap-center shrink-0 w-[85%] sm:w-[280px] md:w-full bg-royal clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/90 backdrop-blur-md clip-service-box w-full h-full p-4 transition-colors group-hover:bg-royal group-hover:text-white">
+                            <h3 class="font-display font-bold text-lg md:text-xl uppercase tracking-wider mb-1.5 text-royal group-hover:text-accent flex items-center gap-2">
+                                <i class="ph-bold ph-trend-up text-xl"></i> JPM
+                            </h3>
+                            <p class="text-[10px] md:text-xs font-mono leading-relaxed text-gray-700 group-hover:text-gray-100">
+                                Meningkatkan member yang ada di grup customer sehingga grup menjadi aktif dan ramai.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
             </header>
 
             <!-- ================= SECTION BUTTON / LINKS ================= -->
