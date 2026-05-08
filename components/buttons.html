@@ -1,30 +1,92 @@
-<!-- File ini hanya berisi struktur tombol saja -->
-<a href="#" class="btn-hover-fx block w-full bg-accent text-dark px-3 py-2 md:py-3 md:px-5 clip-button transition-colors hover:bg-white border-2 border-transparent hover:border-accent group shadow-sm">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 md:gap-3">
-            <i class="ph-bold ph-folder-star text-base md:text-xl group-hover:animate-bounce"></i>
-            <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">WHATSAPP</span>
+<!-- File ini memuat Section utuh untuk tombol-tombol navigasi -->
+<section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
+    
+    <!-- Wrapper utama diperkecil agar tidak mentok layar: w-[85%] max-w-[320px] -->
+    <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6">
+        
+        <!-- Placeholder loading sebelum JSON termuat -->
+        <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4">
+            [ SYSTEM ] Mengunduh data server...
         </div>
-        <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
-    </div>
-</a>
 
-<a href="#" class="btn-hover-fx block w-full bg-royal text-white px-3 py-2 md:py-3 md:px-5 clip-button-reverse transition-colors hover:bg-white hover:text-royal border-2 border-transparent hover:border-royal group shadow-sm">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 md:gap-3">
-            <i class="ph-bold ph-instagram-logo text-base md:text-xl group-hover:-rotate-12 transition-transform"></i>
-            <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">SALURAN WHATSAPP</span>
-        </div>
-        <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
     </div>
-</a>
 
-<a href="#" class="btn-hover-fx block w-full bg-dark text-white px-3 py-2 md:py-3 md:px-5 clip-button transition-colors hover:bg-gray-800 border-2 border-transparent hover:border-dark group shadow-sm">
-    <div class="flex items-center justify-between">
-        <div class="flex items-center gap-2 md:gap-3">
-            <i class="ph-bold ph-x-logo text-base md:text-xl"></i>
-            <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">TIKTOK</span>
-        </div>
-        <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
-    </div>
-</a>
+</section>
+
+<!-- Script untuk men-generate tombol dari JSON -->
+<script>
+    window.renderNusantaraButtons = async function() {
+        const container = document.getElementById('dynamic-button-list');
+        
+        try {
+            // Memanggil file JSON database
+            const response = await fetch('database/button.json');
+            if (!response.ok) throw new Error('Database tidak ditemukan');
+            const dataKategori = await response.json();
+
+            let htmlContent = '';
+
+            // Looping untuk setiap kategori (contoh: CATALOG, SOCIAL MEDIA)
+            dataKategori.forEach(kategori => {
+                
+                // Header Label Kategori
+                htmlContent += `
+                    <div class="flex flex-col gap-2.5">
+                        <div class="flex items-center gap-2 mb-1 opacity-80">
+                            <div class="h-[1px] bg-royal/50 flex-grow"></div>
+                            <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase">${kategori.nama_kategori}</span>
+                            <div class="h-[1px] bg-royal/50 flex-grow"></div>
+                        </div>
+                        <div class="flex flex-col gap-2.5 md:gap-3">
+                `;
+
+                // Looping untuk merender tombol di dalam kategori tersebut
+                kategori.tombol.forEach(btn => {
+                    
+                    // Setup class berdasarkan tema warna di JSON
+                    let themeClass, clipClass;
+                    if (btn.tema === 'accent') {
+                        themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
+                        clipClass = 'clip-button';
+                    } else if (btn.tema === 'royal') {
+                        themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
+                        clipClass = 'clip-button-reverse';
+                    } else {
+                        // Default: dark
+                        themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
+                        clipClass = 'clip-button';
+                    }
+
+                    // Kerangka 1 Tombol
+                    htmlContent += `
+                        <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-2 md:gap-3">
+                                    <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
+                                    <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">${btn.judul}</span>
+                                </div>
+                                <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
+                            </div>
+                        </a>
+                    `;
+                });
+
+                // Penutup wrapper kategori
+                htmlContent += `
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Timpa isi container dengan HTML yang sudah di-generate
+            container.innerHTML = htmlContent;
+
+        } catch (error) {
+            console.error("Gagal memuat button.json:", error);
+            container.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed">[ ERROR ] Koneksi database tombol terputus.</div>';
+        }
+    }
+</script>
+
+<!-- Trik agar script dieksekusi otomatis ketika dipanggil via fetch/innerHTML di VS Code -->
+<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="window.renderNusantaraButtons()" style="display:none;">
