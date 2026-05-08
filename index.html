@@ -352,6 +352,9 @@
 
     </main>
 
+    <!-- WRAPPER UNTUK MEMUAT MODAL KALKULATOR -->
+    <div id="kalkulator-wrapper"></div>
+
     <!-- Script Kontrol Sidebar & Auto-Swipe Slider -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -440,22 +443,37 @@
             updateDots(currentSlide);
         });
 
-        // ================= ACTION LOAD SCRIPT KALKULATOR =================
-        window.loadKalkulator = function(e) {
+        // ================= ACTION LOAD KOMPONEN KALKULATOR =================
+        window.loadKalkulator = async function(e) {
             e.preventDefault();
             
             // Tutup sidebar jika terbuka
             if (typeof toggleSidebar === 'function') toggleSidebar();
 
-            // Panggil script kalkulator.js
-            const script = document.createElement('script');
-            script.src = 'JavaSript/kalkulator.js';
-            document.body.appendChild(script);
-            
-            console.log('Script Kalkulator.js telah dimuat.');
+            try {
+                const wrapper = document.getElementById('kalkulator-wrapper');
+                
+                // Fetch file HTML Kalkulator dari folder components
+                const response = await fetch('components/kalkulator.html');
+                if (!response.ok) throw new Error('File components/kalkulator.html tidak ditemukan');
+                wrapper.innerHTML = await response.text();
+
+                // Mengeksekusi ulang tag <script> yang ada di dalam kalkulator.html
+                const scripts = wrapper.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (error) {
+                console.error('Gagal memuat kalkulator:', error);
+                alert('[ ERROR ] Sistem gagal memuat komponen Kalkulator. Pastikan dijalankan menggunakan Live Server.');
+            }
         };
 
-        // ================= LOAD KOMPONEN TOMBOL =================
+        // ================= LOAD BUTTONS & JSON DARI FILE EKSTERNAL =================
         document.addEventListener('DOMContentLoaded', async () => {
             const btnContainer = document.getElementById('section-tombol-container');
             try {
