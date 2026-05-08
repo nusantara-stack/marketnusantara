@@ -6,22 +6,22 @@
     
     <!-- ================= SEO & LINK PREVIEW META TAGS ================= -->
     <title>Market Nusantara</title>
-    <meta name="title" content="Market Nusantara | Rekber Terpercaya">
-    <meta name="description" content="Pusat layanan digital terpercaya. Menyediakan Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan JPM.">
+    <meta name="title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta name="description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
 
     <!-- Open Graph / Facebook / WhatsApp -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://marketnusantara.com/">
-    <meta property="og:title" content="Market Nusantara | JB Rekber Terpercaya">
-    <meta property="og:description" content="Pusat layanan digital terpercaya. Menyediakan Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan JPM.">
-    <meta property="og:image" content="https://i.ibb.co.com/KjM3GC27/IMG-20260509-042230-999.webp">
+    <meta property="og:title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta property="og:description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
+    <meta property="og:image" content="assets/background/banner1.webp">
 
     <!-- Twitter / X -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://marketnusantara.com/">
-    <meta property="twitter:title" content="Market Nusantara | JB Rekber Terpercaya">
-    <meta property="twitter:description" content="Pusat layanan digital terpercaya. Menyediakan Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan JPM.">
-    <meta property="twitter:image" content="https://i.ibb.co.com/KjM3GC27/IMG-20260509-042230-999.webp">
+    <meta property="twitter:title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta property="twitter:description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
+    <meta property="twitter:image" content="assets/background/banner1.webp">
 
     <!-- Ikon Tautan (Favicon & Apple Touch) -->
     <link rel="icon" type="image/webp" href="assets/images/character2.webp">
@@ -316,6 +316,9 @@
 
     <!-- WRAPPER UNTUK MEMUAT MODAL KALKULATOR -->
     <div id="kalkulator-wrapper"></div>
+    
+    <!-- WRAPPER UNTUK MEMUAT MODAL DONATE -->
+    <div id="donate-wrapper"></div>
 
     <!-- Script Kontrol Sidebar -->
     <script>
@@ -371,6 +374,38 @@
             } catch (error) {
                 console.error('Gagal memuat kalkulator:', error);
                 alert('[ ERROR ] Sistem gagal memuat komponen Kalkulator. Pastikan dijalankan menggunakan Live Server.');
+            }
+        };
+
+        // ================= ACTION LOAD KOMPONEN DONATE =================
+        window.loadDonate = async function(e) {
+            e.preventDefault();
+            
+            // Tutup sidebar jika kebetulan tombol donasi ada di sidebar
+            if (typeof toggleSidebar === 'function' && !document.getElementById('sidebar').classList.contains('translate-x-full')) {
+                toggleSidebar();
+            }
+
+            try {
+                const wrapper = document.getElementById('donate-wrapper');
+                
+                // Fetch file HTML Donate dari folder components
+                const response = await fetch('components/donate.html');
+                if (!response.ok) throw new Error('File components/donate.html tidak ditemukan');
+                wrapper.innerHTML = await response.text();
+
+                // Mengeksekusi ulang tag <script> yang ada di dalam donate.html
+                const scripts = wrapper.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (error) {
+                console.error('Gagal memuat donate:', error);
+                alert('[ ERROR ] Sistem gagal memuat komponen Donate.');
             }
         };
 
