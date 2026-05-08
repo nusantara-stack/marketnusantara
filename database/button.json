@@ -1,6 +1,6 @@
 [
   {
-    "nama_kategori": "",
+    "nama_kategori": "MAIN MENU",
     "tombol": [
       {
         "judul": "WHATSAPP",
@@ -20,19 +20,19 @@
     "nama_kategori": "SOCIAL MEDIA",
     "tombol": [
       {
-        "judul": "Instagram",
-        "ikon": "ph-instagram-logo",
+        "judul": "GRUP JB ALL GAME",
+        "ikon": "ph-group",
         "url": "https://instagram.com",
         "tema": "royal"
       },
       {
-        "judul": "Twitter / X",
+        "judul": "GRUP PUSH KONTAK",
         "ikon": "ph-x-logo",
         "url": "https://twitter.com",
         "tema": "dark"
       },
       {
-        "judul": "Join Discord",
+        "judul": "GRUP ORDER JPM",
         "ikon": "ph-discord-logo",
         "url": "https://discord.com",
         "tema": "dark"
