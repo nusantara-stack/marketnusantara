@@ -1,16 +1,16 @@
 [
   {
-    "nama_kategori": "CATALOG",
+    "nama_kategori": "",
     "tombol": [
       {
-        "judul": "Portofolio Utama",
-        "ikon": "ph-folder-star",
+        "judul": "WHATSAPP",
+        "ikon": "ph-whatsapp-logo",
         "url": "#",
         "tema": "accent"
       },
       {
-        "judul": "Daftar Harga & Jasa",
-        "ikon": "ph-shopping-cart",
+        "judul": "SALURAN",
+        "ikon": "ph-whatsapp-logo",
         "url": "#",
         "tema": "royal"
       }
