@@ -25,14 +25,12 @@
                 Scan QRIS di bawah ini untuk memberikan dukungan.
             </p>
 
-            <!-- Bingkai QR Code -->
-            <div class="bg-white p-3 w-48 h-48 relative flex items-center justify-center" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
-                <!-- Ganti assets/images/qr-donate.png dengan QRIS kamu -->
-                <!-- Jika tidak ada, otomatis menggunakan placeholder QR dummy API -->
-                <img src="assets/images/qr-donate.png" 
-                     onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DonasiMarketNusantara'" 
-                     alt="QRIS Donate" 
-                     class="w-full h-full object-contain pointer-events-none">
+            <!-- Container untuk Render Canvas QR Code -->
+            <div class="p-1 border border-royal shadow-[0_0_20px_rgba(65,105,225,0.2)] bg-[#020617]" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
+                <div id="fancy-qr-canvas" class="w-[200px] h-[200px] flex items-center justify-center pointer-events-none">
+                    <!-- Animasi Loading sementara sebelum script termuat -->
+                    <span id="qr-loading" class="text-[10px] text-royal font-mono animate-pulse">Menghasilkan QR...</span>
+                </div>
             </div>
 
             <!-- Action Button -->
@@ -44,7 +42,7 @@
     </div>
 </div>
 
-<!-- ================= SCRIPT LOGIKA DONATE ================= -->
+<!-- ================= SCRIPT LOGIKA DONATE & FANCY QR ================= -->
 <script>
     // 1. Animasi saat pertama kali dimuat
     setTimeout(() => {
@@ -57,10 +55,90 @@
         document.getElementById('donate-modal').classList.add('opacity-0');
         document.getElementById('donate-box').classList.add('scale-95');
         
-        // Hapus elemen dari DOM setelah animasi selesai
         setTimeout(() => {
             const wrapper = document.getElementById('donate-wrapper');
             if (wrapper) wrapper.innerHTML = '';
         }, 300);
+    }
+
+    // 3. Fungsi Render Fancy QR Code
+    function generateFancyQR() {
+        // Tentukan warna sesuai request (Kuning & Royal Blue)
+        const color1 = '#FFD700'; // Kuning Accent
+        const color2 = '#4169E1'; // Royal Blue
+
+        const qrCode = new QRCodeStyling({
+            width: 200,
+            height: 200,
+            data: "4d8845a5-9210-4e4a-9bb0-5228f6d2c234",
+            margin: 5,
+            dotsOptions: {
+                type: "classy-rounded", 
+                gradient: {
+                    type: "linear",
+                    rotation: 45,
+                    colorStops: [
+                        { offset: 0, color: color1 },
+                        { offset: 1, color: color2 }
+                    ]
+                }
+            },
+            backgroundOptions: {
+                gradient: {
+                    type: "linear",
+                    rotation: 45,
+                    colorStops: [
+                        { offset: 0, color: "#020617" },
+                        { offset: 1, color: "#0f172a" }  
+                    ]
+                }
+            },
+            image: "https://i.postimg.cc/Y90497yM/20260402-005340.png",
+            imageOptions: {
+                crossOrigin: "anonymous",
+                margin: 6,
+                imageSize: 0.3
+            },
+            cornersSquareOptions: {
+                type: "extra-rounded",
+                gradient: {
+                    type: "linear",
+                    rotation: 45,
+                    colorStops: [
+                        { offset: 0, color: color1 },
+                        { offset: 1, color: color2 }
+                    ]
+                }
+            },
+            cornersDotOptions: {
+                type: "classy-rounded", 
+                gradient: {
+                    type: "linear",
+                    rotation: 45,
+                    colorStops: [
+                        { offset: 0, color: color1 },
+                        { offset: 1, color: color2 }
+                    ]
+                }
+            }
+        });
+
+        // Hapus teks loading dan letakkan QR Code di div container
+        const qrContainer = document.getElementById("fancy-qr-canvas");
+        if(qrContainer) {
+            qrContainer.innerHTML = ''; 
+            qrCode.append(qrContainer);
+        }
+    }
+
+    // 4. Mekanisme Memuat Library QR Code secara Dinamis
+    if (typeof QRCodeStyling === 'undefined') {
+        const script = document.createElement('script');
+        script.src = 'https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js';
+        script.onload = generateFancyQR;
+        document.head.appendChild(script);
+    } else {
+        // Jika library sudah pernah dimuat, langsung jalankan render QR
+        generateFancyQR();
     }
 </script>
