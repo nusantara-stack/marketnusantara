@@ -234,70 +234,10 @@
                      class="absolute bottom-0 w-[55vw] max-w-[200px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
 
-                <!-- ================= SERVICE BOXES WRAPPER ================= -->
-                <!-- Wrapper baru agar slider dan indikator titik tertata rapi di mobile -->
-                <div class="w-full mt-auto z-20 pb-4 pt-2 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:pb-0 md:pt-0 md:mt-0">
-                    
-                    <!-- Area Slider -->
-                    <div id="service-slider" class="w-full flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-4 md:px-0 md:flex-col md:overflow-visible scroll-smooth">
-                        
-                        <!-- Box 1: REKBER -->
-                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                            <!-- bg-white/60 digunakan untuk efek transparansi kaca -->
-                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
-                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                    <i class="ph-bold ph-shield-check text-lg md:text-xl"></i> REKBER
-                                </h3>
-                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
-                                    Rekening bersama demi menghindari tindakan penipuan saat melakukan transaksi online.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Box 2: JASA WEB -->
-                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
-                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                    <i class="ph-bold ph-browsers text-lg md:text-xl"></i> JASA WEB
-                                </h3>
-                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
-                                    Pembuatan website link-in-bio kustom yang interaktif, responsif, dan bernuansa futuristik ala GFX.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Box 3: GRUP SELLER -->
-                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
-                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                    <i class="ph-bold ph-users-three text-lg md:text-xl"></i> GRUP SELLER
-                                </h3>
-                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
-                                    Menjual grup jb dengan member aktif berkualitas.
-                                </p>
-                            </div>
-                        </div>
-
-                        <!-- Box 4: JPM -->
-                        <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
-                            <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
-                                <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
-                                    <i class="ph-bold ph-trend-up text-lg md:text-xl"></i> JPM
-                                </h3>
-                                <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
-                                    Meningkatkan member yang ada di grup customer sehingga grup menjadi aktif dan ramai.
-                                </p>
-                            </div>
-                        </div>
-
-                    </div>
-                    
-                    <!-- Indikator Titik (Hanya terlihat di Mobile) -->
-                    <div class="flex justify-center gap-1.5 mt-3 md:hidden">
-                        <div class="dot-indicator w-4 h-1.5 rounded-full bg-royal"></div>
-                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
-                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
-                        <div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>
+                <!-- ================= SERVICE BOXES WRAPPER (DIMUAT DARI FILE EKSTERNAL) ================= -->
+                <div id="section-services-container" class="w-full mt-auto z-20 pb-4 pt-2 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:pb-0 md:pt-0 md:mt-0">
+                    <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 md:mx-0 bg-white/50 backdrop-blur-sm">
+                        [ SYSTEM ] Mengunduh data layanan...
                     </div>
                 </div>
 
@@ -315,7 +255,7 @@
 
             <!-- ================= SECTION BUTTON / LINKS (DIMUAT DARI FILE EKSTERNAL) ================= -->
             <div id="section-tombol-container" class="w-full flex flex-col justify-center items-center">
-                <div class="text-center text-xs text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 my-8">
+                <div class="text-center text-xs text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 my-8 bg-white/50 backdrop-blur-sm">
                     [ SYSTEM ] Memuat data navigasi...
                 </div>
             </div>
@@ -355,7 +295,7 @@
     <!-- WRAPPER UNTUK MEMUAT MODAL KALKULATOR -->
     <div id="kalkulator-wrapper"></div>
 
-    <!-- Script Kontrol Sidebar & Auto-Swipe Slider -->
+    <!-- Script Kontrol Sidebar -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // ================= SIDEBAR LOGIC =================
@@ -380,67 +320,6 @@
             openBtn.addEventListener('click', toggleSidebar);
             closeBtn.addEventListener('click', toggleSidebar);
             overlay.addEventListener('click', toggleSidebar);
-
-            // ================= AUTO-SWIPE SLIDER LOGIC =================
-            const slider = document.getElementById('service-slider');
-            const slides = document.querySelectorAll('.service-slide');
-            const dots = document.querySelectorAll('.dot-indicator');
-            let currentSlide = 0;
-            let autoScrollInterval;
-
-            function updateDots(index) {
-                dots.forEach((dot, i) => {
-                    if (i === index) {
-                        dot.classList.remove('bg-gray-300', 'w-1.5');
-                        dot.classList.add('bg-royal', 'w-4');
-                    } else {
-                        dot.classList.remove('bg-royal', 'w-4');
-                        dot.classList.add('bg-gray-300', 'w-1.5');
-                    }
-                });
-            }
-
-            function scrollToSlide(index) {
-                if (window.innerWidth >= 768) return; 
-                const slideWidth = slides[0].clientWidth;
-                const scrollLeft = index * (slideWidth + 12); 
-                slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
-                updateDots(index);
-            }
-
-            function startAutoScroll() {
-                autoScrollInterval = setInterval(() => {
-                    if (window.innerWidth < 768) {
-                        currentSlide = (currentSlide + 1) % slides.length;
-                        scrollToSlide(currentSlide);
-                    }
-                }, 3000); 
-            }
-
-            function stopAutoScroll() {
-                clearInterval(autoScrollInterval);
-            }
-
-            slider.addEventListener('scroll', () => {
-                if (window.innerWidth < 768) {
-                    const scrollPosition = slider.scrollLeft;
-                    const slideWidth = slides[0].clientWidth + 12;
-                    const newIndex = Math.round(scrollPosition / slideWidth);
-                    
-                    if (newIndex !== currentSlide && newIndex >= 0 && newIndex < slides.length) {
-                        currentSlide = newIndex;
-                        updateDots(currentSlide);
-                    }
-                }
-            });
-
-            slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
-            slider.addEventListener('touchend', startAutoScroll);
-            slider.addEventListener('mouseenter', stopAutoScroll);
-            slider.addEventListener('mouseleave', startAutoScroll);
-
-            startAutoScroll();
-            updateDots(currentSlide);
         });
 
         // ================= ACTION LOAD KOMPONEN KALKULATOR =================
@@ -473,29 +352,49 @@
             }
         };
 
-        // ================= LOAD BUTTONS & JSON DARI FILE EKSTERNAL =================
+        // ================= LOAD SEMUA KOMPONEN EKSTERNAL =================
         document.addEventListener('DOMContentLoaded', async () => {
-            const btnContainer = document.getElementById('section-tombol-container');
+            
+            // 1. Load Components Layanan (Services Box)
+            const srvContainer = document.getElementById('section-services-container');
             try {
-                // 1. Memuat file komponen eksternal (buttons.html)
-                const responseHtml = await fetch('components/buttons.html');
-                if (!responseHtml.ok) throw new Error('File components/buttons.html tidak ditemukan');
-                btnContainer.innerHTML = await responseHtml.text(); 
+                const responseSrv = await fetch('components/services.html');
+                if (!responseSrv.ok) throw new Error('File components/services.html tidak ditemukan');
+                srvContainer.innerHTML = await responseSrv.text(); 
                 
-                // 2. Mengeksekusi script yang ada di dalam components/buttons.html
-                // (Browser mematikan script via innerHTML, jadi kita harus menjalankannya ulang)
-                const scripts = btnContainer.querySelectorAll('script');
-                scripts.forEach(oldScript => {
+                // Mengeksekusi script dalam services.html
+                const scriptsSrv = srvContainer.querySelectorAll('script');
+                scriptsSrv.forEach(oldScript => {
                     const newScript = document.createElement('script');
                     Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
                     newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
+            } catch (error) {
+                console.error('Error memuat komponen layanan:', error);
+                srvContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file layanan.</div>';
+            }
 
+            // 2. Load Components Tombol Navigasi
+            const btnContainer = document.getElementById('section-tombol-container');
+            try {
+                const responseHtml = await fetch('components/buttons.html');
+                if (!responseHtml.ok) throw new Error('File components/buttons.html tidak ditemukan');
+                btnContainer.innerHTML = await responseHtml.text(); 
+                
+                // Mengeksekusi script dalam buttons.html
+                const scriptsBtn = btnContainer.querySelectorAll('script');
+                scriptsBtn.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
             } catch (error) {
                 console.error('Error memuat komponen tombol:', error);
-                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed">[ ERROR ] Sistem gagal memuat file komponen.</div>';
+                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file komponen navigasi.</div>';
             }
+            
         });
     </script>
 </body>
