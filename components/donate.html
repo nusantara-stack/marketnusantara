@@ -1,0 +1,66 @@
+<!-- ================= MODAL DONATE OVERLAY ================= -->
+<div id="donate-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-dark/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    
+    <!-- Kotak Donate GFX -->
+    <div id="donate-box" class="relative w-full max-w-[320px] bg-dark border-2 border-accent shadow-[0_0_40px_rgba(255,215,0,0.25)] transform scale-95 transition-transform duration-300" style="clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);">
+        
+        <!-- Header -->
+        <div class="bg-accent text-dark p-5 pb-4 relative bg-stripes bg-opacity-20">
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-[10px] font-mono tracking-widest text-dark font-bold flex items-center gap-1.5 opacity-80">
+                    <span class="w-1.5 h-1.5 bg-dark animate-pulse"></span> SYS.QR // V1.0
+                </span>
+                <!-- Tombol Tutup -->
+                <button onclick="closeDonate()" class="text-dark hover:text-white transition-colors">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+            <h2 class="font-display font-black text-2xl uppercase tracking-wider mt-1">Support <span class="text-white drop-shadow-md italic">Creator</span></h2>
+        </div>
+
+        <!-- Body -->
+        <div class="p-6 flex flex-col items-center gap-4">
+            
+            <p class="text-xs font-mono text-gray-400 text-center uppercase tracking-wider">
+                Scan QRIS di bawah ini untuk memberikan dukungan.
+            </p>
+
+            <!-- Bingkai QR Code -->
+            <div class="bg-white p-3 w-48 h-48 relative flex items-center justify-center" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
+                <!-- Ganti assets/images/qr-donate.png dengan QRIS kamu -->
+                <!-- Jika tidak ada, otomatis menggunakan placeholder QR dummy API -->
+                <img src="assets/images/qr-donate.png" 
+                     onerror="this.src='https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=DonasiMarketNusantara'" 
+                     alt="QRIS Donate" 
+                     class="w-full h-full object-contain pointer-events-none">
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="closeDonate()" class="w-full bg-dark text-white border border-gray-600 font-bold font-display text-sm uppercase tracking-widest p-3 hover:bg-gray-800 transition-colors mt-2 flex justify-center items-center gap-2" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+                Selesai
+            </button>
+            
+        </div>
+    </div>
+</div>
+
+<!-- ================= SCRIPT LOGIKA DONATE ================= -->
+<script>
+    // 1. Animasi saat pertama kali dimuat
+    setTimeout(() => {
+        document.getElementById('donate-modal').classList.remove('opacity-0');
+        document.getElementById('donate-box').classList.remove('scale-95');
+    }, 10);
+
+    // 2. Fungsi Menutup Donate
+    window.closeDonate = function() {
+        document.getElementById('donate-modal').classList.add('opacity-0');
+        document.getElementById('donate-box').classList.add('scale-95');
+        
+        // Hapus elemen dari DOM setelah animasi selesai
+        setTimeout(() => {
+            const wrapper = document.getElementById('donate-wrapper');
+            if (wrapper) wrapper.innerHTML = '';
+        }, 300);
+    }
+</script>
