@@ -1,0 +1,127 @@
+<!-- Area Slider -->
+<div id="service-slider" class="w-full flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-4 md:px-0 md:flex-col md:overflow-visible scroll-smooth">
+    <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 w-full">
+        [ SYSTEM ] Memproses data layanan...
+    </div>
+</div>
+
+<!-- Indikator Titik (Hanya terlihat di Mobile) -->
+<div id="service-dots" class="flex justify-center gap-1.5 mt-3 md:hidden">
+    <!-- Titik akan digenerate dari JSON -->
+</div>
+
+<!-- ================= LOGIKA RENDER LAYANAN & AUTO-SWIPE ================= -->
+<script>
+    (async function renderServices() {
+        const slider = document.getElementById('service-slider');
+        const dotsContainer = document.getElementById('service-dots');
+        
+        try {
+            // Memanggil file JSON database layanan
+            const response = await fetch('database/services.json');
+            if (!response.ok) throw new Error('File database/services.json tidak ditemukan');
+            const services = await response.json();
+
+            let sliderHtml = '';
+            let dotsHtml = '';
+
+            // Looping Layanan
+            services.forEach((srv, index) => {
+                sliderHtml += `
+                    <div class="service-slide snap-center shrink-0 w-[75%] sm:w-[220px] md:w-full bg-royal/90 clip-service-box p-[2px] relative group hover:-translate-y-1 md:hover:-translate-x-2 transition-transform cursor-pointer shadow-[0_10px_20px_rgba(0,0,0,0.1)]">
+                        <div class="bg-white/60 backdrop-blur-md clip-service-box w-full h-full p-3 md:p-4 transition-colors group-hover:bg-royal/90 group-hover:text-white">
+                            <h3 class="font-display font-bold text-base md:text-xl uppercase tracking-wider mb-1 md:mb-1.5 text-royal group-hover:text-accent flex items-center gap-1.5 md:gap-2">
+                                <i class="ph-bold ${srv.ikon} text-lg md:text-xl"></i> ${srv.judul}
+                            </h3>
+                            <p class="text-[9px] md:text-xs font-mono leading-relaxed text-gray-800 group-hover:text-gray-100">
+                                ${srv.deskripsi}
+                            </p>
+                        </div>
+                    </div>
+                `;
+                
+                // Set indikator titik untuk mobile (Aktif di elemen pertama)
+                if (index === 0) {
+                    dotsHtml += `<div class="dot-indicator w-4 h-1.5 rounded-full bg-royal"></div>`;
+                } else {
+                    dotsHtml += `<div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>`;
+                }
+            });
+
+            // Tampilkan ke layar
+            slider.innerHTML = sliderHtml;
+            dotsContainer.innerHTML = dotsHtml;
+
+            // Inisialisasi Script Slider setelah render HTML selesai
+            initServiceSlider();
+
+        } catch (error) {
+            console.error("Gagal memuat database/services.json:", error);
+            slider.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed w-full">[ ERROR ] Koneksi database layanan terputus.</div>';
+        }
+    })();
+
+    function initServiceSlider() {
+        const slider = document.getElementById('service-slider');
+        const slides = document.querySelectorAll('.service-slide');
+        const dots = document.querySelectorAll('.dot-indicator');
+        let currentSlide = 0;
+        let autoScrollInterval;
+
+        if(slides.length === 0) return;
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-gray-300', 'w-1.5');
+                    dot.classList.add('bg-royal', 'w-4');
+                } else {
+                    dot.classList.remove('bg-royal', 'w-4');
+                    dot.classList.add('bg-gray-300', 'w-1.5');
+                }
+            });
+        }
+
+        function scrollToSlide(index) {
+            if (window.innerWidth >= 768) return; 
+            const slideWidth = slides[0].clientWidth;
+            const scrollLeft = index * (slideWidth + 12); 
+            slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            updateDots(index);
+        }
+
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                if (window.innerWidth < 768) {
+                    currentSlide = (currentSlide + 1) % slides.length;
+                    scrollToSlide(currentSlide);
+                }
+            }, 3000); 
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollInterval);
+        }
+
+        slider.addEventListener('scroll', () => {
+            if (window.innerWidth < 768) {
+                const scrollPosition = slider.scrollLeft;
+                const slideWidth = slides[0].clientWidth + 12;
+                const newIndex = Math.round(scrollPosition / slideWidth);
+                
+                if (newIndex !== currentSlide && newIndex >= 0 && newIndex < slides.length) {
+                    currentSlide = newIndex;
+                    updateDots(currentSlide);
+                }
+            }
+        });
+
+        slider.addEventListener('touchstart', stopAutoScroll, {passive: true});
+        slider.addEventListener('touchend', startAutoScroll);
+        slider.addEventListener('mouseenter', stopAutoScroll);
+        slider.addEventListener('mouseleave', startAutoScroll);
+
+        startAutoScroll();
+        updateDots(currentSlide);
+    }
+</script>
