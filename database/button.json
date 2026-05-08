@@ -1,0 +1,42 @@
+[
+  {
+    "nama_kategori": "CATALOG",
+    "tombol": [
+      {
+        "judul": "Portofolio Utama",
+        "ikon": "ph-folder-star",
+        "url": "#",
+        "tema": "accent"
+      },
+      {
+        "judul": "Daftar Harga & Jasa",
+        "ikon": "ph-shopping-cart",
+        "url": "#",
+        "tema": "royal"
+      }
+    ]
+  },
+  {
+    "nama_kategori": "SOCIAL MEDIA",
+    "tombol": [
+      {
+        "judul": "Instagram",
+        "ikon": "ph-instagram-logo",
+        "url": "https://instagram.com",
+        "tema": "royal"
+      },
+      {
+        "judul": "Twitter / X",
+        "ikon": "ph-x-logo",
+        "url": "https://twitter.com",
+        "tema": "dark"
+      },
+      {
+        "judul": "Join Discord",
+        "ikon": "ph-discord-logo",
+        "url": "https://discord.com",
+        "tema": "dark"
+      }
+    ]
+  }
+]
