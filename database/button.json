@@ -3,7 +3,7 @@
     "nama_kategori": "MAIN MENU",
     "tombol": [
       {
-  "judul": "TELEGRAM | WHATSAPP",
+        "judul": "TELEGRAM | WHATSAPP",
         "ikon": "ph-telegram-logo | ph-whatsapp-logo",
         "url": "https://t.me/akun_kamu | https://wa.me/628123456789",
         "tema": "royal | accent"
