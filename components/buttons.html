@@ -1,35 +1,27 @@
-<!-- File ini memuat Section utuh untuk tombol-tombol navigasi -->
+<!-- ================= TEMPLATE SECTION TOMBOL ================= -->
 <section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
-    
-    <!-- Wrapper utama diperkecil agar tidak mentok layar: w-[85%] max-w-[320px] -->
     <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6">
-        
         <!-- Placeholder loading sebelum JSON termuat -->
         <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4">
             [ SYSTEM ] Mengunduh data server...
         </div>
-
     </div>
-
 </section>
 
-<!-- Script untuk men-generate tombol dari JSON -->
+<!-- ================= LOGIKA RENDER TOMBOL ================= -->
 <script>
-    window.renderNusantaraButtons = async function() {
-        const container = document.getElementById('dynamic-button-list');
-        
+    (async function renderNusantaraButtons() {
+        const listContainer = document.getElementById('dynamic-button-list');
         try {
             // Memanggil file JSON database
-            const response = await fetch('database/button.json');
-            if (!response.ok) throw new Error('Database tidak ditemukan');
-            const dataKategori = await response.json();
+            const responseJson = await fetch('database/button.json');
+            if (!responseJson.ok) throw new Error('File database/button.json tidak ditemukan');
+            const dataKategori = await responseJson.json();
 
             let htmlContent = '';
 
-            // Looping untuk setiap kategori (contoh: CATALOG, SOCIAL MEDIA)
+            // Looping Kategori
             dataKategori.forEach(kategori => {
-                
-                // Header Label Kategori
                 htmlContent += `
                     <div class="flex flex-col gap-2.5">
                         <div class="flex items-center gap-2 mb-1 opacity-80">
@@ -40,10 +32,8 @@
                         <div class="flex flex-col gap-2.5 md:gap-3">
                 `;
 
-                // Looping untuk merender tombol di dalam kategori tersebut
+                // Looping Tombol
                 kategori.tombol.forEach(btn => {
-                    
-                    // Setup class berdasarkan tema warna di JSON
                     let themeClass, clipClass;
                     if (btn.tema === 'accent') {
                         themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
@@ -52,12 +42,10 @@
                         themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
                         clipClass = 'clip-button-reverse';
                     } else {
-                        // Default: dark
                         themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
                         clipClass = 'clip-button';
                     }
 
-                    // Kerangka 1 Tombol
                     htmlContent += `
                         <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
                             <div class="flex items-center justify-between">
@@ -71,22 +59,18 @@
                     `;
                 });
 
-                // Penutup wrapper kategori
                 htmlContent += `
                         </div>
                     </div>
                 `;
             });
 
-            // Timpa isi container dengan HTML yang sudah di-generate
-            container.innerHTML = htmlContent;
+            // Tampilkan ke layar
+            listContainer.innerHTML = htmlContent;
 
         } catch (error) {
-            console.error("Gagal memuat button.json:", error);
-            container.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed">[ ERROR ] Koneksi database tombol terputus.</div>';
+            console.error("Gagal memuat database/button.json:", error);
+            listContainer.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed">[ ERROR ] Koneksi database tombol terputus.</div>';
         }
-    }
+    })();
 </script>
-
-<!-- Trik agar script dieksekusi otomatis ketika dipanggil via fetch/innerHTML di VS Code -->
-<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onload="window.renderNusantaraButtons()" style="display:none;">
