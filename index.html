@@ -455,76 +455,28 @@
             console.log('Script Kalkulator.js telah dimuat.');
         };
 
-        // ================= LOAD BUTTONS & JSON DARI FILE EKSTERNAL =================
+        // ================= LOAD KOMPONEN TOMBOL =================
         document.addEventListener('DOMContentLoaded', async () => {
             const btnContainer = document.getElementById('section-tombol-container');
             try {
-                // 1. Memuat kerangka section utuh dari file eksternal
+                // 1. Memuat file komponen eksternal (buttons.html)
                 const responseHtml = await fetch('components/buttons.html');
                 if (!responseHtml.ok) throw new Error('File components/buttons.html tidak ditemukan');
                 btnContainer.innerHTML = await responseHtml.text(); 
                 
-                // 2. Ambil wadah dinamis di dalam HTML yang baru dimuat
-                const listContainer = document.getElementById('dynamic-button-list');
-                if (listContainer) {
-                    // 3. Muat data JSON dari file database/button.json
-                    const responseJson = await fetch('database/button.json');
-                    if (!responseJson.ok) throw new Error('File database/button.json tidak ditemukan');
-                    const dataKategori = await responseJson.json();
-
-                    let htmlContent = '';
-
-                    // 4. Generate struktur tombol berdasarkan kategori
-                    dataKategori.forEach(kategori => {
-                        htmlContent += `
-                            <div class="flex flex-col gap-2.5">
-                                <div class="flex items-center gap-2 mb-1 opacity-80">
-                                    <div class="h-[1px] bg-royal/50 flex-grow"></div>
-                                    <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase">${kategori.nama_kategori}</span>
-                                    <div class="h-[1px] bg-royal/50 flex-grow"></div>
-                                </div>
-                                <div class="flex flex-col gap-2.5 md:gap-3">
-                        `;
-
-                        kategori.tombol.forEach(btn => {
-                            let themeClass, clipClass;
-                            if (btn.tema === 'accent') {
-                                themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
-                                clipClass = 'clip-button';
-                            } else if (btn.tema === 'royal') {
-                                themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
-                                clipClass = 'clip-button-reverse';
-                            } else {
-                                themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
-                                clipClass = 'clip-button';
-                            }
-
-                            htmlContent += `
-                                <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
-                                    <div class="flex items-center justify-between">
-                                        <div class="flex items-center gap-2 md:gap-3">
-                                            <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
-                                            <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">${btn.judul}</span>
-                                        </div>
-                                        <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
-                                    </div>
-                                </a>
-                            `;
-                        });
-
-                        htmlContent += `
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    // 5. Render ke dalam listContainer
-                    listContainer.innerHTML = htmlContent;
-                }
+                // 2. Mengeksekusi script yang ada di dalam components/buttons.html
+                // (Browser mematikan script via innerHTML, jadi kita harus menjalankannya ulang)
+                const scripts = btnContainer.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
 
             } catch (error) {
-                console.error('Error memuat data:', error);
-                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed">[ ERROR ] Sistem gagal memuat file. Pastikan folder components dan database sudah sesuai, dan dibuka menggunakan Live Server.</div>';
+                console.error('Error memuat komponen tombol:', error);
+                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed">[ ERROR ] Sistem gagal memuat file komponen.</div>';
             }
         });
     </script>
