@@ -26,7 +26,7 @@
                     <div class="flex flex-col gap-2.5">
                         <div class="flex items-center gap-2 mb-1 opacity-80">
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
-                            <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase">${kategori.nama_kategori}</span>
+                            <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase text-center mx-2 whitespace-nowrap">${kategori.nama_kategori}</span>
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
                         </div>
                         <div class="flex flex-col gap-2.5 md:gap-3">
@@ -34,29 +34,80 @@
 
                 // Looping Tombol
                 kategori.tombol.forEach(btn => {
-                    let themeClass, clipClass;
-                    if (btn.tema === 'accent') {
-                        themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
-                        clipClass = 'clip-button';
-                    } else if (btn.tema === 'royal') {
-                        themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
-                        clipClass = 'clip-button-reverse';
-                    } else {
-                        themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
-                        clipClass = 'clip-button';
-                    }
+                    
+                    // ==========================================
+                    // CEK APAKAH TOMBOL DISEKAT MENJADI 2 BAGIAN
+                    // ==========================================
+                    if (btn.judul && btn.judul.includes('|')) {
+                        // Memotong data yang disekat dengan '|'
+                        const juduls = btn.judul.split('|').map(s => s.trim());
+                        const ikons = btn.ikon ? btn.ikon.split('|').map(s => s.trim()) : [];
+                        const urls = btn.url ? btn.url.split('|').map(s => s.trim()) : [];
+                        const temas = btn.tema ? btn.tema.split('|').map(s => s.trim()) : [];
 
-                    htmlContent += `
-                        <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center gap-2 md:gap-3">
-                                    <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
-                                    <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">${btn.judul}</span>
+                        // Buat wadah baris flex row (menyamping)
+                        htmlContent += `<div class="flex items-center gap-2 md:gap-3 w-full">`;
+                        
+                        // Render setiap tombol yang telah dipotong
+                        for (let i = 0; i < juduls.length; i++) {
+                            let tema = temas[i] || 'dark'; // Fallback warna jika tidak diisi
+                            let ikon = ikons[i] || 'ph-link'; // Fallback ikon
+                            let url = urls[i] || '#'; // Fallback URL
+                            
+                            let themeClass, clipClass;
+                            if (tema === 'accent') {
+                                themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
+                                clipClass = 'clip-button';
+                            } else if (tema === 'royal') {
+                                themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
+                                clipClass = 'clip-button-reverse';
+                            } else {
+                                themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
+                                clipClass = 'clip-button';
+                            }
+
+                            // Render tombol setengah (menggunakan flex-1 agar lebar terbagi rata)
+                            // Ikon panah ditiadakan agar muat dan teks diletakkan di tengah (justify-center)
+                            htmlContent += `
+                                <a href="${url}" target="_blank" class="btn-hover-fx flex-1 block ${themeClass} px-2 py-2.5 md:py-3 ${clipClass} transition-colors border-2 group shadow-sm">
+                                    <div class="flex items-center justify-center gap-1.5 md:gap-2">
+                                        <i class="ph-bold ${ikon} text-base md:text-xl group-hover:animate-bounce"></i>
+                                        <span class="btn-text font-bold uppercase text-[9px] md:text-xs italic tracking-wide truncate">${juduls[i]}</span>
+                                    </div>
+                                </a>
+                            `;
+                        }
+                        
+                        htmlContent += `</div>`; // Penutup flex row
+
+                    } else {
+                        // ==========================================
+                        // RENDER TOMBOL PENUH (1 BARIS)
+                        // ==========================================
+                        let themeClass, clipClass;
+                        if (btn.tema === 'accent') {
+                            themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
+                            clipClass = 'clip-button';
+                        } else if (btn.tema === 'royal') {
+                            themeClass = 'bg-royal text-white border-transparent hover:border-royal hover:bg-white hover:text-royal';
+                            clipClass = 'clip-button-reverse';
+                        } else {
+                            themeClass = 'bg-dark text-white border-transparent hover:border-dark hover:bg-gray-800';
+                            clipClass = 'clip-button';
+                        }
+
+                        htmlContent += `
+                            <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
+                                <div class="flex items-center justify-between">
+                                    <div class="flex items-center gap-2 md:gap-3">
+                                        <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
+                                        <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">${btn.judul}</span>
+                                    </div>
+                                    <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
                                 </div>
-                                <i class="ph-bold ph-arrow-right text-[10px] md:text-sm"></i>
-                            </div>
-                        </a>
-                    `;
+                            </a>
+                        `;
+                    }
                 });
 
                 htmlContent += `
