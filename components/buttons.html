@@ -1,7 +1,6 @@
 <!-- ================= TEMPLATE SECTION TOMBOL ================= -->
 <section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
     <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6">
-        <!-- Placeholder loading sebelum JSON termuat -->
         <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4">
             [ SYSTEM ] Mengunduh data server...
         </div>
@@ -13,14 +12,12 @@
     (async function renderNusantaraButtons() {
         const listContainer = document.getElementById('dynamic-button-list');
         try {
-            // Memanggil file JSON database
             const responseJson = await fetch('database/button.json');
             if (!responseJson.ok) throw new Error('File database/button.json tidak ditemukan');
             const dataKategori = await responseJson.json();
 
             let htmlContent = '';
 
-            // Looping Kategori
             dataKategori.forEach(kategori => {
                 htmlContent += `
                     <div class="flex flex-col gap-2.5">
@@ -32,27 +29,32 @@
                         <div class="flex flex-col gap-2.5 md:gap-3">
                 `;
 
-                // Looping Tombol
                 kategori.tombol.forEach(btn => {
-                    
-                    // ==========================================
-                    // CEK APAKAH TOMBOL DISEKAT MENJADI 2 BAGIAN
-                    // ==========================================
+                    // ===============================================
+                    // CEK TOMBOL SPLIT (BERSEBELAHAN DENGAN '|')
+                    // ===============================================
                     if (btn.judul && btn.judul.includes('|')) {
-                        // Memotong data yang disekat dengan '|'
                         const juduls = btn.judul.split('|').map(s => s.trim());
                         const ikons = btn.ikon ? btn.ikon.split('|').map(s => s.trim()) : [];
                         const urls = btn.url ? btn.url.split('|').map(s => s.trim()) : [];
                         const temas = btn.tema ? btn.tema.split('|').map(s => s.trim()) : [];
+                        const aksis = btn.aksi ? btn.aksi.split('|').map(s => s.trim()) : [];
 
-                        // Buat wadah baris flex row (menyamping)
                         htmlContent += `<div class="flex items-center gap-2 md:gap-3 w-full">`;
                         
-                        // Render setiap tombol yang telah dipotong
                         for (let i = 0; i < juduls.length; i++) {
-                            let tema = temas[i] || 'dark'; // Fallback warna jika tidak diisi
-                            let ikon = ikons[i] || 'ph-link'; // Fallback ikon
-                            let url = urls[i] || '#'; // Fallback URL
+                            let tema = temas[i] || 'dark'; 
+                            let ikon = ikons[i] || 'ph-link'; 
+                            let aksi = aksis[i] || '';
+                            let url = urls[i] || '#';
+                            
+                            // LOGIKA FIX: Jika ada Aksi, matikan fungsi URL dan New Tab
+                            let urlAttr = '';
+                            if (aksi !== '') {
+                                urlAttr = `href="javascript:void(0)" onclick="${aksi}"`;
+                            } else {
+                                urlAttr = `href="${url}" target="_blank"`;
+                            }
                             
                             let themeClass, clipClass;
                             if (tema === 'accent') {
@@ -66,10 +68,8 @@
                                 clipClass = 'clip-button';
                             }
 
-                            // Render tombol setengah (menggunakan flex-1 agar lebar terbagi rata)
-                            // Ikon panah ditiadakan agar muat dan teks diletakkan di tengah (justify-center)
                             htmlContent += `
-                                <a href="${url}" target="_blank" class="btn-hover-fx flex-1 block ${themeClass} px-2 py-2.5 md:py-3 ${clipClass} transition-colors border-2 group shadow-sm">
+                                <a ${urlAttr} class="btn-hover-fx flex-1 block ${themeClass} px-2 py-2.5 md:py-3 ${clipClass} transition-colors border-2 group shadow-sm">
                                     <div class="flex items-center justify-center gap-1.5 md:gap-2">
                                         <i class="ph-bold ${ikon} text-base md:text-xl group-hover:animate-bounce"></i>
                                         <span class="btn-text font-bold uppercase text-[9px] md:text-xs italic tracking-wide truncate">${juduls[i]}</span>
@@ -77,13 +77,12 @@
                                 </a>
                             `;
                         }
-                        
-                        htmlContent += `</div>`; // Penutup flex row
+                        htmlContent += `</div>`; 
 
                     } else {
-                        // ==========================================
-                        // RENDER TOMBOL PENUH (1 BARIS)
-                        // ==========================================
+                        // ===============================================
+                        // RENDER TOMBOL PENUH (1 BARIS UTUH)
+                        // ===============================================
                         let themeClass, clipClass;
                         if (btn.tema === 'accent') {
                             themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
@@ -96,8 +95,18 @@
                             clipClass = 'clip-button';
                         }
 
+                        let aksi = btn.aksi || '';
+                        let urlAttr = '';
+                        
+                        // LOGIKA FIX: Jika ada Aksi, matikan fungsi URL dan New Tab
+                        if (aksi !== '') {
+                            urlAttr = `href="javascript:void(0)" onclick="${aksi}"`;
+                        } else {
+                            urlAttr = `href="${btn.url || '#'}" target="_blank"`;
+                        }
+
                         htmlContent += `
-                            <a href="${btn.url}" target="_blank" class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
+                            <a ${urlAttr} class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2 md:gap-3">
                                         <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
@@ -116,7 +125,6 @@
                 `;
             });
 
-            // Tampilkan ke layar
             listContainer.innerHTML = htmlContent;
 
         } catch (error) {
