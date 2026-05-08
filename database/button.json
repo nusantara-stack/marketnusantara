@@ -17,23 +17,23 @@
     ]
   },
   {
-    "nama_kategori": "SOCIAL MEDIA",
+    "nama_kategori": "WHATSAPP GROUP",
     "tombol": [
       {
-        "judul": "GRUP JB ALL GAME",
+        "judul": "JB ALL GAME",
         "ikon": "ph-users-three",
         "url": "https://instagram.com",
         "tema": "royal"
       },
       {
-        "judul": "GRUP PUSH KONTAK",
-        "ikon": "ph-x-logo",
+        "judul": "PUSH KONTAK",
+        "ikon": "ph-users-three",
         "url": "https://twitter.com",
         "tema": "dark"
       },
       {
-        "judul": "GRUP JB SALURAN & GB",
-        "ikon": "ph-discord-logo",
+        "judul": "JB SALURAN & GB",
+        "ikon": "ph-users-three",
         "url": "https://discord.com",
         "tema": "dark"
       }
