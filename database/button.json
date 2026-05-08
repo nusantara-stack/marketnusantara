@@ -1,11 +1,16 @@
 [
-  {
+{
+    "nama_kategori": "                                                  ",
+    "tombol": [
+      {
         "judul": "DONATE ME",
         "ikon": "ph-coffee",
         "url": "",
         "aksi": "loadDonate(event)",
         "tema": "accent"
-      },
+      }
+    ]
+  },
   {
     "nama_kategori": "CONTACT US",
     "tombol": [
