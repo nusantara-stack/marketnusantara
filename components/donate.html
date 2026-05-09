@@ -1,8 +1,8 @@
 <!-- ================= MODAL DONATE OVERLAY ================= -->
 <div id="donate-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-dark/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
     
-    <!-- Wrapper Utama (Margin atas diperbesar menjadi mt-32 agar karakter muat) -->
-    <div id="donate-box" class="relative w-full max-w-[320px] flex flex-col items-center mt-32 scale-95 transition-transform duration-300">
+    <!-- Wrapper Utama (Margin atas diperbesar menjadi mt-48 agar karakter muat) -->
+    <div id="donate-box" class="relative w-full max-w-[320px] flex flex-col items-center mt-48 scale-95 transition-transform duration-300">
         
         <!-- Tombol Tutup -->
         <button onclick="closeDonate()" class="absolute -top-12 right-0 md:-right-4 w-10 h-10 bg-gray-900/80 border border-gray-700 text-gray-400 hover:text-white hover:bg-royal hover:border-royal rounded-full flex items-center justify-center backdrop-blur-md transition-all z-50 shadow-lg">
@@ -10,10 +10,10 @@
         </button>
 
         <!-- Karakter Mengintip -->
-        <!-- Posisi ditarik ke atas jauh (-top-[180px]) dan ukuran diperbesar -->
+        <!-- Posisi ditarik jauh lebih ke atas (-top-[230px]) agar tidak tenggelam -->
         <img src="assets/images/character3.webp" 
              alt="Character Mascot" 
-             class="absolute -top-[180px] md:-top-[200px] w-[260px] md:w-[290px] z-10 drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] pointer-events-none"
+             class="absolute -top-[230px] md:-top-[250px] w-[280px] md:w-[310px] z-10 drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] pointer-events-none"
              draggable="false">
 
         <!-- Kotak Card QRIS (Z-20 agar menutupi bagian bawah karakter) -->
@@ -24,6 +24,14 @@
                 <i class="ph-fill ph-sparkle text-accent text-xl animate-pulse"></i>
                 <h2 class="font-display font-black text-2xl text-white uppercase tracking-widest drop-shadow-md">SCAN <span class="text-accent italic">ME</span></h2>
                 <i class="ph-fill ph-sparkle text-accent text-xl animate-pulse"></i>
+            </div>
+
+            <!-- Frame Pembungkus QR -->
+            <div class="bg-[#020617] p-2 md:p-3 rounded-3xl w-[220px] h-[220px] flex items-center justify-center relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] border border-gray-800">
+                
+                <!-- Menggunakan Gambar Statis Aset QRIS Lokal -->
+                <img src="assets/images/qris.webp" alt="QRIS Donasi" class="w-full h-full object-cover rounded-2xl pointer-events-none">
+
             </div>
 
             <!-- Frame Pembungkus QR -->
@@ -51,7 +59,7 @@
     </div>
 </div>
 
-<!-- ================= SCRIPT LOGIKA DONATE & FANCY QR ================= -->
+<!-- ================= SCRIPT LOGIKA DONATE ================= -->
 <script>
     // 1. Animasi saat pertama kali dimuat
     setTimeout(() => {
@@ -68,80 +76,5 @@
             const wrapper = document.getElementById('donate-wrapper');
             if (wrapper) wrapper.innerHTML = '';
         }, 300);
-    }
-
-    // 3. Fungsi Render Fancy QR Code
-    function generateFancyQR() {
-        try {
-            const color1 = '#FFD700'; // Accent Yellow
-            const color2 = '#4169E1'; // Royal Blue
-
-            const qrCode = new QRCodeStyling({
-                width: 200,
-                height: 200,
-                type: "svg", // Menggunakan SVG agar lebih reliable di-render
-                data: "00020101021126570011ID.DANA.WWW011893600915399828441702099982844170303UMI51440014ID.CO.QRIS.WWW0215ID10254344192930303UMI5204899953033605802ID5916MARKET NUSANTARA6004010961054336463042601",
-                margin: 0,
-                dotsOptions: {
-                    type: "classy-rounded", 
-                    gradient: {
-                        type: "linear",
-                        rotation: 45,
-                        colorStops: [{ offset: 0, color: color1 }, { offset: 1, color: color2 }]
-                    }
-                },
-                backgroundOptions: {
-                    gradient: {
-                        type: "linear",
-                        rotation: 45,
-                        colorStops: [{ offset: 0, color: "#020617" }, { offset: 1, color: "#0f172a" }]
-                    }
-                },
-                image: "https://i.postimg.cc/Y90497yM/20260402-005340.png",
-                imageOptions: {
-                    crossOrigin: "anonymous",
-                    margin: 8,
-                    imageSize: 0.3
-                },
-                cornersSquareOptions: {
-                    type: "extra-rounded",
-                    gradient: {
-                        type: "linear",
-                        rotation: 45,
-                        colorStops: [{ offset: 0, color: color1 }, { offset: 1, color: color2 }]
-                    }
-                },
-                cornersDotOptions: {
-                    type: "classy-rounded", 
-                    gradient: {
-                        type: "linear",
-                        rotation: 45,
-                        colorStops: [{ offset: 0, color: color1 }, { offset: 1, color: color2 }]
-                    }
-                }
-            });
-
-            const qrContainer = document.getElementById("fancy-qr-canvas");
-            if(qrContainer) {
-                qrContainer.innerHTML = ''; 
-                qrCode.append(qrContainer);
-            }
-        } catch (error) {
-            console.error("Gagal merender QR Code:", error);
-            document.getElementById("qr-loading").innerText = "Gagal memuat QR";
-        }
-    }
-
-    // 4. Mekanisme Memuat Library QR Code Dinamis (menggunakan jsDelivr yang lebih stabil)
-    if (typeof QRCodeStyling === 'undefined') {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/qr-code-styling@1.5.0/lib/qr-code-styling.js';
-        script.onload = generateFancyQR;
-        script.onerror = function() {
-            document.getElementById("qr-loading").innerText = "Gagal mengunduh modul QR";
-        };
-        document.head.appendChild(script);
-    } else {
-        generateFancyQR();
     }
 </script>
