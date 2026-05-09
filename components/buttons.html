@@ -13,13 +13,32 @@
     .scroll-reveal-left {
         opacity: 0;
         transform: translateX(-50px);
-        transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek sedikit memantul */
+        transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     
     /* Status Muncul: Terlihat dan kembali ke posisi asli */
     .scroll-reveal-visible {
         opacity: 1;
         transform: translateX(0);
+    }
+
+    /* ================= ANIMASI GFX BACKGROUND ================= */
+    @keyframes gfx-scanline {
+        0% { transform: translateY(-100%); opacity: 0; }
+        10% { opacity: 0.5; }
+        90% { opacity: 0.5; }
+        100% { transform: translateY(800%); opacity: 0; }
+    }
+    .animate-gfx-scanline {
+        animation: gfx-scanline 6s linear infinite;
+    }
+
+    @keyframes gfx-spin-slow {
+        0% { transform: translate(-50%, -50%) rotate(0deg); }
+        100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+    .animate-gfx-spin {
+        animation: gfx-spin-slow 40s linear infinite;
     }
 </style>
 
@@ -28,16 +47,46 @@
     <div id="scroll-progress-bar" class="h-full bg-accent w-0 transition-all duration-75 ease-out shadow-[0_0_15px_rgba(255,215,0,0.8)] rounded-r-full"></div>
 </div>
 
-<!-- ================= TEMPLATE SECTION TOMBOL ================= -->
-<section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
-    <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6 overflow-hidden md:overflow-visible p-2">
-        <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4">
+<!-- ================= TEMPLATE SECTION TOMBOL DENGAN BACKGROUND GFX DINAMIS ================= -->
+<section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-12 pb-20 z-10 overflow-hidden min-h-[500px]">
+    
+    <!-- ================= ELEMEN BACKGROUND GFX (Z-0) ================= -->
+    <div class="absolute inset-0 z-0 pointer-events-none select-none">
+        
+        <!-- Grid Biru Halus yang diam -->
+        <div class="absolute inset-0 opacity-[0.03] bg-[linear-gradient(rgba(65,105,225,1)_1px,transparent_1px),linear-gradient(90deg,rgba(65,105,225,1)_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+        
+        <!-- Glowing Orbs -->
+        <div class="absolute top-10 right-[-10%] w-72 h-72 bg-royal/20 rounded-full blur-[80px] animate-pulse"></div>
+        <div class="absolute bottom-10 left-[-10%] w-64 h-64 bg-accent/10 rounded-full blur-[60px] animate-pulse" style="animation-delay: 2s;"></div>
+        
+        <!-- Laser Scanline (Garis Kuning yang bergerak turun) -->
+        <div class="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-accent to-transparent opacity-40 animate-gfx-scanline shadow-[0_5px_20px_rgba(255,215,0,0.5)]"></div>
+        
+        <!-- Tech Ring Raksasa di tengah (Berputar) -->
+        <div class="absolute top-1/2 left-1/2 w-[350px] md:w-[500px] h-[350px] md:h-[500px] border border-dashed border-gray-400/20 rounded-full animate-gfx-spin"></div>
+        <div class="absolute top-1/2 left-1/2 w-[250px] md:w-[350px] h-[250px] md:h-[350px] border border-royal/10 rounded-full animate-gfx-spin" style="animation-direction: reverse; animation-duration: 30s;"></div>
+        
+        <!-- Crosshairs Khas Mecha UI di sudut -->
+        <div class="absolute top-8 left-8 w-12 h-12 border-t-2 border-l-2 border-royal/30"></div>
+        <div class="absolute bottom-8 right-8 w-12 h-12 border-b-2 border-r-2 border-accent/30"></div>
+        
+        <!-- Teks Vertikal Dekoratif -->
+        <div class="absolute top-1/2 left-2 transform -translate-y-1/2 -rotate-90 text-[8px] font-mono text-gray-400 tracking-[0.4em] opacity-30 whitespace-nowrap hidden md:block">
+            SYS.NAV.CTRL // ON
+        </div>
+    </div>
+
+    <!-- ================= CONTAINER DAFTAR TOMBOL (Z-10) ================= -->
+    <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6 p-2 relative z-10">
+        <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 bg-white/80 backdrop-blur-md rounded-lg">
             [ SYSTEM ] Mengunduh data server...
         </div>
     </div>
+    
 </section>
 
-<!-- ================= LOGIKA RENDER TOMBOL & ANIMASI ================= -->
+<!-- ================= LOGIKA RENDER TOMBOL & ANIMASI SCROLL ================= -->
 <script>
     (async function renderNusantaraButtons() {
         // --- 1. LOGIKA INDIKATOR SCROLL ---
@@ -63,12 +112,11 @@
             dataKategori.forEach(kategori => {
                 htmlContent += `<div class="flex flex-col gap-2.5">`;
 
-                // CEK KATEGORI: Tambahkan class .scroll-reveal-left agar ikut beranimasi
                 if (kategori.nama_kategori && kategori.nama_kategori.trim() !== "") {
                     htmlContent += `
                         <div class="scroll-reveal-left flex items-center gap-2 mb-1 opacity-80">
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
-                            <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase text-center mx-2 whitespace-nowrap">${kategori.nama_kategori}</span>
+                            <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase text-center mx-2 whitespace-nowrap bg-white/80 px-2 py-0.5 rounded-sm backdrop-blur-sm">${kategori.nama_kategori}</span>
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
                         </div>
                     `;
@@ -77,12 +125,8 @@
                 htmlContent += `<div class="flex flex-col gap-2.5 md:gap-3">`;
 
                 kategori.tombol.forEach((btn, index) => {
-                    // Penundaan (delay) dinamis sedikit agar tombol muncul bergantian jika tampil bersamaan
                     const delayStyle = `style="transition-delay: ${index * 0.05}s"`;
 
-                    // ===============================================
-                    // CEK TOMBOL SPLIT (BERSEBELAHAN DENGAN '|')
-                    // ===============================================
                     if (btn.judul && btn.judul.includes('|')) {
                         const juduls = btn.judul.split('|').map(s => s.trim());
                         const ikons = btn.ikon ? btn.ikon.split('|').map(s => s.trim()) : [];
@@ -90,7 +134,6 @@
                         const temas = btn.tema ? btn.tema.split('|').map(s => s.trim()) : [];
                         const aksis = btn.aksi ? btn.aksi.split('|').map(s => s.trim()) : [];
 
-                        // Tambahkan class .scroll-reveal-left ke wadah barisnya
                         htmlContent += `<div class="scroll-reveal-left flex items-center gap-2 md:gap-3 w-full" ${delayStyle}>`;
                         
                         for (let i = 0; i < juduls.length; i++) {
@@ -119,8 +162,8 @@
                             }
 
                             htmlContent += `
-                                <a ${urlAttr} class="btn-hover-fx flex-1 block ${themeClass} px-2 py-2.5 md:py-3 ${clipClass} transition-colors border-2 group shadow-sm">
-                                    <div class="flex items-center justify-center gap-1.5 md:gap-2">
+                                <a ${urlAttr} class="btn-hover-fx flex-1 block ${themeClass} px-2 py-2.5 md:py-3 ${clipClass} transition-colors border-2 group shadow-lg backdrop-blur-sm relative overflow-hidden">
+                                    <div class="flex items-center justify-center gap-1.5 md:gap-2 relative z-10">
                                         <i class="ph-bold ${ikon} text-base md:text-xl group-hover:animate-bounce"></i>
                                         <span class="btn-text font-bold uppercase text-[9px] md:text-xs italic tracking-wide truncate">${juduls[i]}</span>
                                     </div>
@@ -130,9 +173,6 @@
                         htmlContent += `</div>`; 
 
                     } else {
-                        // ===============================================
-                        // RENDER TOMBOL PENUH (1 BARIS UTUH)
-                        // ===============================================
                         let themeClass, clipClass;
                         if (btn.tema === 'accent') {
                             themeClass = 'bg-accent text-dark border-transparent hover:border-accent hover:bg-white';
@@ -154,10 +194,9 @@
                             urlAttr = `href="${btn.url || '#'}" target="_blank"`;
                         }
 
-                        // Tambahkan class .scroll-reveal-left ke tag <a>
                         htmlContent += `
-                            <a ${urlAttr} class="scroll-reveal-left btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm" ${delayStyle}>
-                                <div class="flex items-center justify-between">
+                            <a ${urlAttr} class="scroll-reveal-left btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-lg backdrop-blur-sm relative overflow-hidden" ${delayStyle}>
+                                <div class="flex items-center justify-between relative z-10">
                                     <div class="flex items-center gap-2 md:gap-3">
                                         <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
                                         <span class="btn-text font-bold uppercase text-[10px] md:text-sm italic tracking-wide">${btn.judul}</span>
@@ -175,38 +214,33 @@
                 `;
             });
 
-            // Tampilkan elemen ke layar
             listContainer.innerHTML = htmlContent;
 
             // ================= 3. INISIALISASI OBSERVER ANIMASI SCROLL =================
-            // Menunggu sebentar untuk memastikan DOM selesai merender innerHTML
             setTimeout(() => {
                 const observerOptions = {
                     root: null,
                     rootMargin: '0px',
-                    threshold: 0.1 // Animasi jalan saat 10% elemen mulai masuk layar
+                    threshold: 0.1
                 };
 
                 const scrollObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            // Saat masuk layar: munculkan
                             entry.target.classList.add('scroll-reveal-visible');
                         } else {
-                            // Saat keluar layar: sembunyikan kembali (agar efek berulang saat scroll lagi)
                             entry.target.classList.remove('scroll-reveal-visible');
                         }
                     });
                 }, observerOptions);
 
-                // Pantau semua elemen yang punya class .scroll-reveal-left
                 const elementsToAnimate = listContainer.querySelectorAll('.scroll-reveal-left');
                 elementsToAnimate.forEach(el => scrollObserver.observe(el));
             }, 50);
 
         } catch (error) {
             console.error("Gagal memuat database/button.json:", error);
-            listContainer.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed">[ ERROR ] Koneksi database tombol terputus.</div>';
+            listContainer.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed bg-white/80">[ ERROR ] Koneksi database tombol terputus.</div>';
         }
     })();
 </script>
