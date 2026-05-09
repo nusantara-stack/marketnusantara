@@ -19,15 +19,20 @@
             let htmlContent = '';
 
             dataKategori.forEach(kategori => {
-                htmlContent += `
-                    <div class="flex flex-col gap-2.5">
+                htmlContent += `<div class="flex flex-col gap-2.5">`;
+
+                // CEK KATEGORI: Hanya tampilkan header jika nama_kategori tidak kosong
+                if (kategori.nama_kategori && kategori.nama_kategori.trim() !== "") {
+                    htmlContent += `
                         <div class="flex items-center gap-2 mb-1 opacity-80">
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
                             <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase text-center mx-2 whitespace-nowrap">${kategori.nama_kategori}</span>
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
                         </div>
-                        <div class="flex flex-col gap-2.5 md:gap-3">
-                `;
+                    `;
+                }
+
+                htmlContent += `<div class="flex flex-col gap-2.5 md:gap-3">`;
 
                 kategori.tombol.forEach(btn => {
                     // ===============================================
