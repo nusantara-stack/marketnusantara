@@ -1,41 +1,50 @@
 <!-- ================= MODAL DONATE OVERLAY ================= -->
-<div id="donate-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-dark/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+<div id="donate-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-dark/80 backdrop-blur-md opacity-0 transition-opacity duration-300">
     
-    <!-- Kotak Donate GFX -->
-    <div id="donate-box" class="relative w-full max-w-[320px] bg-dark border-2 border-accent shadow-[0_0_40px_rgba(255,215,0,0.25)] transform scale-95 transition-transform duration-300" style="clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);">
+    <!-- Wrapper Utama (Diberi margin atas agar karakter yang mengintip tidak terpotong layar) -->
+    <div id="donate-box" class="relative w-full max-w-[320px] flex flex-col items-center mt-20 scale-95 transition-transform duration-300">
         
-        <!-- Header -->
-        <div class="bg-accent text-dark p-5 pb-4 relative bg-stripes bg-opacity-20">
-            <div class="flex justify-between items-center mb-1">
-                <span class="text-[10px] font-mono tracking-widest text-dark font-bold flex items-center gap-1.5 opacity-80">
-                    <span class="w-1.5 h-1.5 bg-dark animate-pulse"></span> SYS.QR // V1.0
-                </span>
-                <!-- Tombol Tutup -->
-                <button onclick="closeDonate()" class="text-dark hover:text-white transition-colors">
-                    <i class="ph-bold ph-x text-lg"></i>
-                </button>
-            </div>
-            <h2 class="font-display font-black text-2xl uppercase tracking-wider mt-1">Support <span class="text-white drop-shadow-md italic">Creator</span></h2>
-        </div>
+        <!-- Tombol Tutup (Di luar kotak agar tidak menabrak karakter) -->
+        <button onclick="closeDonate()" class="absolute -top-12 right-0 md:-right-4 w-10 h-10 bg-gray-900/80 border border-gray-700 text-gray-400 hover:text-white hover:bg-royal hover:border-royal rounded-full flex items-center justify-center backdrop-blur-md transition-all z-50 shadow-lg">
+            <i class="ph-bold ph-x text-lg"></i>
+        </button>
 
-        <!-- Body -->
-        <div class="p-6 flex flex-col items-center gap-4">
+        <!-- Karakter Mengintip (Berada di layer belakang box utama) -->
+        <!-- Posisi ditarik ke atas menggunakan -top dan z-10 -->
+        <img src="assets/images/character3.webp" 
+             alt="Character Mascot" 
+             class="absolute -top-[140px] w-[220px] md:w-[240px] z-10 drop-shadow-[0_15px_15px_rgba(0,0,0,0.6)] pointer-events-none"
+             draggable="false">
+
+        <!-- Kotak Card QRIS (Z-20 agar menutupi bagian bawah karakter) -->
+        <div class="relative z-20 w-full bg-gradient-to-b from-gray-900 to-[#0B0F19] border-[4px] border-royal/60 rounded-[2.5rem] p-6 shadow-[0_20px_50px_rgba(65,105,225,0.4)] flex flex-col items-center pt-8">
             
-            <p class="text-xs font-mono text-gray-400 text-center uppercase tracking-wider">
-                Scan QRIS di bawah ini untuk memberikan dukungan.
-            </p>
+            <!-- Judul dengan Sparkle -->
+            <div class="flex items-center gap-2 mb-4">
+                <i class="ph-fill ph-sparkle text-accent text-xl animate-pulse"></i>
+                <h2 class="font-display font-black text-2xl text-white uppercase tracking-widest drop-shadow-md">SCAN <span class="text-accent italic">ME</span></h2>
+                <i class="ph-fill ph-sparkle text-accent text-xl animate-pulse"></i>
+            </div>
 
-            <!-- Container untuk Render Canvas QR Code -->
-            <div class="p-1 border border-royal shadow-[0_0_20px_rgba(65,105,225,0.2)] bg-[#020617]" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
-                <div id="fancy-qr-canvas" class="w-[200px] h-[200px] flex items-center justify-center pointer-events-none">
-                    <!-- Animasi Loading sementara sebelum script termuat -->
-                    <span id="qr-loading" class="text-[10px] text-royal font-mono animate-pulse">Menghasilkan QR...</span>
+            <!-- Frame Pembungkus QR (Warna sama dengan background QR) -->
+            <div class="bg-[#020617] p-2 md:p-3 rounded-3xl w-[220px] h-[220px] flex items-center justify-center relative shadow-[inset_0_0_20px_rgba(0,0,0,0.8)] border border-gray-800">
+                
+                <!-- Container untuk Render Canvas QR Code -->
+                <div id="fancy-qr-canvas" class="w-[200px] h-[200px] flex items-center justify-center pointer-events-none rounded-2xl overflow-hidden">
+                    <span id="qr-loading" class="text-xs text-royal font-mono animate-pulse">Memuat QRIS...</span>
                 </div>
+
+            </div>
+
+            <!-- Label ID Nameplate -->
+            <div class="mt-5 px-4 py-2.5 bg-dark rounded-xl border border-gray-700/80 flex items-center gap-2 shadow-inner w-full justify-center">
+                <i class="ph-bold ph-wallet text-accent"></i>
+                <span class="text-[11px] font-mono text-gray-300 uppercase tracking-widest">Market Nusantara</span>
             </div>
 
             <!-- Action Button -->
-            <button onclick="closeDonate()" class="w-full bg-dark text-white border border-gray-600 font-bold font-display text-sm uppercase tracking-widest p-3 hover:bg-gray-800 transition-colors mt-2 flex justify-center items-center gap-2" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
-                Selesai
+            <button onclick="closeDonate()" class="mt-3 w-full bg-accent text-dark font-bold font-display text-base uppercase tracking-widest p-3 rounded-xl hover:bg-white transition-colors shadow-lg border-2 border-transparent hover:border-accent flex items-center justify-center gap-2">
+                <i class="ph-bold ph-check-circle text-lg"></i> Selesai
             </button>
             
         </div>
@@ -63,15 +72,16 @@
 
     // 3. Fungsi Render Fancy QR Code
     function generateFancyQR() {
-        // Tentukan warna sesuai request (Kuning & Royal Blue)
-        const color1 = '#FFD700'; // Kuning Accent
+        // Tentukan warna Yellow & Royal Blue
+        const color1 = '#FFD700'; // Accent Yellow
         const color2 = '#4169E1'; // Royal Blue
 
         const qrCode = new QRCodeStyling({
             width: 200,
             height: 200,
-            data: "4d8845a5-9210-4e4a-9bb0-5228f6d2c234",
-            margin: 5,
+            // DATA QRIS ASLI KAMU
+            data: "00020101021126570011ID.DANA.WWW011893600915399828441702099982844170303UMI51440014ID.CO.QRIS.WWW0215ID10254344192930303UMI5204899953033605802ID5916MARKET NUSANTARA6004010961054336463042601",
+            margin: 0,
             dotsOptions: {
                 type: "classy-rounded", 
                 gradient: {
@@ -96,7 +106,7 @@
             image: "https://i.postimg.cc/Y90497yM/20260402-005340.png",
             imageOptions: {
                 crossOrigin: "anonymous",
-                margin: 6,
+                margin: 8,
                 imageSize: 0.3
             },
             cornersSquareOptions: {
@@ -123,7 +133,6 @@
             }
         });
 
-        // Hapus teks loading dan letakkan QR Code di div container
         const qrContainer = document.getElementById("fancy-qr-canvas");
         if(qrContainer) {
             qrContainer.innerHTML = ''; 
@@ -131,14 +140,14 @@
         }
     }
 
-    // 4. Mekanisme Memuat Library QR Code secara Dinamis
+    // 4. Mekanisme Memuat Library QR Code secara Dinamis via CDN
     if (typeof QRCodeStyling === 'undefined') {
         const script = document.createElement('script');
         script.src = 'https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js';
         script.onload = generateFancyQR;
         document.head.appendChild(script);
     } else {
-        // Jika library sudah pernah dimuat, langsung jalankan render QR
+        // Jika library sudah pernah dimuat, langsung render QR
         generateFancyQR();
     }
 </script>
