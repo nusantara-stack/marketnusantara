@@ -42,7 +42,7 @@
                     colors: {
                         'royal': '#4169E1',    /* Royal Blue */
                         'accent': '#FFD700',   /* Yellow */
-                        'dark': '#0B0F19',     /* Darker Black for new footer */
+                        'dark': '#0B0F19',     /* Darker Black */
                         'light': '#F8FAFC'     /* Off White */
                     },
                     fontFamily: {
@@ -50,9 +50,6 @@
                         'mono': ['"JetBrains Mono"', 'monospace'],
                         'bebas': ['"Bebas Neue"', 'sans-serif'],
                         'cursive': ['"Dancing Script"', 'cursive']
-                    },
-                    backgroundImage: {
-                        'stripes': 'repeating-linear-gradient(45deg, #4169E1, #4169E1 2px, transparent 2px, transparent 8px)'
                     }
                 }
             }
@@ -65,12 +62,6 @@
         }
         .clip-button-reverse {
             clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
-        }
-        .clip-service-box {
-            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
-        }
-        .clip-sidebar {
-            clip-path: polygon(25px 0, 100% 0, 100% 100%, 0 100%, 0 25px);
         }
         .hide-scrollbar::-webkit-scrollbar {
             display: none;
@@ -91,19 +82,6 @@
         .btn-text {
             transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
-        .sidebar-link:hover .sidebar-arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-        .sidebar-arrow {
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.2s ease;
-        }
-        /* Transisi halus untuk indikator titik mobile */
-        .dot-indicator {
-            transition: all 0.3s ease;
-        }
     </style>
 </head>
 <body class="bg-white min-h-screen font-display text-dark selection:bg-accent selection:text-dark select-none" oncontextmenu="return false;">
@@ -117,7 +95,6 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden opacity-0 transition-opacity duration-300"></div>
 
     <!-- ================= SIDEBAR PANEL ================= -->
-    <!-- Diperkecil menjadi w-[240px] untuk mobile, md:w-[320px] untuk desktop -->
     <aside id="sidebar" class="fixed top-0 right-0 w-[240px] md:w-[320px] h-full bg-[#0B0F19]/90 backdrop-blur-2xl z-50 transform translate-x-full transition-transform duration-500 ease-out flex flex-col border-l-2 border-royal shadow-[-20px_0_50px_rgba(65,105,225,0.15)]">
         
         <!-- Sidebar Header -->
@@ -134,7 +111,6 @@
 
         <!-- Sidebar Navigation -->
         <nav class="flex flex-col px-3 py-5 md:px-4 md:py-6 gap-1.5 md:gap-2 flex-1 overflow-y-auto hide-scrollbar">
-            
             <a href="#" class="group flex items-center justify-between text-gray-400 hover:text-white p-2.5 md:p-3 rounded-xl md:rounded-2xl hover:bg-royal/10 border border-transparent hover:border-royal/30 transition-all duration-300">
                 <div class="flex items-center gap-3 md:gap-4">
                     <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-gray-800/50 flex items-center justify-center group-hover:bg-royal group-hover:text-white group-hover:scale-110 transition-all duration-300 shadow-inner">
@@ -145,7 +121,7 @@
                 <i class="ph-bold ph-caret-right text-royal opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"></i>
             </a>
 
-            <!-- Highlighted Kalkulator Button (Soft GFX Style) -->
+            <!-- Highlighted Kalkulator Button -->
             <div class="mt-auto pt-4 px-1.5 md:px-2">
                 <a href="#" onclick="loadKalkulator(event)" class="group relative flex items-center justify-between bg-gradient-to-r from-accent to-yellow-400 text-dark p-1 pr-3 md:pr-4 rounded-full transition-all hover:shadow-[0_0_20px_rgba(255,215,0,0.4)] hover:scale-[1.02]">
                     <div class="flex items-center gap-2.5 md:gap-3">
@@ -157,7 +133,6 @@
                     <i class="ph-bold ph-arrow-right text-dark group-hover:translate-x-1 transition-transform"></i>
                 </a>
             </div>
-
         </nav>
 
         <!-- Sidebar Footer -->
@@ -176,70 +151,76 @@
                 <div class="w-1 h-full bg-white rounded-full"></div>
                 <div class="w-[2px] h-full bg-white rounded-full"></div>
                 <div class="w-2 h-full bg-white rounded-full"></div>
-                <div class="w-1 h-full bg-white rounded-full"></div>
-                <div class="w-3 h-full bg-white rounded-full"></div>
             </div>
-            
             <p class="font-mono text-[7px] md:text-[8px] text-gray-500 mt-2.5 md:mt-3 uppercase tracking-[0.2em]">ID: MARKET-NST-01 // VER: 2.5.0</p>
         </div>
     </aside>
 
     <!-- ================= MAIN CONTENT CONTAINER ================= -->
     <main class="relative w-full min-h-screen overflow-hidden bg-grid flex flex-col">
-        
-        <div class="absolute top-0 left-0 bg-royal text-white font-mono text-[7px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button">
-            SYS.READY // V.2.0
-        </div>
-        <div class="absolute -top-16 -right-16 w-32 h-32 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
-        <div class="absolute top-8 right-8 w-2.5 h-2.5 md:w-4 md:h-4 bg-accent rounded-full z-0"></div>
 
         <div class="flex flex-col w-full flex-1 z-10 relative">
 
-            <header class="relative pt-6 md:pt-12 pb-0 w-full min-h-[420px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
+            <!-- ================= HERO SECTION (UPDATED DGN REFERENSI) ================= -->
+            <header class="relative pt-6 md:pt-12 pb-0 w-full min-h-[420px] md:min-h-[700px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start bg-gradient-to-br from-royal via-blue-700 to-[#0B0F19] shadow-[0_15px_40px_rgba(65,105,225,0.4)] rounded-b-[2.5rem] md:rounded-b-[4rem]">
                 
-                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-2 md:mt-0">
-                    <div class="font-bebas text-[22vw] md:text-[160px] lg:text-[200px] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
-                        <span>NUSANTARA</span>
-                        <span class="text-royal/5" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.4);">NUSANTARA</span>
-                    </div>
-                    <div class="absolute top-[40%] md:top-[45%] w-[120%] text-center font-cursive text-[15vw] md:text-[110px] lg:text-[140px] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
-                        Nusantara
+                <!-- Tekstur Halus di Atas Background -->
+                <div class="absolute inset-0 opacity-20 bg-[radial-gradient(circle_at_center,rgba(255,255,255,0.2)_1px,transparent_1px)] bg-[size:20px_20px] z-0"></div>
+
+                <div class="absolute top-0 left-0 bg-accent text-dark font-mono text-[7px] md:text-[10px] py-1 px-2 md:py-1.5 md:px-4 z-20 clip-button font-bold">
+                    SYS.READY // V.2.0
+                </div>
+
+                <!-- TEKS NUSANTARA FULL COLOR (GAYA REFERENSI) -->
+                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none mt-2 md:mt-0">
+                    <div class="relative font-display font-black text-[23vw] md:text-[170px] lg:text-[210px] leading-[0.8] text-white drop-shadow-[0_15px_20px_rgba(0,0,0,0.5)] tracking-tighter flex flex-col items-center z-10" style="transform: scaleY(1.15);">
+                        <span class="relative">
+                            NUSANTARA
+                            <!-- Bintang Sparkle seperti Referensi -->
+                            <i class="ph-fill ph-sparkle text-white text-[12vw] md:text-[100px] absolute -top-[15%] -right-[8%] drop-shadow-[0_0_25px_rgba(255,255,255,0.9)] animate-pulse"></i>
+                        </span>
+                        <!-- Teks bayangan di bawahnya agar komposisi penuh -->
+                        <span class="text-white/20 mt-2 md:mt-4">NUSANTARA</span>
                     </div>
                 </div>
 
+                <!-- Teks Info Kiri Atas (Diubah ke Putih/Kuning agar terbaca di background gelap) -->
                 <div class="absolute top-12 left-4 md:top-20 md:left-12 z-20">
                     <div class="flex items-stretch gap-1 md:gap-2">
-                        <div class="relative w-1.5 md:w-2.5 border-t-[1.5px] md:border-t-2 border-b-[1.5px] md:border-b-2 border-l-[1.5px] md:border-l-2 border-dark">
-                            <span class="absolute top-1/2 -left-2.5 md:-left-2.5 transform -translate-y-1/2 -rotate-90 text-[5px] md:text-[8px] font-mono tracking-[0.2em] text-dark font-bold whitespace-nowrap">0 0 1</span>
+                        <div class="relative w-1.5 md:w-2.5 border-t-[1.5px] md:border-t-2 border-b-[1.5px] md:border-b-2 border-l-[1.5px] md:border-l-2 border-accent">
+                            <span class="absolute top-1/2 -left-2.5 md:-left-2.5 transform -translate-y-1/2 -rotate-90 text-[5px] md:text-[8px] font-mono tracking-[0.2em] text-accent font-bold whitespace-nowrap">0 0 1</span>
                         </div>
                         
                         <div class="py-0 md:py-0.5 flex flex-col justify-center">
-                            <p class="text-[5px] md:text-[9px] font-mono tracking-[0.2em] text-gray-500 mb-0 md:mb-0.5 uppercase leading-none">Nusantara Archives</p>
-                            <h1 class="text-xl md:text-5xl lg:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-dark mt-0.5 md:mt-0">
-                                MARKET<br>NUSANTARA
+                            <p class="text-[5px] md:text-[9px] font-mono tracking-[0.2em] text-gray-300 mb-0 md:mb-0.5 uppercase leading-none">Nusantara Archives</p>
+                            <h1 class="text-xl md:text-5xl lg:text-6xl font-black font-display uppercase leading-[0.85] tracking-tighter text-white mt-0.5 md:mt-0 drop-shadow-lg">
+                                MARKET<br><span class="text-accent">NUSANTARA</span>
                             </h1>
-                            <p class="text-[7px] md:text-[12px] font-medium text-gray-600 mt-0.5 md:mt-3 max-w-[110px] md:max-w-[180px] leading-tight">
+                            <p class="text-[7px] md:text-[12px] font-medium text-gray-200 mt-0.5 md:mt-3 max-w-[110px] md:max-w-[180px] leading-tight drop-shadow-md">
                                 Desainer, Kreator, dan Penggemar GFX.
                             </p>
                         </div>
                     </div>
                 </div>
 
+                <!-- Gambar Karakter (Bertumpuk di atas teks persis seperti referensi) -->
                 <img src="assets/images/character1.webp" 
                      alt="Karakter Nusantara" 
-                     class="absolute bottom-0 w-[70vw] max-w-[260px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-xl pointer-events-none md:left-[45%] md:-translate-x-1/2"
+                     class="absolute bottom-0 w-[70vw] max-w-[260px] md:w-[450px] md:max-w-[95%] object-contain z-10 drop-shadow-[0_20px_40px_rgba(0,0,0,0.8)] pointer-events-none md:left-[45%] md:-translate-x-1/2"
                      draggable="false">
 
-                <!-- ================= SERVICE BOXES WRAPPER (DIMUAT DARI FILE EKSTERNAL) ================= -->
+                <!-- ================= SERVICE BOXES WRAPPER ================= -->
+                <!-- Diubah warna background loading-nya agar sesuai background baru -->
                 <div id="section-services-container" class="w-full mt-auto z-20 pb-4 pt-2 md:absolute md:right-6 lg:right-12 md:top-1/2 md:-translate-y-1/2 md:w-[280px] lg:w-[320px] md:pb-0 md:pt-0 md:mt-0">
-                    <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 md:mx-0 bg-white/50 backdrop-blur-sm">
+                    <div class="text-center text-[10px] text-white font-mono animate-pulse border border-white/30 border-dashed p-4 mx-4 md:mx-0 bg-dark/30 backdrop-blur-md rounded-xl">
                         [ SYSTEM ] Mengunduh data layanan...
                     </div>
                 </div>
 
             </header>
 
-            <div class="w-full flex items-center px-4 md:px-12 my-2 md:my-4 z-20 relative">
+            <!-- Garis Pemisah Navigasi -->
+            <div class="w-full flex items-center px-4 md:px-12 mt-6 md:mt-10 z-20 relative">
                 <div class="flex-grow h-[1.5px] bg-royal opacity-60"></div>
                 <div class="flex items-center gap-1.5 px-3 font-mono text-[8px] md:text-[10px] text-royal tracking-[0.2em] font-bold uppercase opacity-80">
                     <span class="w-1.5 h-1.5 bg-royal"></span>
@@ -249,7 +230,7 @@
                 <div class="flex-grow h-[1.5px] bg-royal opacity-60"></div>
             </div>
 
-            <!-- ================= SECTION BUTTON / LINKS (DIMUAT DARI FILE EKSTERNAL) ================= -->
+            <!-- ================= SECTION BUTTON / LINKS ================= -->
             <div id="section-tombol-container" class="w-full flex flex-col justify-center items-center">
                 <div class="text-center text-xs text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 my-8 bg-white/50 backdrop-blur-sm">
                     [ SYSTEM ] Memuat data navigasi...
@@ -258,11 +239,10 @@
             
         </div>
 
-        <footer class="relative w-full flex flex-col z-20 mt-auto">
+        <footer class="relative w-full flex flex-col z-20 mt-auto pt-6">
+            <div class="absolute top-4 left-0 w-full h-8 md:h-14 bg-royal shadow-[0_-5px_15px_rgba(65,105,225,0.3)]" style="clip-path: polygon(0 100%, 100% 0, 100% 100%); z-10;"></div>
             
-            <div class="absolute -top-2 left-0 w-full h-8 md:h-14 bg-royal shadow-[0_-5px_15px_rgba(65,105,225,0.3)]" style="clip-path: polygon(0 100%, 100% 0, 100% 100%); z-10;"></div>
-            
-            <div class="relative bg-dark w-full flex flex-col pt-8 md:pt-12 pb-6 px-6 md:pb-8" style="clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%); margin-top: -10px;">
+            <div class="relative bg-dark w-full flex flex-col pt-8 md:pt-12 pb-6 px-6 md:pb-8" style="clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%);">
                 
                 <div class="flex justify-center items-center gap-2 md:gap-3 mt-2 mb-3 md:mb-6">
                     <div class="flex flex-col gap-[2px] md:gap-[3px] w-6 md:w-10 transform -skew-x-[15deg]">
@@ -282,19 +262,16 @@
                      alt="Chibi Mascot" 
                      class="absolute bottom-0 right-2 md:right-8 w-[70px] md:w-[100px] z-30 drop-shadow-lg pointer-events-none"
                      draggable="false">
-
             </div>
         </footer>
 
     </main>
 
-    <!-- WRAPPER UNTUK MEMUAT MODAL KALKULATOR -->
+    <!-- WRAPPER UNTUK MEMUAT MODAL -->
     <div id="kalkulator-wrapper"></div>
-    
-    <!-- WRAPPER UNTUK MEMUAT MODAL DONATE -->
     <div id="donate-wrapper"></div>
 
-    <!-- Script Kontrol Sidebar -->
+    <!-- Script Kontrol Sidebar & Loaders -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             // ================= SIDEBAR LOGIC =================
@@ -321,22 +298,14 @@
             overlay.addEventListener('click', toggleSidebar);
         });
 
-        // ================= ACTION LOAD KOMPONEN KALKULATOR =================
         window.loadKalkulator = async function(e) {
             e.preventDefault();
-            
-            // Tutup sidebar jika terbuka
             if (typeof toggleSidebar === 'function') toggleSidebar();
-
             try {
                 const wrapper = document.getElementById('kalkulator-wrapper');
-                
-                // Fetch file HTML Kalkulator dari folder components
                 const response = await fetch('components/kalkulator.html');
                 if (!response.ok) throw new Error('File components/kalkulator.html tidak ditemukan');
                 wrapper.innerHTML = await response.text();
-
-                // Mengeksekusi ulang tag <script> yang ada di dalam kalkulator.html
                 const scripts = wrapper.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -344,31 +313,21 @@
                     newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
-
             } catch (error) {
                 console.error('Gagal memuat kalkulator:', error);
-                alert('[ ERROR ] Sistem gagal memuat komponen Kalkulator. Pastikan dijalankan menggunakan Live Server.');
             }
         };
 
-        // ================= ACTION LOAD KOMPONEN DONATE =================
         window.loadDonate = async function(e) {
             e.preventDefault();
-            
-            // Tutup sidebar jika kebetulan tombol donasi ada di sidebar
             if (typeof toggleSidebar === 'function' && !document.getElementById('sidebar').classList.contains('translate-x-full')) {
                 toggleSidebar();
             }
-
             try {
                 const wrapper = document.getElementById('donate-wrapper');
-                
-                // Fetch file HTML Donate dari folder components
                 const response = await fetch('components/donate.html');
                 if (!response.ok) throw new Error('File components/donate.html tidak ditemukan');
                 wrapper.innerHTML = await response.text();
-
-                // Mengeksekusi ulang tag <script> yang ada di dalam donate.html
                 const scripts = wrapper.querySelectorAll('script');
                 scripts.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -376,24 +335,18 @@
                     newScript.appendChild(document.createTextNode(oldScript.innerHTML));
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
-
             } catch (error) {
                 console.error('Gagal memuat donate:', error);
-                alert('[ ERROR ] Sistem gagal memuat komponen Donate.');
             }
         };
 
-        // ================= LOAD SEMUA KOMPONEN EKSTERNAL =================
         document.addEventListener('DOMContentLoaded', async () => {
-            
-            // 1. Load Components Layanan (Services Box)
+            // Load Layanan
             const srvContainer = document.getElementById('section-services-container');
             try {
                 const responseSrv = await fetch('components/services.html');
                 if (!responseSrv.ok) throw new Error('File components/services.html tidak ditemukan');
                 srvContainer.innerHTML = await responseSrv.text(); 
-                
-                // Mengeksekusi script dalam services.html
                 const scriptsSrv = srvContainer.querySelectorAll('script');
                 scriptsSrv.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -402,18 +355,16 @@
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
             } catch (error) {
-                console.error('Error memuat komponen layanan:', error);
-                srvContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file layanan.</div>';
+                console.error('Error memuat layanan:', error);
+                srvContainer.innerHTML = '';
             }
 
-            // 2. Load Components Tombol Navigasi
+            // Load Tombol Navigasi
             const btnContainer = document.getElementById('section-tombol-container');
             try {
                 const responseHtml = await fetch('components/buttons.html');
                 if (!responseHtml.ok) throw new Error('File components/buttons.html tidak ditemukan');
                 btnContainer.innerHTML = await responseHtml.text(); 
-                
-                // Mengeksekusi script dalam buttons.html
                 const scriptsBtn = btnContainer.querySelectorAll('script');
                 scriptsBtn.forEach(oldScript => {
                     const newScript = document.createElement('script');
@@ -422,10 +373,9 @@
                     oldScript.parentNode.replaceChild(newScript, oldScript);
                 });
             } catch (error) {
-                console.error('Error memuat komponen tombol:', error);
-                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file komponen navigasi.</div>';
+                console.error('Error memuat tombol:', error);
+                btnContainer.innerHTML = '';
             }
-            
         });
     </script>
 </body>
