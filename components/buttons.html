@@ -1,5 +1,14 @@
-<!-- ================= GAYA ANIMASI SCROLL (LOKAL) ================= -->
+<!-- ================= GAYA ANIMASI & GLOBAL SCROLLBAR ================= -->
 <style>
+    /* Menyembunyikan scrollbar utama secara global */
+    ::-webkit-scrollbar {
+        display: none !important;
+    }
+    html, body {
+        -ms-overflow-style: none !important;
+        scrollbar-width: none !important;
+    }
+
     /* Status Awal: Tersembunyi dan tergeser ke kiri */
     .scroll-reveal-left {
         opacity: 0;
@@ -14,6 +23,11 @@
     }
 </style>
 
+<!-- ================= INDIKATOR SCROLL ATAS ================= -->
+<div class="fixed top-0 left-0 w-full h-[3px] bg-white/5 z-[9999] pointer-events-none backdrop-blur-sm">
+    <div id="scroll-progress-bar" class="h-full bg-accent w-0 transition-all duration-75 ease-out shadow-[0_0_15px_rgba(255,215,0,0.8)] rounded-r-full"></div>
+</div>
+
 <!-- ================= TEMPLATE SECTION TOMBOL ================= -->
 <section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
     <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6 overflow-hidden md:overflow-visible p-2">
@@ -26,6 +40,18 @@
 <!-- ================= LOGIKA RENDER TOMBOL & ANIMASI ================= -->
 <script>
     (async function renderNusantaraButtons() {
+        // --- 1. LOGIKA INDIKATOR SCROLL ---
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progressBar = document.getElementById('scroll-progress-bar');
+            if (progressBar) {
+                progressBar.style.width = scrolled + '%';
+            }
+        });
+
+        // --- 2. RENDER TOMBOL DARI JSON ---
         const listContainer = document.getElementById('dynamic-button-list');
         try {
             const responseJson = await fetch('database/button.json');
@@ -152,7 +178,7 @@
             // Tampilkan elemen ke layar
             listContainer.innerHTML = htmlContent;
 
-            // ================= INISIALISASI OBSERVER ANIMASI SCROLL =================
+            // ================= 3. INISIALISASI OBSERVER ANIMASI SCROLL =================
             // Menunggu sebentar untuk memastikan DOM selesai merender innerHTML
             setTimeout(() => {
                 const observerOptions = {
