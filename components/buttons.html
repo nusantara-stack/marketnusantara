@@ -1,13 +1,29 @@
+<!-- ================= GAYA ANIMASI SCROLL (LOKAL) ================= -->
+<style>
+    /* Status Awal: Tersembunyi dan tergeser ke kiri */
+    .scroll-reveal-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: opacity 0.5s ease-out, transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efek sedikit memantul */
+    }
+    
+    /* Status Muncul: Terlihat dan kembali ke posisi asli */
+    .scroll-reveal-visible {
+        opacity: 1;
+        transform: translateX(0);
+    }
+</style>
+
 <!-- ================= TEMPLATE SECTION TOMBOL ================= -->
 <section class="relative w-full flex flex-col justify-center items-center px-4 md:px-12 pt-4 md:pt-6 pb-10 z-10">
-    <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6">
+    <div id="dynamic-button-list" class="w-[85%] max-w-[320px] md:max-w-[360px] mx-auto flex flex-col gap-6 overflow-hidden md:overflow-visible p-2">
         <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4">
             [ SYSTEM ] Mengunduh data server...
         </div>
     </div>
 </section>
 
-<!-- ================= LOGIKA RENDER TOMBOL ================= -->
+<!-- ================= LOGIKA RENDER TOMBOL & ANIMASI ================= -->
 <script>
     (async function renderNusantaraButtons() {
         const listContainer = document.getElementById('dynamic-button-list');
@@ -21,10 +37,10 @@
             dataKategori.forEach(kategori => {
                 htmlContent += `<div class="flex flex-col gap-2.5">`;
 
-                // CEK KATEGORI: Hanya tampilkan header jika nama_kategori tidak kosong
+                // CEK KATEGORI: Tambahkan class .scroll-reveal-left agar ikut beranimasi
                 if (kategori.nama_kategori && kategori.nama_kategori.trim() !== "") {
                     htmlContent += `
-                        <div class="flex items-center gap-2 mb-1 opacity-80">
+                        <div class="scroll-reveal-left flex items-center gap-2 mb-1 opacity-80">
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
                             <span class="font-mono text-[9px] tracking-[0.2em] text-royal font-bold uppercase text-center mx-2 whitespace-nowrap">${kategori.nama_kategori}</span>
                             <div class="h-[1px] bg-royal/50 flex-grow"></div>
@@ -34,7 +50,10 @@
 
                 htmlContent += `<div class="flex flex-col gap-2.5 md:gap-3">`;
 
-                kategori.tombol.forEach(btn => {
+                kategori.tombol.forEach((btn, index) => {
+                    // Penundaan (delay) dinamis sedikit agar tombol muncul bergantian jika tampil bersamaan
+                    const delayStyle = `style="transition-delay: ${index * 0.05}s"`;
+
                     // ===============================================
                     // CEK TOMBOL SPLIT (BERSEBELAHAN DENGAN '|')
                     // ===============================================
@@ -45,7 +64,8 @@
                         const temas = btn.tema ? btn.tema.split('|').map(s => s.trim()) : [];
                         const aksis = btn.aksi ? btn.aksi.split('|').map(s => s.trim()) : [];
 
-                        htmlContent += `<div class="flex items-center gap-2 md:gap-3 w-full">`;
+                        // Tambahkan class .scroll-reveal-left ke wadah barisnya
+                        htmlContent += `<div class="scroll-reveal-left flex items-center gap-2 md:gap-3 w-full" ${delayStyle}>`;
                         
                         for (let i = 0; i < juduls.length; i++) {
                             let tema = temas[i] || 'dark'; 
@@ -53,7 +73,6 @@
                             let aksi = aksis[i] || '';
                             let url = urls[i] || '#';
                             
-                            // LOGIKA FIX: Jika ada Aksi, matikan fungsi URL dan New Tab
                             let urlAttr = '';
                             if (aksi !== '') {
                                 urlAttr = `href="javascript:void(0)" onclick="${aksi}"`;
@@ -103,15 +122,15 @@
                         let aksi = btn.aksi || '';
                         let urlAttr = '';
                         
-                        // LOGIKA FIX: Jika ada Aksi, matikan fungsi URL dan New Tab
                         if (aksi !== '') {
                             urlAttr = `href="javascript:void(0)" onclick="${aksi}"`;
                         } else {
                             urlAttr = `href="${btn.url || '#'}" target="_blank"`;
                         }
 
+                        // Tambahkan class .scroll-reveal-left ke tag <a>
                         htmlContent += `
-                            <a ${urlAttr} class="btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm">
+                            <a ${urlAttr} class="scroll-reveal-left btn-hover-fx block w-full ${themeClass} px-3 py-2.5 md:py-3 md:px-5 ${clipClass} transition-colors border-2 group shadow-sm" ${delayStyle}>
                                 <div class="flex items-center justify-between">
                                     <div class="flex items-center gap-2 md:gap-3">
                                         <i class="ph-bold ${btn.ikon} text-base md:text-xl group-hover:animate-bounce"></i>
@@ -130,7 +149,34 @@
                 `;
             });
 
+            // Tampilkan elemen ke layar
             listContainer.innerHTML = htmlContent;
+
+            // ================= INISIALISASI OBSERVER ANIMASI SCROLL =================
+            // Menunggu sebentar untuk memastikan DOM selesai merender innerHTML
+            setTimeout(() => {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1 // Animasi jalan saat 10% elemen mulai masuk layar
+                };
+
+                const scrollObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Saat masuk layar: munculkan
+                            entry.target.classList.add('scroll-reveal-visible');
+                        } else {
+                            // Saat keluar layar: sembunyikan kembali (agar efek berulang saat scroll lagi)
+                            entry.target.classList.remove('scroll-reveal-visible');
+                        }
+                    });
+                }, observerOptions);
+
+                // Pantau semua elemen yang punya class .scroll-reveal-left
+                const elementsToAnimate = listContainer.querySelectorAll('.scroll-reveal-left');
+                elementsToAnimate.forEach(el => scrollObserver.observe(el));
+            }, 50);
 
         } catch (error) {
             console.error("Gagal memuat database/button.json:", error);
