@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    
+    <!-- ================= SEO & LINK PREVIEW META TAGS ================= -->
+    <title>Market Nusantara</title>
+    <meta name="title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta name="description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
+
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://marketnusantara.com/">
+    <meta property="og:title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta property="og:description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
+    <meta property="og:image" content="assets/background/banner1.webp">
+
+    <!-- Twitter / X -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://marketnusantara.com/">
+    <meta property="twitter:title" content="Market Nusantara | Terminal GFX & Layanan Digital">
+    <meta property="twitter:description" content="Pusat layanan digital terpercaya. Menyediakan fasilitas Rekening Bersama (Rekber), Jasa Pembuatan Website kustom, Grup Seller, dan optimasi JPM.">
+    <meta property="twitter:image" content="assets/background/banner1.webp">
+
+    <!-- Ikon Tautan (Favicon & Apple Touch) -->
+    <link rel="icon" type="image/webp" href="assets/images/character2.webp">
+    <link rel="apple-touch-icon" href="assets/images/character2.webp">
+    <!-- ================================================================= -->
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'royal': '#4169E1',    /* Royal Blue */
+                        'accent': '#FFD700',   /* Yellow */
+                        'dark': '#0B0F19',     /* Darker Black for new footer */
+                        'light': '#F8FAFC'     /* Off White */
+                    },
+                    fontFamily: {
+                        'display': ['"Chakra Petch"', 'sans-serif'],
+                        'mono': ['"JetBrains Mono"', 'monospace'],
+                        'bebas': ['"Bebas Neue"', 'sans-serif'],
+                        'cursive': ['"Dancing Script"', 'cursive']
+                    },
+                    backgroundImage: {
+                        'stripes': 'repeating-linear-gradient(45deg, #4169E1, #4169E1 2px, transparent 2px, transparent 8px)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .clip-button {
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
+        }
+        .clip-button-reverse {
+            clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+        }
+        .clip-service-box {
+            clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px);
+        }
+        .clip-sidebar {
+            clip-path: polygon(25px 0, 100% 0, 100% 100%, 0 100%, 0 25px);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .bg-grid {
+            background-size: 30px 30px;
+            background-image: 
+                linear-gradient(to right, rgba(65, 105, 225, 0.05) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(65, 105, 225, 0.05) 1px, transparent 1px);
+        }
+        .btn-hover-fx:hover .btn-text {
+            transform: translateX(4px);
+        }
+        .btn-text {
+            transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .sidebar-link:hover .sidebar-arrow {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .sidebar-arrow {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.2s ease;
+        }
+        /* Transisi halus untuk indikator titik mobile */
+        .dot-indicator {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-white md:bg-slate-950 min-h-screen font-display text-dark selection:bg-accent selection:text-dark select-none" oncontextmenu="return false;">
+
+<!-- ================= MAIN CONTENT CONTAINER ================= -->
+    <main class="relative w-full min-h-screen overflow-hidden bg-white bg-grid flex flex-col md:max-w-[430px] md:mx-auto md:shadow-[0_0_60px_rgba(0,0,0,0.5)]">
+
+        <div class="absolute top-0 left-0 z-20 flex items-center gap-1.5 bg-dark text-white font-mono text-[7px] md:text-[9px] py-1.5 px-3 md:py-2 md:px-4 clip-button border-b border-r border-royal/30">
+            <span class="relative flex h-1.5 w-1.5 shrink-0">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400"></span>
+            </span>
+            <span class="tracking-widest">WELCOME</span>
+        </div>
+        <div class="absolute -top-16 -right-16 w-32 h-32 md:w-64 md:h-64 rounded-full border border-dashed border-gray-300 opacity-50 z-0 animate-[spin_60s_linear_infinite]"></div>
+        <div class="absolute top-8 right-8 w-2.5 h-2.5 md:w-4 md:h-4 bg-accent rounded-full z-0"></div>
+
+        <div class="flex flex-col w-full flex-1 z-10 relative">
+
+            <header class="relative pt-6 pb-0 w-full min-h-[420px] flex-shrink-0 overflow-hidden flex flex-col items-center justify-start">
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center z-0 pointer-events-none select-none opacity-80 mt-2">
+                    <div class="font-bebas text-[22vw] leading-[0.8] text-transparent tracking-tight flex flex-col items-center" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.2); transform: scaleY(1.7);">
+                        <span>NUSANTARA</span>
+                        <span class="text-royal/5" style="-webkit-text-stroke: 1.5px rgba(65, 105, 225, 0.4);">NUSANTARA</span>
+                    </div>
+                    <div class="absolute top-[40%] w-[120%] text-center font-cursive text-[15vw] text-royal/40 -rotate-[8deg] transform -translate-y-1/2 drop-shadow-sm">
+                        Nusantara
+                    </div>
+                </div>
+
+                <div class="absolute top-10 left-4 z-20">
+                    <p class="text-[6px] font-mono tracking-[0.3em] text-royal uppercase flex items-center gap-1.5 leading-none mb-1.5">
+                        <span class="w-4 h-[1px] bg-royal/50 inline-block"></span>
+                        Nusantara Archives
+                    </p>
+                    <h1 class="font-bebas text-[32px] uppercase leading-none tracking-wider text-dark">
+                        MARKET<br><span class="text-royal">NUSANTARA</span>
+                    </h1>
+                    <p class="text-[7px] font-mono text-gray-400 mt-1.5 max-w-[130px] leading-tight tracking-wide uppercase">
+                        Layanan Digital
+                    </p>
+                </div>
+
+                <img src="assets/images/character1.webp"
+                     alt="Karakter Nusantara"
+                     class="absolute bottom-0 w-[70vw] max-w-[260px] object-contain z-10 drop-shadow-xl pointer-events-none"
+                     draggable="false"
+                     loading="eager"
+                     fetchpriority="high">
+
+                <!-- ================= SERVICE BOXES WRAPPER (DIMUAT DARI FILE EKSTERNAL) ================= -->
+                <div id="section-services-container" class="w-full mt-auto z-20">
+                    <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 md:mx-0 bg-white/50 backdrop-blur-sm">
+                        [ SYSTEM ] Mengunduh data layanan...
+                    </div>
+                </div>
+
+            </header>
+
+            <!-- ================= SECTION STATISTIK ================= -->
+            <div id="section-statistik" class="w-full px-4 md:px-12 pt-4 pb-2 z-20 relative">
+                <div class="flex items-center gap-2 mb-2.5">
+                    <span class="w-1 h-1 bg-accent shrink-0"></span>
+                    <span class="font-mono text-[8px] tracking-[0.2em] text-dark/50 uppercase">Market Stats</span>
+                    <div class="flex-grow h-[1px] bg-dark/10"></div>
+                </div>
+                <div class="grid grid-cols-2 gap-2">
+                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                        <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                        <div class="absolute inset-0 bg-white/40"></div>
+                        <div class="relative z-10">
+                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="1K+">1K+</p>
+                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Transaksi Rekber</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                        <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                        <div class="absolute inset-0 bg-white/40"></div>
+                        <div class="relative z-10">
+                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="600+">600+</p>
+                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Grup Terjual</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                        <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                        <div class="absolute inset-0 bg-white/40"></div>
+                        <div class="relative z-10">
+                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="240+">240+</p>
+                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Website Dibuat</p>
+                        </div>
+                    </div>
+                    <div class="group relative overflow-hidden border border-accent/40 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
+                        <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                        <div class="absolute inset-0 bg-accent/10"></div>
+                        <div class="relative z-10">
+                            <p class="font-bebas text-[28px] text-dark leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="99%">99%</p>
+                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Kepuasan Client</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full flex items-center px-4 md:px-12 my-2 md:my-4 z-20 relative">
+                <div class="flex-grow h-[1.5px] bg-royal opacity-60"></div>
+                <div class="flex items-center gap-1.5 px-3 font-mono text-[8px] md:text-[10px] text-royal tracking-[0.2em] font-bold uppercase opacity-80">
+                    <span class="w-1.5 h-1.5 bg-royal"></span>
+                    System // Nav
+                    <span class="w-1.5 h-1.5 bg-accent"></span>
+                </div>
+                <div class="flex-grow h-[1.5px] bg-royal opacity-60"></div>
+            </div>
+
+            <!-- ================= SECTION BUTTON / LINKS (DIMUAT DARI FILE EKSTERNAL) ================= -->
+            <div id="section-tombol-container" class="w-full flex flex-col justify-center items-center">
+                <div class="text-center text-xs text-royal font-mono animate-pulse border border-royal border-dashed p-4 mx-4 my-8 bg-white/50 backdrop-blur-sm">
+                    [ SYSTEM ] Memuat data navigasi...
+                </div>
+            </div>
+            
+        </div>
+
+        <footer class="relative w-full flex flex-col z-20 mt-auto">
+            
+            <div class="relative bg-dark w-full flex flex-col pt-10 md:pt-14 pb-6 px-6 md:pb-8" style="clip-path: polygon(0 20px, 100% 0, 100% 100%, 0 100%);">
+                
+                <div class="flex justify-center items-center gap-2 md:gap-3 mt-2 mb-3 md:mb-6">
+                    <div class="flex flex-col gap-[2px] md:gap-[3px] w-6 md:w-10 transform -skew-x-[15deg]">
+                        <div class="h-[3px] md:h-[5px] w-full bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-[95%] bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-[75%] bg-white"></div>
+                        <div class="h-[3px] md:h-[5px] w-full bg-white"></div>
+                    </div>
+                    <h2 class="text-[20px] md:text-[36px] font-black font-display uppercase tracking-widest text-white leading-none mt-1">NUSANTARA</h2>
+                </div>
+
+                <div class="mt-3 md:mt-6 pt-3 md:pt-4 text-center font-mono text-[7px] md:text-[10px] text-gray-500 uppercase tracking-[0.15em] border-t border-gray-800/50 relative z-20">
+                    © 2026 NUSANTARA. ALL RIGHTS RESERVED.
+                </div>
+
+                <img src="assets/images/chibi1.webp"
+                     alt="Chibi Mascot"
+                     class="absolute bottom-0 right-2 md:right-8 w-[70px] md:w-[100px] z-30 drop-shadow-lg pointer-events-none"
+                     draggable="false"
+                     loading="lazy">
+
+            </div>
+        </footer>
+
+    </main>
+
+    <!-- WRAPPER UNTUK MEMUAT MODAL KALKULATOR -->
+    <div id="kalkulator-wrapper"></div>
+    
+    <!-- WRAPPER UNTUK MEMUAT MODAL DONATE -->
+    <div id="donate-wrapper"></div>
+
+    <script>
+        // ================= ACTION LOAD KOMPONEN KALKULATOR =================
+        window.loadKalkulator = async function(e) {
+            e.preventDefault();
+
+            try {
+                const wrapper = document.getElementById('kalkulator-wrapper');
+
+                const response = await fetch('components/kalkulator.html');
+                if (!response.ok) throw new Error('File components/kalkulator.html tidak ditemukan');
+                wrapper.innerHTML = await response.text();
+
+                const scripts = wrapper.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (error) {
+                console.error('Gagal memuat kalkulator:', error);
+                alert('[ ERROR ] Sistem gagal memuat komponen Kalkulator. Pastikan dijalankan menggunakan Live Server.');
+            }
+        };
+
+        // ================= ACTION LOAD KOMPONEN DONATE =================
+        window.loadDonate = async function(e) {
+            e.preventDefault();
+
+            try {
+                const wrapper = document.getElementById('donate-wrapper');
+                
+                // Fetch file HTML Donate dari folder components
+                const response = await fetch('components/donate.html');
+                if (!response.ok) throw new Error('File components/donate.html tidak ditemukan');
+                wrapper.innerHTML = await response.text();
+
+                // Mengeksekusi ulang tag <script> yang ada di dalam donate.html
+                const scripts = wrapper.querySelectorAll('script');
+                scripts.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+
+            } catch (error) {
+                console.error('Gagal memuat donate:', error);
+                alert('[ ERROR ] Sistem gagal memuat komponen Donate.');
+            }
+        };
+
+        // ================= LOAD SEMUA KOMPONEN EKSTERNAL =================
+        document.addEventListener('DOMContentLoaded', async () => {
+            
+            // 1. Load Components Layanan (Services Box)
+            const srvContainer = document.getElementById('section-services-container');
+            try {
+                const responseSrv = await fetch('components/services.html');
+                if (!responseSrv.ok) throw new Error('File components/services.html tidak ditemukan');
+                srvContainer.innerHTML = await responseSrv.text(); 
+                
+                // Mengeksekusi script dalam services.html
+                const scriptsSrv = srvContainer.querySelectorAll('script');
+                scriptsSrv.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            } catch (error) {
+                console.error('Error memuat komponen layanan:', error);
+                srvContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file layanan.</div>';
+            }
+
+            // 2. Load Components Tombol Navigasi
+            const btnContainer = document.getElementById('section-tombol-container');
+            try {
+                const responseHtml = await fetch('components/buttons.html');
+                if (!responseHtml.ok) throw new Error('File components/buttons.html tidak ditemukan');
+                btnContainer.innerHTML = await responseHtml.text(); 
+                
+                // Mengeksekusi script dalam buttons.html
+                const scriptsBtn = btnContainer.querySelectorAll('script');
+                scriptsBtn.forEach(oldScript => {
+                    const newScript = document.createElement('script');
+                    Array.from(oldScript.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value));
+                    newScript.appendChild(document.createTextNode(oldScript.innerHTML));
+                    oldScript.parentNode.replaceChild(newScript, oldScript);
+                });
+            } catch (error) {
+                console.error('Error memuat komponen tombol:', error);
+                btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file komponen navigasi.</div>';
+            }
+
+            // 3. Animasi Counter Statistik
+            function animateStatNumber(el) {
+                const final = el.dataset.final;
+                let target, fmt;
+                if (final === '1K+') {
+                    target = 1000;
+                    fmt = n => (n >= 1000 ? '1K' : n) + '+';
+                } else if (final.includes('%')) {
+                    target = parseInt(final);
+                    fmt = n => n + '%';
+                } else {
+                    target = parseInt(final);
+                    fmt = n => n + '+';
+                }
+                const dur = 1600;
+                let t0 = null;
+                el.textContent = fmt(0);
+                function step(ts) {
+                    if (!t0) t0 = ts;
+                    const p = Math.min((ts - t0) / dur, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = p < 1 ? fmt(Math.floor(eased * target)) : final;
+                    if (p < 1) requestAnimationFrame(step);
+                }
+                requestAnimationFrame(step);
+            }
+            const statSection = document.getElementById('section-statistik');
+            if (statSection) {
+                new IntersectionObserver((entries, obs) => {
+                    if (entries[0].isIntersecting) {
+                        statSection.querySelectorAll('[data-final]').forEach(animateStatNumber);
+                        obs.disconnect();
+                    }
+                }, { threshold: 0.3 }).observe(statSection);
+            }
+
+        });
+    </script>
+</body>
+</html>

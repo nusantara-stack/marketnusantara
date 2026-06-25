@@ -1,0 +1,55 @@
+[
+{
+    "nama_kategori": "                                                  ",
+    "tombol": [
+      {
+        "judul": "DONATE ME",
+        "ikon": "ph-coffee",
+        "url": "",
+        "aksi": "loadDonate(event)",
+        "tema": "accent"
+      }
+    ]
+  },
+  {
+    "nama_kategori": "CONTACT US",
+    "tombol": [
+      {
+        "judul": "TELEGRAM | WHATSAPP",
+        "ikon": "ph-telegram-logo | ph-whatsapp-logo",
+        "url": "https://t.me/MarketNusantaraXYZ | https://wa.me/marketnusantara",
+        "tema": "royal | accent"
+      }
+    ]
+  },
+  {
+    "nama_kategori": "WHATSAPP GROUP",
+    "tombol": [
+      {
+        "judul": "JB ALL GAME",
+        "ikon": "ph-users-three",
+        "url": "https://chat.whatsapp.com/EioG5sQ6R8yExIJaKKVvoB?mlu=0&s=cl&p=a",
+        "tema": "royal"
+      },
+      {
+        "judul": "PUSH KONTAK",
+        "ikon": "ph-users-three",
+        "url": "https://chat.whatsapp.com/DqrlvG49tu7DAql9FYXhnQ?mlu=0&s=cl&p=a",
+        "tema": "dark"
+      },
+      {
+        "judul": "JB SALURAN & GB",
+        "ikon": "ph-users-three",
+        "url": "https://chat.whatsapp.com/Dji8CvHqujiGGKvbh4beeS?mlu=0&s=cl&p=a",
+        "tema": "dark"
+      },
+      {
+        "judul": "KALKULATOR REKBER",
+        "ikon": "ph-calculator",
+        "url": "",
+        "aksi": "loadKalkulator(event)",
+        "tema": "accent"
+      }
+    ]
+  }
+]

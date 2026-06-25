@@ -1,0 +1,158 @@
+<style>
+    @keyframes cardSlideUp {
+        from { opacity: 0; transform: translateY(16px); }
+        to   { opacity: 1; transform: translateY(0); }
+    }
+    .service-card-anim {
+        opacity: 0;
+        animation: cardSlideUp 0.45s ease-out forwards;
+    }
+    @keyframes bracketPulse {
+        0%, 100% { opacity: 0.4; }
+        50%       { opacity: 1; }
+    }
+    .service-slide:hover .card-bracket {
+        animation: bracketPulse 1.2s ease-in-out infinite;
+    }
+</style>
+
+<!-- Carousel — semua ukuran layar -->
+<div id="service-slider" class="w-full flex gap-3 overflow-x-auto snap-x snap-mandatory hide-scrollbar pb-4 pt-2" style="padding-inline: calc(50% - 130px); scroll-padding-inline: calc(50% - 130px);">
+    <div class="text-center text-[10px] text-royal font-mono animate-pulse border border-royal border-dashed p-4 w-full shrink-0">
+        [ SYSTEM ] Memproses data layanan...
+    </div>
+</div>
+
+<!-- Dot indicators -->
+<div id="service-dots" class="flex justify-center gap-1.5 mt-3"></div>
+
+<script>
+    (async function renderServices() {
+        const slider = document.getElementById('service-slider');
+        const dotsContainer = document.getElementById('service-dots');
+
+        try {
+            const response = await fetch('database/services.json');
+            if (!response.ok) throw new Error('File database/services.json tidak ditemukan');
+            const services = await response.json();
+
+            let sliderHtml = '';
+            let dotsHtml = '';
+
+            services.forEach((srv, index) => {
+                const isLast = index === services.length - 1;
+                const delay = `animation-delay: ${index * 0.1}s`;
+
+                if (isLast) {
+                    sliderHtml += `
+                        <div class="service-slide service-card-anim snap-center shrink-0
+                            w-[260px]
+                            relative group overflow-hidden cursor-pointer
+                            bg-dark border border-accent/30
+                            p-4 transition-transform duration-300 hover:-translate-y-0.5"
+                            style="${delay}">
+                            <div class="absolute inset-0 bg-stripes opacity-[0.06] pointer-events-none"></div>
+                            <span class="card-bracket absolute top-2 left-2   w-3 h-3 border-t-2 border-l-2 border-accent/60 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute top-2 right-2  w-3 h-3 border-t-2 border-r-2 border-accent/60 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute bottom-2 left-2  w-3 h-3 border-b-2 border-l-2 border-accent/60 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute bottom-2 right-2 w-3 h-3 border-b-2 border-r-2 border-accent/60 transition-colors duration-300 group-hover:border-accent"></span>
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-2 mb-1.5">
+                                    <i class="ph-bold ${srv.ikon} text-accent text-lg transition-transform duration-300 group-hover:scale-110"></i>
+                                    <h3 class="font-display font-black text-sm uppercase tracking-widest text-accent leading-none">${srv.judul}</h3>
+                                </div>
+                                <p class="text-[9px] font-mono text-gray-400 leading-relaxed">${srv.deskripsi}</p>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    sliderHtml += `
+                        <div class="service-slide service-card-anim snap-center shrink-0
+                            w-[260px]
+                            relative group overflow-hidden cursor-pointer
+                            bg-dark/85 backdrop-blur-sm border border-royal/20
+                            p-4 transition-transform duration-300 hover:-translate-y-0.5 hover:bg-royal/20"
+                            style="${delay}">
+                            <span class="card-bracket absolute top-2 left-2   w-2.5 h-2.5 border-t border-l border-royal/40 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute top-2 right-2  w-2.5 h-2.5 border-t border-r border-royal/40 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute bottom-2 left-2  w-2.5 h-2.5 border-b border-l border-royal/40 transition-colors duration-300 group-hover:border-accent"></span>
+                            <span class="card-bracket absolute bottom-2 right-2 w-2.5 h-2.5 border-b border-r border-royal/40 transition-colors duration-300 group-hover:border-accent"></span>
+                            <div class="flex items-center gap-2 mb-1.5">
+                                <i class="ph-bold ${srv.ikon} text-royal group-hover:text-accent text-lg transition-all duration-300 group-hover:scale-110"></i>
+                                <h3 class="font-display font-black text-sm uppercase tracking-widest text-white leading-none">${srv.judul}</h3>
+                            </div>
+                            <p class="text-[9px] font-mono text-gray-400 leading-relaxed">${srv.deskripsi}</p>
+                        </div>
+                    `;
+                }
+
+                dotsHtml += index === 0
+                    ? `<div class="dot-indicator w-4 h-1.5 rounded-full bg-royal"></div>`
+                    : `<div class="dot-indicator w-1.5 h-1.5 rounded-full bg-gray-300"></div>`;
+            });
+
+            slider.innerHTML = sliderHtml;
+            dotsContainer.innerHTML = dotsHtml;
+            initServiceSlider();
+
+        } catch (error) {
+            console.error("Gagal memuat database/services.json:", error);
+            slider.innerHTML = '<div class="text-[10px] text-red-500 font-mono text-center p-4 border border-red-500 border-dashed w-full shrink-0">[ ERROR ] Koneksi database layanan terputus.</div>';
+        }
+    })();
+
+    function initServiceSlider() {
+        const slider = document.getElementById('service-slider');
+        const slides = document.querySelectorAll('.service-slide');
+        const dots = document.querySelectorAll('.dot-indicator');
+        let currentSlide = 0;
+        let autoScrollInterval;
+
+        if (slides.length === 0) return;
+
+        function updateDots(index) {
+            dots.forEach((dot, i) => {
+                if (i === index) {
+                    dot.classList.remove('bg-gray-300', 'w-1.5');
+                    dot.classList.add('bg-royal', 'w-4');
+                } else {
+                    dot.classList.remove('bg-royal', 'w-4');
+                    dot.classList.add('bg-gray-300', 'w-1.5');
+                }
+            });
+        }
+
+        function scrollToSlide(index) {
+            const slideWidth = slides[0].clientWidth;
+            const scrollLeft = index * (slideWidth + 12);
+            slider.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            updateDots(index);
+        }
+
+        function startAutoScroll() {
+            autoScrollInterval = setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                scrollToSlide(currentSlide);
+            }, 3000);
+        }
+
+        function stopAutoScroll() { clearInterval(autoScrollInterval); }
+
+        slider.addEventListener('scroll', () => {
+            const slideWidth = slides[0].clientWidth + 12;
+            const newIndex = Math.round(slider.scrollLeft / slideWidth);
+            if (newIndex !== currentSlide && newIndex >= 0 && newIndex < slides.length) {
+                currentSlide = newIndex;
+                updateDots(currentSlide);
+            }
+        });
+
+        slider.addEventListener('touchstart', stopAutoScroll, { passive: true });
+        slider.addEventListener('touchend', startAutoScroll);
+        slider.addEventListener('mouseenter', stopAutoScroll);
+        slider.addEventListener('mouseleave', startAutoScroll);
+
+        startAutoScroll();
+        updateDots(currentSlide);
+    }
+</script>

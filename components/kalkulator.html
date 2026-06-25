@@ -1,0 +1,112 @@
+<!-- ================= MODAL KALKULATOR OVERLAY ================= -->
+<div id="kalkulator-modal" class="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-dark/80 backdrop-blur-sm opacity-0 transition-opacity duration-300">
+    
+    <!-- Kotak Kalkulator GFX -->
+    <div id="kalkulator-box" class="relative w-full max-w-[340px] bg-dark border-2 border-royal shadow-[0_0_40px_rgba(65,105,225,0.4)] transform scale-95 transition-transform duration-300" style="clip-path: polygon(25px 0, 100% 0, 100% calc(100% - 25px), calc(100% - 25px) 100%, 0 100%, 0 25px);">
+        
+        <!-- Header -->
+        <div class="bg-royal text-white p-5 pb-4 relative bg-stripes bg-opacity-10">
+            <div class="flex justify-between items-center mb-1">
+                <span class="text-[10px] font-mono tracking-widest text-accent flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 bg-accent animate-pulse"></span> SYS.CALC // V1.0
+                </span>
+                <!-- Tombol Tutup -->
+                <button onclick="closeKalkulator()" class="text-white hover:text-accent transition-colors">
+                    <i class="ph-bold ph-x text-lg"></i>
+                </button>
+            </div>
+            <h2 class="font-display font-black text-2xl uppercase tracking-wider mt-1">Kalkulator <span class="text-accent italic">Rekber</span></h2>
+        </div>
+
+        <!-- Body -->
+        <div class="p-5 flex flex-col gap-4">
+            
+            <!-- Input Nominal -->
+            <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] font-mono text-gray-400 uppercase tracking-widest flex justify-between">
+                    <span>Nominal Transaksi</span>
+                    <span class="text-royal">IDR</span>
+                </label>
+                <div class="relative">
+                    <span class="absolute left-3 top-1/2 -translate-y-1/2 font-mono text-gray-500 font-bold">Rp</span>
+                    <input type="number" id="calc-input" oninput="hitungFee()" class="w-full bg-gray-900 border-2 border-gray-700 text-white p-3 pl-10 font-mono focus:outline-none focus:border-accent transition-colors" placeholder="0" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+                </div>
+            </div>
+
+            <!-- Box Hasil / Receipt -->
+            <div class="flex flex-col gap-2 p-4 bg-gray-800/40 border border-gray-700/50 mt-1 relative overflow-hidden" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
+                <!-- Dekorasi Barcode kecil -->
+                <div class="absolute right-2 top-2 opacity-20 text-[8px] font-mono flex flex-col items-end">
+                    <span>||| || ||| | ||</span>
+                    <span>NST-FEE</span>
+                </div>
+
+                <div class="flex justify-between items-center text-xs font-mono relative z-10">
+                     <span class="text-gray-400">Biaya Layanan:</span>
+                     <span id="calc-fee" class="text-accent font-bold tracking-wider">Rp 0</span>
+                </div>
+                <div class="h-[1px] w-full bg-gray-700/50 my-1 relative z-10 border-t border-dashed border-gray-600"></div>
+                <div class="flex justify-between items-center text-sm font-mono relative z-10">
+                     <span class="text-gray-300">Total Dibayar:</span>
+                     <span id="calc-total" class="text-white font-bold tracking-wider text-base">Rp 0</span>
+                </div>
+            </div>
+
+            <!-- Action Button -->
+            <button onclick="closeKalkulator()" class="w-full bg-accent text-dark font-bold font-display text-sm uppercase tracking-widest p-3 hover:bg-white hover:text-royal transition-colors mt-2 flex justify-center items-center gap-2" style="clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);">
+                <i class="ph-bold ph-check-circle"></i> Selesai
+            </button>
+            
+        </div>
+    </div>
+</div>
+
+<!-- ================= SCRIPT LOGIKA KALKULATOR ================= -->
+<script>
+    // 1. Animasi saat pertama kali dimuat
+    setTimeout(() => {
+        document.getElementById('kalkulator-modal').classList.remove('opacity-0');
+        document.getElementById('kalkulator-box').classList.remove('scale-95');
+    }, 10);
+
+    // 2. Fungsi Menutup Kalkulator
+    window.closeKalkulator = function() {
+        document.getElementById('kalkulator-modal').classList.add('opacity-0');
+        document.getElementById('kalkulator-box').classList.add('scale-95');
+        
+        // Hapus elemen dari DOM setelah animasi selesai
+        setTimeout(() => {
+            const wrapper = document.getElementById('kalkulator-wrapper');
+            if (wrapper) wrapper.innerHTML = '';
+        }, 300);
+    }
+
+    // 3. Fungsi Menghitung Fee (Otomatis setiap kali diketik)
+    window.hitungFee = function() {
+        const val = document.getElementById('calc-input').value;
+        const nominal = parseInt(val) || 0;
+        let fee = 0;
+        
+        // --- ATUR TARIF REKBER DI SINI ---
+        if (nominal <= 0) {
+            fee = 0;
+        } else if (nominal <= 100000) {         // 1 - 100rb
+            fee = 5000;
+        } else if (nominal <= 500000) {         // 100rb - 500rb
+            fee = 10000;
+        } else if (nominal <= 1000000) {        // 500rb - 1 Juta
+            fee = 20000;
+        } else if (nominal <= 5000000) {        // 1 Juta - 5 Juta
+            fee = 50000;
+        } else {                                // Di atas 5 Juta
+            fee = 100000;
+        }
+        // ---------------------------------
+
+        const total = nominal + fee;
+
+        // Tampilkan ke antarmuka dengan format Rupiah (IDR)
+        document.getElementById('calc-fee').innerText = 'Rp ' + fee.toLocaleString('id-ID');
+        document.getElementById('calc-total').innerText = 'Rp ' + total.toLocaleString('id-ID');
+    }
+</script>
