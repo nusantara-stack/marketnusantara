@@ -7,7 +7,7 @@
         "ikon": "ph-coffee",
         "url": "",
         "aksi": "loadDonate(event)",
-        "tema": "accent"
+        "tema": "dark"
       }
     ]
   },
@@ -26,22 +26,16 @@
     "nama_kategori": "WHATSAPP GROUP",
     "tombol": [
       {
-        "judul": "JB ALL GAME",
-        "ikon": "ph-users-three",
-        "url": "https://chat.whatsapp.com/EioG5sQ6R8yExIJaKKVvoB?mlu=0&s=cl&p=a",
-        "tema": "royal"
-      },
-      {
         "judul": "PUSH KONTAK",
         "ikon": "ph-users-three",
         "url": "https://chat.whatsapp.com/DqrlvG49tu7DAql9FYXhnQ?mlu=0&s=cl&p=a",
-        "tema": "dark"
+        "tema": "royal"
       },
       {
         "judul": "JB SALURAN & GB",
         "ikon": "ph-users-three",
         "url": "https://chat.whatsapp.com/Dji8CvHqujiGGKvbh4beeS?mlu=0&s=cl&p=a",
-        "tema": "dark"
+        "tema": "royal"
       },
       {
         "judul": "KALKULATOR REKBER",
