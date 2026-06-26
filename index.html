@@ -32,7 +32,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Chakra+Petch:ital,wght@0,400;0,600;0,700;1,400;1,700&family=Dancing+Script:wght@700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     
-    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link rel="preload" as="image" href="assets/images/character1.webp" fetchpriority="high">
+
+    <script defer src="https://unpkg.com/@phosphor-icons/web"></script>
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -111,6 +113,13 @@
             width: 46px;
             flex-shrink: 0;
         }
+        .tipe-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 56px;
+            flex-shrink: 0;
+        }
         @keyframes leaderIn {
             from { opacity: 0; transform: translateY(10px); }
             to   { opacity: 1; transform: translateY(0); }
@@ -179,13 +188,17 @@
             <div id="section-statistik" class="w-full px-4 md:px-12 pt-4 pb-3 z-20 relative">
 
                 <!-- Tab Nav -->
-                <div class="flex gap-1.5 mb-3">
+                <div class="flex gap-1 mb-3">
                     <button id="tab-btn-stats" onclick="switchStatsTab(1)"
-                        class="flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-royal text-white border border-royal clip-button">
+                        class="flex-1 py-2 font-mono text-[9px] uppercase tracking-wide transition-all duration-200 bg-royal text-white border border-royal clip-button">
                         Statistik
                     </button>
-                    <button id="tab-btn-buyers" onclick="switchStatsTab(2)"
-                        class="flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal clip-button-reverse">
+                    <button id="tab-btn-riwayat" onclick="switchStatsTab(2)"
+                        class="flex-1 py-2 font-mono text-[9px] uppercase tracking-wide transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal">
+                        Riwayat
+                    </button>
+                    <button id="tab-btn-buyers" onclick="switchStatsTab(3)"
+                        class="flex-1 py-2 font-mono text-[9px] uppercase tracking-wide transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal clip-button-reverse">
                         Top Buyer
                     </button>
                 </div>
@@ -194,7 +207,7 @@
                 <div id="stats-tab-1">
                     <div class="grid grid-cols-2 gap-1.5">
                         <div class="group relative overflow-hidden border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                            <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false" loading="lazy">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10">
                                 <p id="stat-buyers" class="font-bebas text-[22px] text-royal leading-none tracking-wide">—</p>
@@ -202,7 +215,7 @@
                             </div>
                         </div>
                         <div class="group relative overflow-hidden border border-accent/40 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
-                            <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false" loading="lazy">
                             <div class="absolute inset-0 bg-accent/10"></div>
                             <div class="relative z-10">
                                 <p id="stat-kepuasan" class="font-bebas text-[22px] text-dark leading-none tracking-wide">96%</p>
@@ -210,7 +223,7 @@
                             </div>
                         </div>
                         <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                            <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false" loading="lazy">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10 flex items-center justify-between">
                                 <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider">Total Pendapatan</p>
@@ -218,7 +231,7 @@
                             </div>
                         </div>
                         <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                            <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false" loading="lazy">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10 flex items-center justify-between">
                                 <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider">Total Member Dipush</p>
@@ -228,8 +241,16 @@
                     </div>
                 </div>
 
-                <!-- Tab 2: Top Buyer -->
+                <!-- Tab 2: Riwayat -->
                 <div id="stats-tab-2" class="hidden">
+                    <div id="riwayat-list" class="flex flex-col gap-1 mb-1.5">
+                        <div class="text-center text-[9px] text-royal/60 font-mono animate-pulse py-6">[ SYSTEM ] Memuat riwayat...</div>
+                    </div>
+                    <div id="riwayat-pagination" class="flex items-center justify-between gap-1"></div>
+                </div>
+
+                <!-- Tab 3: Top Buyer -->
+                <div id="stats-tab-3" class="hidden">
                     <div class="flex items-center gap-1.5 mb-2">
                         <i class="ph-bold ph-clock text-[10px] text-royal/60"></i>
                         <span class="font-mono text-[8px] text-gray-500 uppercase tracking-widest">Data diperbarui setiap pukul 00:00 WIB</span>
@@ -351,10 +372,12 @@
         window.switchStatsTab = function(n) {
             document.getElementById('stats-tab-1').classList.toggle('hidden', n !== 1);
             document.getElementById('stats-tab-2').classList.toggle('hidden', n !== 2);
-            const active   = 'flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-royal text-white border border-royal';
-            const inactive = 'flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal';
-            document.getElementById('tab-btn-stats').className   = (n === 1 ? active : inactive) + ' clip-button';
-            document.getElementById('tab-btn-buyers').className  = (n === 2 ? active : inactive) + ' clip-button-reverse';
+            document.getElementById('stats-tab-3').classList.toggle('hidden', n !== 3);
+            const active   = 'flex-1 py-2 font-mono text-[9px] uppercase tracking-wide transition-all duration-200 bg-royal text-white border border-royal';
+            const inactive = 'flex-1 py-2 font-mono text-[9px] uppercase tracking-wide transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal';
+            document.getElementById('tab-btn-stats').className    = (n === 1 ? active : inactive) + ' clip-button';
+            document.getElementById('tab-btn-riwayat').className  = (n === 2 ? active : inactive);
+            document.getElementById('tab-btn-buyers').className   = (n === 3 ? active : inactive) + ' clip-button-reverse';
         };
 
         // ================= LOAD SEMUA KOMPONEN EKSTERNAL =================
@@ -417,9 +440,16 @@
                 const fmtRp     = n => 'Rp ' + n.toLocaleString('id-ID');
                 const fmtMember = n => n.toLocaleString('id-ID');
 
+                new IntersectionObserver(async (entries, obs) => {
+                    if (!entries[0].isIntersecting) return;
+                    obs.disconnect();
                 try {
-                    const res      = await fetch('database/user.json');
-                    const userData = await res.json();
+                    const [res, rwRes] = await Promise.all([
+                        fetch('database/user.json'),
+                        fetch('database/riwayat.json')
+                    ]);
+                    const userData    = await res.json();
+                    const riwayatData = await rwRes.json();
                     const users    = Object.values(userData);
                     const members  = users.filter(u => u.role === 'Member');
 
@@ -435,6 +465,46 @@
                         animateNum(document.getElementById('stat-pendapatan'), totalSaldo,  fmtRp);
                         animateNum(document.getElementById('stat-member'),    totalMember, fmtMember);
                     }, { threshold: 0.3 }).observe(statSection);
+
+                    // ---- RIWAYAT ----
+                    const tipeCfg = t => {
+                        if (t === 'order')    return { cls: 'text-royal border-royal/40 bg-royal/5',           label: 'ORDER'   };
+                        if (t === 'deposit')  return { cls: 'text-green-500 border-green-400/40 bg-green-400/5', label: 'DEPOSIT' };
+                        if (t === 'addsaldo') return { cls: 'text-amber-400 border-amber-400/40 bg-amber-400/5', label: '+SALDO'  };
+                        return { cls: 'text-gray-400 border-gray-500/30 bg-gray-500/5', label: (t||'LOG').toUpperCase() };
+                    };
+                    const rwPerPage = 5;
+                    let   rwPage    = 0;
+                    const rwTotal   = Math.ceil(riwayatData.length / rwPerPage);
+
+                    function renderRiwayat() {
+                        const items = riwayatData.slice(rwPage * rwPerPage, (rwPage + 1) * rwPerPage);
+                        document.getElementById('riwayat-list').innerHTML = items.map((r, i) => {
+                            const t = tipeCfg(r.tipe);
+                            return `<div class="flex items-center gap-2 px-2 py-2 border border-royal/20 bg-dark/5" style="animation:leaderIn 0.3s ease both;animation-delay:${i*45}ms">
+                                <span class="tipe-badge text-[7px] font-mono font-semibold uppercase tracking-wide py-0.5 border ${t.cls}">${t.label}</span>
+                                <div class="flex-1 min-w-0">
+                                    <p class="font-mono text-[11px] font-semibold text-dark leading-none">${r.user}</p>
+                                    <p class="font-mono text-[8px] text-gray-500 mt-0.5 truncate">${r.waktu} · ${r.teks}</p>
+                                </div>
+                                <span class="font-mono text-[9px] font-semibold text-royal shrink-0">${fmtRp(r.nominal||0)}</span>
+                            </div>`;
+                        }).join('');
+                        const btnBase = 'flex-1 py-1 font-mono text-[9px] font-semibold uppercase tracking-wide border flex items-center justify-center gap-1 transition-all';
+                        const btnOn   = `${btnBase} text-royal border-royal/30 hover:bg-royal hover:text-white`;
+                        const btnOff  = `${btnBase} text-gray-300 border-gray-200 cursor-not-allowed`;
+                        document.getElementById('riwayat-pagination').innerHTML = `
+                            <button onclick="goRiwayatPage(-1)" class="${(rwPage===0?btnOff:btnOn)+' clip-button'}" ${rwPage===0?'disabled':''}>
+                                <i class="ph-bold ph-caret-left text-[8px]"></i> Prev
+                            </button>
+                            <span class="font-mono text-[9px] text-gray-500 px-2 shrink-0">Hal. ${rwPage+1} / ${rwTotal||1}</span>
+                            <button onclick="goRiwayatPage(1)" class="${(rwPage>=rwTotal-1?btnOff:btnOn)+' clip-button-reverse'}" ${rwPage>=rwTotal-1?'disabled':''}>
+                                Next <i class="ph-bold ph-caret-right text-[8px]"></i>
+                            </button>`;
+                    }
+                    window.goRiwayatPage = d => { rwPage = Math.max(0, Math.min(rwTotal-1, rwPage+d)); renderRiwayat(); };
+                    renderRiwayat();
+                    // ------------------
 
                     const tierCls = t => {
                         if (t === 'PRIME') return 'text-amber-400 border-amber-400/40 bg-amber-400/5';
@@ -532,7 +602,7 @@
                         }, 10);
                     };
 
-                    document.getElementById('stats-tab-2').insertAdjacentHTML('beforeend', `
+                    document.getElementById('stats-tab-3').insertAdjacentHTML('beforeend', `
                         <button onclick="expandLeaderboard()"
                             class="w-full mt-1.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-royal border border-royal/30 hover:bg-royal hover:text-white transition-all duration-200 clip-button-reverse flex items-center justify-center gap-1.5">
                             <i class="ph-bold ph-list-numbers text-[9px]"></i> Lihat Lebih Banyak
@@ -542,6 +612,7 @@
                     console.error('Gagal memuat user.json:', e);
                     document.getElementById('top-buyer-list').innerHTML = '<div class="text-[9px] text-red-400 font-mono text-center py-4">[ ERROR ] Gagal memuat data.</div>';
                 }
+                }, { rootMargin: '400px', threshold: 0 }).observe(statSection);
             }
 
         });
