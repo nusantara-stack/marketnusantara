@@ -473,12 +473,13 @@
                         if (t === 'addsaldo') return { cls: 'text-amber-400 border-amber-400/40 bg-amber-400/5', label: '+SALDO'  };
                         return { cls: 'text-gray-400 border-gray-500/30 bg-gray-500/5', label: (t||'LOG').toUpperCase() };
                     };
-                    const rwPerPage = 5;
-                    let   rwPage    = 0;
-                    const rwTotal   = Math.ceil(riwayatData.length / rwPerPage);
+                    const rwFiltered = riwayatData.filter(r => r.tipe === 'order');
+                    const rwPerPage  = 5;
+                    let   rwPage     = 0;
+                    const rwTotal    = Math.ceil(rwFiltered.length / rwPerPage);
 
                     function renderRiwayat() {
-                        const items = riwayatData.slice(rwPage * rwPerPage, (rwPage + 1) * rwPerPage);
+                        const items = rwFiltered.slice(rwPage * rwPerPage, (rwPage + 1) * rwPerPage);
                         document.getElementById('riwayat-list').innerHTML = items.map((r, i) => {
                             const t = tipeCfg(r.tipe);
                             return `<div class="flex items-center gap-2 px-2 py-2 border border-royal/20 bg-dark/5" style="animation:leaderIn 0.3s ease both;animation-delay:${i*45}ms">
