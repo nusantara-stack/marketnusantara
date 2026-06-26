@@ -3,7 +3,7 @@
     "name": "NUSANTARA",
     "number": "6281330730462",
     "saldo": 10106010,
-    "totalOrder": 10110220,
+    "totalOrder": 10110013,
     "role": "Owner",
     "tier": "PRIME",
     "bonusEvent": false,
@@ -104,18 +104,6 @@
     "totalSaldo": 1449049,
     "totalReff": 5
   },
-  "6285742950366": {
-    "name": "rexxy",
-    "number": "6285742950366",
-    "saldo": 1000,
-    "totalOrder": 3830,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTR67AT",
-    "invitedBy": "NSTR8888",
-    "date": "27-5-2026",
-    "totalSaldo": 1399000
-  },
   "628984863328": {
     "name": "Kenz",
     "number": "628984863328",
@@ -158,7 +146,7 @@
   "6283168500936": {
     "name": "Cell",
     "number": "6283168500936",
-    "saldo": 500,
+    "saldo": 0,
     "totalOrder": 2801,
     "role": "Member",
     "tier": "BASIC",
@@ -166,7 +154,7 @@
     "invitedBy": "NSTR8888",
     "date": "23-5-2026",
     "totalSaldo": 930000,
-    "totalReff": 2
+    "totalReff": 1
   },
   "6287776335263": {
     "name": "IKI STORE REAL",
@@ -358,6 +346,18 @@
     "totalSaldo": 305000,
     "referral": "NSTR2209",
     "invitedBy": "NSTR8888"
+  },
+  "6285742950366": {
+    "name": "rexxy",
+    "number": "6285742950366",
+    "saldo": 3000,
+    "totalOrder": 1000,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTR67AT",
+    "invitedBy": "NSTR8888",
+    "date": "27-5-2026",
+    "totalSaldo": 300000
   },
   "62895629157898": {
     "name": "rayy",
@@ -5188,102 +5188,6 @@
     "referral": "NSTRTLNH",
     "invitedBy": "NSTR8888",
     "date": "24-6-2026",
-    "totalSaldo": 0
-  },
-  "6287881517773": {
-    "name": "volt",
-    "number": "6287881517773",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRKCCT",
-    "invitedBy": "NSTR8888",
-    "date": "25-6-2026",
-    "totalSaldo": 0
-  },
-  "6285178485843": {
-    "name": "diapn",
-    "number": "6285178485843",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRGW28",
-    "invitedBy": "NSTR8888",
-    "date": "25-6-2026",
-    "totalSaldo": 0
-  },
-  "6283897845602": {
-    "name": "varo",
-    "number": "6283897845602",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRZ96R",
-    "invitedBy": "NSTR8888",
-    "date": "25-6-2026",
-    "totalSaldo": 0
-  },
-  "6285143798947": {
-    "name": "kyo",
-    "number": "6285143798947",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRAVJZ",
-    "invitedBy": "NSTR8888",
-    "date": "25-6-2026",
-    "totalSaldo": 0
-  },
-  "628976464952": {
-    "name": "Nabil",
-    "number": "628976464952",
-    "saldo": 1200,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRGK9T",
-    "invitedBy": "NSTR8FYL",
-    "date": "26-6-2026",
-    "totalSaldo": 0
-  },
-  "6283171827926": {
-    "name": "yas",
-    "number": "6283171827926",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRZ6WZ",
-    "invitedBy": "NSTR8888",
-    "date": "26-6-2026",
-    "totalSaldo": 0
-  },
-  "6282174636166": {
-    "name": "KENZZNEW",
-    "number": "6282174636166",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTRZS5A",
-    "invitedBy": "NSTR8888",
-    "date": "26-6-2026",
-    "totalSaldo": 0
-  },
-  "6282379255315": {
-    "name": "AnwarzStore",
-    "number": "6282379255315",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTR4AML",
-    "invitedBy": "NSTR8888",
-    "date": "26-6-2026",
     "totalSaldo": 0
   }
 }
