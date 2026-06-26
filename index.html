@@ -192,37 +192,37 @@
 
                 <!-- Tab 1: Statistik -->
                 <div id="stats-tab-1">
-                    <div class="grid grid-cols-2 gap-2">
-                        <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                    <div class="grid grid-cols-2 gap-1.5">
+                        <div class="group relative overflow-hidden border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
                             <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10">
-                                <p id="stat-buyers" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
-                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest mt-0.5 drop-shadow-sm">Total Buyer JPM</p>
+                                <p id="stat-buyers" class="font-bebas text-[22px] text-royal leading-none tracking-wide">—</p>
+                                <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider mt-0.5">Total Buyer JPM</p>
                             </div>
                         </div>
-                        <div class="group relative overflow-hidden border border-accent/40 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
+                        <div class="group relative overflow-hidden border border-accent/40 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
                             <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
                             <div class="absolute inset-0 bg-accent/10"></div>
                             <div class="relative z-10">
-                                <p id="stat-kepuasan" class="font-bebas text-[28px] text-dark leading-none tracking-wide">96%</p>
-                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest mt-0.5 drop-shadow-sm">Tingkat Kepuasan</p>
+                                <p id="stat-kepuasan" class="font-bebas text-[22px] text-dark leading-none tracking-wide">96%</p>
+                                <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider mt-0.5">Tingkat Kepuasan</p>
                             </div>
                         </div>
-                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
                             <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10 flex items-center justify-between">
-                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest drop-shadow-sm">Total Pendapatan</p>
-                                <p id="stat-pendapatan" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
+                                <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider">Total Pendapatan</p>
+                                <p id="stat-pendapatan" class="font-bebas text-[22px] text-royal leading-none tracking-wide">—</p>
                             </div>
                         </div>
-                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-2 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
                             <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
                             <div class="absolute inset-0 bg-white/40"></div>
                             <div class="relative z-10 flex items-center justify-between">
-                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest drop-shadow-sm">Total Member Dipush</p>
-                                <p id="stat-member" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
+                                <p class="text-[9px] font-mono font-semibold text-gray-800 uppercase tracking-wider">Total Member Dipush</p>
+                                <p id="stat-member" class="font-bebas text-[22px] text-royal leading-none tracking-wide">—</p>
                             </div>
                         </div>
                     </div>
@@ -234,7 +234,7 @@
                         <i class="ph-bold ph-clock text-[10px] text-royal/60"></i>
                         <span class="font-mono text-[8px] text-gray-500 uppercase tracking-widest">Data diperbarui setiap pukul 00:00 WIB</span>
                     </div>
-                    <div id="top-buyer-list" class="flex flex-col gap-1 max-h-[320px] overflow-y-auto hide-scrollbar">
+                    <div id="top-buyer-list" class="flex flex-col gap-1 max-h-[220px] overflow-y-auto hide-scrollbar">
                         <div class="text-center text-[9px] text-royal/60 font-mono animate-pulse py-6">[ SYSTEM ] Memuat data...</div>
                     </div>
                 </div>
@@ -442,9 +442,10 @@
                         if (t === 'VIP')   return 'text-violet-400 border-violet-400/40 bg-violet-400/5';
                         return 'text-gray-400 border-gray-500/30 bg-gray-500/5';
                     };
-                    const sorted  = [...members].sort((a, b) => (b.totalSaldo || 0) - (a.totalSaldo || 0)).slice(0, 11);
-                    const podium3 = sorted.slice(0, 3);
-                    const rest8   = sorted.slice(3);
+                    const sorted15 = [...members].sort((a, b) => (b.totalSaldo || 0) - (a.totalSaldo || 0)).slice(0, 15);
+                    const podium3  = sorted15.slice(0, 3);
+                    const rest3    = sorted15.slice(3, 6);
+                    const extra9   = sorted15.slice(6);
 
                     const podiumCfg = [
                         { rank: '#1', clr: 'text-accent',     border: 'border-accent/50',      bg: 'bg-accent/5'     },
@@ -457,22 +458,85 @@
                             const c = podiumCfg[i];
                             return `<div class="flex-1 flex flex-col items-center gap-1 px-1.5 py-2 border ${c.border} ${c.bg}" style="animation: leaderIn 0.4s ease both; animation-delay: ${i * 80}ms">
                                 <span class="font-bebas text-[22px] ${c.clr} leading-none">${c.rank}</span>
-                                <span class="tier-badge text-[8px] font-mono uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
+                                <span class="tier-badge text-[8px] font-mono font-semibold uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
                                 <span class="font-mono text-[10px] text-dark font-semibold text-center leading-tight break-all">${u.name}</span>
-                                <span class="font-mono text-[8px] text-royal">${fmtRp(u.totalSaldo || 0)}</span>
+                                <span class="font-mono text-[8px] font-semibold text-royal">${fmtRp(u.totalSaldo || 0)}</span>
                             </div>`;
                         }).join('')}
                     </div>`;
 
-                    const listHTML = rest8.map((u, i) => `
+                    const listHTML = rest3.map((u, i) => `
                         <div class="flex items-center gap-2 px-2 py-1.5 border border-royal/20 bg-dark/5" style="animation: leaderIn 0.35s ease both; animation-delay: ${(i + 3) * 60}ms">
                             <span class="font-bebas text-base text-gray-500 w-5 text-center shrink-0">#${i + 4}</span>
-                            <span class="tier-badge text-[8px] font-mono uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
-                            <span class="font-mono text-[11px] text-dark truncate flex-1 min-w-0">${u.name}</span>
-                            <span class="font-mono text-[9px] text-royal shrink-0">${fmtRp(u.totalSaldo || 0)}</span>
+                            <span class="tier-badge text-[8px] font-mono font-semibold uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
+                            <span class="font-mono text-[11px] font-semibold text-dark truncate flex-1 min-w-0">${u.name}</span>
+                            <span class="font-mono text-[9px] font-semibold text-royal shrink-0">${fmtRp(u.totalSaldo || 0)}</span>
                         </div>`).join('');
 
                     document.getElementById('top-buyer-list').innerHTML = podiumHTML + listHTML;
+
+                    window.closeLeaderboardModal = function() {
+                        const m = document.getElementById('lb-modal');
+                        if (!m) return;
+                        m.classList.add('opacity-0');
+                        m.querySelector('#lb-modal-box').classList.add('scale-95');
+                        setTimeout(() => m.remove(), 300);
+                    };
+
+                    window.expandLeaderboard = function() {
+                        if (document.getElementById('lb-modal')) return;
+
+                        const p3HTML = `<div class="flex gap-1 mb-2">
+                            ${sorted15.slice(0, 3).map((u, i) => {
+                                const c = podiumCfg[i];
+                                return `<div class="flex-1 flex flex-col items-center gap-1 px-1.5 py-2 border ${c.border} ${c.bg}" style="animation:leaderIn 0.4s ease both;animation-delay:${i*80}ms">
+                                    <span class="font-bebas text-[22px] ${c.clr} leading-none">${c.rank}</span>
+                                    <span class="tier-badge text-[8px] font-mono font-semibold uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier||'BASIC'}</span>
+                                    <span class="font-mono text-[10px] text-white font-semibold text-center leading-tight break-all">${u.name}</span>
+                                    <span class="font-mono text-[8px] font-semibold text-royal">${fmtRp(u.totalSaldo||0)}</span>
+                                </div>`;
+                            }).join('')}
+                        </div>`;
+
+                        const restHTML = sorted15.slice(3).map((u, i) => `
+                            <div class="flex items-center gap-2 px-2 py-1.5 border border-royal/20 bg-white/5" style="animation:leaderIn 0.3s ease both;animation-delay:${(i+3)*45}ms">
+                                <span class="font-bebas text-base text-gray-500 w-5 text-center shrink-0">#${i+4}</span>
+                                <span class="tier-badge text-[8px] font-mono font-semibold uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier||'BASIC'}</span>
+                                <span class="font-mono text-[11px] font-semibold text-gray-100 truncate flex-1 min-w-0">${u.name}</span>
+                                <span class="font-mono text-[9px] font-semibold text-royal shrink-0">${fmtRp(u.totalSaldo||0)}</span>
+                            </div>`).join('');
+
+                        document.body.insertAdjacentHTML('beforeend', `
+                        <div id="lb-modal" class="fixed inset-0 z-[70] flex items-end justify-center bg-dark/85 backdrop-blur-sm opacity-0 transition-opacity duration-300" onclick="if(event.target===this)closeLeaderboardModal()">
+                            <div id="lb-modal-box" class="relative w-full max-w-[430px] bg-dark border-t border-royal/50 shadow-[0_-20px_60px_rgba(65,105,225,0.35)] px-4 pt-5 pb-6 scale-95 transition-transform duration-300" style="clip-path:polygon(20px 0,100% 0,100% 100%,0 100%,0 20px)">
+                                <div class="flex items-center gap-2 mb-3">
+                                    <span class="w-1 h-4 bg-royal shrink-0"></span>
+                                    <span class="font-bebas text-[22px] text-white leading-none tracking-wider">TOP 15 BUYER</span>
+                                    <div class="flex-grow h-[1px] bg-royal/20 ml-1"></div>
+                                    <button onclick="closeLeaderboardModal()" class="w-7 h-7 flex items-center justify-center shrink-0 text-gray-400 hover:text-accent border border-gray-700 hover:border-accent/50 transition-all clip-button">
+                                        <i class="ph-bold ph-x text-xs"></i>
+                                    </button>
+                                </div>
+                                ${p3HTML}
+                                <div class="flex flex-col gap-1 max-h-[340px] overflow-y-auto hide-scrollbar">${restHTML}</div>
+                                <div class="flex items-center gap-1.5 mt-3 pt-2 border-t border-gray-800/50">
+                                    <i class="ph-bold ph-clock text-[9px] text-royal/50"></i>
+                                    <span class="font-mono text-[7px] text-gray-600 uppercase tracking-widest">Data diperbarui setiap pukul 00:00 WIB</span>
+                                </div>
+                            </div>
+                        </div>`);
+
+                        setTimeout(() => {
+                            document.getElementById('lb-modal').classList.remove('opacity-0');
+                            document.getElementById('lb-modal-box').classList.remove('scale-95');
+                        }, 10);
+                    };
+
+                    document.getElementById('stats-tab-2').insertAdjacentHTML('beforeend', `
+                        <button onclick="expandLeaderboard()"
+                            class="w-full mt-1.5 py-1.5 font-mono text-[10px] font-semibold uppercase tracking-widest text-royal border border-royal/30 hover:bg-royal hover:text-white transition-all duration-200 clip-button-reverse flex items-center justify-center gap-1.5">
+                            <i class="ph-bold ph-list-numbers text-[9px]"></i> Lihat Lebih Banyak
+                        </button>`);
 
                 } catch (e) {
                     console.error('Gagal memuat user.json:', e);
