@@ -1,0 +1,7 @@
+[
+  { "waktu": "27/06/2026, 22:18", "tipe": "order",    "user": "rexxy",     "teks": "order 830 member",          "nominal": 247000 },
+  { "waktu": "27/06/2026, 22:15", "tipe": "deposit",  "user": "rexxy",     "teks": "melakukan deposit",         "nominal": 247000 },
+  { "waktu": "27/06/2026, 20:30", "tipe": "addsaldo", "user": "Nusantara", "teks": "menambahkan saldo FRANX",   "nominal": 200000 },
+  { "waktu": "27/06/2026, 18:10", "tipe": "order",    "user": "Cell",      "teks": "order 1000 member",         "nominal": 300000 },
+  { "waktu": "27/06/2026, 16:20", "tipe": "deposit",  "user": "Cell",      "teks": "melakukan deposit",         "nominal": 300000 }
+]
