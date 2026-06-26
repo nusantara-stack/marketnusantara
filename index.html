@@ -104,6 +104,17 @@
         .dot-indicator {
             transition: all 0.3s ease;
         }
+        .tier-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 46px;
+            flex-shrink: 0;
+        }
+        @keyframes leaderIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-white md:bg-slate-950 min-h-screen font-display text-dark selection:bg-accent selection:text-dark select-none" oncontextmenu="return false;">
@@ -111,7 +122,7 @@
 <!-- ================= MAIN CONTENT CONTAINER ================= -->
     <main class="relative w-full min-h-screen overflow-hidden bg-white bg-grid flex flex-col md:max-w-[430px] md:mx-auto md:shadow-[0_0_60px_rgba(0,0,0,0.5)]">
 
-        <div class="absolute top-0 left-0 z-20 flex items-center gap-1.5 bg-dark text-white font-mono text-[7px] md:text-[9px] py-1.5 px-3 md:py-2 md:px-4 clip-button border-b border-r border-royal/30">
+        <div class="absolute top-0 left-0 z-20 flex items-center gap-1.5 bg-dark text-white font-mono text-[9px] md:text-[11px] py-1.5 px-3 md:py-2 md:px-4 clip-button border-b border-r border-royal/30">
             <span class="relative flex h-1.5 w-1.5 shrink-0">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-400"></span>
@@ -136,14 +147,14 @@
                 </div>
 
                 <div class="absolute top-10 left-4 z-20">
-                    <p class="text-[6px] font-mono tracking-[0.3em] text-royal uppercase flex items-center gap-1.5 leading-none mb-1.5">
+                    <p class="text-[9px] font-mono tracking-[0.3em] text-royal uppercase flex items-center gap-1.5 leading-none mb-1.5">
                         <span class="w-4 h-[1px] bg-royal/50 inline-block"></span>
                         Nusantara Archives
                     </p>
-                    <h1 class="font-bebas text-[32px] uppercase leading-none tracking-wider text-dark">
+                    <h1 class="font-bebas text-[38px] uppercase leading-none tracking-wider text-dark">
                         MARKET<br><span class="text-royal">NUSANTARA</span>
                     </h1>
-                    <p class="text-[7px] font-mono text-gray-400 mt-1.5 max-w-[130px] leading-tight tracking-wide uppercase">
+                    <p class="text-[10px] font-mono text-gray-600 mt-1.5 max-w-[130px] leading-tight tracking-wide uppercase">
                         Layanan Digital
                     </p>
                 </div>
@@ -165,51 +176,74 @@
             </header>
 
             <!-- ================= SECTION STATISTIK ================= -->
-            <div id="section-statistik" class="w-full px-4 md:px-12 pt-4 pb-2 z-20 relative">
-                <div class="flex items-center gap-2 mb-2.5">
-                    <span class="w-1 h-1 bg-accent shrink-0"></span>
-                    <span class="font-mono text-[8px] tracking-[0.2em] text-dark/50 uppercase">Market Stats</span>
-                    <div class="flex-grow h-[1px] bg-dark/10"></div>
+            <div id="section-statistik" class="w-full px-4 md:px-12 pt-4 pb-3 z-20 relative">
+
+                <!-- Tab Nav -->
+                <div class="flex gap-1.5 mb-3">
+                    <button id="tab-btn-stats" onclick="switchStatsTab(1)"
+                        class="flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-royal text-white border border-royal clip-button">
+                        Statistik
+                    </button>
+                    <button id="tab-btn-buyers" onclick="switchStatsTab(2)"
+                        class="flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal clip-button-reverse">
+                        Top Buyer
+                    </button>
                 </div>
-                <div class="grid grid-cols-2 gap-2">
-                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                        <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
-                        <div class="absolute inset-0 bg-white/40"></div>
-                        <div class="relative z-10">
-                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="1K+">1K+</p>
-                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Transaksi Rekber</p>
+
+                <!-- Tab 1: Statistik -->
+                <div id="stats-tab-1">
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                            <img src="assets/background/bg1.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <div class="absolute inset-0 bg-white/40"></div>
+                            <div class="relative z-10">
+                                <p id="stat-buyers" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
+                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest mt-0.5 drop-shadow-sm">Total Buyer JPM</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                        <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
-                        <div class="absolute inset-0 bg-white/40"></div>
-                        <div class="relative z-10">
-                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="600+">600+</p>
-                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Grup Terjual</p>
+                        <div class="group relative overflow-hidden border border-accent/40 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
+                            <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <div class="absolute inset-0 bg-accent/10"></div>
+                            <div class="relative z-10">
+                                <p id="stat-kepuasan" class="font-bebas text-[28px] text-dark leading-none tracking-wide">96%</p>
+                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest mt-0.5 drop-shadow-sm">Tingkat Kepuasan</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="group relative overflow-hidden border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
-                        <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
-                        <div class="absolute inset-0 bg-white/40"></div>
-                        <div class="relative z-10">
-                            <p class="font-bebas text-[28px] text-royal leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="240+">240+</p>
-                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Website Dibuat</p>
+                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                            <img src="assets/background/bg2.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <div class="absolute inset-0 bg-white/40"></div>
+                            <div class="relative z-10 flex items-center justify-between">
+                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest drop-shadow-sm">Total Pendapatan</p>
+                                <p id="stat-pendapatan" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="group relative overflow-hidden border border-accent/40 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-accent/80 cursor-pointer">
-                        <img src="assets/background/bg4.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
-                        <div class="absolute inset-0 bg-accent/10"></div>
-                        <div class="relative z-10">
-                            <p class="font-bebas text-[28px] text-dark leading-none tracking-wide transition-transform duration-200 group-hover:scale-110 inline-block" data-final="99%">99%</p>
-                            <p class="text-[7px] font-mono text-gray-700 uppercase tracking-widest mt-0.5 drop-shadow-sm">Kepuasan Client</p>
+                        <div class="group relative overflow-hidden col-span-2 border border-royal/20 p-3 clip-service-box transition-all duration-200 hover:-translate-y-1 hover:border-royal/60 cursor-pointer">
+                            <img src="assets/background/bg3.webp" class="absolute inset-0 w-full h-full object-cover opacity-50 transition-transform duration-300 group-hover:scale-105" alt="" draggable="false">
+                            <div class="absolute inset-0 bg-white/40"></div>
+                            <div class="relative z-10 flex items-center justify-between">
+                                <p class="text-[10px] font-mono text-gray-800 uppercase tracking-widest drop-shadow-sm">Total Member Dipush</p>
+                                <p id="stat-member" class="font-bebas text-[28px] text-royal leading-none tracking-wide">—</p>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Tab 2: Top Buyer -->
+                <div id="stats-tab-2" class="hidden">
+                    <div class="flex items-center gap-1.5 mb-2">
+                        <i class="ph-bold ph-clock text-[10px] text-royal/60"></i>
+                        <span class="font-mono text-[8px] text-gray-500 uppercase tracking-widest">Data diperbarui setiap pukul 00:00 WIB</span>
+                    </div>
+                    <div id="top-buyer-list" class="flex flex-col gap-1 max-h-[320px] overflow-y-auto hide-scrollbar">
+                        <div class="text-center text-[9px] text-royal/60 font-mono animate-pulse py-6">[ SYSTEM ] Memuat data...</div>
+                    </div>
+                </div>
+
             </div>
 
             <div class="w-full flex items-center px-4 md:px-12 my-2 md:my-4 z-20 relative">
                 <div class="flex-grow h-[1.5px] bg-royal opacity-60"></div>
-                <div class="flex items-center gap-1.5 px-3 font-mono text-[8px] md:text-[10px] text-royal tracking-[0.2em] font-bold uppercase opacity-80">
+                <div class="flex items-center gap-1.5 px-3 font-mono text-[10px] md:text-[12px] text-royal tracking-[0.2em] font-bold uppercase">
                     <span class="w-1.5 h-1.5 bg-royal"></span>
                     System // Nav
                     <span class="w-1.5 h-1.5 bg-accent"></span>
@@ -240,7 +274,7 @@
                     <h2 class="text-[20px] md:text-[36px] font-black font-display uppercase tracking-widest text-white leading-none mt-1">NUSANTARA</h2>
                 </div>
 
-                <div class="mt-3 md:mt-6 pt-3 md:pt-4 text-center font-mono text-[7px] md:text-[10px] text-gray-500 uppercase tracking-[0.15em] border-t border-gray-800/50 relative z-20">
+                <div class="mt-3 md:mt-6 pt-3 md:pt-4 text-center font-mono text-[9px] md:text-[11px] text-gray-400 uppercase tracking-[0.15em] border-t border-gray-800/50 relative z-20">
                     © 2026 NUSANTARA. ALL RIGHTS RESERVED.
                 </div>
 
@@ -314,6 +348,15 @@
             }
         };
 
+        window.switchStatsTab = function(n) {
+            document.getElementById('stats-tab-1').classList.toggle('hidden', n !== 1);
+            document.getElementById('stats-tab-2').classList.toggle('hidden', n !== 2);
+            const active   = 'flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-royal text-white border border-royal';
+            const inactive = 'flex-1 py-2 font-mono text-[11px] uppercase tracking-widest transition-all duration-200 bg-transparent text-gray-700 border border-royal/30 hover:text-royal hover:border-royal';
+            document.getElementById('tab-btn-stats').className   = (n === 1 ? active : inactive) + ' clip-button';
+            document.getElementById('tab-btn-buyers').className  = (n === 2 ? active : inactive) + ' clip-button-reverse';
+        };
+
         // ================= LOAD SEMUA KOMPONEN EKSTERNAL =================
         document.addEventListener('DOMContentLoaded', async () => {
             
@@ -357,40 +400,84 @@
                 btnContainer.innerHTML = '<div class="text-center text-xs text-red-500 font-mono p-4 my-8 border border-red-500 border-dashed bg-white/80">[ ERROR ] Sistem gagal memuat file komponen navigasi.</div>';
             }
 
-            // 3. Animasi Counter Statistik
-            function animateStatNumber(el) {
-                const final = el.dataset.final;
-                let target, fmt;
-                if (final === '1K+') {
-                    target = 1000;
-                    fmt = n => (n >= 1000 ? '1K' : n) + '+';
-                } else if (final.includes('%')) {
-                    target = parseInt(final);
-                    fmt = n => n + '%';
-                } else {
-                    target = parseInt(final);
-                    fmt = n => n + '+';
-                }
-                const dur = 1600;
-                let t0 = null;
-                el.textContent = fmt(0);
-                function step(ts) {
-                    if (!t0) t0 = ts;
-                    const p = Math.min((ts - t0) / dur, 1);
-                    const eased = 1 - Math.pow(1 - p, 3);
-                    el.textContent = p < 1 ? fmt(Math.floor(eased * target)) : final;
-                    if (p < 1) requestAnimationFrame(step);
-                }
-                requestAnimationFrame(step);
-            }
+            // 3. Statistik & Top Buyer dari user.json
             const statSection = document.getElementById('section-statistik');
             if (statSection) {
-                new IntersectionObserver((entries, obs) => {
-                    if (entries[0].isIntersecting) {
-                        statSection.querySelectorAll('[data-final]').forEach(animateStatNumber);
-                        obs.disconnect();
+                function animateNum(el, target, fmtFn, dur = 1400) {
+                    let t0 = null;
+                    const ease = p => 1 - Math.pow(1 - p, 3);
+                    function step(ts) {
+                        if (!t0) t0 = ts;
+                        const p = Math.min((ts - t0) / dur, 1);
+                        el.textContent = fmtFn(Math.floor(ease(p) * target));
+                        if (p < 1) requestAnimationFrame(step);
                     }
-                }, { threshold: 0.3 }).observe(statSection);
+                    requestAnimationFrame(step);
+                }
+                const fmtRp     = n => 'Rp ' + n.toLocaleString('id-ID');
+                const fmtMember = n => n.toLocaleString('id-ID');
+
+                try {
+                    const res      = await fetch('database/user.json');
+                    const userData = await res.json();
+                    const users    = Object.values(userData);
+                    const members  = users.filter(u => u.role === 'Member');
+
+                    const totalBuyers = members.length;
+                    const totalSaldo  = members.reduce((s, u) => s + (u.totalSaldo  || 0), 0);
+                    const totalMember = members.reduce((s, u) => s + (u.totalOrder  || 0), 0);
+
+                    let animated = false;
+                    new IntersectionObserver((entries, obs) => {
+                        if (!entries[0].isIntersecting || animated) return;
+                        animated = true; obs.disconnect();
+                        animateNum(document.getElementById('stat-buyers'),    totalBuyers, n => n + ' User');
+                        animateNum(document.getElementById('stat-pendapatan'), totalSaldo,  fmtRp);
+                        animateNum(document.getElementById('stat-member'),    totalMember, fmtMember);
+                    }, { threshold: 0.3 }).observe(statSection);
+
+                    const tierCls = t => {
+                        if (t === 'PRIME') return 'text-amber-400 border-amber-400/40 bg-amber-400/5';
+                        if (t === 'SVIP')  return 'text-sky-300 border-sky-300/40 bg-sky-300/5';
+                        if (t === 'VIP')   return 'text-violet-400 border-violet-400/40 bg-violet-400/5';
+                        return 'text-gray-400 border-gray-500/30 bg-gray-500/5';
+                    };
+                    const sorted  = [...members].sort((a, b) => (b.totalSaldo || 0) - (a.totalSaldo || 0)).slice(0, 11);
+                    const podium3 = sorted.slice(0, 3);
+                    const rest8   = sorted.slice(3);
+
+                    const podiumCfg = [
+                        { rank: '#1', clr: 'text-accent',     border: 'border-accent/50',      bg: 'bg-accent/5'     },
+                        { rank: '#2', clr: 'text-gray-400',   border: 'border-gray-400/30',    bg: 'bg-gray-400/5'   },
+                        { rank: '#3', clr: 'text-orange-400', border: 'border-orange-400/40',  bg: 'bg-orange-400/5' },
+                    ];
+
+                    const podiumHTML = `<div class="flex gap-1 mb-1.5">
+                        ${podium3.map((u, i) => {
+                            const c = podiumCfg[i];
+                            return `<div class="flex-1 flex flex-col items-center gap-1 px-1.5 py-2 border ${c.border} ${c.bg}" style="animation: leaderIn 0.4s ease both; animation-delay: ${i * 80}ms">
+                                <span class="font-bebas text-[22px] ${c.clr} leading-none">${c.rank}</span>
+                                <span class="tier-badge text-[8px] font-mono uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
+                                <span class="font-mono text-[10px] text-dark font-semibold text-center leading-tight break-all">${u.name}</span>
+                                <span class="font-mono text-[8px] text-royal">${fmtRp(u.totalSaldo || 0)}</span>
+                            </div>`;
+                        }).join('')}
+                    </div>`;
+
+                    const listHTML = rest8.map((u, i) => `
+                        <div class="flex items-center gap-2 px-2 py-1.5 border border-royal/20 bg-dark/5" style="animation: leaderIn 0.35s ease both; animation-delay: ${(i + 3) * 60}ms">
+                            <span class="font-bebas text-base text-gray-500 w-5 text-center shrink-0">#${i + 4}</span>
+                            <span class="tier-badge text-[8px] font-mono uppercase tracking-wide py-0.5 border ${tierCls(u.tier)}">${u.tier || 'BASIC'}</span>
+                            <span class="font-mono text-[11px] text-dark truncate flex-1 min-w-0">${u.name}</span>
+                            <span class="font-mono text-[9px] text-royal shrink-0">${fmtRp(u.totalSaldo || 0)}</span>
+                        </div>`).join('');
+
+                    document.getElementById('top-buyer-list').innerHTML = podiumHTML + listHTML;
+
+                } catch (e) {
+                    console.error('Gagal memuat user.json:', e);
+                    document.getElementById('top-buyer-list').innerHTML = '<div class="text-[9px] text-red-400 font-mono text-center py-4">[ ERROR ] Gagal memuat data.</div>';
+                }
             }
 
         });
