@@ -81,15 +81,28 @@
   "6287894590275": {
     "name": "gar",
     "number": "6287894590275",
-    "saldo": 5952,
-    "totalOrder": 8658,
+    "saldo": 0,
+    "totalOrder": 8958,
     "role": "Member",
     "tier": "VIP",
     "date": "20-4-2026",
-    "totalSaldo": 2320998,
+    "totalSaldo": 2420998,
     "referral": "NSTR1149",
     "invitedBy": "NSTR8888",
     "email": "tegartripambudi543@gmail.com"
+  },
+  "628984863328": {
+    "name": "Kenz",
+    "number": "628984863328",
+    "saldo": 0,
+    "totalOrder": 6996,
+    "role": "Member",
+    "tier": "VIP",
+    "date": "18-4-2026",
+    "totalSaldo": 1782572,
+    "referral": "NSTR5564",
+    "invitedBy": "NSTR8888",
+    "totalReff": 2
   },
   "6285810160254": {
     "name": "ciostore",
@@ -104,18 +117,17 @@
     "totalSaldo": 1449049,
     "totalReff": 5
   },
-  "628984863328": {
-    "name": "Kenz",
-    "number": "628984863328",
+  "6285742950366": {
+    "name": "rexxy",
+    "number": "6285742950366",
     "saldo": 0,
-    "totalOrder": 4996,
+    "totalOrder": 4000,
     "role": "Member",
-    "tier": "VIP",
-    "date": "18-4-2026",
-    "totalSaldo": 1382572,
-    "referral": "NSTR5564",
+    "tier": "BASIC",
+    "referral": "NSTR67AT",
     "invitedBy": "NSTR8888",
-    "totalReff": 2
+    "date": "27-5-2026",
+    "totalSaldo": 1200000
   },
   "6282156313748": {
     "name": "Ary",
@@ -346,18 +358,6 @@
     "totalSaldo": 305000,
     "referral": "NSTR2209",
     "invitedBy": "NSTR8888"
-  },
-  "6285742950366": {
-    "name": "rexxy",
-    "number": "6285742950366",
-    "saldo": 3000,
-    "totalOrder": 1000,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTR67AT",
-    "invitedBy": "NSTR8888",
-    "date": "27-5-2026",
-    "totalSaldo": 300000
   },
   "62895629157898": {
     "name": "rayy",
@@ -5188,6 +5188,18 @@
     "referral": "NSTRTLNH",
     "invitedBy": "NSTR8888",
     "date": "24-6-2026",
+    "totalSaldo": 0
+  },
+  "6289672487703": {
+    "name": "panzzzstur",
+    "number": "6289672487703",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTRQ76R",
+    "invitedBy": "NSTR8888",
+    "date": "27-6-2026",
     "totalSaldo": 0
   }
 }
