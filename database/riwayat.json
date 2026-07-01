@@ -1,5 +1,68 @@
 [
   {
+    "waktu": "01/07/2026, 11:47",
+    "tipe": "order",
+    "user": "znngnn",
+    "teks": "order 1.000 member",
+    "nominal": 300000
+  },
+  {
+    "waktu": "01/07/2026, 11:43",
+    "tipe": "deposit",
+    "user": "znngnn",
+    "teks": "melakukan deposit",
+    "nominal": 300000
+  },
+  {
+    "waktu": "01/07/2026, 11:24",
+    "tipe": "order",
+    "user": "ucok",
+    "teks": "order 450 member",
+    "nominal": 135000
+  },
+  {
+    "waktu": "01/07/2026, 11:21",
+    "tipe": "deposit",
+    "user": "ucok",
+    "teks": "melakukan deposit",
+    "nominal": 136000
+  },
+  {
+    "waktu": "30/06/2026, 07:44",
+    "tipe": "order",
+    "user": "mazz",
+    "teks": "order 300 member",
+    "nominal": 90000
+  },
+  {
+    "waktu": "30/06/2026, 07:41",
+    "tipe": "deposit",
+    "user": "mazz",
+    "teks": "melakukan deposit",
+    "nominal": 90000
+  },
+  {
+    "waktu": "30/06/2026, 06:25",
+    "tipe": "order",
+    "user": "znngnn",
+    "teks": "order 500 member",
+    "nominal": 150000
+  },
+  {
+    "waktu": "30/06/2026, 06:21",
+    "tipe": "deposit",
+    "user": "znngnn",
+    "teks": "melakukan deposit",
+    "nominal": 150000
+  },
+  {
+    "waktu": "30/06/2026, 05:08",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 1.023 member",
+    "nominal": 0
+  },
+  {
     "waktu": "27/06/2026, 23:10",
     "tipe": "order",
     "user": "gar",
