@@ -3,7 +3,7 @@
     "name": "NUSANTARA",
     "number": "6281330730462",
     "saldo": 10106010,
-    "totalOrder": 10110013,
+    "totalOrder": 10107026,
     "role": "Owner",
     "tier": "PRIME",
     "bonusEvent": false,
@@ -81,28 +81,15 @@
   "6287894590275": {
     "name": "gar",
     "number": "6287894590275",
-    "saldo": 0,
-    "totalOrder": 8958,
+    "saldo": 5952,
+    "totalOrder": 8658,
     "role": "Member",
     "tier": "VIP",
     "date": "20-4-2026",
-    "totalSaldo": 2420998,
+    "totalSaldo": 2320998,
     "referral": "NSTR1149",
     "invitedBy": "NSTR8888",
     "email": "tegartripambudi543@gmail.com"
-  },
-  "628984863328": {
-    "name": "Kenz",
-    "number": "628984863328",
-    "saldo": 0,
-    "totalOrder": 6996,
-    "role": "Member",
-    "tier": "VIP",
-    "date": "18-4-2026",
-    "totalSaldo": 1782572,
-    "referral": "NSTR5564",
-    "invitedBy": "NSTR8888",
-    "totalReff": 2
   },
   "6285810160254": {
     "name": "ciostore",
@@ -117,17 +104,18 @@
     "totalSaldo": 1449049,
     "totalReff": 5
   },
-  "6285742950366": {
-    "name": "rexxy",
-    "number": "6285742950366",
+  "628984863328": {
+    "name": "Kenz",
+    "number": "628984863328",
     "saldo": 0,
-    "totalOrder": 4000,
+    "totalOrder": 4996,
     "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTR67AT",
+    "tier": "VIP",
+    "date": "18-4-2026",
+    "totalSaldo": 1382572,
+    "referral": "NSTR5564",
     "invitedBy": "NSTR8888",
-    "date": "27-5-2026",
-    "totalSaldo": 1200000
+    "totalReff": 2
   },
   "6282156313748": {
     "name": "Ary",
@@ -193,6 +181,18 @@
     "date": "25-5-2026",
     "totalSaldo": 855000
   },
+  "6285717474806": {
+    "name": "mazz",
+    "number": "6285717474806",
+    "saldo": 270,
+    "totalOrder": 3582,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTREM59",
+    "invitedBy": "NSTR8888",
+    "date": "25-5-2026",
+    "totalSaldo": 850305
+  },
   "6283866836412": {
     "name": "fatzz beck era",
     "number": "6283866836412",
@@ -217,18 +217,6 @@
     "invitedBy": "NSTR8888",
     "date": "27-5-2026",
     "totalSaldo": 761000
-  },
-  "6285717474806": {
-    "name": "mazz",
-    "number": "6285717474806",
-    "saldo": 270,
-    "totalOrder": 3282,
-    "role": "Member",
-    "tier": "BASIC",
-    "referral": "NSTREM59",
-    "invitedBy": "NSTR8888",
-    "date": "25-5-2026",
-    "totalSaldo": 760305
   },
   "6285185238280": {
     "name": "padiloo",
@@ -280,6 +268,18 @@
     "totalSaldo": 450000,
     "referral": "NSTR3390",
     "invitedBy": "NSTR8888"
+  },
+  "6281328593220": {
+    "name": "znngnn",
+    "number": "6281328593220",
+    "saldo": 0,
+    "totalOrder": 1500,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTRU6UX",
+    "invitedBy": "NSTR8888",
+    "date": "30-6-2026",
+    "totalSaldo": 450000
   },
   "6285920288009": {
     "name": "Jubel",
@@ -358,6 +358,18 @@
     "totalSaldo": 305000,
     "referral": "NSTR2209",
     "invitedBy": "NSTR8888"
+  },
+  "6285742950366": {
+    "name": "rexxy",
+    "number": "6285742950366",
+    "saldo": 3000,
+    "totalOrder": 1000,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTR67AT",
+    "invitedBy": "NSTR8888",
+    "date": "27-5-2026",
+    "totalSaldo": 300000
   },
   "62895629157898": {
     "name": "rayy",
@@ -673,6 +685,18 @@
     "invitedBy": "NSTR8888",
     "date": "6-5-2026",
     "totalSaldo": 144600
+  },
+  "6283165286460": {
+    "name": "ucok",
+    "number": "6283165286460",
+    "saldo": 1000,
+    "totalOrder": 450,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTRXUZF",
+    "invitedBy": "NSTR8888",
+    "date": "1-7-2026",
+    "totalSaldo": 135000
   },
   "628388458306": {
     "name": "RAZOR",
@@ -5190,16 +5214,64 @@
     "date": "24-6-2026",
     "totalSaldo": 0
   },
-  "6289672487703": {
-    "name": "panzzzstur",
-    "number": "6289672487703",
+  "6283854781332": {
+    "name": "fall",
+    "number": "6283854781332",
     "saldo": 0,
     "totalOrder": 0,
     "role": "Member",
     "tier": "BASIC",
-    "referral": "NSTRQ76R",
+    "referral": "NSTRDYXY",
     "invitedBy": "NSTR8888",
-    "date": "27-6-2026",
+    "date": "30-6-2026",
+    "totalSaldo": 0
+  },
+  "6285198273460": {
+    "name": "bran",
+    "number": "6285198273460",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTRXCJT",
+    "invitedBy": "NSTR8888",
+    "date": "30-6-2026",
+    "totalSaldo": 0
+  },
+  "6285178485843": {
+    "name": "aku",
+    "number": "6285178485843",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTR8MFG",
+    "invitedBy": "NSTR8888",
+    "date": "30-6-2026",
+    "totalSaldo": 0
+  },
+  "6288973150195": {
+    "name": "renzz",
+    "number": "6288973150195",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTR9UXY",
+    "invitedBy": "NSTR8888",
+    "date": "1-7-2026",
+    "totalSaldo": 0
+  },
+  "6282379255315": {
+    "name": "pler123",
+    "number": "6282379255315",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "referral": "NSTRHMQG",
+    "invitedBy": "NSTR8888",
+    "date": "1-7-2026",
     "totalSaldo": 0
   }
 }
