@@ -8,15 +8,15 @@
     "MemberPending": 3,
     "kick": 80,
     "left": 0,
-    "sanksi": 20,
+    "sanksi": 40,
     "lastCount": 558,
-    "currentMember": 174,
+    "currentMember": 175,
     "pp_path": "/home/container/DATABASE/profilegroup/120363430138433177.jpg",
     "status": "active",
     "date": "2/8/2026",
     "startTime": 1785678018438,
     "owner": "6281330730462",
-    "target": 845,
+    "target": 825,
     "startCount": 0
   }
 }
