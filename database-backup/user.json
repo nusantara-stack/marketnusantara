@@ -4378,5 +4378,15 @@
     "tier": "BASIC",
     "date": "9-7-2026",
     "totalSaldo": 0
+  },
+  "6285718278735": {
+    "name": "rassyrizz",
+    "number": "6285718278735",
+    "saldo": 0,
+    "totalOrder": 0,
+    "role": "Member",
+    "tier": "BASIC",
+    "date": "6-8-2026",
+    "totalSaldo": 0
   }
 }
