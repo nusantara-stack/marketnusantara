@@ -3,7 +3,7 @@
     "name": "NUSANTARA",
     "number": "6281330730462",
     "saldo": 10106010,
-    "totalOrder": 10111399,
+    "totalOrder": 10108719,
     "role": "Owner",
     "tier": "PRIME",
     "bonusEvent": false,
@@ -4378,15 +4378,5 @@
     "tier": "BASIC",
     "date": "9-7-2026",
     "totalSaldo": 0
-  },
-  "6285718278735": {
-    "name": "rassyrizz",
-    "number": "6285718278735",
-    "saldo": 0,
-    "totalOrder": 100,
-    "role": "Member",
-    "tier": "BASIC",
-    "date": "6-8-2026",
-    "totalSaldo": 30000
   }
 }
