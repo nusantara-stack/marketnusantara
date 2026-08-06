@@ -18,25 +18,5 @@
     "owner": "6281330730462",
     "target": 845,
     "startCount": 0
-  },
-  "120363428124858275@g.us": {
-    "id": "120363428124858275@g.us",
-    "name": "s",
-    "link": "https://chat.whatsapp.com/Lfp2qVuv0L2BrEyoxU7uQY",
-    "paket": "reguler",
-    "order": 1000,
-    "MemberPending": 0,
-    "kick": 0,
-    "left": 0,
-    "sanksi": 0,
-    "lastCount": 3,
-    "currentMember": 3,
-    "pp_path": "/home/container/DATABASE/profilegroup/120363428124858275.jpg",
-    "status": "active",
-    "date": "6/8/2026",
-    "startTime": 1785978055168,
-    "owner": "6281330730462",
-    "target": 1003,
-    "startCount": 3
   }
 }
