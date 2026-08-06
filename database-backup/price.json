@@ -2,19 +2,19 @@
   "basic": {
     "name": "BASIC",
     "discountPercent": 0,
-    "minOrder": 400,
+    "minOrder": 200,
     "keterangan": "Harga Normal"
   },
   "vip": {
     "name": "VIP",
     "discountPercent": 10,
-    "minOrder": 400,
+    "minOrder": 200,
     "keterangan": "Potongan Harga 10%"
   },
   "svip": {
     "name": "SVIP",
     "discountPercent": 20,
-    "minOrder": 400,
+    "minOrder": 200,
     "keterangan": "Potongan Harga 20%"
   },
   "prime": {
