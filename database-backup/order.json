@@ -10,15 +10,15 @@
     "left": 0,
     "sanksi": 0,
     "isProgress": true,
-    "lastCount": 715,
+    "lastCount": 714,
     "currentMember": 713,
     "pp_path": "/home/container/DATABASE/profilegroup/120363430138433177.jpg",
     "status": "active",
     "date": "6/8/2026",
-    "startTime": 1786094322231,
+    "startTime": 1786098307285,
     "owner": "6281330730462",
-    "target": 917,
-    "startCount": 717
+    "target": 910,
+    "startCount": 710
   },
   "120363408385949342@g.us": {
     "id": "120363408385949342@g.us",
@@ -26,7 +26,7 @@
     "link": "https://chat.whatsapp.com/ESxOsgfnjRJ7Ge8tj40eYE",
     "paket": "reguler",
     "order": 100,
-    "MemberPending": 0,
+    "MemberPending": 1,
     "kick": 0,
     "left": 0,
     "sanksi": 0,
@@ -36,7 +36,7 @@
     "pp_path": "/home/container/DATABASE/profilegroup/120363408385949342.jpg",
     "status": "active",
     "date": "6/8/2026",
-    "startTime": 1786094322231,
+    "startTime": 1786098307285,
     "owner": "6285718278735",
     "target": 747,
     "startCount": 647
