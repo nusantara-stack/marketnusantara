@@ -29,16 +29,16 @@
     "MemberPending": 1,
     "kick": 0,
     "left": 0,
-    "sanksi": 20,
+    "sanksi": 40,
     "isProgress": true,
     "lastCount": 649,
-    "currentMember": 647,
+    "currentMember": 648,
     "pp_path": "/home/container/DATABASE/profilegroup/120363408385949342.jpg",
     "status": "active",
     "date": "6/8/2026",
     "startTime": 1786098307285,
     "owner": "6285718278735",
-    "target": 727,
+    "target": 707,
     "startCount": 647
   }
 }
