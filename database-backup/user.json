@@ -4378,15 +4378,5 @@
     "tier": "BASIC",
     "date": "9-7-2026",
     "totalSaldo": 0
-  },
-  "628137052433": {
-    "name": "GianzGtg",
-    "number": "628137052433",
-    "saldo": 0,
-    "totalOrder": 0,
-    "role": "Member",
-    "tier": "BASIC",
-    "date": "7-8-2026",
-    "totalSaldo": 0
   }
 }
