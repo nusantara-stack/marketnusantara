@@ -11,7 +11,7 @@
     "sanksi": 20,
     "isProgress": true,
     "lastCount": 774,
-    "currentMember": 873,
+    "currentMember": 871,
     "pp_path": "/home/container/DATABASE/profilegroup/120363430138433177.jpg",
     "status": "active",
     "date": "6/8/2026",
@@ -33,13 +33,13 @@
     "privacy": true,
     "isProgress": false,
     "lastCount": 300,
-    "currentMember": 300,
+    "currentMember": 298,
     "pp_path": null,
     "status": "active",
     "date": "7/8/2026",
     "startTime": 1786114194110,
     "owner": "6281330730462",
-    "target": 500,
-    "startCount": 300
+    "target": 498,
+    "startCount": 298
   }
 }
