@@ -2,10 +2,10 @@
   "120363427709615649@g.us": {
     "id": "120363427709615649@g.us",
     "name": "KHUSUS STOK RATUSAN JUTAAN NIAA STORE PP BOMEL",
-    "link": "https://chat.whatsapp.com/Ej9vtSd45NxBfjemKgH76p",
+    "link": "https://chat.whatsapp.com/Ej9vtSd45NxBfjemKgH76pp",
     "paket": "reguler",
     "order": 200,
-    "MemberPending": 12,
+    "MemberPending": 84,
     "kick": 0,
     "left": 0,
     "sanksi": 0,
@@ -20,5 +20,27 @@
     "owner": "6281330730462",
     "target": 497,
     "startCount": 297
+  },
+  "120363427276888481@g.us": {
+    "id": "120363427276888481@g.us",
+    "name": "GRUP TEST 1",
+    "link": "https://chat.whatsapp.com/JZ4u3AKOgfeLbtbl6Jxj9G",
+    "paket": "reguler",
+    "order": 10,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 6,
+    "currentMember": 6,
+    "pp_path": null,
+    "status": "active",
+    "date": "8/8/2026",
+    "startTime": 1786163930519,
+    "owner": "6281330730462",
+    "target": 16,
+    "startCount": 6
   }
 }
