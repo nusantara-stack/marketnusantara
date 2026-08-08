@@ -32,15 +32,15 @@
     "left": 0,
     "sanksi": 0,
     "privacy": false,
-    "isProgress": false,
+    "isProgress": true,
     "lastCount": 556,
-    "currentMember": 555,
+    "currentMember": 586,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427649377563.jpg",
     "status": "active",
     "date": "8/8/2026",
     "startTime": 1786193047885,
     "owner": "6281330730462",
-    "target": 655,
-    "startCount": 555
+    "target": 620,
+    "startCount": 520
   }
 }
