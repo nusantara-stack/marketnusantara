@@ -34,14 +34,14 @@
     "privacy": true,
     "isProgress": false,
     "lastCount": 720,
-    "currentMember": 721,
+    "currentMember": 720,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427709615649.jpg",
     "status": "active",
     "date": "11/8/2026",
     "startTime": 1786418723565,
     "owner": "6281330730462",
-    "target": 921,
-    "startCount": 721
+    "target": 920,
+    "startCount": 720
   },
   "120363427649377563@g.us": {
     "id": "120363427649377563@g.us",
@@ -56,13 +56,13 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 639,
-    "currentMember": 638,
+    "currentMember": 648,
     "pp_path": null,
     "status": "active",
     "date": "11/8/2026",
     "startTime": 1786434332315,
     "owner": "6282171736848",
-    "target": 656,
-    "startCount": 606
+    "target": 689,
+    "startCount": 639
   }
 }
