@@ -34,13 +34,35 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 767,
-    "currentMember": 742,
+    "currentMember": 738,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427709615649.jpg",
     "status": "active",
     "date": "11/8/2026",
     "startTime": 1786418723565,
     "owner": "6281330730462",
-    "target": 942,
-    "startCount": 742
+    "target": 938,
+    "startCount": 738
+  },
+  "120363427649377563@g.us": {
+    "id": "120363427649377563@g.us",
+    "name": "Fii Store || JB All Game",
+    "link": "https://chat.whatsapp.com/GNAlxevaE4SJpkR2mOfPuZ",
+    "paket": "reguler",
+    "order": 50,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 583,
+    "currentMember": 583,
+    "pp_path": null,
+    "status": "active",
+    "date": "11/8/2026",
+    "startTime": 1786434332315,
+    "owner": "6282171736848",
+    "target": 633,
+    "startCount": 583
   }
 }
