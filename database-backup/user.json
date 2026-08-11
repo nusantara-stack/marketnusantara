@@ -4404,11 +4404,11 @@
     "name": "fii",
     "number": "6282171736848",
     "saldo": 0,
-    "totalOrder": 0,
+    "totalOrder": 50,
     "role": "Member",
     "tier": "BASIC",
     "date": "9-8-2026",
-    "totalSaldo": 0
+    "totalSaldo": 15000
   },
   "6285828266892": {
     "name": "WannzStecuu",
