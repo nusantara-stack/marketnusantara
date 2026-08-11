@@ -43,15 +43,26 @@
     "date": "06-03-2026",
     "totalSaldo": 3733926
   },
+  "6283872586510": {
+    "name": "Niaa",
+    "number": "6283872586510",
+    "saldo": 0,
+    "totalOrder": 650,
+    "role": "Member",
+    "tier": "BASIC",
+    "bonusEvent": false,
+    "date": "06-03-2026",
+    "totalSaldo": 195000
+  },
   "6287894590275": {
     "name": "gar",
     "number": "6287894590275",
-    "saldo": 5952,
-    "totalOrder": 8658,
+    "saldo": 0,
+    "totalOrder": 8858,
     "role": "Member",
     "tier": "VIP",
     "date": "20-4-2026",
-    "totalSaldo": 2320998,
+    "totalSaldo": 2380998,
     "email": "tegartripambudi543@gmail.com"
   },
   "6285810160254": {
