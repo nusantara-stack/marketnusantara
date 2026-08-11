@@ -1,5 +1,12 @@
 [
   {
+    "waktu": "11/08/2026, 11:19",
+    "tipe": "order",
+    "user": "fii",
+    "teks": "order 70 member",
+    "nominal": 21000
+  },
+  {
     "waktu": "11/08/2026, 07:45",
     "tipe": "order",
     "user": "fii",
