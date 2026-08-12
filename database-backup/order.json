@@ -4,7 +4,7 @@
     "name": "KHUSUS STOK RATUSAN JUTAAN NIAA STORE PP BOMEL",
     "link": "https://chat.whatsapp.com/H99t7RwvqifHzW4qOOpHXj",
     "paket": "reguler",
-    "order": 150,
+    "order": 163,
     "MemberPending": 0,
     "kick": 0,
     "left": 0,
@@ -12,14 +12,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 888,
-    "currentMember": 871,
+    "currentMember": 870,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427709615649.jpg",
     "status": "active",
     "date": "12/8/2026",
     "startTime": 1786532840810,
     "owner": "6281330730462",
-    "target": 1021,
-    "startCount": 871
+    "target": 1033,
+    "startCount": 870
   },
   "120363429873159243@g.us": {
     "id": "120363429873159243@g.us",
@@ -64,5 +64,27 @@
     "owner": "6281330730462",
     "target": 362,
     "startCount": 62
+  },
+  "120363410695732698@g.us": {
+    "id": "120363410695732698@g.us",
+    "name": "GB TERBUKA DANZ STR X PP BOMEL",
+    "link": "https://chat.whatsapp.com/IYpYlSNPHRK4qXk4JZv3VL",
+    "paket": "reguler",
+    "order": 40,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 296,
+    "currentMember": 296,
+    "pp_path": null,
+    "status": "active",
+    "date": "12/8/2026",
+    "startTime": 1786537563302,
+    "owner": "6281330730462",
+    "target": 336,
+    "startCount": 296
   }
 }
