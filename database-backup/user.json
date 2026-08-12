@@ -4444,10 +4444,10 @@
     "name": "ris",
     "number": "6285764600694",
     "saldo": 0,
-    "totalOrder": 0,
+    "totalOrder": 100,
     "role": "Member",
     "tier": "BASIC",
     "date": "11-8-2026",
-    "totalSaldo": 0
+    "totalSaldo": 20000
   }
 }
