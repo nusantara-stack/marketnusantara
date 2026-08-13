@@ -1,1 +1,46 @@
-{}
+{
+  "120363428114415998@g.us": {
+    "id": "120363428114415998@g.us",
+    "name": "JB¹   RixzzzSTR²⁶",
+    "link": "https://chat.whatsapp.com/JoUNBu2Io0KHphhAYvCtKa",
+    "paket": "reguler",
+    "order": 321,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 60,
+    "currentMember": 60,
+    "pp_path": "/home/container/DATABASE/profilegroup/120363428114415998.jpg",
+    "status": "active",
+    "date": "13/8/2026",
+    "startTime": 1786634321522,
+    "owner": "6281330730462",
+    "target": 381,
+    "startCount": 60
+  },
+  "120363427023179548@g.us": {
+    "id": "120363427023179548@g.us",
+    "name": "JB¹ WAN4YOU CRUEL SULAWESI ✅",
+    "link": "https://chat.whatsapp.com/BvIRTVOAGwcFux9PVrfr5I",
+    "paket": "reguler",
+    "order": 298,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 47,
+    "currentMember": 47,
+    "pp_path": "/home/container/DATABASE/profilegroup/120363427023179548.jpg",
+    "status": "active",
+    "date": "13/8/2026",
+    "startTime": 1786634366100,
+    "owner": "6281330730462",
+    "target": 345,
+    "startCount": 47
+  }
+}
