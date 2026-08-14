@@ -2,13 +2,13 @@
   "120363428114415998@g.us": {
     "id": "120363428114415998@g.us",
     "name": "JB¹   RixzzzSTR²⁶",
-    "link": "https://chat.whatsapp.com/JoUNBu2Io0KHphhAYvCtKa",
+    "link": "https://chat.whatsapp.com/ERftPQLPmQCCibRHiAcl2X",
     "paket": "reguler",
     "order": 321,
     "MemberPending": 286,
     "kick": 0,
     "left": 0,
-    "sanksi": 0,
+    "sanksi": 100,
     "privacy": false,
     "isProgress": false,
     "lastCount": 60,
@@ -18,7 +18,7 @@
     "date": "13/8/2026",
     "startTime": 1786634321522,
     "owner": "6281330730462",
-    "target": 381,
+    "target": 281,
     "startCount": 60
   },
   "120363427023179548@g.us": {
@@ -56,13 +56,13 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 906,
-    "currentMember": 897,
+    "currentMember": 896,
     "pp_path": "/home/container/DATABASE/profilegroup/120363428944162646.jpg",
     "status": "active",
     "date": "13/8/2026",
     "startTime": 1786634395601,
     "owner": "6281330730462",
-    "target": 967,
-    "startCount": 897
+    "target": 966,
+    "startCount": 896
   }
 }
