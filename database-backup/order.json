@@ -12,14 +12,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 41,
-    "currentMember": 85,
+    "currentMember": 86,
     "pp_path": "/home/container/DATABASE/profilegroup/120363411898051724.jpg",
     "status": "active",
     "date": "15/8/2026",
     "startTime": 1786753538032,
     "owner": "6281330730462",
-    "target": 159,
-    "startCount": 45
+    "target": 200,
+    "startCount": 86
   },
   "120363427126452334@g.us": {
     "id": "120363427126452334@g.us",
@@ -34,14 +34,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 55,
-    "currentMember": 103,
+    "currentMember": 102,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427126452334.jpg",
     "status": "active",
     "date": "15/8/2026",
     "startTime": 1786753959328,
     "owner": "6281330730462",
-    "target": 402,
-    "startCount": 79
+    "target": 425,
+    "startCount": 102
   },
   "120363427709615649@g.us": {
     "id": "120363427709615649@g.us",
@@ -56,13 +56,13 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 963,
-    "currentMember": 963,
+    "currentMember": 962,
     "pp_path": "/home/container/DATABASE/profilegroup/120363427709615649.jpg",
     "status": "active",
     "date": "15/8/2026",
     "startTime": 1786754650137,
     "owner": "6281330730462",
-    "target": 1071,
-    "startCount": 963
+    "target": 1070,
+    "startCount": 962
   }
 }
