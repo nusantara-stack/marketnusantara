@@ -152,5 +152,27 @@
     "owner": "6281330730462",
     "target": 117,
     "startCount": 17
+  },
+  "120363427242795784@g.us": {
+    "id": "120363427242795784@g.us",
+    "name": "GB| UTAMA DANZSUGA",
+    "link": "https://chat.whatsapp.com/GWQzJdd5PoH6K7Qx4OZfQU",
+    "paket": "reguler",
+    "order": 100,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 52,
+    "currentMember": 52,
+    "pp_path": null,
+    "status": "active",
+    "date": "16/8/2026",
+    "startTime": 1786915470662,
+    "owner": "6281330730462",
+    "target": 152,
+    "startCount": 52
   }
 }
