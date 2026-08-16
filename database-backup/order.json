@@ -75,7 +75,7 @@
     "kick": 0,
     "left": 0,
     "sanksi": 0,
-    "privacy": false,
+    "privacy": true,
     "isProgress": true,
     "lastCount": 31,
     "currentMember": 30,
