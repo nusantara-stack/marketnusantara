@@ -122,14 +122,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 429,
-    "currentMember": 426,
+    "currentMember": 424,
     "pp_path": "/home/container/DATABASE/profilegroup/120363411898051724.jpg",
     "status": "active",
     "date": "16/8/2026",
     "startTime": 1786900431021,
     "owner": "6281330730462",
-    "target": 526,
-    "startCount": 426
+    "target": 524,
+    "startCount": 424
   },
   "120363407010223370@g.us": {
     "id": "120363407010223370@g.us",
@@ -174,5 +174,27 @@
     "owner": "6281330730462",
     "target": 152,
     "startCount": 52
+  },
+  "120363410397447503@g.us": {
+    "id": "120363410397447503@g.us",
+    "name": "STOK RES DANZZ 🧢 ²",
+    "link": "https://chat.whatsapp.com/Is8eguE16Ll9jJ2IMJPzAB",
+    "paket": "reguler",
+    "order": 380,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 63,
+    "currentMember": 63,
+    "pp_path": null,
+    "status": "active",
+    "date": "16/8/2026",
+    "startTime": 1786919412901,
+    "owner": "6281330730462",
+    "target": 443,
+    "startCount": 63
   }
 }
