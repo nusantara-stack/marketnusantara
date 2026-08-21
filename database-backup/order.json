@@ -52,7 +52,7 @@
     "MemberPending": 0,
     "kick": 0,
     "left": 0,
-    "sanksi": 20,
+    "sanksi": 0,
     "privacy": false,
     "isProgress": false,
     "lastCount": 151,
@@ -62,7 +62,7 @@
     "date": "21/8/2026",
     "startTime": 1787276619424,
     "owner": "6281330730462",
-    "target": 221,
+    "target": 241,
     "startCount": 151
   },
   "120363409076800962@g.us": {
