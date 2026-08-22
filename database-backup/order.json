@@ -56,13 +56,35 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 708,
-    "currentMember": 707,
+    "currentMember": 706,
     "pp_path": null,
     "status": "active",
     "date": "22/8/2026",
     "startTime": 1787362107906,
     "owner": "6281330730462",
-    "target": 907,
-    "startCount": 707
+    "target": 906,
+    "startCount": 706
+  },
+  "120363409287301400@g.us": {
+    "id": "120363409287301400@g.us",
+    "name": "𝐆𝐂 𝐔𝐓𝐀𝐌𝐀 𝐉𝐄𝐍𝐒𝐄𝐍",
+    "link": "https://chat.whatsapp.com/KMS3FHrzYeaIIz7xH68UT2",
+    "paket": "reguler",
+    "order": 100,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 573,
+    "currentMember": 572,
+    "pp_path": null,
+    "status": "active",
+    "date": "22/8/2026",
+    "startTime": 1787383685125,
+    "owner": "6281330730462",
+    "target": 672,
+    "startCount": 572
   }
 }
