@@ -1,5 +1,19 @@
 [
   {
+    "waktu": "22/08/2026, 00:51",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 100 member",
+    "nominal": 0
+  },
+  {
+    "waktu": "22/08/2026, 00:51",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 246 member",
+    "nominal": 0
+  },
+  {
     "waktu": "21/08/2026, 01:44",
     "tipe": "order",
     "user": "NUSANTARA",
