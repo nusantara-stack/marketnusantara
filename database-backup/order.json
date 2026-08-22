@@ -12,7 +12,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 300,
-    "currentMember": 292,
+    "currentMember": 291,
     "pp_path": "/home/container/DATABASE/profilegroup/120363413218605269.jpg",
     "status": "active",
     "date": "21/8/2026",
@@ -72,19 +72,19 @@
     "paket": "reguler",
     "order": 100,
     "MemberPending": 0,
-    "kick": 0,
+    "kick": 2,
     "left": 0,
-    "sanksi": 0,
+    "sanksi": 40,
     "privacy": false,
     "isProgress": false,
     "lastCount": 573,
-    "currentMember": 572,
+    "currentMember": 570,
     "pp_path": null,
     "status": "active",
     "date": "22/8/2026",
     "startTime": 1787383685125,
     "owner": "6281330730462",
-    "target": 672,
-    "startCount": 572
+    "target": 650,
+    "startCount": 570
   }
 }
