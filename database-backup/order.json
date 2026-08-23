@@ -12,7 +12,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 528,
-    "currentMember": 528,
+    "currentMember": 527,
     "pp_path": "/home/container/DATABASE/profilegroup/120363413218605269.jpg",
     "status": "active",
     "date": "21/8/2026",
@@ -34,7 +34,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 44,
-    "currentMember": 44,
+    "currentMember": 42,
     "pp_path": "/home/container/DATABASE/profilegroup/120363411885080684.jpg",
     "status": "active",
     "date": "23/8/2026",
@@ -122,14 +122,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 775,
-    "currentMember": 774,
+    "currentMember": 773,
     "pp_path": "/home/container/DATABASE/profilegroup/120363408385949342.jpg",
     "status": "active",
     "date": "23/8/2026",
     "startTime": 1787472045116,
     "owner": "6281330730462",
-    "target": 871,
-    "startCount": 771
+    "target": 873,
+    "startCount": 773
   },
   "120363429347913227@g.us": {
     "id": "120363429347913227@g.us",
@@ -144,13 +144,13 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 818,
-    "currentMember": 817,
+    "currentMember": 816,
     "pp_path": "/home/container/DATABASE/profilegroup/120363429347913227.jpg",
     "status": "active",
     "date": "23/8/2026",
     "startTime": 1787478773684,
     "owner": "6281330730462",
-    "target": 1057,
-    "startCount": 817
+    "target": 1056,
+    "startCount": 816
   }
 }
