@@ -12,7 +12,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 503,
-    "currentMember": 495,
+    "currentMember": 494,
     "pp_path": "/home/container/DATABASE/profilegroup/120363413218605269.jpg",
     "status": "active",
     "date": "21/8/2026",
@@ -108,5 +108,27 @@
     "owner": "6281330730462",
     "target": 68,
     "startCount": 18
+  },
+  "120363408385949342@g.us": {
+    "id": "120363408385949342@g.us",
+    "name": "Market¹ ALL Game || Rassyrizz",
+    "link": "https://chat.whatsapp.com/FGzW9zojNO681BaEDaZ1bR",
+    "paket": "reguler",
+    "order": 100,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 20,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 771,
+    "currentMember": 772,
+    "pp_path": null,
+    "status": "active",
+    "date": "23/8/2026",
+    "startTime": 1787472045116,
+    "owner": "6281330730462",
+    "target": 851,
+    "startCount": 771
   }
 }
