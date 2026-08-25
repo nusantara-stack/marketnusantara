@@ -122,14 +122,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 294,
-    "currentMember": 291,
+    "currentMember": 290,
     "pp_path": "/home/container/DATABASE/profilegroup/120363410122436803.jpg",
     "status": "active",
     "date": "25/8/2026",
     "startTime": 1787631511167,
     "owner": "6281330730462",
-    "target": 391,
-    "startCount": 291
+    "target": 390,
+    "startCount": 290
   },
   "120363408848781468@g.us": {
     "id": "120363408848781468@g.us",
@@ -152,5 +152,27 @@
     "owner": "6281330730462",
     "target": 475,
     "startCount": 375
+  },
+  "120363410962025227@g.us": {
+    "id": "120363410962025227@g.us",
+    "name": "GB UTAMA XHAMN",
+    "link": "https://chat.whatsapp.com/FuzcsXvxEIM51C029fOKVG",
+    "paket": "reguler",
+    "order": 200,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 20,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 503,
+    "currentMember": 504,
+    "pp_path": null,
+    "status": "active",
+    "date": "25/8/2026",
+    "startTime": 1787648964191,
+    "owner": "6281330730462",
+    "target": 683,
+    "startCount": 503
   }
 }
