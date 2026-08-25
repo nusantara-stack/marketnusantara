@@ -56,14 +56,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 564,
-    "currentMember": 560,
+    "currentMember": 559,
     "pp_path": "/home/container/DATABASE/profilegroup/120363413218605269.jpg",
     "status": "active",
     "date": "25/8/2026",
     "startTime": 1787621814040,
     "owner": "6281330730462",
-    "target": 1060,
-    "startCount": 560
+    "target": 1059,
+    "startCount": 559
   },
   "120363405121625744@g.us": {
     "id": "120363405121625744@g.us",
@@ -162,7 +162,7 @@
     "MemberPending": 0,
     "kick": 0,
     "left": 0,
-    "sanksi": 20,
+    "sanksi": 0,
     "privacy": false,
     "isProgress": false,
     "lastCount": 503,
@@ -172,7 +172,7 @@
     "date": "25/8/2026",
     "startTime": 1787648964191,
     "owner": "6281330730462",
-    "target": 683,
+    "target": 703,
     "startCount": 503
   }
 }
