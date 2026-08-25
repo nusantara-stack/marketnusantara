@@ -122,13 +122,35 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 295,
-    "currentMember": 293,
+    "currentMember": 292,
     "pp_path": null,
     "status": "active",
     "date": "25/8/2026",
     "startTime": 1787631511167,
     "owner": "6281330730462",
-    "target": 393,
-    "startCount": 293
+    "target": 392,
+    "startCount": 292
+  },
+  "120363408848781468@g.us": {
+    "id": "120363408848781468@g.us",
+    "name": "GC UTAMA BYY_STR",
+    "link": "https://chat.whatsapp.com/C0wwa7V0EpmJfXOBVvMqbQ",
+    "paket": "reguler",
+    "order": 100,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 377,
+    "currentMember": 377,
+    "pp_path": null,
+    "status": "active",
+    "date": "25/8/2026",
+    "startTime": 1787637911225,
+    "owner": "6281330730462",
+    "target": 477,
+    "startCount": 377
   }
 }
