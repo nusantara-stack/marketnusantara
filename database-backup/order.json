@@ -64,27 +64,5 @@
     "owner": "6281330730462",
     "target": 1107,
     "startCount": 767
-  },
-  "120363409471854530@g.us": {
-    "id": "120363409471854530@g.us",
-    "name": "GB JIBZ STR#1",
-    "link": "https://chat.whatsapp.com/HUzr18rEq2R9cmViJjBL7o",
-    "paket": "reguler",
-    "order": 87,
-    "MemberPending": 6,
-    "kick": 0,
-    "left": 0,
-    "sanksi": 0,
-    "privacy": false,
-    "isProgress": true,
-    "lastCount": 128,
-    "currentMember": 128,
-    "pp_path": "/home/container/DATABASE/profilegroup/120363409471854530.jpg",
-    "status": "active",
-    "date": "30/8/2026",
-    "startTime": 1788075869117,
-    "owner": "6281330730462",
-    "target": 161,
-    "startCount": 74
   }
 }
