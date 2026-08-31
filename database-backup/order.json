@@ -42,27 +42,5 @@
     "owner": "6281330730462",
     "target": 264,
     "startCount": 64
-  },
-  "120363413218605269@g.us": {
-    "id": "120363413218605269@g.us",
-    "name": "𝗝𝗕 𝗡𝗜𝗔𝗔 𝗦𝗧𝗢𝗥𝗘 𝟭",
-    "link": "https://chat.whatsapp.com/Iyp38wH19Z85mo84LobGV5",
-    "paket": "reguler",
-    "order": 400,
-    "MemberPending": 187,
-    "kick": 9,
-    "left": 0,
-    "sanksi": 0,
-    "privacy": false,
-    "isProgress": true,
-    "lastCount": 956,
-    "currentMember": 952,
-    "pp_path": "/home/container/DATABASE/profilegroup/120363413218605269.jpg",
-    "status": "active",
-    "date": "30/8/2026",
-    "startTime": 1788075847402,
-    "owner": "6281330730462",
-    "target": 1160,
-    "startCount": 760
   }
 }
