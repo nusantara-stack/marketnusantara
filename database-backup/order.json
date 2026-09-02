@@ -8,7 +8,7 @@
     "MemberPending": 21,
     "kick": 1,
     "left": 0,
-    "sanksi": 40,
+    "sanksi": 140,
     "privacy": false,
     "isProgress": true,
     "lastCount": 841,
@@ -18,7 +18,7 @@
     "date": "30/8/2026",
     "startTime": 1788072258182,
     "owner": "6281330730462",
-    "target": 1006,
+    "target": 906,
     "startCount": 646
   },
   "120363404791078005@g.us": {
@@ -42,5 +42,27 @@
     "owner": "6281330730462",
     "target": 264,
     "startCount": 64
+  },
+  "120363427126452334@g.us": {
+    "id": "120363427126452334@g.us",
+    "name": "𝗚𝗖 𝗨𝗧𝗔𝗠𝗔 𝗡𝗜𝗔𝗔 𝗦𝗧𝗢𝗥𝗘",
+    "link": "https://chat.whatsapp.com/IHcQMYOXkYl4BmqBVNTTeE",
+    "paket": "reguler",
+    "order": 225,
+    "MemberPending": 0,
+    "kick": 0,
+    "left": 0,
+    "sanksi": 0,
+    "privacy": false,
+    "isProgress": false,
+    "lastCount": 721,
+    "currentMember": 721,
+    "pp_path": "/home/container/DATABASE/profilegroup/120363427126452334.jpg",
+    "status": "active",
+    "date": "2/9/2026",
+    "startTime": 1788345622333,
+    "owner": "6281330730462",
+    "target": 944,
+    "startCount": 719
   }
 }
