@@ -34,7 +34,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 200,
-    "currentMember": 200,
+    "currentMember": 199,
     "pp_path": "/home/container/DATABASE/profilegroup/120363404791078005.jpg",
     "status": "active",
     "date": "30/8/2026",
@@ -91,7 +91,7 @@
     "id": "120363407840612940@g.us",
     "name": "𝙈𝘼𝙍𝙆𝙀𝙏 𝘾𝘼𝙈𝙀𝙇 𝙎𝙏𝙐𝙍 𝙑𝟭",
     "link": "https://chat.whatsapp.com/L3TrfulcV0m9NAuCdNsOh7",
-    "paket": "reguler",
+    "paket": "platinum",
     "order": 100,
     "MemberPending": 0,
     "kick": 0,
@@ -100,13 +100,13 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 982,
-    "currentMember": 984,
+    "currentMember": 983,
     "pp_path": "/home/container/DATABASE/profilegroup/120363407840612940.jpg",
     "status": "active",
     "date": "2/9/2026",
     "startTime": 1788347337027,
     "owner": "6281330730462",
-    "target": 1062,
-    "startCount": 982
+    "target": 1083,
+    "startCount": 983
   }
 }
