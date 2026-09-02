@@ -78,14 +78,14 @@
     "privacy": false,
     "isProgress": false,
     "lastCount": 309,
-    "currentMember": 308,
+    "currentMember": 307,
     "pp_path": "/home/container/DATABASE/profilegroup/120363423967343565.jpg",
     "status": "active",
     "date": "2/9/2026",
     "startTime": 1788347030005,
     "owner": "6281330730462",
-    "target": 508,
-    "startCount": 308
+    "target": 507,
+    "startCount": 307
   },
   "120363407840612940@g.us": {
     "id": "120363407840612940@g.us",
@@ -94,19 +94,19 @@
     "paket": "platinum",
     "order": 100,
     "MemberPending": 0,
-    "kick": 0,
+    "kick": 1,
     "left": 0,
     "sanksi": 20,
     "privacy": false,
     "isProgress": false,
     "lastCount": 982,
-    "currentMember": 983,
+    "currentMember": 981,
     "pp_path": "/home/container/DATABASE/profilegroup/120363407840612940.jpg",
     "status": "active",
     "date": "2/9/2026",
     "startTime": 1788347337027,
     "owner": "6281330730462",
-    "target": 1083,
-    "startCount": 983
+    "target": 1081,
+    "startCount": 981
   }
 }
