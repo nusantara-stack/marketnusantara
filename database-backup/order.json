@@ -12,7 +12,7 @@
     "privacy": false,
     "isProgress": true,
     "lastCount": 235,
-    "currentMember": 236,
+    "currentMember": 235,
     "pp_path": "/home/container/DATABASE/profilegroup/120363404791078005.jpg",
     "status": "active",
     "date": "30/8/2026",
@@ -74,7 +74,7 @@
     "MemberPending": 5,
     "kick": 0,
     "left": 0,
-    "sanksi": 0,
+    "sanksi": 15,
     "privacy": false,
     "isProgress": false,
     "lastCount": 975,
@@ -84,7 +84,7 @@
     "date": "2/9/2026",
     "startTime": 1788347337027,
     "owner": "6281330730462",
-    "target": 1074,
-    "startCount": 974
+    "target": 1058,
+    "startCount": 973
   }
 }
