@@ -1,5 +1,40 @@
 [
   {
+    "waktu": "11/09/2026, 11:33",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 100 member",
+    "nominal": 0
+  },
+  {
+    "waktu": "11/09/2026, 11:32",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 100 member",
+    "nominal": 0
+  },
+  {
+    "waktu": "11/09/2026, 11:27",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 50 member",
+    "nominal": 0
+  },
+  {
+    "waktu": "11/09/2026, 11:27",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 100 member",
+    "nominal": 0
+  },
+  {
+    "waktu": "11/09/2026, 11:26",
+    "tipe": "order",
+    "user": "NUSANTARA",
+    "teks": "order 500 member",
+    "nominal": 0
+  },
+  {
     "waktu": "08/09/2026, 10:55",
     "tipe": "order",
     "user": "NUSANTARA",
